@@ -1,0 +1,13 @@
+section {
+  display: table;
+  padding-left: 20px;
+}
+
+.btnbiddingExemption {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.btnbiddingExemption .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}

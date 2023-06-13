@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Criar</h1>
+<div [formGroup]="formSupplierOrders" mat-dialog-content class="content">
+  <!--  <p>Nome</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="name">
+      <mat-option *ngFor="let supplier of data.Protocols" [value]="supplier.id"
+        >{{ supplier.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> 
+-->
+  <p>Fornecedor</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="supplier">
+      <mat-option
+        *ngFor="let supplier of data.suppliers"
+        [value]="supplier.id"
+        >{{ firstLetterOnCapital(supplier.name) }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+
+  <p>Ata</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="protocol">
+      <mat-option
+        *ngFor="let protocol of data.protocols"
+        [value]="protocol.id"
+        >{{ protocol.code }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+
+  <p>Defensoria</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="public_defense">
+      <mat-option
+        *ngFor="let public_defense of data.public_defenses"
+        [value]="public_defense.id"
+        >{{ firstLetterOnCapital(public_defense.name) }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onNoClick()"></button>
+  <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
+</div>

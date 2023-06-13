@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Criar Pedido de AF</h1>
+<div mat-dialog-content class="content" [formGroup]="formMaterialsOrder">
+  <p>Fornecedor</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="supplier_id">
+      <mat-option
+        *ngFor="let supplier of data.suppliers"
+        [value]="supplier.id"
+        >{{ supplier.name }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <p>Categoria</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="category_id">
+      <mat-option
+        *ngFor="let category of data.categories"
+        [value]="category.id"
+        >{{ firstLetterOnCapital(category.name) }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <p>Data Inicial</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Data Inicial</mat-label>
+    <input type="date" matInput formControlName="initial_date" />
+  </mat-form-field>
+  <p>Data Final</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Data Final</mat-label>
+    <input type="date" matInput formControlName="final_date" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="" cdkFocusInitial (click)="onClick()">
+    Ok
+  </button>
+</div>

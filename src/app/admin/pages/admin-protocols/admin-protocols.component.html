@@ -1,0 +1,118 @@
+<admin-sidebar>
+  <section>
+    <div class="btnCreate">
+      <button mat-raised-button color="warn" (click)="openCreateModal()">
+        Criar
+      </button>
+    </div>
+  </section>
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar>
+        <span>Atas</span>
+      </mat-toolbar>
+
+      <table mat-table [dataSource]="adminProtocols" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let adminProtocols">
+            {{ adminProtocols.id }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef>Código</th>
+          <td mat-cell *matCellDef="let adminProtocols">
+            {{ adminProtocols.code }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="supplier">
+          <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
+          <td mat-cell *matCellDef="let adminProtocols">
+            {{ adminProtocols.supplier.name }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>Categoria</th>
+          <td mat-cell *matCellDef="let adminProtocols">
+            {{ firstLetterOnCapital(adminProtocols.category.name) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="file">
+          <th mat-header-cell *matHeaderCellDef>Arquivo</th>
+          <td mat-cell *matCellDef="let adminProtocols">
+            <div class="button-container">
+              <button
+                class="btn"
+                mat-mini-fab
+                color="warn"
+                aria-label="download"
+                (click)="downloadProtocols(adminProtocols.file)"
+              >
+                <mat-icon>download</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="protocolItems">
+          <th mat-header-cell *matHeaderCellDef>Itens de Protocolo</th>
+          <td mat-cell *matCellDef="let adminSuppliers">
+            <div class="button-container">
+              <button
+                class="btn"
+                mat-mini-fab
+                color="white"
+                aria-label="Protocol Items"
+                (click)="navToProtocolItems(adminSuppliers.id)"
+              >
+                <mat-icon>exit_to_app</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="editProtocols">
+          <th mat-header-cell *matHeaderCellDef>Editar</th>
+          <td mat-cell *matCellDef="let protocol">
+            <div class="button-container">
+              <button
+                class="btn"
+                mat-mini-fab
+                color="white"
+                aria-label="Edit measure"
+                (click)="openModal(protocol.id)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="deleteProtocol">
+          <th mat-header-cell *matHeaderCellDef>Excluir</th>
+          <td mat-cell *matCellDef="let protocol">
+            <div class="button-container">
+              <button
+                class="btn"
+                mat-mini-fab
+                color="warn"
+                aria-label="Delete protocol"
+                (click)="deleteProtocol(protocol.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</admin-sidebar>

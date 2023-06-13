@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Produto</h1>
+<div [formGroup]="formProduct" mat-dialog-content class="content">
+  <p>Nome</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="name" />
+  </mat-form-field>
+  <p>Descrição</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="description" />
+  </mat-form-field>
+  <p>Código</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="code" />
+  </mat-form-field>
+  <p>Categoria</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="category">
+      <mat-option
+        *ngFor="let category of data.categories"
+        [value]="category.id"
+        >{{ firstLetterOnCapital(category.name) }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <p>Preço</p>
+  <mat-form-field appearance="fill">
+    <input type="number" matInput formControlName="price" />
+  </mat-form-field>
+  <p>Disponível</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="is_available">
+      <mat-option [value]="true">Sim</mat-option>
+      <mat-option [value]="false">Não</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onNoClick()"></button>
+  <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
+</div>

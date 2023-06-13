@@ -1,0 +1,100 @@
+<!-- http://localhost:4200/admin-notas -->
+<admin-sidebar>
+  <section>
+    <div class="btnCreate">
+      <button mat-raised-button color="warn" (click)="openModal()">
+        Criar
+      </button>
+    </div>
+  </section>
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar>
+        <span>Controle de Notas</span>
+      </mat-toolbar>
+
+      <table mat-table [dataSource]="adminInvoices" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let adminInvoices">
+            {{ adminInvoices.id }}
+          </td>
+        </ng-container>
+
+        <!-- Código Column -->
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef>Código</th>
+          <td mat-cell *matCellDef="let adminInvoices">
+            {{ adminInvoices.code }}
+          </td>
+        </ng-container>
+
+        <!-- Fornecedor Column -->
+        <ng-container matColumnDef="supplier">
+          <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
+          <td mat-cell *matCellDef="let adminInvoices">
+            {{ adminInvoices.supplier.name }}
+          </td>
+        </ng-container>
+
+        <!-- Defensoria Column -->
+        <ng-container matColumnDef="public_defense">
+          <th mat-header-cell *matHeaderCellDef>Defensoria</th>
+          <td mat-cell *matCellDef="let adminInvoices">
+            {{ adminInvoices.public_defense.name }}
+          </td>
+        </ng-container>
+
+        <!-- Valor total Column -->
+        <ng-container matColumnDef="total_value">
+          <th mat-header-cell *matHeaderCellDef>Valor total</th>
+          <td mat-cell *matCellDef="let adminInvoices">
+            {{ adminInvoices.total_value }}
+          </td>
+        </ng-container>
+
+        <!-- Arquivo Column -->
+        <ng-container matColumnDef="file">
+          <th mat-header-cell *matHeaderCellDef>Arquivo</th>
+          <td mat-cell *matCellDef="let adminInvoices">
+            <div class="button-container">
+              <button
+                class="btn"
+                mat-mini-fab
+                color="warn"
+                aria-label="download"
+                (click)="downloadInvoice(adminInvoices.file)"
+              >
+                <mat-icon>download</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="deleteInvoice">
+          <th mat-header-cell *matHeaderCellDef>Excluir Nota</th>
+          <td mat-cell *matCellDef="let adminInvoices">
+            <div class="button-container">
+              <button
+                class="btn"
+                mat-mini-fab
+                color="warn"
+                aria-label="Delete measure"
+                (click)="deleteInvoice(adminInvoices.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</admin-sidebar>

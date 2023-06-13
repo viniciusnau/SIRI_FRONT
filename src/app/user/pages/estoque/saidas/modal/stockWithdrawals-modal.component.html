@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Criar</h1>
+<div [formGroup]="formStockWithdrawals" mat-dialog-content class="content">
+  <p>Quantidade</p>
+  <mat-form-field appearance="fill">
+    <input type="number" matInput formControlName="withdraw_quantity" />
+  </mat-form-field>
+  <p>Descrição</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="description" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="onClick()" cdkFocusInitial>Criar</button>
+</div>

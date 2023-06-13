@@ -1,0 +1,60 @@
+<user-sidebar>
+  <mat-card>
+    <mat-card-content>
+      <section>
+        <div class="btnCreate">
+          <button mat-raised-button color="warn" (click)="openModal()">
+            Criar
+          </button>
+        </div>
+      </section>
+      <mat-divider></mat-divider>
+
+      <mat-toolbar>
+        <span>Saídas</span>
+      </mat-toolbar>
+
+      <table mat-table [dataSource]="withdrawals" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+          <td mat-cell *matCellDef="let withdrawals">
+            {{ withdrawals.withdraw_quantity }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descrição</th>
+          <td mat-cell *matCellDef="let withdrawals">
+            {{ withdrawals.description }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Data</th>
+          <td mat-cell *matCellDef="let withdrawals">{{ formatDate(withdrawals.withdraw_date) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef>Excluir</th>
+          <td mat-cell *matCellDef="let withdrawals">
+            <div class="button-container">
+              <button
+                class="btn"
+                mat-mini-fab
+                color="warn"
+                aria-label="Delete order"
+                (click)="deleteWithdraw(withdrawals.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</user-sidebar>

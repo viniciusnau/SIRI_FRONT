@@ -1,0 +1,72 @@
+<admin-sidebar>
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar>
+        <span>Itens do Pedido</span>
+      </mat-toolbar>
+
+      <table mat-table [dataSource]="orderItems" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let orderItem">{{ orderItem.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef>Produto</th>
+          <td mat-cell *matCellDef="let orderItem">{{ firstLetterOnCapital(orderItem.product.name) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+          <td mat-cell *matCellDef="let orderItem">{{ orderItem.quantity }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="added_quantity">
+          <th mat-header-cell *matHeaderCellDef>Quantidade Adicionada</th>
+          <td mat-cell *matCellDef="let orderItem">{{ orderItem.added_quantity }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="measure">
+          <th mat-header-cell *matHeaderCellDef>Medida</th>
+          <td mat-cell *matCellDef="let orderItem">{{ orderItem.product.measure.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="supplier">
+          <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
+          <td mat-cell *matCellDef="let orderItem">
+            <mat-form-field appearance="fill">
+              <mat-select [(value)]="orderItem.supplier.id" name="supplier">
+                <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">
+                  {{ supplier.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="supplier_quantity">
+          <th mat-header-cell *matHeaderCellDef>Quantidade do Fornecedor</th>
+          <td mat-cell *matCellDef="let orderItem">
+            <mat-form-field appearance="fill">
+              <input matInput [(ngModel)]="orderItem.supplier_quantity" name="supplierQuantity" [type]="'number'" [formControl]="supplierQuantityControls[orderItem.id]" placeholder="{{ orderItem.quantity }}">
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Salvar</th>
+          <td mat-cell *matCellDef="let orderItem">
+            <button mat-mini-fab color="warn" (click)="saveItem(orderItem)">
+              <mat-icon>save</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</admin-sidebar>

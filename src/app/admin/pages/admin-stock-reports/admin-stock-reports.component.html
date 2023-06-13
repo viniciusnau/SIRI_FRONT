@@ -1,0 +1,138 @@
+<admin-sidebar>
+  <div class="container">
+    <mat-card>
+      <mat-card-content>
+        <div class="filter-container">
+          <div class="filter-field">
+            <p class="textField">Data de Início</p>
+            <mat-form-field appearance="fill">
+              <input type="date" matInput [(ngModel)]="startDate" />
+            </mat-form-field>
+          </div>
+          <div class="filter-field">
+            <p class="textField">Data Final</p>
+            <mat-form-field appearance="fill">
+              <input type="date" matInput [(ngModel)]="finalDate" />
+            </mat-form-field>
+          </div>
+          <div class="filter-field">
+            <p class="textField">Categoria</p>
+            <mat-form-field appearance="fill">
+              <mat-select [(ngModel)]="selectedCategories" multiple>
+                <mat-option *ngFor="let category of categories" [value]="category.id">
+                  {{ category.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="filter-field">
+            <p class="textField">Produto</p>
+            <mat-form-field appearance="fill">
+              <mat-select [(ngModel)]="selectedProducts" multiple>
+                <mat-option *ngFor="let product of products" [value]="product.id">
+                  {{ product.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="filter-field">
+            <p class="textField">Núcleo</p>
+            <mat-form-field appearance="fill">
+              <mat-select [(ngModel)]="selectedPublicDefenses" multiple [disabled]="selectedSectors.length > 0">
+                <mat-option *ngFor="let publicDefense of publicDefenses" [value]="publicDefense.id">
+                  {{ publicDefense.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="filter-field">
+            <p class="textField">Setor</p>
+            <mat-form-field appearance="fill">
+              <mat-select [(ngModel)]="selectedSectors" multiple [disabled]="selectedPublicDefenses.length > 0">
+                <mat-option *ngFor="let sector of sectors" [value]="sector.id">
+                  {{ sector.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="btnRequest">
+            <button mat-raised-button color="warn" (click)="onSave()">Consultar</button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-content>
+        <mat-toolbar>
+          <span>Relatório de Estoque</span>
+          <span class="spacer"></span>
+          <button mat-icon-button (click)="generatePDF()">
+            <mat-icon>download</mat-icon>
+          </button>
+        </mat-toolbar>
+
+        <table mat-table [dataSource]="stockReports" class="mat-elevation-z8">
+          <ng-container matColumnDef="productCode">
+            <th mat-header-cell *matHeaderCellDef>Código</th>
+            <td mat-cell *matCellDef="let stockReport">
+              {{ stockReport.productCode }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="productName">
+            <th mat-header-cell *matHeaderCellDef>Produto</th>
+            <td mat-cell *matCellDef="let stockReport">
+              {{ stockReport.productName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="entryQuantity">
+            <th mat-header-cell *matHeaderCellDef>Quantidade de Entrada</th>
+            <td mat-cell *matCellDef="let stockReport">
+              {{ stockReport.entryQuantity }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="withdrawalQuantity">
+            <th mat-header-cell *matHeaderCellDef>Quantidade de Saída</th>
+            <td mat-cell *matCellDef="let stockReport">
+              {{ stockReport.withdrawalQuantity }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="entryPrice">
+            <th mat-header-cell *matHeaderCellDef>Valor de Entrada</th>
+            <td mat-cell *matCellDef="let stockReport">
+              {{ stockReport.entryPrice | number: '1.2-2' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="withdrawalPrice">
+            <th mat-header-cell *matHeaderCellDef>Valor de Saída</th>
+            <td mat-cell *matCellDef="let stockReport">
+              {{ stockReport.withdrawalPrice }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="core">
+            <th mat-header-cell *matHeaderCellDef>Núcleo</th>
+            <td mat-cell *matCellDef="let stockReport">
+              {{ stockReport.core }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="sector">
+            <th mat-header-cell *matHeaderCellDef>Setor</th>
+            <td mat-cell *matCellDef="let stockReport">
+              {{ stockReport.sector }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let stockReport; columns: displayedColumns"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</admin-sidebar>

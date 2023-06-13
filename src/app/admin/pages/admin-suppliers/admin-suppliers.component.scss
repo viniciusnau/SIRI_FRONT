@@ -1,0 +1,14 @@
+section {
+  display: table;
+  padding-left: 20px;
+}
+
+.btnCreate {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.btnCreate .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}
+

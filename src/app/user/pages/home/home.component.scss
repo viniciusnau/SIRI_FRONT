@@ -1,0 +1,54 @@
+.toolbar-and-button {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.button-container {
+  margin-left: auto;
+}
+
+.order-button {
+  margin-left: 16px;
+}
+
+.filter-and-button {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.filter-container {
+  flex-grow: 1;
+}
+
+table {
+  width: 100%;
+}
+
+section {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+.btnOrder {
+  margin-left: auto;
+}
+
+.btnOrder .mat-mdc-button-base {
+  margin-right: 8px;
+}
+
+td, th {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.mat-sort-header-container {
+  justify-content: center !important;
+}
+
+.mat-column-name {
+  max-width: 50px;
+}

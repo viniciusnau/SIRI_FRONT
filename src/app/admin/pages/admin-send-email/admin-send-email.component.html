@@ -1,0 +1,27 @@
+<admin-sidebar>
+  <div class="container">
+    <mat-card>
+      <mat-toolbar>
+        <span>Enviar Email</span>
+      </mat-toolbar>
+      <mat-card-content>
+        <p class="textField">Assunto</p>
+        <mat-form-field appearance="fill">
+          <mat-label>Assunto</mat-label>
+          <input matInput [(ngModel)]="subject" />
+        </mat-form-field>
+        <p class="textField">Mensagem</p>
+        <mat-form-field appearance="fill">
+          <mat-label>Mensagem</mat-label>
+          <textarea matInput [(ngModel)]="message"></textarea>
+        </mat-form-field>
+        <div class="btnRequest">
+          <button mat-raised-button color="warn" (click)="sendEmail()" [disabled]="loading">
+            <span *ngIf="!loading">Enviar</span>
+            <div class="custom-spinner" *ngIf="loading"></div>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</admin-sidebar>

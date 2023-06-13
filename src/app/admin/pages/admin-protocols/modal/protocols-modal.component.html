@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Atas</h1>
+<div [formGroup]="formProtocols" mat-dialog-content class="content">
+  <p class="field-label">Código</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="code" />
+  </mat-form-field>
+  <p class="field-label">Fornecedor</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="supplier">
+      <mat-option *ngFor="let supplier of data?.suppliers" [value]="supplier.id">
+        {{ supplier.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p class="field-label">Categoria</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="category">
+      <mat-option *ngFor="let category of data?.categories" [value]="category.id">
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="custom-file-input">
+    <label for="fileInput" class="file-label">Escolher arquivo</label>
+    <input type="file" id="fileInput" (change)="onFileChange($event)" />
+  </div>
+  <div *ngIf="selectedFile" class="file-info">
+    Arquivo selecionado: {{ selectedFile.name }}
+  </div>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
+</div>

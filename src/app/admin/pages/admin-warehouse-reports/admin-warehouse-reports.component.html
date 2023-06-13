@@ -1,0 +1,69 @@
+<admin-sidebar>
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar>
+        <span>Relatorio do Almoxarifado</span>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="generatePDF()">
+          <mat-icon>download</mat-icon>
+        </button>
+      </mat-toolbar>
+
+      <table mat-table [dataSource]="warehouseReports" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Código Column -->
+        <ng-container matColumnDef="productCode">
+          <th mat-header-cell *matHeaderCellDef>Código</th>
+          <td mat-cell *matCellDef="let warehouseReport">
+            {{ warehouseReport.productCode }}
+          </td>
+        </ng-container>
+
+        <!-- Produto Column -->
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef>Produto</th>
+          <td mat-cell *matCellDef="let warehouseReport">
+            {{ firstLetterOnCapital(warehouseReport.productName) }}
+          </td>
+        </ng-container>
+
+        <!-- Medida Column -->
+        <ng-container matColumnDef="productMeasure">
+          <th mat-header-cell *matHeaderCellDef>Medida</th>
+          <td mat-cell *matCellDef="let warehouseReport">
+            {{ warehouseReport.productMeasure }}
+          </td>
+        </ng-container>
+
+        <!-- Quantidade Column -->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+          <td mat-cell *matCellDef="let warehouseReport">
+            {{ warehouseReport.quantity }}
+          </td>
+        </ng-container>
+
+        <!-- Valor Total Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Valor Total</th>
+          <td mat-cell *matCellDef="let warehouseReport">
+            {{ warehouseReport.price }}
+          </td>
+        </ng-container>
+
+        <!-- Valor Médio Column -->
+        <ng-container matColumnDef="averagePrice">
+          <th mat-header-cell *matHeaderCellDef>Valor Médio</th>
+          <td mat-cell *matCellDef="let warehouseReport">
+            {{ warehouseReport.averagePrice }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</admin-sidebar>

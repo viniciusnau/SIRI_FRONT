@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Item do pedido</h1>
+<div [formGroup]="formOrderItem" mat-dialog-content class="content">
+  <p>Quantidade adicionada</p>
+  <mat-form-field appearance="fill">
+    <input type="number" matInput formControlName="added_quantity" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onNoClick()"></button>
+  <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
+</div>

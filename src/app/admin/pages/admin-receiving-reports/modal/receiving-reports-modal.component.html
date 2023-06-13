@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Guias de Entrada</h1>
+<div [formGroup]="formDescription" mat-dialog-content class="content">
+  <p>Descrição</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="description" />
+  </mat-form-field>
+  <div mat-dialog-actions class="actions">
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
+  </div>
+</div>

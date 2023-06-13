@@ -1,0 +1,115 @@
+<admin-sidebar>
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar>
+        <span>Guias de Entrada</span>
+      </mat-toolbar>
+
+      <table mat-table [dataSource]="receivingReports" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let receivingReports">
+            {{ receivingReports.id }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="supplier">
+          <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
+          <td mat-cell *matCellDef="let receivingReports">
+            {{ receivingReports.supplier.name }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef>Produto</th>
+          <td mat-cell *matCellDef="let receivingReports">
+            {{ firstLetterOnCapital(receivingReports.product.name) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+          <td mat-cell *matCellDef="let receivingReports">
+            {{ receivingReports.quantity }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="file">
+          <th mat-header-cell *matHeaderCellDef>Arquivo</th>
+          <td mat-cell *matCellDef="let receivingReports">
+            <div class="button-container">
+              <button
+                *ngIf="receivingReports.file; else saveButton"
+                class="btn"
+                mat-mini-fab
+                color="warn"
+                aria-label="download"
+                (click)="
+                  downloadReceivingReports(
+                    receivingReports.file,
+                    receivingReports.id
+                  )
+                "
+              >
+                <mat-icon>download</mat-icon>
+              </button>
+              <ng-template #saveButton>
+                <button
+                  class="btn"
+                  mat-mini-fab
+                  color="warn"
+                  aria-label="save"
+                  (click)="generateReceivingReports(receivingReports)"
+                >
+                  <mat-icon>save</mat-icon>
+                </button>
+              </ng-template>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descrição</th>
+          <td mat-cell *matCellDef="let receivingReports">
+            {{ firstLetterOnCapital(receivingReports.description) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="created">
+          <th mat-header-cell *matHeaderCellDef>Criado</th>
+          <td mat-cell *matCellDef="let receivingReports">
+            {{ formatDate(receivingReports.created) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="updated">
+          <th mat-header-cell *matHeaderCellDef>Atualizado</th>
+          <td mat-cell *matCellDef="let receivingReports">
+            {{ formatDate(receivingReports.updated) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="editDescription">
+          <th mat-header-cell *matHeaderCellDef>Editar Descrição</th>
+          <td mat-cell *matCellDef="let adminSuppliers">
+            <div class="button-container">
+              <button
+                class="btn"
+                mat-mini-fab
+                color="white"
+                aria-label="Edit description"
+                (click)="openModal(adminSuppliers.id)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</admin-sidebar>

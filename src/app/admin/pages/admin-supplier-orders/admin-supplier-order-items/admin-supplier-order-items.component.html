@@ -1,0 +1,59 @@
+<admin-sidebar>
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar>
+        <span>Itens do Pedido</span>
+      </mat-toolbar>
+
+      <table
+        mat-table
+        [dataSource]="supplierOrderItems"
+        class="mat-elevation-z8"
+      >
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let supplierOrderItems">
+            {{ supplierOrderItems.id }}
+          </td>
+        </ng-container>
+
+        <!-- Produto Column -->
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef>Produto</th>
+          <td mat-cell *matCellDef="let supplierOrderItems">
+            {{ supplierOrderItems.product }}
+          </td>
+        </ng-container>
+
+        <!-- Medida Column -->
+        <ng-container matColumnDef="measure">
+          <th mat-header-cell *matHeaderCellDef>Medida</th>
+          <td mat-cell *matCellDef="let supplierOrderItems">
+            {{ supplierOrderItems.measure }}
+          </td>
+        </ng-container>
+
+        <!-- Quantidade Column -->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+          <td mat-cell *matCellDef="let supplierOrderItems">
+            {{ supplierOrderItems.quantity }}
+          </td>
+        </ng-container>
+
+        <!-- Quantidade Recebida Column -->
+        <ng-container matColumnDef="receivedQuantity">
+          <th mat-header-cell *matHeaderCellDef>Quantidade Recebida</th>
+          <td mat-cell *matCellDef="let supplierOrderItems">PLACEHOLDER</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</admin-sidebar>

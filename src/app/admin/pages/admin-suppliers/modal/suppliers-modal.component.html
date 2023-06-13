@@ -1,0 +1,62 @@
+<h1 mat-dialog-title>Fornecedor</h1>
+<div [formGroup]="formSuppliers" mat-dialog-content class="content">
+  <!--  <p>Nome</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="name">
+      <mat-option *ngFor="let supplier of data.suppliers" [value]="supplier.id"
+        >{{ supplier.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> 
+-->
+  <p>Nome</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="name" />
+  </mat-form-field>
+  <p>Agente</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="agent" />
+  </mat-form-field>
+  <p>Endereço</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="address" />
+  </mat-form-field>
+  <p>Email</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="email" />
+  </mat-form-field>
+  <p>Contato</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="phone" />
+  </mat-form-field>
+  <p>CNPJ</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="ein" />
+  </mat-form-field>
+  <p>CPF</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="ssn" />
+  </mat-form-field>
+  <p>RG</p>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput formControlName="nic" />
+  </mat-form-field>
+  <p>Categoria</p>
+  <mat-form-field appearance="fill">
+    <mat-select
+      [(ngModel)]="selectedCategories"
+      formControlName="category"
+      multiple
+    >
+      <mat-option
+        *ngFor="let category of data.categories"
+        [value]="category.id"
+        >{{ firstLetterOnCapital(category.name) }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onNoClick()"></button>
+  <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
+</div>

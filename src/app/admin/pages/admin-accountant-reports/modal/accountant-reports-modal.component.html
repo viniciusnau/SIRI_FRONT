@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Criar</h1>
+<div [formGroup]="formAccountantReports" mat-dialog-content class="content">
+  <p>Mes</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="month" placeholder="Mês">
+      <mat-option *ngFor="let month of months" [value]="month">{{ month }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="year" placeholder="Ano">
+      <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="onOkClick()" cdkFocusInitial>Ok</button>
+</div>

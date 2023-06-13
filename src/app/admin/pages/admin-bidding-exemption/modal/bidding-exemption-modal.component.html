@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Criar</h1>
+<div [formGroup]="formBiddingExemption" mat-dialog-content class="content">
+  <p>Produto</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="product">
+      <mat-option *ngFor="let product of data.products" [value]="product.id">{{
+        firstLetterOnCapital(product.name)
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>Quantidade</p>
+  <mat-form-field appearance="fill">
+    <input type="number" matInput formControlName="quantity" />
+  </mat-form-field>
+  <p>Estoque</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="stock">
+      <mat-option *ngFor="let stock of data.stocks" [value]="stock.id">{{
+        stock.sector
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>Nota fiscal</p>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="invoice">
+      <mat-option *ngFor="let invoice of data.invoices" [value]="invoice.id">{{
+        invoice.code
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onNoClick()"></button>
+  <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
+</div>

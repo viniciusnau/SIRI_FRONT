@@ -1,0 +1,40 @@
+<!-- http://localhost:4200/admin-setores -->
+<admin-sidebar>
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar>
+        <span>Setores</span>
+      </mat-toolbar>
+
+      <table mat-table [dataSource]="sectors" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let sectors">{{ sectors.id }}</td>
+        </ng-container>
+
+        <!-- Nome Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let sectors">
+            {{ sectors.name }}
+          </td>
+        </ng-container>
+
+        <!-- Defensoria Column -->
+        <ng-container matColumnDef="public_defense">
+          <th mat-header-cell *matHeaderCellDef>Defensoria</th>
+          <td mat-cell *matCellDef="let sectors">
+            {{ sectors.public_defense.name }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</admin-sidebar>

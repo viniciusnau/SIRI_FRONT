@@ -1,0 +1,138 @@
+<main class="container">
+  <mat-sidenav-container mode="side">
+    <mat-sidenav opened mode="side" disableClose="true" fixedInViewport="true">
+      <a href="/admin">
+        <img
+          src="../../../../assets/logo_defensoria_sc_preferencial_branco.png"
+          alt=""
+          class="logoSide"
+        />
+      </a>
+      <mat-divider></mat-divider>
+      <mat-nav-list>
+        <mat-list-item routerLink="/admin/pedidos">
+          <span matListItemTitle>Pedidos</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/estoque">
+          <span matListItemTitle>Estoque</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/setores">
+          <span matListItemTitle>Setores</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/notas">
+          <span matListItemTitle>Controle de notas</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/guias-de-entrada">
+          <span matListItemTitle>Guias de entrada</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/guias-de-saida">
+          <span matListItemTitle>Guias de saída</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/categorias">
+          <span matListItemTitle>Categorias</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/medidas">
+          <span matListItemTitle>Medidas</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/fornecedores">
+          <span matListItemTitle>Fornecedores</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/pedidos-fornecedor">
+          <span matListItemTitle>Pedidos do Fornecedor</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> -->
+        </mat-list-item>
+        <mat-list-item routerLink="/admin/atas">
+          <span matListItemTitle>Atas</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/produtos">
+          <span matListItemTitle>Produtos</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/pedido-de-AF">
+          <span matListItemTitle>Pedidos de AF</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/dispensa-de-licitacao">
+          <span matListItemTitle>Dispensa de Licitação</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/relatorio-do-contador">
+          <span matListItemTitle>Relatório do Contador</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/relatorio-de-estoque">
+          <span matListItemTitle>Relatório de Estoque</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/relatorio-do-almoxarifado">
+          <span matListItemTitle>Relatório do Almoxarifado</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item routerLink="/admin/enviar-email">
+          <span matListItemTitle>Enviar Email</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/admin/esqueci-a-senha">
+          <span matListItemTitle>Mudar senha</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+        <mat-list-item (click)="logout()">
+          <span matListItemTitle>Sair</span>
+          <!-- <div matListItemMeta>
+            <mat-icon>home</mat-icon>
+          </div> --></mat-list-item
+        >
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content> <ng-content></ng-content> </mat-sidenav-content>
+  </mat-sidenav-container>
+</main>

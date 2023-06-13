@@ -1,0 +1,42 @@
+<!-- http://localhost:4200/admin-estoque/itens -->
+<admin-sidebar>
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar>
+        <span>Itens Estoque</span>
+      </mat-toolbar>
+
+      <table mat-table [dataSource]="stockItems" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let stockItems">
+            {{ stockItems.id }}
+          </td>
+        </ng-container>
+
+        <!-- Produto Column -->
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef>Produto</th>
+          <td mat-cell *matCellDef="let stockItems">
+            {{ firstLetterOnCapital(stockItems.product.name) }}
+          </td>
+        </ng-container>
+
+        <!-- Quantidade Column -->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+          <td mat-cell *matCellDef="let stockItems">
+            {{ stockItems.quantity }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</admin-sidebar>

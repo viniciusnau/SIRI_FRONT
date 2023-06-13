@@ -1,0 +1,88 @@
+<admin-sidebar>
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar>
+        <span>Guias de Saída</span>
+      </mat-toolbar>
+
+      <table mat-table [dataSource]="dispatchReports" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let dispatchReport">{{ dispatchReport.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="publicDefense">
+          <th mat-header-cell *matHeaderCellDef>Núcleo</th>
+          <td mat-cell *matCellDef="let dispatchReport">{{ dispatchReport.public_defense?.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef>Produto</th>
+          <td mat-cell *matCellDef="let dispatchReport">{{ dispatchReport.product?.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+          <td mat-cell *matCellDef="let dispatchReport">{{ dispatchReport.quantity }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="file">
+          <th mat-header-cell *matHeaderCellDef>Arquivo</th>
+          <td mat-cell *matCellDef="let dispatchReports">
+            <div class="button-container">
+              <button
+                *ngIf="dispatchReports.file; else saveButton"
+                class="btn"
+                mat-mini-fab
+                color="warn"
+                aria-label="download"
+                (click)="downloadDispatchReports(dispatchReports.file)"
+              >
+                <mat-icon>download</mat-icon>
+              </button>
+              <ng-template #saveButton>
+                <button
+                  class="btn"
+                  mat-mini-fab
+                  color="warn"
+                  aria-label="save"
+                  (click)="generateDispatchReports(dispatchReports)"
+                >
+                  <mat-icon>save</mat-icon>
+                </button>
+              </ng-template>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descrição</th>
+          <td mat-cell *matCellDef="let dispatchReport">{{ dispatchReport.description }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="created">
+          <th mat-header-cell *matHeaderCellDef>Criado</th>
+          <td mat-cell *matCellDef="let dispatchReport">{{ formatDate(dispatchReport.created) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="updated">
+          <th mat-header-cell *matHeaderCellDef>Atualizado</th>
+          <td mat-cell *matCellDef="let dispatchReport">{{ formatDate(dispatchReport.updated) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="editDescription">
+          <th mat-header-cell *matHeaderCellDef>Editar Descrição</th>
+          <td mat-cell *matCellDef="let dispatchReport">
+            <div class="button-container">
+              <button class="btn" mat-mini-fab color="white" aria-label="Edit description" (click)="openModal(dispatchReport.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let dispatchReport; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</admin-sidebar>

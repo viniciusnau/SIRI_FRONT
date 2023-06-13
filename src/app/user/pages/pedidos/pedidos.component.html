@@ -1,0 +1,95 @@
+<user-sidebar>
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar>
+        <span>Pedidos</span>
+      </mat-toolbar>
+
+      <table mat-table [dataSource]="orders" matSort class="mat-elevation-z8">
+
+        <ng-container matColumnDef="sent">
+          <th mat-header-cell *matHeaderCellDef>Enviado</th>
+          <td mat-cell *matCellDef="let orders">
+            {{ orders.is_sent ? 'Sim' : 'Não' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="partAdded">
+          <th mat-header-cell *matHeaderCellDef>
+            Parcialmente Adicionado ao Estoque
+          </th>
+          <td mat-cell *matCellDef="let orders">
+            {{ orders.partially_added_to_stock ? 'Sim' : 'Não' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="compAdded">
+          <th mat-header-cell *matHeaderCellDef>
+            Completamente Adicionado ao Estoque
+          </th>
+          <td mat-cell *matCellDef="let orders">
+            {{ orders.completely_added_to_stock ? 'Sim' : 'Não' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="created">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by creation date"
+          >
+            Criado
+          </th>
+          <td mat-cell *matCellDef="let orders">
+            {{ formatDate(orders.created) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="updated">
+          <th mat-header-cell *matHeaderCellDef>Atualizado</th>
+          <td mat-cell *matCellDef="let orders">
+            {{ formatDate(orders.updated) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="oderItems">
+          <th mat-header-cell *matHeaderCellDef>Itens do Pedido</th>
+          <td mat-cell *matCellDef="let orders">
+            <div class="button-container">
+              <button
+                color='x'
+                class="btn"
+                mat-mini-fab
+                aria-label="List order items"
+                [routerLink]="['/pedidos/itens/', orders.id]"
+              >
+                <mat-icon>list</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="deleteOrder">
+          <th mat-header-cell *matHeaderCellDef>Excluir Pedido</th>
+          <td mat-cell *matCellDef="let orders">
+            <div class="button-container">
+              <button
+                class="btn"
+                mat-mini-fab
+                color="warn"
+                aria-label="Delete order"
+                (click)="deleteOrder(orders.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</user-sidebar>

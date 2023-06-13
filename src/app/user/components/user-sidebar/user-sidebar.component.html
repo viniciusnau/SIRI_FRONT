@@ -1,0 +1,33 @@
+<main class="container">
+  <mat-sidenav-container mode="side">
+    <mat-sidenav opened mode="side" disableClose="true" fixedInViewport="true">
+      <a href="/">
+        <img
+          src="../../../../assets/logo_defensoria_sc_preferencial_branco.png"
+          alt=""
+          class="logoSide"
+        />
+      </a>
+      <mat-divider></mat-divider>
+      <mat-nav-list>
+        <mat-list-item routerLink="/">
+          <span matListItemTitle>Pedir</span>
+        </mat-list-item>
+        <mat-list-item routerLink="/estoque">
+          <span matListItemTitle>Estoque</span>
+        </mat-list-item>
+        <mat-list-item routerLink="/pedidos">
+          <span matListItemTitle>Pedidos</span>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item (click)="resetPassword()">
+          <span matListItemTitle>Mudar Senha</span>
+        </mat-list-item>
+        <mat-list-item (click)="logout()">
+          <span matListItemTitle>Sair</span>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content> <ng-content></ng-content> </mat-sidenav-content>
+  </mat-sidenav-container>
+</main>

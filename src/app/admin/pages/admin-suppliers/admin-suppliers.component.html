@@ -1,0 +1,148 @@
+<!-- http://localhost:4200/admin-fornecedores -->
+<admin-sidebar>
+  <section>
+    <div class="btnCreate">
+      <button mat-raised-button color="warn" (click)="openCreateModal()">
+        Criar
+      </button>
+    </div>
+  </section>
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar>
+        <span>Fornecedores</span>
+      </mat-toolbar>
+
+      <table mat-table [dataSource]="suppliers" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let suppliers">
+            {{ suppliers.id }}
+          </td>
+        </ng-container>
+
+        <!-- Nome Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let suppliers">
+            {{ suppliers.name }}
+          </td>
+        </ng-container>
+
+        <!-- Agente Column -->
+        <ng-container matColumnDef="agent">
+          <th mat-header-cell *matHeaderCellDef>Agente</th>
+          <td mat-cell *matCellDef="let suppliers">
+            {{ suppliers.agent }}
+          </td>
+        </ng-container>
+
+        <!-- Endereço Column -->
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>Endereço</th>
+          <td mat-cell *matCellDef="let suppliers">
+            {{ suppliers.address }}
+          </td>
+        </ng-container>
+
+        <!-- email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>E-mail</th>
+          <td mat-cell *matCellDef="let suppliers">
+            {{ suppliers.email }}
+          </td>
+        </ng-container>
+
+        <!-- Contato Column -->
+        <ng-container matColumnDef="contact">
+          <th mat-header-cell *matHeaderCellDef>Contato</th>
+          <td mat-cell *matCellDef="let suppliers">
+            {{ suppliers.phone }}
+          </td>
+        </ng-container>
+
+        <!-- cnpj Column -->
+        <ng-container matColumnDef="cnpj">
+          <th mat-header-cell *matHeaderCellDef>CNPJ</th>
+          <td mat-cell *matCellDef="let suppliers">
+            {{ suppliers.ein }}
+          </td>
+        </ng-container>
+
+        <!-- cpf Column -->
+        <ng-container matColumnDef="cpf">
+          <th mat-header-cell *matHeaderCellDef>CPF</th>
+          <td mat-cell *matCellDef="let suppliers">
+            {{ suppliers.ssn }}
+          </td>
+        </ng-container>
+
+        <!-- rg Column -->
+        <ng-container matColumnDef="rg">
+          <th mat-header-cell *matHeaderCellDef>RG</th>
+          <td mat-cell *matCellDef="let suppliers">
+            {{ suppliers.nic }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ordersSuppliers">
+          <th mat-header-cell *matHeaderCellDef>Pedidos</th>
+          <td mat-cell *matCellDef="let adminSuppliers">
+            <div class="button-container">
+              <button
+                class="btn"
+                mat-mini-fab
+                color="white"
+                aria-label="Nav measure"
+                (click)="navToSupplierOrders(adminSuppliers.id)"
+              >
+                <mat-icon>exit_to_app</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="editSuppliers">
+          <th mat-header-cell *matHeaderCellDef>Editar</th>
+          <td mat-cell *matCellDef="let adminSuppliers">
+            <div class="button-container">
+              <button
+                class="btn"
+                mat-mini-fab
+                color="white"
+                aria-label="Edit measure"
+                (click)="openModal(adminSuppliers.id)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="deleteSuppliers">
+          <th mat-header-cell *matHeaderCellDef>Excluir</th>
+          <td mat-cell *matCellDef="let adminSuppliers">
+            <div class="button-container">
+              <button
+                class="btn"
+                mat-mini-fab
+                color="warn"
+                aria-label="Delete measure"
+                (click)="deleteSupplier(adminSuppliers.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</admin-sidebar>
