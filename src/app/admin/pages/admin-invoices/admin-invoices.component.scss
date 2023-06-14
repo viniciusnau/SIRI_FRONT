@@ -6,8 +6,17 @@ section {
 .btnCreate {
   display: table-cell;
   max-width: 600px;
+  .btn {
+    background-color: #cc2229
+  }
 }
 
 .btnCreate .mat-mdc-button-base {
   margin: 8px 8px 8px 0;
+}
+
+.button-container {
+  .btn {
+    background-color: #cc2229
+}
 }

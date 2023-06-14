@@ -16,7 +16,7 @@
           <textarea matInput [(ngModel)]="message"></textarea>
         </mat-form-field>
         <div class="btnRequest">
-          <button mat-raised-button color="warn" (click)="sendEmail()" [disabled]="loading">
+          <button mat-raised-button class="btn" (click)="sendEmail()" [disabled]="loading">
             <span *ngIf="!loading">Enviar</span>
             <div class="custom-spinner" *ngIf="loading"></div>
           </button>

@@ -1,7 +1,7 @@
 <admin-sidebar>
   <section>
     <div class="btnCreate">
-      <button mat-raised-button color="warn" (click)="openCreateModal()">
+      <button mat-raised-button class="btn" (click)="openCreateModal()">
         Criar
       </button>
     </div>
@@ -49,7 +49,6 @@
               <button
                 class="btn"
                 mat-mini-fab
-                color="warn"
                 aria-label="download"
                 (click)="downloadProtocols(adminProtocols.file)"
               >
@@ -83,7 +82,6 @@
               <button
                 class="btn"
                 mat-mini-fab
-                color="white"
                 aria-label="Edit measure"
                 (click)="openModal(protocol.id)"
               >
@@ -100,7 +98,6 @@
               <button
                 class="btn"
                 mat-mini-fab
-                color="warn"
                 aria-label="Delete protocol"
                 (click)="deleteProtocol(protocol.id)"
               >

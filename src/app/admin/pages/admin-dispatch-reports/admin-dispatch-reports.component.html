@@ -34,7 +34,6 @@
                 *ngIf="dispatchReports.file; else saveButton"
                 class="btn"
                 mat-mini-fab
-                color="warn"
                 aria-label="download"
                 (click)="downloadDispatchReports(dispatchReports.file)"
               >
@@ -44,7 +43,6 @@
                 <button
                   class="btn"
                   mat-mini-fab
-                  color="warn"
                   aria-label="save"
                   (click)="generateDispatchReports(dispatchReports)"
                 >
