@@ -40,6 +40,7 @@ export class EditOrderItemModalComponent implements OnInit {
   onClick(): void {
     if (this.formOrderItem.invalid) return;
     const editOrderItemData = this.formOrderItem.getRawValue();
+    console.log(this.data);
 
     this.ordersService
       .updateOrderItem(this.data.order_id, editOrderItemData)
@@ -48,9 +49,11 @@ export class EditOrderItemModalComponent implements OnInit {
           this.dialogRef.close();
           this.data.snackBar.open(
             'Tudo certo!',
-            'O item do pedido foi editado com sucesso!',
+            'Item do pedido editado com sucesso!',
             {
               duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
             },
           );
         },
@@ -60,6 +63,8 @@ export class EditOrderItemModalComponent implements OnInit {
             'Houve um erro ao editar o item do pedido!',
             {
               duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
             },
           );
         },

@@ -36,7 +36,7 @@
           <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
           <td mat-cell *matCellDef="let orderItem">
             <mat-form-field appearance="fill">
-              <mat-select [(value)]="orderItem.supplier.id" name="supplier">
+              <mat-select [(value)]="orderItem.supplier && orderItem.supplier.id" name="supplier">
                 <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">
                   {{ supplier.name }}
                 </mat-option>
