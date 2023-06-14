@@ -13,6 +13,11 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descrição</th>
+          <td mat-cell *matCellDef="let orderItems">{{ orderItems.product.description }}</td>
+        </ng-container>
+
         <ng-container matColumnDef="measure">
           <th mat-header-cell *matHeaderCellDef>Medida</th>
           <td mat-cell *matCellDef="let orderItems">

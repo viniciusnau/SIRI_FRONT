@@ -17,13 +17,7 @@
       <mat-toolbar>
         <span>Produtos</span>
         <div class="button-container">
-          <button
-            mat-raised-button
-            class="order-button"
-            (click)="order()"
-          >
-            Fazer pedido
-          </button>
+          <button mat-raised-button class="order-button" (click)="order()">Fazer pedido</button>
         </div>
       </mat-toolbar>
 
@@ -31,9 +25,12 @@
         <table mat-table [dataSource]="products" class="mat-elevation-z8">
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Nome</th>
-            <td mat-cell *matCellDef="let product">
-              {{ firstLetterOnCapital(product.name) }}
-            </td>
+            <td mat-cell *matCellDef="let product">{{ firstLetterOnCapital(product.name) }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Descrição</th>
+            <td mat-cell *matCellDef="let product">{{ product.description }}</td>
           </ng-container>
 
           <ng-container matColumnDef="quantity">
@@ -47,9 +44,7 @@
 
           <ng-container matColumnDef="measure">
             <th mat-header-cell *matHeaderCellDef>Medida</th>
-            <td mat-cell *matCellDef="let material">
-              {{ material.measure.name }}
-            </td>
+            <td mat-cell *matCellDef="let material">{{ material.measure.name }}</td>
           </ng-container>
 
           <ng-container matColumnDef="option">
