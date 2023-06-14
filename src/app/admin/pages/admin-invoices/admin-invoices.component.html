@@ -2,7 +2,7 @@
 <admin-sidebar>
   <section>
     <div class="btnCreate">
-      <button mat-raised-button color="warn" (click)="openModal()">
+      <button mat-raised-button class="btn" color="#cc2229" (click)="openModal()">
         Criar
       </button>
     </div>
@@ -65,7 +65,6 @@
               <button
                 class="btn"
                 mat-mini-fab
-                color="warn"
                 aria-label="download"
                 (click)="downloadInvoice(adminInvoices.file)"
               >
@@ -82,7 +81,6 @@
               <button
                 class="btn"
                 mat-mini-fab
-                color="warn"
                 aria-label="Delete measure"
                 (click)="deleteInvoice(adminInvoices.id)"
               >

@@ -6,6 +6,9 @@ section {
 .btnbiddingExemption {
   display: table-cell;
   max-width: 600px;
+  .btn {
+    background-color: #cc2229
+  }
 }
 
 .btnbiddingExemption .mat-mdc-button-base {
