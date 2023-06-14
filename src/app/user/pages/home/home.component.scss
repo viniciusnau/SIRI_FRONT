@@ -6,11 +6,13 @@
 
 .button-container {
   margin-left: auto;
+  .order-button {
+    margin-left: 16px;
+    background-color: #cc2229;
+  }
 }
 
-.order-button {
-  margin-left: 16px;
-}
+
 
 .filter-and-button {
   display: flex;
