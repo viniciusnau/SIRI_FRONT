@@ -59,6 +59,9 @@ import {
   AdminProtocolItemsComponent
 } from './pages/admin-protocols/admin-protocols-items/admin-protocol-items.component';
 import { CreateProtocolItemsModalComponent } from './pages/admin-protocols/admin-protocols-items/createModal/createProtocolItems-modal.component';
+import {
+  DeleteOrderItemModalComponent
+} from './pages/admin-orders/admin-order-items/modal/deleteOrderItem-modal.component.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +114,7 @@ import { CreateProtocolItemsModalComponent } from './pages/admin-protocols/admin
     CreateAdminGeneralSupplierOrdersItemsModalComponent,
     AdminProtocolItemsComponent,
     CreateProtocolItemsModalComponent,
+    DeleteOrderItemModalComponent,
   ],
   imports: [
     CommonModule,

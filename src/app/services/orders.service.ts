@@ -34,11 +34,12 @@ export class OrdersService {
     return this.httpClient.get<any>(`${this.apiUrl}/order-items`, options);
   }
 
-  public deleteOrderItem(order_item_id: string): any {
-    return this.httpClient.delete<any>(
-      `${this.apiUrl}/order-items/${order_item_id}`,
-      this.httpOptions,
-    );
+  public deleteOrderItem(order_item_id: string, description?: string): any {
+    let url = `${this.apiUrl}/order-items/${order_item_id}`;
+    if (description) {
+      url += `/?description=${encodeURIComponent(description)}`;
+    }
+    return this.httpClient.delete<any>(url, this.httpOptions);
   }
 
   public deleteOrder(order_id: string): any {

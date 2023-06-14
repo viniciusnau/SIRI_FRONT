@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { CreateProtocolsModalComponent } from '../../admin-protocols/createModal/createProtocols-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteOrderItemModalComponent } from './modal/deleteOrderItem-modal.component.component';
 
 interface AdminOrderItems {
   id: number;
@@ -48,7 +51,8 @@ export class AdminOrderItemsComponent implements OnInit {
     private ordersService: OrdersService,
     private suppliersService: SuppliersService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -121,11 +125,10 @@ export class AdminOrderItemsComponent implements OnInit {
     orderItem.supplier = { id: supplierId, name: '' };
   }
 
-  deleteOrderItem(orderItemId: string) {
-    this.ordersService
-      .deleteOrderItem(orderItemId)
-      .toPromise()
-      .then((data: any) => window.location.reload());
+  deleteOrderItemModal(orderItemId: string): void {
+    const dialogRef = this.dialog.open(DeleteOrderItemModalComponent, {
+      data: orderItemId,
+    });
   }
 
   displayedColumns = [
