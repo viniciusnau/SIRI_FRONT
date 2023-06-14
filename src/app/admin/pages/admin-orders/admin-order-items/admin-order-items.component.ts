@@ -121,6 +121,13 @@ export class AdminOrderItemsComponent implements OnInit {
     orderItem.supplier = { id: supplierId, name: '' };
   }
 
+  deleteOrderItem(orderItemId: string) {
+    this.ordersService
+      .deleteOrderItem(orderItemId)
+      .toPromise()
+      .then((data: any) => window.location.reload());
+  }
+
   displayedColumns = [
     'id',
     'product',
@@ -130,5 +137,6 @@ export class AdminOrderItemsComponent implements OnInit {
     'supplier',
     'supplier_quantity',
     'actions',
+    'deleteOrderItem'
   ];
 }
