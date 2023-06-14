@@ -12,8 +12,6 @@
   }
 }
 
-
-
 .filter-and-button {
   display: flex;
   align-items: center;
@@ -53,4 +51,17 @@ td, th {
 
 .mat-column-name {
   max-width: 50px;
+}
+
+table.mat-table {
+  td.mat-cell {
+    padding: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.mat-column-name {
+  max-width: 200px;
 }
