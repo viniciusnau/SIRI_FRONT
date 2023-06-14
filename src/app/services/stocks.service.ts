@@ -285,4 +285,15 @@ export class StocksService {
     const url = `${this.apiUrl}/dispatch-reports/${dispatchReportId}/`;
     return this.httpClient.patch(url, file, this.httpOptions);
   }
+
+  createProtocolItem(body): any {
+    const url = this.apiUrl + `/protocol-items/`;
+    return this.httpClient.post<any>(url, body, this.httpOptions);
+  }
+
+  deleteProtocolItem(protocolItemId): Observable<void> {
+    const url = `${this.apiUrl}/protocol-items/${protocolItemId}/`;
+    return this.httpClient.delete<any>(url, this.httpOptions);
+  }
+
 }

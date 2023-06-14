@@ -40,7 +40,6 @@ export class EditOrderItemModalComponent implements OnInit {
   onClick(): void {
     if (this.formOrderItem.invalid) return;
     const editOrderItemData = this.formOrderItem.getRawValue();
-    console.log(this.data);
 
     this.ordersService
       .updateOrderItem(this.data.order_id, editOrderItemData)

@@ -55,13 +55,9 @@ export class SuppliersModalComponent implements OnInit {
       });
     }
 
-    console.log(this.selectedCategories);
-
-    var editSuppliersData = this.formSuppliers.getRawValue();
+    const editSuppliersData = this.formSuppliers.getRawValue();
 
     editSuppliersData.category = this.selectedCategories;
-
-    console.log(editSuppliersData);
 
     this.stocksService
       .editSupplier(this.data.suppliers_id, editSuppliersData)

@@ -19,7 +19,7 @@ interface AdminOrderItems {
   added_quantity: number;
   order: number;
   measure: number;
-  supplier: {
+  supplier?: {
     id: number;
     name: string;
   };
@@ -83,7 +83,7 @@ export class AdminOrderItemsComponent implements OnInit {
     let payload = {};
 
     if (typeof orderItem.supplier === 'object' && !Array.isArray(orderItem.supplier)) {
-      const { id } = orderItem.supplier;
+      const id = orderItem.supplier.id;
       payload = {
         ...payload,
         supplier: id,
@@ -115,6 +115,10 @@ export class AdminOrderItemsComponent implements OnInit {
         });
       }
     );
+  }
+
+  onSupplierSelectionChange(orderItem: AdminOrderItems, supplierId: number) {
+    orderItem.supplier = { id: supplierId, name: '' };
   }
 
   displayedColumns = [

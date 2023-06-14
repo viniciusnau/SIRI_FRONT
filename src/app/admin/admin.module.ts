@@ -55,6 +55,10 @@ import { CreateAdminGeneralSupplierOrdersModalComponent } from './pages/admin-ge
 import { AdminGeneralSupplierOrderItemsComponent } from './pages/admin-general-supplier-orders/admin-supplier-order-items/admin-general-supplier-order-items.component';
 import { CreateAdminGeneralSupplierOrdersItemsModalComponent } from './pages/admin-general-supplier-orders/admin-supplier-order-items/createModal/create-admin-general-supplier-orders-items-modal-component';
 import { ProtocolsModalComponent } from './pages/admin-protocols/modal/protocols-modal.component';
+import {
+  AdminProtocolItemsComponent
+} from './pages/admin-protocols/admin-protocols-items/admin-protocol-items.component';
+import { CreateProtocolItemsModalComponent } from './pages/admin-protocols/admin-protocols-items/createModal/createProtocolItems-modal.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +109,8 @@ import { ProtocolsModalComponent } from './pages/admin-protocols/modal/protocols
     CreateAdminGeneralSupplierOrdersModalComponent,
     AdminGeneralSupplierOrderItemsComponent,
     CreateAdminGeneralSupplierOrdersItemsModalComponent,
+    AdminProtocolItemsComponent,
+    CreateProtocolItemsModalComponent,
   ],
   imports: [
     CommonModule,
@@ -114,7 +120,7 @@ import { ProtocolsModalComponent } from './pages/admin-protocols/modal/protocols
     MaterialCommonsModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
 })
 export class AdminModule {}
