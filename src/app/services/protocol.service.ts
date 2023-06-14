@@ -39,7 +39,6 @@ export class ProtocolService {
   }
 
   patchProtocol(id, body): any {
-    console.log(id, body);
     return this.httpClient.patch<any>(
       `${this.apiUrl}/${id}/`,
       body,

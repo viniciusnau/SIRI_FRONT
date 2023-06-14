@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProtocolService } from '../../../services/protocol.service';
@@ -36,6 +37,7 @@ export class AdminProtocolsComponent implements OnInit {
     private stockService: StocksService,
     private supplierService: SuppliersService,
     public dialog: MatDialog,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -46,7 +48,6 @@ export class AdminProtocolsComponent implements OnInit {
 
   getProtocols() {
     this.protocolService.getProtocols().subscribe((data) => {
-      console.log(data.results);
       this.adminProtocols = data.results;
     });
   }
@@ -97,6 +98,10 @@ export class AdminProtocolsComponent implements OnInit {
       .deleteProtocol(protocol_id)
       .toPromise()
       .then((data: any) => this.getProtocols());
+  }
+
+  navToProtocolItems(protocolId: number) {
+    this.router.navigate([`/admin/atas/itens/${protocolId}`]);
   }
 
   displayedColumns = [

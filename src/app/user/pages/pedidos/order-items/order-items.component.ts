@@ -64,11 +64,10 @@ export class OrderItemsComponent implements OnInit {
     return text[0].toUpperCase() + text.substring(1);
   }
 
-  openEditModal(product_id: string) {
-    console.log(this.orderId);
+  openEditModal(orderItemId: string) {
     const dialogRef = this.dialog.open(EditOrderItemModalComponent, {
       data: {
-        order_id: this.orderId,
+        order_id: orderItemId,
         snackBar: this.snackBar,
       },
     });

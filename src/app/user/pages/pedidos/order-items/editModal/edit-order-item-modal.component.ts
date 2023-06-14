@@ -48,9 +48,11 @@ export class EditOrderItemModalComponent implements OnInit {
           this.dialogRef.close();
           this.data.snackBar.open(
             'Tudo certo!',
-            'O item do pedido foi editado com sucesso!',
+            'Item do pedido editado com sucesso!',
             {
               duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
             },
           );
         },
@@ -60,6 +62,8 @@ export class EditOrderItemModalComponent implements OnInit {
             'Houve um erro ao editar o item do pedido!',
             {
               duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
             },
           );
         },

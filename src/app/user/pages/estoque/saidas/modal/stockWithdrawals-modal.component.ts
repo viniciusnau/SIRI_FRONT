@@ -51,8 +51,6 @@ export class StockWithdrawalsModalComponent implements OnInit {
 
     createStockWithdrawalData.stock_item = this.data.stock_item_id;
 
-    console.log(createStockWithdrawalData);
-
     this.ordersService
       .createStockWithdrawal(createStockWithdrawalData)
       .subscribe(
