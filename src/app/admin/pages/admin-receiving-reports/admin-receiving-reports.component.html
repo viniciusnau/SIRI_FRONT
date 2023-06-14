@@ -43,7 +43,6 @@
                 *ngIf="receivingReports.file; else saveButton"
                 class="btn"
                 mat-mini-fab
-                color="warn"
                 aria-label="download"
                 (click)="
                   downloadReceivingReports(
@@ -58,7 +57,6 @@
                 <button
                   class="btn"
                   mat-mini-fab
-                  color="warn"
                   aria-label="save"
                   (click)="generateReceivingReports(receivingReports)"
                 >

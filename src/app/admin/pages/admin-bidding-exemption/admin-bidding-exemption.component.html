@@ -1,7 +1,7 @@
 <admin-sidebar>
   <section>
     <div class="btnbiddingExemption">
-      <button mat-raised-button color="warn" (click)="openModal()">
+      <button mat-raised-button class="btn" (click)="openModal()">
         Criar
       </button>
     </div>
@@ -55,7 +55,7 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Excluir</th>
           <td mat-cell *matCellDef="let biddingExemption">
-            <button mat-mini-fab color="warn" (click)="deleteBiddingExemption(biddingExemption)">
+            <button mat-mini-fab class="btn" (click)="deleteBiddingExemption(biddingExemption)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
