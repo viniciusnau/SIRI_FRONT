@@ -235,6 +235,7 @@ export class AdminReceivingReportsComponent implements OnInit {
       pdfDocGenerator.getBlob((blob) => {
         const formData = new FormData();
         formData.append('file', blob, `ReceivingReport_${receivingReport.id}.pdf`);
+        formData.append('description', receivingReport.description || "");
 
         this.stocksService.updateReceivingReportFile(receivingReport.id, formData).subscribe(
           (response) => {window.location.reload()},
