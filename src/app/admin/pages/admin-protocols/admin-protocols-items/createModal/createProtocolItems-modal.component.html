@@ -4,7 +4,7 @@
   <mat-form-field appearance="fill">
     <mat-select formControlName="product">
       <mat-option *ngFor="let product of data.products" [value]="product.id">
-        {{ product.name }}
+        {{ product.description }}
       </mat-option>
     </mat-select>
   </mat-form-field>

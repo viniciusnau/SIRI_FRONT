@@ -65,8 +65,10 @@ export class AdminProtocolItemsComponent implements OnInit {
   }
 
   firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
+    if (text && text.length > 0) {
+      return text[0].toUpperCase() + text.substring(1);
+    }
+    return '';
   }
 
   deleteProtocolItem(protocol_item_id: string) {
@@ -79,6 +81,7 @@ export class AdminProtocolItemsComponent implements OnInit {
   displayedColumns = [
     'id',
     'product',
+    'productDescription',
     'quantity',
     'original_quantity',
     'delete',
