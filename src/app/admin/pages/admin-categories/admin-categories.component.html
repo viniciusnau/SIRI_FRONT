@@ -1,23 +1,18 @@
-<!-- http://localhost:4200/admin-categorias -->
 <admin-sidebar>
-  <section>
-    <div class="btnCreate">
-      <button mat-raised-button class="btn" (click)="openCreateModal()">
-        Criar
-      </button>
-    </div>
-  </section>
   <mat-card>
     <mat-card-content>
       <mat-toolbar>
         <span>Categorias</span>
+        <span class="spacer"></span>
+        <div class="btnCreate">
+          <button mat-raised-button class="btn" (click)="openCreateModal()">
+            Criar
+          </button>
+        </div>
       </mat-toolbar>
 
       <table mat-table [dataSource]="categories" class="mat-elevation-z8">
-        <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- id Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Id</th>
           <td mat-cell *matCellDef="let categories">
@@ -25,7 +20,6 @@
           </td>
         </ng-container>
 
-        <!-- Nome Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Nome</th>
           <td mat-cell *matCellDef="let categories">
@@ -33,7 +27,6 @@
           </td>
         </ng-container>
 
-        <!-- Código Column -->
         <ng-container matColumnDef="code">
           <th mat-header-cell *matHeaderCellDef>Código</th>
           <td mat-cell *matCellDef="let categories">

@@ -1,24 +1,18 @@
-<!-- http://localhost:4200/admin-produtos -->
 <admin-sidebar>
-  <section>
-    <div class="btnCreate">
-      <button mat-raised-button class="btn" (click)="openCreateModal()">
-        Criar
-      </button>
-    </div>
-  </section>
-  
   <mat-card>
     <mat-card-content>
       <mat-toolbar>
         <span>Produtos</span>
+        <span class="spacer"></span>
+        <div class="btnCreate">
+          <button mat-raised-button class="btn" (click)="openCreateModal()">
+            Criar
+          </button>
+        </div>
       </mat-toolbar>
 
       <table mat-table [dataSource]="products" class="mat-elevation-z8">
-        <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- id Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Id</th>
           <td mat-cell *matCellDef="let products">
@@ -26,7 +20,6 @@
           </td>
         </ng-container>
 
-        <!-- Nome Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Nome</th>
           <td mat-cell *matCellDef="let products">
@@ -34,7 +27,6 @@
           </td>
         </ng-container>
 
-        <!-- Descrição Column -->
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef>Descrição</th>
           <td mat-cell *matCellDef="let products">
@@ -42,7 +34,6 @@
           </td>
         </ng-container>
 
-        <!-- Código Column -->
         <ng-container matColumnDef="code">
           <th mat-header-cell *matHeaderCellDef>Código</th>
           <td mat-cell *matCellDef="let products">
@@ -50,7 +41,6 @@
           </td>
         </ng-container>
 
-        <!-- Medida Column -->
         <ng-container matColumnDef="measure">
           <th mat-header-cell *matHeaderCellDef>Medida</th>
           <td mat-cell *matCellDef="let products">
@@ -58,7 +48,6 @@
           </td>
         </ng-container>
 
-        <!-- Categoria Column -->
         <ng-container matColumnDef="category">
           <th mat-header-cell *matHeaderCellDef>Categoria</th>
           <td mat-cell *matCellDef="let products">
@@ -66,7 +55,6 @@
           </td>
         </ng-container>
 
-        <!-- Preço Column -->
         <ng-container matColumnDef="price">
           <th mat-header-cell *matHeaderCellDef>Preço</th>
           <td mat-cell *matCellDef="let products">
@@ -74,7 +62,6 @@
           </td>
         </ng-container>
 
-        <!-- Disponivel Column -->
         <ng-container matColumnDef="available">
           <th mat-header-cell *matHeaderCellDef>Disponivel</th>
           <td mat-cell *matCellDef="let products">
@@ -82,7 +69,6 @@
           </td>
         </ng-container>
 
-        <!-- Criado Column -->
         <ng-container matColumnDef="created">
           <th mat-header-cell *matHeaderCellDef>Criado</th>
           <td mat-cell *matCellDef="let products">
@@ -90,7 +76,6 @@
           </td>
         </ng-container>
 
-        <!-- Atualizado Column -->
         <ng-container matColumnDef="updated">
           <th mat-header-cell *matHeaderCellDef>Atualizado</th>
           <td mat-cell *matCellDef="let products">
