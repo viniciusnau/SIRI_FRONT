@@ -10,6 +10,7 @@ import { OrdersService } from '../../../../../services/orders.service';
 })
 export class DeleteOrderItemModalComponent implements OnInit {
   formDeleteOrderItem: FormGroup;
+  loading: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<DeleteOrderItemModalComponent>,
@@ -33,9 +34,13 @@ export class DeleteOrderItemModalComponent implements OnInit {
   }
 
   onClick() {
+    this.loading = true;
     this.ordersService
       .deleteOrderItem(this.data, this.formDeleteOrderItem.getRawValue().description)
       .toPromise()
-      .then((data: any) => window.location.reload());
+      .then((data: any) => {
+        this.loading = false;
+        window.location.reload();
+      });
   }
 }
