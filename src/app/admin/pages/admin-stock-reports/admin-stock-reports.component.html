@@ -30,7 +30,7 @@
             <mat-form-field appearance="fill">
               <mat-select [(ngModel)]="selectedProducts" multiple>
                 <mat-option *ngFor="let product of products" [value]="product.id">
-                  {{ product.name }}
+                  {{ product.description }}
                 </mat-option>
               </mat-select>
             </mat-form-field>

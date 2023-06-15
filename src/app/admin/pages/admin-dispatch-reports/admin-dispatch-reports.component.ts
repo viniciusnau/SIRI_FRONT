@@ -29,6 +29,7 @@ interface DispatchReport {
 interface Product {
   id: number;
   name: string;
+  description: string;
   code: string;
   price: number;
   measure: {
@@ -111,6 +112,7 @@ export class AdminDispatchReportsComponent implements OnInit {
         id: dispatchReport.id,
         publicDefense: dispatchReport.public_defense.name,
         name: product.name,
+        description: product.description,
         code: product.code,
         measure: product.measure.name,
         quantity: dispatchReport.quantity,
@@ -164,6 +166,12 @@ export class AdminDispatchReportsComponent implements OnInit {
           },
           {
             text: `Produto: ${reportData.name}`,
+            style: 'line',
+            alignment: 'left',
+            margin: [20, 5],
+          },
+          {
+            text: `Descrição: ${reportData.description}`,
             style: 'line',
             alignment: 'left',
             margin: [20, 5],
@@ -250,6 +258,7 @@ export class AdminDispatchReportsComponent implements OnInit {
     'id',
     'publicDefense',
     'product',
+    'productDescription',
     'quantity',
     'file',
     'description',
