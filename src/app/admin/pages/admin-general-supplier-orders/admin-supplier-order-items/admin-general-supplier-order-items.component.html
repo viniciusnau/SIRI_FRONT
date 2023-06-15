@@ -1,15 +1,14 @@
 <admin-sidebar>
-  <section>
-    <div class="btnCreate">
-      <button mat-raised-button class="btn" (click)="openCreateModal()">
-        Criar
-      </button>
-    </div>
-  </section>
   <mat-card>
     <mat-card-content>
       <mat-toolbar>
         <span>Itens do Pedido</span>
+        <span class="spacer"></span>
+        <div class="btnCreate">
+          <button mat-raised-button class="btn" (click)="openCreateModal()">
+            Criar
+          </button>
+        </div>
       </mat-toolbar>
 
       <table
@@ -17,10 +16,7 @@
         [dataSource]="supplierOrderItems"
         class="mat-elevation-z8"
       >
-        <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- id Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Id</th>
           <td mat-cell *matCellDef="let supplierOrderItems">
@@ -28,7 +24,6 @@
           </td>
         </ng-container>
 
-        <!-- Produto Column -->
         <ng-container matColumnDef="product">
           <th mat-header-cell *matHeaderCellDef>Produto</th>
           <td mat-cell *matCellDef="let supplierOrderItems">
@@ -36,7 +31,13 @@
           </td>
         </ng-container>
 
-        <!-- Quantidade Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descrição</th>
+          <td mat-cell *matCellDef="let supplierOrderItems">
+            {{ firstLetterOnCapital(supplierOrderItems.product.description) }}
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="quantity">
           <th mat-header-cell *matHeaderCellDef>Quantidade</th>
           <td mat-cell *matCellDef="let supplierOrderItems">
@@ -44,7 +45,6 @@
           </td>
         </ng-container>
 
-        <!-- Medida Column -->
         <ng-container matColumnDef="measure">
           <th mat-header-cell *matHeaderCellDef>Medida</th>
           <td mat-cell *matCellDef="let supplierOrderItems">

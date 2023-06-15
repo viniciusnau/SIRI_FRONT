@@ -46,7 +46,7 @@ export class CreateAdminGeneralSupplierOrdersItemsModalComponent
   onClick(): void {
     if (this.formSupplierOrders.invalid) return;
 
-    var createSupplierOrderItemData = this.formSupplierOrders.getRawValue();
+    const createSupplierOrderItemData = this.formSupplierOrders.getRawValue();
 
     createSupplierOrderItemData.supplier_order = parseInt(
       this.data.supplier_order,
@@ -55,7 +55,7 @@ export class CreateAdminGeneralSupplierOrdersItemsModalComponent
     this.ordersService
       .createSupplierOrderItem(createSupplierOrderItemData)
       .subscribe((response) => {
-        this.dialogRef.close();
+        window.location.reload()
       });
   }
 }

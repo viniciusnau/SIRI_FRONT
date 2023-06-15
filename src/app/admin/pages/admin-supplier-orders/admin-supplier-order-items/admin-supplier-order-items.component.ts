@@ -6,8 +6,14 @@ interface SupplierOrderItems {
   id: number;
   quantity: number;
   supplier_order: number;
-  product: number;
-  measure: number;
+  product: {
+    id: number;
+    name: string;
+    measure: {
+      name: string;
+    };
+    description: string;
+  };
 }
 
 @Component({
@@ -21,15 +27,16 @@ export class AdminSupplierOrderItemsComponent implements OnInit {
   displayedColumns = [
     'id',
     'product',
+    'description',
     'measure',
     'quantity',
-    'receivedQuantity',
   ];
 
   constructor(
     private ordersService: OrdersService,
     private route: ActivatedRoute,
   ) {}
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.supplierOrderId = params['id'];
@@ -41,7 +48,7 @@ export class AdminSupplierOrderItemsComponent implements OnInit {
     this.ordersService
       .getSupplierOrderItems(this.supplierOrderId)
       .subscribe((data) => {
-        this.supplierOrderItems = data.results;
+        this.supplierOrderItems = data;
       });
   }
 }

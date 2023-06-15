@@ -18,6 +18,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
   displayedColumns = [
     'id',
     'product',
+    'description',
     'quantity',
     'measure',
     'deleteOrderItem',

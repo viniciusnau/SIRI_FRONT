@@ -1,23 +1,18 @@
-<!-- http://localhost:4200/admin-pedidos-fornecedor -->
 <admin-sidebar>
-  <section>
-    <div class="btnCreate">
-      <button mat-raised-button class="btn" (click)="openCreateModal()">
-        Criar
-      </button>
-    </div>
-  </section>
   <mat-card>
     <mat-card-content>
       <mat-toolbar>
         <span>Pedidos do Fornecedor</span>
+        <span class="spacer"></span>
+        <div class="btnCreate">
+          <button mat-raised-button class="btn" (click)="openCreateModal()">
+            Criar
+          </button>
+        </div>
       </mat-toolbar>
 
       <table mat-table [dataSource]="supplierOrders" class="mat-elevation-z8">
-        <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- id Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Id</th>
           <td mat-cell *matCellDef="let supplierOrders">
@@ -39,7 +34,6 @@
           </td>
         </ng-container>
 
-        <!-- Ata Column -->
         <ng-container matColumnDef="protocol">
           <th mat-header-cell *matHeaderCellDef>Ata</th>
           <td mat-cell *matCellDef="let supplierOrders">
@@ -47,7 +41,6 @@
           </td>
         </ng-container>
 
-        <!-- Prazo de Entrega Column -->
         <ng-container matColumnDef="delivery_date">
           <th mat-header-cell *matHeaderCellDef>Prazo de Entrega</th>
           <td mat-cell *matCellDef="let supplierOrders">
@@ -55,7 +48,6 @@
           </td>
         </ng-container>
 
-        <!-- Recebido Column -->
         <ng-container matColumnDef="received">
           <th mat-header-cell *matHeaderCellDef>Recebido</th>
           <td mat-cell *matCellDef="let supplierOrders">
@@ -63,7 +55,6 @@
           </td>
         </ng-container>
 
-        <!-- Criado Column -->
         <ng-container matColumnDef="created">
           <th mat-header-cell *matHeaderCellDef>Criado</th>
           <td mat-cell *matCellDef="let supplierOrders">
@@ -71,7 +62,6 @@
           </td>
         </ng-container>
 
-        <!-- Atualizado Column -->
         <ng-container matColumnDef="updated">
           <th mat-header-cell *matHeaderCellDef>Atualizado</th>
           <td mat-cell *matCellDef="let supplierOrders">
