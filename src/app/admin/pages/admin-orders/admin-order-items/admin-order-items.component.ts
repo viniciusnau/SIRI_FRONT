@@ -84,17 +84,21 @@ export class AdminOrderItemsComponent implements OnInit {
 
   saveItem(orderItem: AdminOrderItems) {
     let payload = {};
-
-    if (typeof orderItem.supplier === 'object' && !Array.isArray(orderItem.supplier)) {
-      const id = orderItem.supplier.id;
-      payload = {
-        ...payload,
-        supplier: id,
-        supplier_quantity: orderItem.supplier_quantity,
-        quantity: orderItem.quantity
-      };
-    } else {
-      payload = {};
+    if (orderItem.supplier) {
+      if (typeof orderItem.supplier === 'object' && !Array.isArray(orderItem.supplier)) {
+        const id = orderItem.supplier.id;
+        payload = {
+          ...payload,
+          supplier: id,
+          supplier_quantity: orderItem.supplier_quantity,
+          quantity: orderItem.quantity
+        };
+      } else {
+        payload = {};
+      }
+    }
+    else {
+      payload = {quantity: orderItem.quantity};
     }
 
     this.ordersService.updateOrderItem(orderItem.id, payload).subscribe(
