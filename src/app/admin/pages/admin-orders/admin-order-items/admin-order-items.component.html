@@ -19,7 +19,11 @@
 
         <ng-container matColumnDef="quantity">
           <th mat-header-cell *matHeaderCellDef>Quantidade</th>
-          <td mat-cell *matCellDef="let orderItem">{{ orderItem.quantity }}</td>
+          <td mat-cell *matCellDef="let orderItem">
+            <mat-form-field appearance="fill">
+              <input [disabled]="orderItem.quantity === orderItem.added_quantity" matInput [(ngModel)]="orderItem.quantity" name="quantity" [type]="'number'" placeholder="Quantidade">
+            </mat-form-field>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="added_quantity">
@@ -36,7 +40,7 @@
           <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
           <td mat-cell *matCellDef="let orderItem">
             <mat-form-field appearance="fill">
-              <mat-select [(value)]="orderItem.supplier && orderItem.supplier.id" (selectionChange)="onSupplierSelectionChange(orderItem, $event.value)" name="supplier">
+              <mat-select [disabled]="orderItem.quantity === orderItem.added_quantity" [(value)]="orderItem.supplier && orderItem.supplier.id" (selectionChange)="onSupplierSelectionChange(orderItem, $event.value)" name="supplier">
                 <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">
                   {{ supplier.name }}
                 </mat-option>
@@ -57,7 +61,7 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Salvar</th>
           <td mat-cell *matCellDef="let orderItem">
-            <button mat-mini-fab class="btn" (click)="saveItem(orderItem)">
+            <button [disabled]="orderItem.quantity === orderItem.added_quantity" mat-mini-fab class="btn" (click)="saveItem(orderItem)">
               <mat-icon>save</mat-icon>
             </button>
           </td>
