@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { CreateProtocolsModalComponent } from '../../admin-protocols/createModal/createProtocols-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteOrderItemModalComponent } from './modal/deleteOrderItem-modal.component.component';
 
@@ -92,13 +91,10 @@ export class AdminOrderItemsComponent implements OnInit {
         ...payload,
         supplier: id,
         supplier_quantity: orderItem.supplier_quantity,
+        quantity: orderItem.quantity
       };
     } else {
-      payload = {
-        ...payload,
-        supplier: orderItem.supplier,
-        supplier_quantity: orderItem.supplier_quantity,
-      };
+      payload = {};
     }
 
     this.ordersService.updateOrderItem(orderItem.id, payload).subscribe(
