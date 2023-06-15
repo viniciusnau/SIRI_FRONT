@@ -22,8 +22,11 @@ export class OrdersService {
     };
   }
 
-  public getAllOrders(): Observable<any> {
-    return this.httpClient.get<any>(this.apiUrl, this.httpOptions);
+  public getAllOrders(pageChange = ''): Observable<any> {
+    if (pageChange !== '/') {
+      null
+    }
+    return this.httpClient.get<any>(this.apiUrl + pageChange, this.httpOptions);
   }
 
   public getOrderItems(order_id: string): Observable<any> {

@@ -62,6 +62,7 @@ import { CreateProtocolItemsModalComponent } from './pages/admin-protocols/admin
 import {
   DeleteOrderItemModalComponent
 } from './pages/admin-orders/admin-order-items/modal/deleteOrderItem-modal.component.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import {
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    NgxPaginationModule,
   ],
 })
 export class AdminModule {}

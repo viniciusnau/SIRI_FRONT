@@ -55,6 +55,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let order; columns: displayedColumns"></tr>
       </table>
+      <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
     </mat-card-content>
   </mat-card>
 </admin-sidebar>

@@ -19,6 +19,11 @@ interface AdminOrder {
 })
 export class AdminOrdersComponent implements OnInit {
   orders: AdminOrder[] = [];
+  pagedItems: AdminOrder[] = [];
+  pageSize = 10;
+  currentPage = 1;
+  pageChange = '';
+  data;
 
   constructor(public ordersService: OrdersService, private router: Router) {}
 
@@ -26,10 +31,31 @@ export class AdminOrdersComponent implements OnInit {
     this.getOrders();
   }
 
-  getOrders() {
-    this.ordersService.getAllOrders().subscribe((data) => {
+  getOrders(pageChange?: string) {
+    this.ordersService.getAllOrders(pageChange).subscribe((data) => {
+      this.data = data;
       this.orders = data.results;
+      this.setPage(this.currentPage)
     });
+  }
+
+  setPage(page: number) {
+    const startIndex = (page - 1) * this.pageSize;
+    const endIndex = Math.min(startIndex + this.pageSize - 1, this.orders.length - 1);
+    this.pagedItems = this.orders.slice(startIndex, endIndex + 1);
+    this.getOrders(this.pageChange);
+  }
+
+  onPageChange(page: number) {
+    const previousPage = this.currentPage;
+    this.currentPage = page;
+  
+    if (page > previousPage) {
+      this.pageChange = this.data.next.match(/\?(.+)/)[0]
+    } else if (page < previousPage) {
+      this.pageChange = this.data.previous.match(/\?(.+)/)[0]
+    }
+    this.setPage(page);
   }
 
   formatDate(date: string) {
