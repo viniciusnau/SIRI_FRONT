@@ -130,6 +130,7 @@ export class AdminOrderItemsComponent implements OnInit {
   displayedColumns = [
     'id',
     'product',
+    'description',
     'quantity',
     'added_quantity',
     'measure',
