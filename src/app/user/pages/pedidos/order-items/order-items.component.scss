@@ -1,3 +1,5 @@
+@import '../../../../../colors.scss';
+
 table {
   width: 100%;
 }
@@ -13,6 +15,7 @@ td, th {
 
 .button-container {
   .btn {
-    background-color: #cc2229;
+    background-color: $primary-color;
+    color: $primary-text-color;;
   }
 }

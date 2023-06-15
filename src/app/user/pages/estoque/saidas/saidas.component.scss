@@ -1,12 +1,16 @@
+@import '../../../../../colors.scss';
+
 .btnCreate {
   padding: 10px;
   .btn {
-    background-color: #cc2229;
+    background-color: $primary-color;
+    color: $primary-text-color;;
   }
 }
 
 .button-container {
   .btn {
-    background-color: #cc2229;
+    background-color: $primary-color;
+    color: $primary-text-color;;
   }
 }

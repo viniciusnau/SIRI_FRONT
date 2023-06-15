@@ -1,6 +1,15 @@
-.btnCreate{
+@import '../../../../colors.scss';
+
+section {
+    display: table;
     margin: .5rem 1.25rem;
+}
+
+.btnCreate{
+    display: table-cell;
+    max-width: 600px;
     .btn {
-        background-color: #cc2229;
+        background-color: $primary-color;
+        color: $primary-text-color;;
     }
 }

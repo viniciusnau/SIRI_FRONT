@@ -1,3 +1,5 @@
+@import '../../../../colors.scss';
+
 section {
   display: table;
   padding-left: 20px;
@@ -7,7 +9,8 @@ section {
   display: table-cell;
   max-width: 600px;
   .btn {
-    background-color: #cc2229
+    background-color: $primary-color;
+    color: $primary-text-color;
   }
 }
 
@@ -17,6 +20,7 @@ section {
 
 .button-container {
   .btn {
-    background-color: #cc2229
+    background-color: $primary-color;
+    color: $primary-text-color;
   }
 }

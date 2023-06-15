@@ -63,6 +63,7 @@ section {
   margin-right: 30px;
   padding: 30px;
   .btn {
-    background-color: #cc2229;
+    background-color: $primary-color;
+    color: $primary-text-color;;
   }
 }

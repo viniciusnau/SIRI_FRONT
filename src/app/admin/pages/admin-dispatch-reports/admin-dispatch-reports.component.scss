@@ -1,3 +1,6 @@
+@import '../../../../colors.scss';
+
 .btn {
-    background-color: #cc2229
+    background-color: $primary-color;
+    color: $primary-text-color;
 }

@@ -1,3 +1,5 @@
+@import '../../../../colors.scss';
+
 .mat-mdc-row .mat-mdc-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
@@ -9,5 +11,6 @@
 }
 
 .btn {
-  background-color: #cc2229;
+  background-color: $primary-color;
+  color: $primary-text-color;;
 }
