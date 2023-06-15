@@ -76,7 +76,7 @@
           <th mat-header-cell *matHeaderCellDef>Excluir</th>
           <td mat-cell *matCellDef="let orderItem">
             <div class="button-container">
-              <button [disabled]="orderItem.quantity === orderItem.added_quantity" class="btn" mat-mini-fab aria-label="Delete"
+              <button [disabled]="orderItem.added_quantity > 0" class="btn" mat-mini-fab aria-label="Delete"
                       (click)="deleteOrderItemModal(orderItem.id)">
                 <mat-icon>delete</mat-icon>
               </button>

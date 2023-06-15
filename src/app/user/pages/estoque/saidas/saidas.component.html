@@ -1,17 +1,14 @@
 <user-sidebar>
   <mat-card>
     <mat-card-content>
-      <section>
+      <mat-toolbar>
+        <span>Saídas</span>
+        <span class="spacer"></span>
         <div class="btnCreate">
           <button mat-raised-button class="btn" (click)="openModal()">
             Criar
           </button>
         </div>
-      </section>
-      <mat-divider></mat-divider>
-
-      <mat-toolbar>
-        <span>Saídas</span>
       </mat-toolbar>
 
       <table mat-table [dataSource]="withdrawals" class="mat-elevation-z8">
