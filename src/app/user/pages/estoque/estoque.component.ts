@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 
-
 interface Category {
   id: number;
   name: string;
@@ -18,7 +17,7 @@ interface Category {
 export class EstoqueComponent implements OnInit {
   categories: Category[] = [];
   stock: any[] = [];
-  displayedColumns = ['name', 'quantity', 'measure', 'entries', 'withdrawals'];
+  displayedColumns = ['name', 'description', 'quantity', 'measure', 'entries', 'withdrawals'];
 
   constructor(
     public userService: UserService,

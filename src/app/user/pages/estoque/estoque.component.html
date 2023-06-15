@@ -7,10 +7,15 @@
 
       <table mat-table [dataSource]="stock" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <th mat-header-cell *matHeaderCellDef>Produto</th>
           <td mat-cell *matCellDef="let stock">
             {{ firstLetterOnCapital(stock.product.name) }}
           </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descrição</th>
+          <td mat-cell *matCellDef="let stock">{{ stock.product.description }}</td>
         </ng-container>
 
         <ng-container matColumnDef="quantity">

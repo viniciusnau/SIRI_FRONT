@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Excluir</h1>
+<div [formGroup]="formDeleteOrderItem" mat-dialog-content class="content">
+  <p>Justificativa</p>
+  <mat-form-field appearance="fill">
+    <input type="string" matInput formControlName="description" />
+  </mat-form-field>
+
+  <div mat-dialog-actions class="actions">
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button (click)="onClick()" cdkFocusInitial>Confirmar</button>
+  </div>
+</div>

@@ -90,5 +90,5 @@ export class AdminBiddingExemptionComponent {
     return new Date(date).toLocaleDateString();
   }
 
-  displayedColumns = ['id', 'quantity', 'product', 'stock', 'invoice', 'actions'];
+  displayedColumns = ['id', 'quantity', 'product', 'description', 'stock', 'invoice', 'actions'];
 }

@@ -75,6 +75,7 @@ export class OrderItemsComponent implements OnInit {
 
   displayedColumns = [
     'product',
+    'description',
     'measure',
     'quantity',
     'added_quantity',

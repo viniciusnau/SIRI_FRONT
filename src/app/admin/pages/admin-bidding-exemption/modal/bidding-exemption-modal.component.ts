@@ -48,7 +48,7 @@ export class BiddingExemptionModalComponent implements OnInit {
     this.stocksService
       .createBiddingExemption(createBiddingExemptionData)
       .subscribe((response) => {
-        this.dialogRef.close();
+        window.location.reload()
       });
   }
 }

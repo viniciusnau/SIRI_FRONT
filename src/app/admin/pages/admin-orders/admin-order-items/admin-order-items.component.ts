@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteOrderItemModalComponent } from './modal/deleteOrderItem-modal.component.component';
 
 interface AdminOrderItems {
   id: number;
@@ -48,7 +50,8 @@ export class AdminOrderItemsComponent implements OnInit {
     private ordersService: OrdersService,
     private suppliersService: SuppliersService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -88,13 +91,10 @@ export class AdminOrderItemsComponent implements OnInit {
         ...payload,
         supplier: id,
         supplier_quantity: orderItem.supplier_quantity,
+        quantity: orderItem.quantity
       };
     } else {
-      payload = {
-        ...payload,
-        supplier: orderItem.supplier,
-        supplier_quantity: orderItem.supplier_quantity,
-      };
+      payload = {};
     }
 
     this.ordersService.updateOrderItem(orderItem.id, payload).subscribe(
@@ -121,14 +121,22 @@ export class AdminOrderItemsComponent implements OnInit {
     orderItem.supplier = { id: supplierId, name: '' };
   }
 
+  deleteOrderItemModal(orderItemId: string): void {
+    const dialogRef = this.dialog.open(DeleteOrderItemModalComponent, {
+      data: orderItemId,
+    });
+  }
+
   displayedColumns = [
     'id',
     'product',
+    'description',
     'quantity',
     'added_quantity',
     'measure',
     'supplier',
     'supplier_quantity',
     'actions',
+    'deleteOrderItem'
   ];
 }

@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class HomeComponent implements OnInit {
   categories: Category[] = [];
   products: Product[] = [];
-  displayedColumns = ['name', 'quantity', 'measure', 'option'];
+  displayedColumns = ['name', 'description', 'quantity', 'measure', 'option'];
   selectedCategoryId: number;
   client: number;
 

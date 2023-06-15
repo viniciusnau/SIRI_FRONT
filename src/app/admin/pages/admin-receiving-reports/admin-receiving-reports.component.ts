@@ -27,6 +27,7 @@ interface ReceivingReport {
 interface Product {
   id: number;
   name: string;
+  description: string;
   code: string;
   price: number;
   measure: {
@@ -98,6 +99,7 @@ export class AdminReceivingReportsComponent implements OnInit {
         id: receivingReport.id,
         supplier: receivingReport.supplier.name,
         name: product.name,
+        description: product.description,
         code: product.code,
         measure: product.measure.name,
         quantity: receivingReport.quantity,
@@ -157,6 +159,12 @@ export class AdminReceivingReportsComponent implements OnInit {
           },
           {
             text: `Produto: ${reportData.name}`,
+            style: 'line',
+            alignment: 'left',
+            margin: [20, 5],
+          },
+          {
+            text: `Descrição: ${reportData.description}`,
             style: 'line',
             alignment: 'left',
             margin: [20, 5],
@@ -241,6 +249,7 @@ export class AdminReceivingReportsComponent implements OnInit {
     'id',
     'supplier',
     'product',
+    'productDescription',
     'quantity',
     'file',
     'description',
