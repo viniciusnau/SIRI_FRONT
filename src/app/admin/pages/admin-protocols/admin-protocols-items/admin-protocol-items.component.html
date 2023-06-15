@@ -1,7 +1,7 @@
 <admin-sidebar>
   <section>
     <div class="btnCreate">
-      <button mat-raised-button color="warn" (click)="openCreateModal()">
+      <button mat-raised-button class="btn" (click)="openCreateModal()">
         Criar
       </button>
     </div>
@@ -57,7 +57,6 @@
               <button
                 class="btn"
                 mat-mini-fab
-                color="warn"
                 aria-label="Delete protocol"
                 (click)="deleteProtocolItem(adminProtocolItem.id)"
               >
