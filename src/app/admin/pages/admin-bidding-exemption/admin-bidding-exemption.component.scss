@@ -5,6 +5,7 @@ section {
   padding-left: 20px;
 }
 
+
 .btnbiddingExemption {
   display: table-cell;
   max-width: 600px;
@@ -16,4 +17,9 @@ section {
 
 .btnbiddingExemption .mat-mdc-button-base {
   margin: 8px 8px 8px 0;
+}
+
+.btn {
+  background-color: $primary-color;
+  color: $primary-text-color;
 }
