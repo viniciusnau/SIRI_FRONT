@@ -2,31 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
-  template: `
-    <div class="pagination">
-      <button class="previous" [disabled]="!hasPrevious()" (click)="goToPreviousPage()">
-        Voltar
-      </button>
-      <span class="page-number">{{ currentPage }}</span>
-      <button class="next" [disabled]="!hasNext()" (click)="goToNextPage()">
-        Próximo
-      </button>
-    </div>
-  `,
-  styles: [
-    `
-      .pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-      }
-
-      .page-number {
-        margin: 0 10px;
-      }
-    `,
-  ],
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent {
   @Input() currentPage: number;
