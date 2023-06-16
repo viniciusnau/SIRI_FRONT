@@ -5,7 +5,12 @@
         <span>Pedidos</span>
       </mat-toolbar>
 
-      <table mat-table [dataSource]="orders" matSort class="mat-elevation-z8">
+      <table
+        mat-table
+        [dataSource]="data.results"
+        matSort
+        class="mat-elevation-z8"
+      >
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Id</th>
           <td mat-cell *matCellDef="let order">{{ order.id }}</td>
@@ -19,34 +24,53 @@
         <ng-container matColumnDef="sent">
           <th mat-header-cell *matHeaderCellDef>Enviado</th>
           <td mat-cell *matCellDef="let order">
-            <mat-checkbox [(ngModel)]="order.is_sent" (change)="updateOrderSentStatus(order)"></mat-checkbox>
+            <mat-checkbox
+              [(ngModel)]="order.is_sent"
+              (change)="updateOrderSentStatus(order)"
+            ></mat-checkbox>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="partAdded">
-          <th mat-header-cell *matHeaderCellDef>Parcialmente Adicionado ao Estoque</th>
-          <td mat-cell *matCellDef="let order">{{ order.partially_added_to_stock ? 'Sim' : 'Não' }}</td>
+          <th mat-header-cell *matHeaderCellDef>
+            Parcialmente Adicionado ao Estoque
+          </th>
+          <td mat-cell *matCellDef="let order">
+            {{ order.partially_added_to_stock ? 'Sim' : 'Não' }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="compAdded">
-          <th mat-header-cell *matHeaderCellDef>Completamente Adicionado ao Estoque</th>
-          <td mat-cell *matCellDef="let order">{{ order.completely_added_to_stock ? 'Sim' : 'Não' }}</td>
+          <th mat-header-cell *matHeaderCellDef>
+            Completamente Adicionado ao Estoque
+          </th>
+          <td mat-cell *matCellDef="let order">
+            {{ order.completely_added_to_stock ? 'Sim' : 'Não' }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="created">
           <th mat-header-cell *matHeaderCellDef>Criado</th>
-          <td mat-cell *matCellDef="let order">{{ formatDate(order.created) }}</td>
+          <td mat-cell *matCellDef="let order">
+            {{ formatDate(order.created) }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="updated">
           <th mat-header-cell *matHeaderCellDef>Atualizado</th>
-          <td mat-cell *matCellDef="let order">{{ formatDate(order.updated) }}</td>
+          <td mat-cell *matCellDef="let order">
+            {{ formatDate(order.updated) }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Itens</th>
           <td mat-cell *matCellDef="let order">
-            <button mat-mini-fab class="btn" (click)="navigateToOrderItems(order.id)">
+            <button
+              mat-mini-fab
+              class="btn"
+              (click)="navigateToOrderItems(order.id)"
+            >
               <mat-icon>exit_to_app</mat-icon>
             </button>
           </td>
@@ -55,7 +79,11 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let order; columns: displayedColumns"></tr>
       </table>
-      <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+      <pagination-controls
+        (pageChange)="onPageChange($event)"
+        previousLabel="Voltar"
+        nextLabel="Avançar"
+      ></pagination-controls>
     </mat-card-content>
   </mat-card>
 </admin-sidebar>

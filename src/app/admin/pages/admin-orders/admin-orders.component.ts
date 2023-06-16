@@ -18,7 +18,6 @@ interface AdminOrder {
   styleUrls: ['./admin-orders.component.scss'],
 })
 export class AdminOrdersComponent implements OnInit {
-  orders: AdminOrder[] = [];
   pagedItems: AdminOrder[] = [];
   pageSize = 10;
   currentPage = 1;
@@ -34,28 +33,33 @@ export class AdminOrdersComponent implements OnInit {
   getOrders(pageChange?: string) {
     this.ordersService.getAllOrders(pageChange).subscribe((data) => {
       this.data = data;
-      this.orders = data.results;
-      this.setPage(this.currentPage)
+      this.setPage(this.currentPage);
     });
   }
 
   setPage(page: number) {
     const startIndex = (page - 1) * this.pageSize;
-    const endIndex = Math.min(startIndex + this.pageSize - 1, this.orders.length - 1);
-    this.pagedItems = this.orders.slice(startIndex, endIndex + 1);
+    const endIndex = Math.min(
+      startIndex + this.pageSize - 1,
+      this.data.results.length - 1,
+    );
+    this.pagedItems = this.data.results.slice(startIndex, endIndex + 1);
     this.getOrders(this.pageChange);
+    // this.currentPage
   }
 
   onPageChange(page: number) {
     const previousPage = this.currentPage;
     this.currentPage = page;
-  
+
     if (page > previousPage) {
-      this.pageChange = this.data.next.match(/\?(.+)/)[0]
+      this.pageChange = this.data.next.match(/\?(.+)/)[0];
+      this.setPage(page--);
     } else if (page < previousPage) {
-      this.pageChange = this.data.previous.match(/\?(.+)/)[0]
+      this.pageChange = this.data.previous.match(/\?(.+)/)[0];
+      this.setPage(page++);
     }
-    this.setPage(page);
+    this.getOrders(this.pageChange);
   }
 
   formatDate(date: string) {
