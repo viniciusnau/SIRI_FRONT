@@ -33,7 +33,6 @@ export class AdminOrdersComponent implements OnInit {
   getOrders(pageChange?: string) {
     this.ordersService.getAllOrders(pageChange).subscribe((data) => {
       this.data = data;
-      this.setPage(this.currentPage);
     });
   }
 
@@ -45,21 +44,17 @@ export class AdminOrdersComponent implements OnInit {
     );
     this.pagedItems = this.data.results.slice(startIndex, endIndex + 1);
     this.getOrders(this.pageChange);
-    // this.currentPage
   }
 
   onPageChange(page: number) {
     const previousPage = this.currentPage;
     this.currentPage = page;
-
-    if (page > previousPage) {
-      this.pageChange = this.data.next.match(/\?(.+)/)[0];
-      this.setPage(page--);
-    } else if (page < previousPage) {
-      this.pageChange = this.data.previous.match(/\?(.+)/)[0];
-      this.setPage(page++);
-    }
-    this.getOrders(this.pageChange);
+    console.log('this.currentPage: ', this.currentPage);
+    this.getOrders(
+      page > previousPage
+        ? this.data?.next?.match(/\?(.+)/)[0]
+        : this.data?.previous?.match(/\?(.+)/)[0],
+    );
   }
 
   formatDate(date: string) {

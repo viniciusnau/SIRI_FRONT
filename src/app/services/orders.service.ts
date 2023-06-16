@@ -23,9 +23,6 @@ export class OrdersService {
   }
 
   public getAllOrders(pageChange = ''): Observable<any> {
-    if (pageChange !== '/') {
-      null
-    }
     return this.httpClient.get<any>(this.apiUrl + pageChange, this.httpOptions);
   }
 
@@ -173,11 +170,19 @@ export class OrdersService {
   }
 
   createOrder(order: any): Observable<any> {
-    return this.httpClient.post<any>(`${this.apiUrl}/`, order, this.httpOptions);
+    return this.httpClient.post<any>(
+      `${this.apiUrl}/`,
+      order,
+      this.httpOptions,
+    );
   }
 
   createOrderItems(orderItems: any[]): Observable<any> {
-    return this.httpClient.post<any>(`${this.apiUrl}/order-items/`, orderItems, this.httpOptions);
+    return this.httpClient.post<any>(
+      `${this.apiUrl}/order-items/`,
+      orderItems,
+      this.httpOptions,
+    );
   }
 
   createStockWithdrawal(body): any {
