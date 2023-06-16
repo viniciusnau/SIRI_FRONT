@@ -18,11 +18,8 @@ interface AdminOrder {
   styleUrls: ['./admin-orders.component.scss'],
 })
 export class AdminOrdersComponent implements OnInit {
-  pagedItems: AdminOrder[] = [];
-  pageSize = 10;
   currentPage = 1;
-  pageChange = '';
-  data;
+  apiResponse: any;
 
   constructor(public ordersService: OrdersService, private router: Router) {}
 
@@ -30,26 +27,15 @@ export class AdminOrdersComponent implements OnInit {
     this.getOrders();
   }
 
-  getOrders(pageChange?: string) {
-    this.ordersService.getAllOrders(pageChange).subscribe((data) => {
-      this.data = data;
-    });
-  }
-
   onPageChange(page: number) {
     this.currentPage = page;
-    if (page > 1) {
-      this.pageChange = this.data?.next;
-    } else if (page < 1) {
-      this.pageChange = this.data?.previous;
-    } else {
-      this.pageChange = '';
-    }
+    this.getOrders();
+  }
 
-    if (this.pageChange) {
-      const queryString = this.pageChange.match(/\?(.+)/);
-      this.getOrders(queryString ? queryString[0] : '');
-    }
+  getOrders() {
+    this.ordersService.getAllOrders(this.currentPage.toString()).subscribe((data) => {
+      this.apiResponse = data;
+    });
   }
 
   formatDate(date: string) {
@@ -64,7 +50,7 @@ export class AdminOrdersComponent implements OnInit {
     const payload = { is_sent: order.is_sent };
 
     this.ordersService.updateOrder(order.id, payload).subscribe(() => {
-      // Success message or any additional logic after updating the order
+      // Handle success or error if needed
     });
   }
 

@@ -63,6 +63,7 @@ import {
   DeleteOrderItemModalComponent
 } from './pages/admin-orders/admin-order-items/modal/deleteOrderItem-modal.component.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AdminProtocolItemsComponent,
     CreateProtocolItemsModalComponent,
     DeleteOrderItemModalComponent,
+    PaginationComponent,
   ],
   imports: [
     CommonModule,
