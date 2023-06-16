@@ -36,25 +36,20 @@ export class AdminOrdersComponent implements OnInit {
     });
   }
 
-  setPage(page: number) {
-    const startIndex = (page - 1) * this.pageSize;
-    const endIndex = Math.min(
-      startIndex + this.pageSize - 1,
-      this.data.results.length - 1,
-    );
-    this.pagedItems = this.data.results.slice(startIndex, endIndex + 1);
-    this.getOrders(this.pageChange);
-  }
-
   onPageChange(page: number) {
-    const previousPage = this.currentPage;
     this.currentPage = page;
-    console.log('this.currentPage: ', this.currentPage);
-    this.getOrders(
-      page > previousPage
-        ? this.data?.next?.match(/\?(.+)/)[0]
-        : this.data?.previous?.match(/\?(.+)/)[0],
-    );
+    if (page > 1) {
+      this.pageChange = this.data?.next;
+    } else if (page < 1) {
+      this.pageChange = this.data?.previous;
+    } else {
+      this.pageChange = '';
+    }
+
+    if (this.pageChange) {
+      const queryString = this.pageChange.match(/\?(.+)/);
+      this.getOrders(queryString ? queryString[0] : '');
+    }
   }
 
   formatDate(date: string) {
