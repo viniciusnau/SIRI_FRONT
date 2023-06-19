@@ -1,5 +1,25 @@
 <h1 mat-dialog-title>Criar</h1>
 <div [formGroup]="formCreateProtocols" mat-dialog-content class="content">
+  <div class="date-fields">
+    <div class="date-field">
+      <p>Data Inicial</p>
+      <div class="mat-form-field-wrapper">
+        <mat-form-field appearance="fill">
+          <mat-label>Data Inicial</mat-label>
+          <input type="date" matInput formControlName="initial_date" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="date-field">
+      <p>Data Final</p>
+      <div class="mat-form-field-wrapper">
+        <mat-form-field appearance="fill">
+          <mat-label>Data Final</mat-label>
+          <input type="date" matInput formControlName="final_date" />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
   <p>Código</p>
   <mat-form-field appearance="fill">
     <input type="text" matInput formControlName="code" />

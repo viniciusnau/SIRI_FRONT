@@ -51,6 +51,8 @@ export class ProtocolsModalComponent implements OnInit {
       supplier: ['', [Validators.required]],
       category: [''],
       file: [''],
+      initial_date: ['', [Validators.required]],
+      final_date: ['', [Validators.required]],
     });
   }
 
@@ -74,6 +76,12 @@ export class ProtocolsModalComponent implements OnInit {
       }
       if (this.selectedFile) {
         formData.append('file', this.selectedFile);
+      }
+      if (protocolData.initial_date) {
+        formData.append('start_date', protocolData.initial_date);
+      }
+      if (protocolData.final_date) {
+        formData.append('end_date', protocolData.final_date);
       }
 
       this.protocolService.patchProtocol(this.protocolId, formData).subscribe(

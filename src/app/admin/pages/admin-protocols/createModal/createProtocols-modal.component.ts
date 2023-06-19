@@ -47,7 +47,9 @@ export class CreateProtocolsModalComponent implements OnInit {
     this.formCreateProtocols = this.formBuilder.group({
       code: ['', [Validators.required]],
       supplier: ['', [Validators.required]],
-      category: ['', [Validators.required]]
+      category: ['', [Validators.required]],
+      initial_date: ['', [Validators.required]],
+      final_date: ['', [Validators.required]],
     });
   }
 
@@ -67,6 +69,8 @@ export class CreateProtocolsModalComponent implements OnInit {
       formData.append('code', protocolData.code);
       formData.append('supplier', protocolData.supplier);
       formData.append('category', protocolData.category);
+      formData.append('start_date', protocolData.initial_date);
+      formData.append('end_date', protocolData.final_date);
 
       this.protocolService.createProtocol(formData).subscribe(
         (response) => {

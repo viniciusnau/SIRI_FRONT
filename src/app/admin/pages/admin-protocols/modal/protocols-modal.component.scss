@@ -51,3 +51,15 @@ mat-form-field {
   margin-bottom: 0.5rem;
   margin-left: 1.6rem;
 }
+
+.date-fields {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 95%;
+  margin-bottom: 1rem;
+}
+
+.date-field {
+  margin-right: 0.5rem;
+}
