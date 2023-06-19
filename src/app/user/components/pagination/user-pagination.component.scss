@@ -1,0 +1,15 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  margin: 1.25rem;
+
+  .previous,
+  .next {
+    border-radius: 0.25rem;
+    border: none;
+    padding: 0.5rem;
+  }
+  .page-number {
+    margin: 0 1rem;
+  }
+}

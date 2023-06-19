@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { GetProductDto, ProductsService } from 'src/app/services/products.service';
+import {
+  GetProductDto,
+  ProductsService,
+} from 'src/app/services/products.service';
 import { UserService } from 'src/app/services/user.service';
 import { Category, Product } from '../../../interfaces/stock/interfaces';
 import { OrdersService } from 'src/app/services/orders.service';
@@ -11,6 +14,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  currentPage = 1;
+  apiResponse: any;
+  page = 'next';
+  count: number;
   categories: Category[] = [];
   products: Product[] = [];
   displayedColumns = ['name', 'description', 'quantity', 'measure', 'option'];
@@ -21,11 +28,16 @@ export class HomeComponent implements OnInit {
     public userService: UserService,
     public productsService: ProductsService,
     public ordersService: OrdersService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
     this.getUserData();
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent([this.selectedCategoryId]);
   }
 
   getUserData(): void {
@@ -33,28 +45,28 @@ export class HomeComponent implements OnInit {
       (data) => {
         this.categories = data.categories;
         this.client = data.client.id;
-        this.getProducts(this.categories.map((category) => category.id));
+        this.getContent(this.categories.map((category) => category.id));
       },
-      (error) => {}
+      (error) => {},
     );
   }
 
   updateProducts(): void {
     if (this.selectedCategoryId) {
-      this.getProducts([this.selectedCategoryId]);
+      this.getContent([this.selectedCategoryId]);
     } else {
       this.products = [];
     }
   }
 
-  getProducts(categoryIds: number[]): void {
+  getContent(categoryIds: number[]): void {
     const getProductDto: GetProductDto = { categories: categoryIds };
-    this.productsService.getProducts(getProductDto).subscribe(
-      (data) => {
-        this.products = data.results;
-      },
-      (error) => {}
-    );
+    this.productsService
+      .getProducts(getProductDto, this.currentPage.toString())
+      .subscribe((data) => {
+        this.apiResponse = data;
+        this.count = this.apiResponse.orders.length;
+      });
   }
 
   firstLetterOnCapital(text: string): string {
@@ -97,7 +109,7 @@ export class HomeComponent implements OnInit {
               horizontalPosition: 'end',
               verticalPosition: 'top',
             });
-          }
+          },
         );
       },
       (error) => {
@@ -106,7 +118,7 @@ export class HomeComponent implements OnInit {
           horizontalPosition: 'end',
           verticalPosition: 'top',
         });
-      }
+      },
     );
   }
 }

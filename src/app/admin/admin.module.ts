@@ -55,13 +55,9 @@ import { CreateAdminGeneralSupplierOrdersModalComponent } from './pages/admin-ge
 import { AdminGeneralSupplierOrderItemsComponent } from './pages/admin-general-supplier-orders/admin-supplier-order-items/admin-general-supplier-order-items.component';
 import { CreateAdminGeneralSupplierOrdersItemsModalComponent } from './pages/admin-general-supplier-orders/admin-supplier-order-items/createModal/create-admin-general-supplier-orders-items-modal-component';
 import { ProtocolsModalComponent } from './pages/admin-protocols/modal/protocols-modal.component';
-import {
-  AdminProtocolItemsComponent
-} from './pages/admin-protocols/admin-protocols-items/admin-protocol-items.component';
+import { AdminProtocolItemsComponent } from './pages/admin-protocols/admin-protocols-items/admin-protocol-items.component';
 import { CreateProtocolItemsModalComponent } from './pages/admin-protocols/admin-protocols-items/createModal/createProtocolItems-modal.component';
-import {
-  DeleteOrderItemModalComponent
-} from './pages/admin-orders/admin-order-items/modal/deleteOrderItem-modal.component.component';
+import { DeleteOrderItemModalComponent } from './pages/admin-orders/admin-order-items/modal/deleteOrderItem-modal.component.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationComponent } from './components/pagination/pagination.component';
 

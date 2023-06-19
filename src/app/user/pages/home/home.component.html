@@ -3,7 +3,11 @@
     <div class="filter-container">
       <mat-form-field appearance="fill">
         <mat-label>Categorias</mat-label>
-        <mat-select [(ngModel)]="selectedCategoryId" name="categorySelect" (selectionChange)="updateProducts()">
+        <mat-select
+          [(ngModel)]="selectedCategoryId"
+          name="categorySelect"
+          (selectionChange)="updateProducts()"
+        >
           <mat-option *ngFor="let category of categories" [value]="category.id">
             {{ firstLetterOnCapital(category.name) }}
           </mat-option>
@@ -17,46 +21,72 @@
       <mat-toolbar>
         <span>Produtos</span>
         <div class="button-container">
-          <button mat-raised-button class="order-button" (click)="order()">Fazer pedido</button>
+          <button mat-raised-button class="order-button" (click)="order()">
+            Fazer pedido
+          </button>
         </div>
       </mat-toolbar>
 
       <form class="example-form">
-        <table mat-table [dataSource]="products" class="mat-elevation-z8">
+        <table
+          mat-table
+          [dataSource]="apiResponse?.results"
+          class="mat-elevation-z8"
+        >
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Nome</th>
-            <td mat-cell *matCellDef="let product">{{ firstLetterOnCapital(product.name) }}</td>
+            <td mat-cell *matCellDef="let product">
+              {{ firstLetterOnCapital(product.name) }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef>Descrição</th>
-            <td mat-cell *matCellDef="let product">{{ product.description }}</td>
+            <td mat-cell *matCellDef="let product">
+              {{ product.description }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="quantity">
             <th mat-header-cell *matHeaderCellDef>Quantidade</th>
             <td mat-cell *matCellDef="let material">
               <mat-form-field>
-                <input matInput [(ngModel)]="material.quantity" name="quantityInput" />
+                <input
+                  matInput
+                  [(ngModel)]="material.quantity"
+                  name="quantityInput"
+                />
               </mat-form-field>
             </td>
           </ng-container>
 
           <ng-container matColumnDef="measure">
             <th mat-header-cell *matHeaderCellDef>Medida</th>
-            <td mat-cell *matCellDef="let material">{{ material.measure.name }}</td>
+            <td mat-cell *matCellDef="let material">
+              {{ material.measure.name }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="option">
             <th mat-header-cell *matHeaderCellDef>Escolher</th>
             <td mat-cell *matCellDef="let material">
-              <mat-checkbox [(ngModel)]="material.option" name="optionCheckbox"></mat-checkbox>
+              <mat-checkbox
+                [(ngModel)]="material.option"
+                name="optionCheckbox"
+              ></mat-checkbox>
             </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
+        <app-user-pagination
+          [currentPage]="currentPage"
+          [apiResponse]="apiResponse"
+          (pageChange)="onPageChange($event)"
+          [page]="page"
+          [count]="count"
+        ></app-user-pagination>
       </form>
     </mat-card-content>
   </mat-card>
