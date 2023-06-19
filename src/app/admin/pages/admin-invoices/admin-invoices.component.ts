@@ -22,6 +22,8 @@ interface AdminInvoices {
   styleUrls: ['./admin-invoices.component.scss'],
 })
 export class AdminInvoicesComponent implements OnInit {
+  currentPage = 1;
+  apiResponse: any;
   adminInvoices: AdminInvoices[] = [];
 
   modalData: InvoiceModalData = {
@@ -36,15 +38,22 @@ export class AdminInvoicesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getInvoices();
+    this.getContent();
     this.getSuppliers();
     this.getPublicDefenses();
   }
 
-  getInvoices() {
-    this.stocksService.getInvoices().subscribe((data) => {
-      this.adminInvoices = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
+    this.stocksService
+      .getInvoices(this.currentPage.toString())
+      .subscribe((data) => {
+        this.apiResponse = data;
+      });
   }
 
   getSuppliers() {
@@ -69,7 +78,7 @@ export class AdminInvoicesComponent implements OnInit {
     this.stocksService
       .deleteInvoice(invoice_id)
       .toPromise()
-      .then((data: any) => this.getInvoices());
+      .then((data: any) => this.getContent());
   }
 
   downloadInvoice(file) {

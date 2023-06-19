@@ -90,11 +90,13 @@ export class StocksService {
     );
   }
 
-  public getInvoices(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/invoices`,
-      this.httpOptions,
-    );
+  public getInvoices(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/invoices/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/invoices`, this.httpOptions);
   }
 
   public deleteInvoice(invoice_id: string): any {
