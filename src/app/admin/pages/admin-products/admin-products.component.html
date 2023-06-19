@@ -7,14 +7,18 @@
       </button>
     </div>
   </section>
-  
+
   <mat-card>
     <mat-card-content>
       <mat-toolbar>
         <span>Produtos</span>
       </mat-toolbar>
 
-      <table mat-table [dataSource]="products" class="mat-elevation-z8">
+      <table
+        mat-table
+        [dataSource]="apiResponse?.results"
+        class="mat-elevation-z8"
+      >
         <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
@@ -134,6 +138,11 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <app-pagination
+        [currentPage]="currentPage"
+        [apiResponse]="apiResponse"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
     </mat-card-content>
   </mat-card>
 </admin-sidebar>

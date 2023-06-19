@@ -17,18 +17,26 @@ interface AdminCategories {
   styleUrls: ['./admin-categories.component.scss'],
 })
 export class AdminCategoriesComponent implements OnInit {
-  categories: AdminCategories[] = [];
+  currentPage = 1;
+  apiResponse: any;
 
   constructor(private stocksService: StocksService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.getCategories();
+    this.getContent();
   }
 
-  getCategories() {
-    this.stocksService.getAllCategories().subscribe((data) => {
-      this.categories = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
+    this.stocksService
+      .getAllCategories(this.currentPage.toString())
+      .subscribe((data) => {
+        this.apiResponse = data;
+      });
   }
 
   firstLetterOnCapital(text: string) {
@@ -40,7 +48,7 @@ export class AdminCategoriesComponent implements OnInit {
     this.stocksService
       .deleteCategory(category_id)
       .toPromise()
-      .then((data: any) => this.getCategories());
+      .then((data: any) => this.getContent());
   }
 
   openEditModal(category_id: string) {

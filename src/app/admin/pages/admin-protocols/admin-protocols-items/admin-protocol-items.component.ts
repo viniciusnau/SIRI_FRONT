@@ -19,7 +19,8 @@ interface adminProtocols {
   styleUrls: ['./admin-protocol-items.component.scss'],
 })
 export class AdminProtocolItemsComponent implements OnInit {
-  adminProtocolItems: adminProtocols[] = [];
+  currentPage = 1;
+  apiResponse: any;
   protocolId;
 
   modalData = {
@@ -38,14 +39,21 @@ export class AdminProtocolItemsComponent implements OnInit {
       this.protocolId = params['id'];
       this.modalData.protocolId = parseInt(params['id']);
     });
-    this.getProtocolItems();
+    this.getContent();
     this.getProducts();
   }
 
-  getProtocolItems() {
-    this.stockService.getProtocolItems(this.protocolId).subscribe((data) => {
-      this.adminProtocolItems = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
+    this.stockService
+      .getProtocolItems(this.protocolId, this.currentPage.toString())
+      .subscribe((data) => {
+        this.apiResponse = data;
+      });
   }
 
   getProducts() {
@@ -75,7 +83,7 @@ export class AdminProtocolItemsComponent implements OnInit {
     this.stockService
       .deleteProtocolItem(protocol_item_id)
       .toPromise()
-      .then((data: any) => this.getProtocolItems());
+      .then((data: any) => this.getContent());
   }
 
   displayedColumns = [

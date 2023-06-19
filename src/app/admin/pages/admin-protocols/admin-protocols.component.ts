@@ -25,7 +25,8 @@ interface adminProtocols {
   styleUrls: ['./admin-protocols.component.scss'],
 })
 export class AdminProtocolsComponent implements OnInit {
-  adminProtocols: adminProtocols[] = [];
+  currentPage = 1;
+  apiResponse: any;
 
   modalData: ProtocolsModalData = {
     suppliers: [],
@@ -41,15 +42,22 @@ export class AdminProtocolsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProtocols();
+    this.getContent();
     this.getCategories();
     this.getSuppliers();
   }
 
-  getProtocols() {
-    this.protocolService.getProtocols().subscribe((data) => {
-      this.adminProtocols = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
+    this.protocolService
+      .getProtocols(this.currentPage.toString())
+      .subscribe((data) => {
+        this.apiResponse = data;
+      });
   }
 
   getCategories() {
@@ -97,7 +105,7 @@ export class AdminProtocolsComponent implements OnInit {
     this.protocolService
       .deleteProtocol(protocol_id)
       .toPromise()
-      .then((data: any) => this.getProtocols());
+      .then((data: any) => this.getContent());
   }
 
   navToProtocolItems(protocolId: number) {

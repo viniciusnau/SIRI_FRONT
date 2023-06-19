@@ -23,7 +23,8 @@ interface MaterialsOrder {
   styleUrls: ['./admin-materials-order.component.scss'],
 })
 export class AdminMaterialsOrderComponent implements OnInit {
-  materialsOrder: MaterialsOrder[] = [];
+  currentPage = 1;
+  apiResponse: any;
 
   modalData: MaterialsOrderModalData = {
     suppliers: [],
@@ -38,15 +39,22 @@ export class AdminMaterialsOrderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getMaterialsOrder();
+    this.getContent();
     this.getCategories();
     this.getSuppliers();
   }
 
-  getMaterialsOrder() {
-    this.ordersService.getMaterialsOrder().subscribe((data) => {
-      this.materialsOrder = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
+    this.ordersService
+      .getMaterialsOrder(this.currentPage.toString())
+      .subscribe((data) => {
+        this.apiResponse = data;
+      });
   }
 
   getCategories() {
@@ -65,7 +73,7 @@ export class AdminMaterialsOrderComponent implements OnInit {
     this.ordersService
       .deleteMaterialOrder(order_id)
       .toPromise()
-      .then((data: any) => this.getMaterialsOrder());
+      .then((data: any) => this.getContent());
   }
 
   openModal(): void {

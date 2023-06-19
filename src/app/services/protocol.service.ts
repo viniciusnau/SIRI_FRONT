@@ -9,8 +9,11 @@ export class ProtocolService {
   httpOptions: { headers: HttpHeaders };
 
   constructor(private httpClient: HttpClient) {
-    const storedAuth = localStorage.getItem('auth') || sessionStorage.getItem('auth');
-    const [username, password] = storedAuth ? storedAuth.split(':') : [null, null];
+    const storedAuth =
+      localStorage.getItem('auth') || sessionStorage.getItem('auth');
+    const [username, password] = storedAuth
+      ? storedAuth.split(':')
+      : [null, null];
 
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -19,8 +22,13 @@ export class ProtocolService {
     };
   }
 
-  public getProtocols(): Observable<any> {
-    return this.httpClient.get<any>(this.apiUrl, this.httpOptions);
+  public getProtocols(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(this.apiUrl, this.httpOptions);
   }
 
   public deleteProtocol(protocol_id: string): any {

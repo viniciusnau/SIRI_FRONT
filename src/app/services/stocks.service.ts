@@ -48,25 +48,31 @@ export class StocksService {
       : this.httpClient.get<any>(`${this.apiUrl}/sectors`, this.httpOptions);
   }
 
-  public getAllCategories(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/categories`,
-      this.httpOptions,
-    );
+  public getAllCategories(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/categories/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/categories`, this.httpOptions);
   }
 
-  public getAllMeasures(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/measures`,
-      this.httpOptions,
-    );
+  public getAllMeasures(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/measures/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/measures`, this.httpOptions);
   }
 
-  public getAllProducts(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/products`,
-      this.httpOptions,
-    );
+  public getAllProducts(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/products/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/products`, this.httpOptions);
   }
 
   public getReceivingReports(pageChange = ''): Observable<any> {
@@ -162,11 +168,16 @@ export class StocksService {
     );
   }
 
-  public getBiddingExemption(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/bidding-exemption`,
-      this.httpOptions,
-    );
+  public getBiddingExemption(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/bidding-exemption/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(
+          `${this.apiUrl}/bidding-exemption`,
+          this.httpOptions,
+        );
   }
 
   public getAccountantReports(): Observable<any> {
@@ -282,9 +293,11 @@ export class StocksService {
     return this.httpClient.post<any>(url, body, this.httpOptions);
   }
 
-  getProtocolItems(protocol: string) {
+  getProtocolItems(protocol: string, pageChange = '') {
     const url = this.apiUrl + `/protocol-items/?protocol_id=${protocol}`;
-    return this.httpClient.get<any>(url, this.httpOptions);
+    return pageChange
+      ? this.httpClient.get<any>(`${url}&&page=${pageChange}`, this.httpOptions)
+      : this.httpClient.get<any>(url, this.httpOptions);
   }
 
   deleteBiddingExemption(biddingExemptionId: number): Observable<void> {

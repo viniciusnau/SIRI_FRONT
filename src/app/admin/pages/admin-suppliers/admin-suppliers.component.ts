@@ -34,18 +34,26 @@ export class AdminSuppliersComponent implements OnInit {
     public dialog: MatDialog,
   ) {}
 
-  suppliers: AdminSuppliers[] = [];
+  currentPage = 1;
+  apiResponse: any;
   categories = [];
 
   ngOnInit(): void {
-    this.getSuppliers();
+    this.getContent();
     this.getCategories();
   }
 
-  getSuppliers() {
-    this.suppliersService.getSuppliers().subscribe((data) => {
-      this.suppliers = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
+    this.suppliersService
+      .getSuppliers(this.currentPage.toString())
+      .subscribe((data) => {
+        this.apiResponse = data;
+      });
   }
 
   getCategories() {
@@ -58,7 +66,7 @@ export class AdminSuppliersComponent implements OnInit {
     this.stocksService
       .deleteSupplier(supplier_id)
       .toPromise()
-      .then((data: any) => this.getSuppliers());
+      .then((data: any) => this.getContent());
   }
 
   navToSupplierOrders(supplier_id: number) {

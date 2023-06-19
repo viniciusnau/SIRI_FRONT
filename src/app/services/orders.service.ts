@@ -31,12 +31,17 @@ export class OrdersService {
       : this.httpClient.get<any>(this.apiUrl, this.httpOptions);
   }
 
-  public getOrderItems(order_id: string): Observable<any> {
+  public getOrderItems(order_id: string, pageChange = ''): Observable<any> {
     const options = {
       headers: this.httpOptions.headers,
       params: new HttpParams().set('order_id', order_id),
     };
-    return this.httpClient.get<any>(`${this.apiUrl}/order-items`, options);
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/order-items/?page=${pageChange}`,
+          options,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/order-items`, options);
   }
 
   public deleteOrderItem(order_item_id: string, description?: string): any {
@@ -80,11 +85,16 @@ export class OrdersService {
     );
   }
 
-  public getMaterialsOrder(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/materials-order`,
-      this.httpOptions,
-    );
+  public getMaterialsOrder(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/materials-order/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(
+          `${this.apiUrl}/materials-order`,
+          this.httpOptions,
+        );
   }
 
   public deleteMaterialOrder(order_id: string): any {

@@ -24,7 +24,8 @@ interface AdminProducts {
   styleUrls: ['./admin-products.component.scss'],
 })
 export class AdminProductsComponent implements OnInit {
-  products: AdminProducts[] = [];
+  currentPage = 1;
+  apiResponse: any;
   categories = [];
   measures = [];
 
@@ -35,15 +36,22 @@ export class AdminProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getContent();
     this.getCategories();
     this.getMeasures();
   }
 
-  getProducts() {
-    this.stocksService.getAllProducts().subscribe((data) => {
-      this.products = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
+    this.stocksService
+      .getAllProducts(this.currentPage.toString())
+      .subscribe((data) => {
+        this.apiResponse = data;
+      });
   }
 
   getCategories() {
@@ -70,7 +78,7 @@ export class AdminProductsComponent implements OnInit {
   deleteProduct(product_id: string) {
     this.stocksService.deleteProduct(product_id).subscribe({
       next: (result) => {
-        this.getProducts();
+        this.getContent();
         this.snackBar.open(
           'Tudo certo!',
           'O produto foi excluído com sucesso!',
