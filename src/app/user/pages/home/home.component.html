@@ -37,7 +37,7 @@
             <th mat-header-cell *matHeaderCellDef>Quantidade</th>
             <td mat-cell *matCellDef="let material">
               <mat-form-field>
-                <input matInput [(ngModel)]="material.quantity" name="quantityInput" />
+                <input matInput [(ngModel)]="material.quantity" name="quantityInput" maxlength="3" />
               </mat-form-field>
             </td>
           </ng-container>
