@@ -24,18 +24,20 @@ export class AdminOrdersComponent implements OnInit {
   constructor(public ordersService: OrdersService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getOrders();
+    this.getContent();
   }
 
   onPageChange(page: number) {
     this.currentPage = page;
-    this.getOrders();
+    this.getContent();
   }
 
-  getOrders() {
-    this.ordersService.getAllOrders(this.currentPage.toString()).subscribe((data) => {
-      this.apiResponse = data;
-    });
+  getContent() {
+    this.ordersService
+      .getAllOrders(this.currentPage.toString())
+      .subscribe((data) => {
+        this.apiResponse = data;
+      });
   }
 
   formatDate(date: string) {

@@ -13,18 +13,26 @@ interface AdminSectors {
   styleUrls: ['./admin-sectors.component.scss'],
 })
 export class AdminSectorsComponent implements OnInit {
-  sectors: AdminSectors[] = [];
+  currentPage = 1;
+  apiResponse: any;
 
   constructor(private stocksService: StocksService) {}
 
   ngOnInit(): void {
-    this.getSectors();
+    this.getContent();
   }
 
-  getSectors() {
-    this.stocksService.getAllSectors().subscribe((data) => {
-      this.sectors = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
+    this.stocksService
+      .getAllSectors(this.currentPage.toString())
+      .subscribe((data) => {
+        this.apiResponse = data;
+      });
   }
 
   displayedColumns = ['id', 'name', 'public_defense'];

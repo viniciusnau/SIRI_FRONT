@@ -39,8 +39,13 @@ export class StocksService {
     return this.httpClient.get<any>(`${this.apiUrl}/stock-items`, options);
   }
 
-  public getAllSectors(): Observable<any> {
-    return this.httpClient.get<any>(`${this.apiUrl}/sectors`, this.httpOptions);
+  public getAllSectors(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/sectors/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/sectors`, this.httpOptions);
   }
 
   public getAllCategories(): Observable<any> {
