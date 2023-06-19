@@ -69,11 +69,16 @@ export class StocksService {
     );
   }
 
-  public getReceivingReports(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/receiving-reports`,
-      this.httpOptions,
-    );
+  public getReceivingReports(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/receiving-reports/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(
+          `${this.apiUrl}/receiving-reports`,
+          this.httpOptions,
+        );
   }
 
   public getDispatchReports(): Observable<any> {
