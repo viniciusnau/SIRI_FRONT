@@ -81,11 +81,16 @@ export class StocksService {
         );
   }
 
-  public getDispatchReports(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/dispatch-reports`,
-      this.httpOptions,
-    );
+  public getDispatchReports(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/dispatch-reports/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(
+          `${this.apiUrl}/dispatch-reports`,
+          this.httpOptions,
+        );
   }
 
   public deleteMeasure(measure_id: string): any {
