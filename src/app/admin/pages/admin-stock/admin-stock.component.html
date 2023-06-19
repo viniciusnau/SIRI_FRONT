@@ -6,7 +6,11 @@
         <span>Estoque</span>
       </mat-toolbar>
 
-      <table mat-table [dataSource]="stocks" class="mat-elevation-z8">
+      <table
+        mat-table
+        [dataSource]="apiResponse?.results"
+        class="mat-elevation-z8"
+      >
         <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
@@ -26,9 +30,14 @@
         <tr
           mat-row
           *matRowDef="let row; columns: displayedColumns"
-          (click)="navToStockItems(row.id)"
+          (click)="navigateToStockItems(row.id)"
         ></tr>
       </table>
+      <app-pagination
+        [currentPage]="currentPage"
+        [apiResponse]="apiResponse"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
     </mat-card-content>
   </mat-card>
 </admin-sidebar>

@@ -14,20 +14,30 @@ interface AdminStock {
 })
 export class AdminStockComponent implements OnInit {
   stocks: AdminStock[] = [];
+  currentPage = 1;
+  apiResponse: any;
 
   constructor(private stocksService: StocksService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getStocks();
+    this.getContent();
   }
 
-  getStocks() {
-    this.stocksService.getStocks().subscribe((data) => {
-      this.stocks = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
   }
 
-  navToStockItems(stock_id: number) {
+  getContent() {
+    this.stocksService
+      .getStocks(this.currentPage.toString())
+      .subscribe((data) => {
+        console.log('data: ', data);
+        this.apiResponse = data;
+      });
+  }
+
+  navigateToStockItems(stock_id: number) {
     this.router.navigate([`/admin/estoque/itens/${stock_id}`]);
   }
 

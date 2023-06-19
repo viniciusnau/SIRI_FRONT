@@ -22,8 +22,13 @@ export class StocksService {
     };
   }
 
-  public getStocks(): Observable<any> {
-    return this.httpClient.get<any>(this.apiUrl, this.httpOptions);
+  public getStocks(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(this.apiUrl, this.httpOptions);
   }
 
   public getStockItems(stock_id: string): Observable<any> {
@@ -295,5 +300,4 @@ export class StocksService {
     const url = `${this.apiUrl}/protocol-items/${protocolItemId}/`;
     return this.httpClient.delete<any>(url, this.httpOptions);
   }
-
 }

@@ -23,10 +23,12 @@ export class OrdersService {
   }
 
   public getAllOrders(pageChange = ''): Observable<any> {
-    if (pageChange) {
-      return this.httpClient.get<any>(`${this.apiUrl}/?page=${pageChange}`, this.httpOptions);
-    }
-    return this.httpClient.get<any>(this.apiUrl, this.httpOptions);
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(this.apiUrl, this.httpOptions);
   }
 
   public getOrderItems(order_id: string): Observable<any> {
