@@ -52,7 +52,7 @@ export class CreateProductModalComponent implements OnInit {
         this.dialogRef.close();
         this.data.snackBar.open(
           'Tudo certo!',
-          'O produto foi criado com sucesso!',
+          'Produto criado com sucesso!',
           {
             duration: 3000,
           },

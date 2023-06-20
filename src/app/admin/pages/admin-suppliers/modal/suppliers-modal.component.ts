@@ -50,20 +50,31 @@ export class SuppliersModalComponent implements OnInit {
 
   onClick(): void {
     if (this.formSuppliers.invalid) {
-      this.snackBar.open('Ops!', 'Possivelmente seu e-mail está inválido', {
+      this.snackBar.open('Ops!', 'Possivelmente o e-mail está inválido', {
         duration: 3000,
       });
+      return;
     }
 
     const editSuppliersData = this.formSuppliers.getRawValue();
 
-    editSuppliersData.category = this.selectedCategories;
+    Object.keys(editSuppliersData).forEach((key) => {
+      if (editSuppliersData[key] === '') {
+        delete editSuppliersData[key];
+      }
+    });
+
+    if (Array.isArray(this.selectedCategories) && this.selectedCategories.length != 0) {
+      editSuppliersData.category = this.selectedCategories;
+    }
+    else {
+      delete editSuppliersData.category
+    }
 
     this.stocksService
       .editSupplier(this.data.suppliers_id, editSuppliersData)
       .subscribe((response) => {
-        this.dialogRef.close();
+        window.location.reload()
       });
-    //window.location.reload();
   }
 }
