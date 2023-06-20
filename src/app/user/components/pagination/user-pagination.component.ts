@@ -16,7 +16,6 @@ export class UserPaginationComponent {
   }
 
   hasNext(): boolean {
-    console.log('api: ', this.apiResponse);
     return !!this.apiResponse[this.page];
   }
 
