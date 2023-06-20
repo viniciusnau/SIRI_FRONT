@@ -66,20 +66,20 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
   }
 
   getSuppliers() {
-    this.suppliersService.getSuppliers().subscribe((data) => {
-      this.suppliers = data.results;
+    this.suppliersService.getAllSuppliers().subscribe((data) => {
+      this.suppliers = data;
     });
   }
 
   getProtocols() {
-    this.stocksService.getProtocols().subscribe((data) => {
-      this.protocols = data.results;
+    this.stocksService.getAllProtocols().subscribe((data) => {
+      this.protocols = data;
     });
   }
 
   getPublicDefenses() {
-    this.stocksService.getPublicDefenses().subscribe((data) => {
-      this.public_defenses = data.results;
+    this.stocksService.getAllPublicDefenses().subscribe((data) => {
+      this.public_defenses = data;
     });
   }
 

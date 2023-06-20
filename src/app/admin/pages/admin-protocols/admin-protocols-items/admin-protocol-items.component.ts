@@ -50,7 +50,7 @@ export class AdminProtocolItemsComponent implements OnInit {
 
   getProducts() {
     this.stockService.getAllProducts().subscribe((data) => {
-      this.modalData.products = data.results;
+      this.modalData.products = data;
     });
   }
 

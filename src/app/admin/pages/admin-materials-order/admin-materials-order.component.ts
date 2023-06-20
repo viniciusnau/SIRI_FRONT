@@ -51,13 +51,13 @@ export class AdminMaterialsOrderComponent implements OnInit {
 
   getCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.modalData.categories = data.results;
+      this.modalData.categories = data;
     });
   }
 
   getSuppliers() {
-    this.suppliersService.getSuppliers().subscribe((data) => {
-      this.modalData.suppliers = data.results;
+    this.suppliersService.getAllSuppliers().subscribe((data) => {
+      this.modalData.suppliers = data;
     });
   }
 

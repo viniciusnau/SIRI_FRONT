@@ -24,7 +24,7 @@ export class AdminMeasuresComponent implements OnInit {
   }
 
   getMeasures() {
-    this.stocksService.getAllMeasures().subscribe((data) => {
+    this.stocksService.getMeasures().subscribe((data) => {
       this.measures = data.results;
     });
   }

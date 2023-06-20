@@ -68,7 +68,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
   }
 
   getProtocolItems() {
-    this.stocksService.getProtocolItems(this.protocolId).subscribe((data) => {
+    this.stocksService.getAllProtocolItems(this.protocolId).subscribe((data) => {
       this.protocolItems = data.results;
     });
   }

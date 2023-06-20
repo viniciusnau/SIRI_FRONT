@@ -25,7 +25,6 @@ interface AdminSuppliers {
   styleUrls: ['./admin-suppliers.component.scss'],
 })
 export class AdminSuppliersComponent implements OnInit {
-  adminSuppliers: AdminSuppliers[] = [];
 
   constructor(
     public suppliersService: SuppliersService,
@@ -50,7 +49,7 @@ export class AdminSuppliersComponent implements OnInit {
 
   getCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.categories = data.results;
+      this.categories = data;
     });
   }
 

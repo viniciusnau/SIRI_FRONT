@@ -49,19 +49,19 @@ export class AdminBiddingExemptionComponent {
 
   getProducts() {
     this.stocksService.getAllProducts().subscribe((data) => {
-      this.products = data.results;
+      this.products = data;
     });
   }
 
   getStocks() {
-    this.stocksService.getStocks().subscribe((data) => {
-      this.stocks = data.results;
+    this.stocksService.getAllStocks().subscribe((data) => {
+      this.stocks = data;
     });
   }
 
   getInvoices() {
-    this.stocksService.getInvoices().subscribe((data) => {
-      this.invoices = data.results;
+    this.stocksService.getAllInvoices().subscribe((data) => {
+      this.invoices = data;
     });
   }
 

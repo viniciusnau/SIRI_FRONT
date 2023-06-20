@@ -41,20 +41,20 @@ export class AdminProductsComponent implements OnInit {
   }
 
   getProducts() {
-    this.stocksService.getAllProducts().subscribe((data) => {
+    this.stocksService.getProducts().subscribe((data) => {
       this.products = data.results;
     });
   }
 
   getCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.categories = data.results;
+      this.categories = data;
     });
   }
 
   getMeasures() {
     this.stocksService.getAllMeasures().subscribe((data) => {
-      this.measures = data.results;
+      this.measures = data;
     });
   }
 

@@ -22,7 +22,7 @@ export class AdminSectorsComponent implements OnInit {
   }
 
   getSectors() {
-    this.stocksService.getAllSectors().subscribe((data) => {
+    this.stocksService.getSectors().subscribe((data) => {
       this.sectors = data.results;
     });
   }

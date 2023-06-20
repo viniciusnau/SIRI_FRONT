@@ -77,8 +77,8 @@ export class AdminOrderItemsComponent implements OnInit {
   }
 
   getSuppliers() {
-    this.suppliersService.getSuppliers().subscribe((data) => {
-      this.suppliers = data.results;
+    this.suppliersService.getAllSuppliers().subscribe((data) => {
+      this.suppliers = data;
     });
   }
 

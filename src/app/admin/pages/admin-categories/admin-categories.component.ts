@@ -26,7 +26,7 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   getCategories() {
-    this.stocksService.getAllCategories().subscribe((data) => {
+    this.stocksService.getCategories().subscribe((data) => {
       this.categories = data.results;
     });
   }

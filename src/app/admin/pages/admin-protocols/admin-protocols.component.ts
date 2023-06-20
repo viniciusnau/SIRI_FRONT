@@ -54,13 +54,13 @@ export class AdminProtocolsComponent implements OnInit {
 
   getCategories() {
     this.stockService.getAllCategories().subscribe((data) => {
-      this.modalData.categories = data.results;
+      this.modalData.categories = data;
     });
   }
 
   getSuppliers() {
-    this.supplierService.getSuppliers().subscribe((data) => {
-      this.modalData.suppliers = data.results;
+    this.supplierService.getAllSuppliers().subscribe((data) => {
+      this.modalData.suppliers = data;
     });
   }
 
@@ -69,7 +69,7 @@ export class AdminProtocolsComponent implements OnInit {
       data: {
         suppliers: this.modalData.suppliers,
         categories: this.modalData.categories,
-        protocolId: protocolId, // Pass the protocolId in the data object
+        protocolId: protocolId,
       },
     });
   }

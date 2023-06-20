@@ -82,25 +82,25 @@ export class AdminStockReportsComponent implements OnInit {
 
   fetchCategories() {
     this.stockService.getAllCategories().subscribe((categories) => {
-      this.categories = categories.results;
+      this.categories = categories;
     });
   }
 
   fetchProducts() {
     this.stockService.getAllProducts().subscribe((products) => {
-      this.products = products.results;
+      this.products = products;
     });
   }
 
   fetchPublicDefenses() {
-    this.stockService.getPublicDefenses().subscribe((publicDefenses) => {
-      this.publicDefenses = publicDefenses.results;
+    this.stockService.getAllPublicDefenses().subscribe((publicDefenses) => {
+      this.publicDefenses = publicDefenses;
     });
   }
 
   fetchSectors() {
     this.stockService.getAllSectors().subscribe((sectors) => {
-      this.sectors = sectors.results;
+      this.sectors = sectors;
     });
   }
 
