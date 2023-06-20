@@ -21,27 +21,37 @@ interface Order {
   styleUrls: ['./pedidos.component.scss'],
 })
 export class PedidosComponent implements OnInit, AfterViewInit {
-  orders: Order[] = [];
+  currentPage = 1;
+  apiResponse: any = [];
+  page = 'next_orders';
 
   constructor(
     public userService: UserService,
     public ordersService: OrdersService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {}
+
   ngOnInit(): void {
-    this.getOrders();
+    this.getContent();
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
   }
 
   @ViewChild(MatSort) sort: MatSort;
-  dataSource = new MatTableDataSource(this.orders);
+  dataSource = new MatTableDataSource(this.apiResponse?.orders);
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
 
-  getOrders() {
-    this.userService.getUser().subscribe((data) => {
-      this.orders = data.orders;
+  getContent() {
+    this.userService.getUser(this.currentPage.toString()).subscribe((data) => {
+      this.apiResponse = data[this.currentPage == 1 ? 'orders' : 'results'];
+      this.apiResponse.next_orders =
+        data[this.currentPage == 1 ? 'next_orders' : 'next'];
     });
   }
 
@@ -50,7 +60,7 @@ export class PedidosComponent implements OnInit, AfterViewInit {
       .deleteOrder(order_id)
       .toPromise()
       .then((data: any) => {
-        this.getOrders();
+        this.getContent();
       })
       .catch((error: any) => {
         this.snackBar.open('Erro ao excluir pedido', 'Fechar', {

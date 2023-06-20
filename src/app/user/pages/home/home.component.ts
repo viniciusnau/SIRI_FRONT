@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   currentPage = 1;
   apiResponse: any;
   page = 'next';
-  count: number;
   categories: Category[] = [];
   products: Product[] = [];
   displayedColumns = ['name', 'description', 'quantity', 'measure', 'option'];
@@ -65,7 +64,6 @@ export class HomeComponent implements OnInit {
       .getProducts(getProductDto, this.currentPage.toString())
       .subscribe((data) => {
         this.apiResponse = data;
-        this.count = this.apiResponse.orders.length;
       });
   }
 
@@ -75,7 +73,9 @@ export class HomeComponent implements OnInit {
   }
 
   order(): void {
-    const selectedProducts = this.products.filter((product) => product.option);
+    const selectedProducts = this.apiResponse.results.filter(
+      (product) => product.option,
+    );
 
     const order = {
       is_sent: false,

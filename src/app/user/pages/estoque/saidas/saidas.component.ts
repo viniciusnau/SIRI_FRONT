@@ -17,7 +17,9 @@ interface Withdrawals {
   styleUrls: ['./saidas.component.scss'],
 })
 export class SaidasComponent implements OnInit {
-  withdrawals: Withdrawals[] = [];
+  currentPage = 1;
+  apiResponse: any;
+  page = 'next';
 
   stockItemId: string;
 
@@ -25,20 +27,27 @@ export class SaidasComponent implements OnInit {
     private ordersService: OrdersService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.stockItemId = params['id'];
     });
-    this.getStockWithdrawals(this.stockItemId);
+    this.getContent(this.stockItemId);
   }
 
-  getStockWithdrawals(orderId: string) {
-    this.ordersService.getStockWithdrawals(orderId).subscribe((data) => {
-      this.withdrawals = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent(this.stockItemId);
+  }
+
+  getContent(orderId: string) {
+    this.ordersService
+      .getStockWithdrawals(orderId, this.currentPage.toString())
+      .subscribe((data) => {
+        this.apiResponse = data;
+      });
   }
 
   deleteWithdraw(withdraw_id: string) {
@@ -46,7 +55,7 @@ export class SaidasComponent implements OnInit {
       .deleteWithdraw(withdraw_id)
       .toPromise()
       .then((data: any) => {
-        this.getStockWithdrawals(this.stockItemId);
+        this.getContent(this.stockItemId);
       })
       .catch((error: any) => {
         this.snackBar.open('Erro ao excluir', 'Fechar', {

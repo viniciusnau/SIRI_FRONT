@@ -5,8 +5,11 @@
         <span>Entradas</span>
       </mat-toolbar>
 
-      <table mat-table [dataSource]="entries" class="mat-elevation-z8">
-
+      <table
+        mat-table
+        [dataSource]="apiResponse?.results"
+        class="mat-elevation-z8"
+      >
         <ng-container matColumnDef="quantity">
           <th mat-header-cell *matHeaderCellDef>Quantidade</th>
           <td mat-cell *matCellDef="let entry">{{ entry.entry_quantity }}</td>
@@ -22,6 +25,12 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <app-user-pagination
+        [currentPage]="currentPage"
+        [apiResponse]="apiResponse"
+        (pageChange)="onPageChange($event)"
+        [page]="page"
+      ></app-user-pagination>
     </mat-card-content>
   </mat-card>
 </user-sidebar>

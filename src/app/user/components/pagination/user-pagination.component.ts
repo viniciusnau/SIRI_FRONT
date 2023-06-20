@@ -9,7 +9,6 @@ export class UserPaginationComponent {
   @Input() currentPage: number;
   @Input() apiResponse: any;
   @Input() page: any;
-  @Input() count: any;
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
   hasPrevious(): boolean {

@@ -18,7 +18,6 @@ export class EstoqueComponent implements OnInit {
   categories: Category[] = [];
   currentPage = 1;
   page = 'next_stock_items';
-  count: number;
   apiResponse: any;
   displayedColumns = [
     'name',
@@ -50,8 +49,6 @@ export class EstoqueComponent implements OnInit {
   getContent(category = 1) {
     this.userService.getUser().subscribe((data) => {
       this.apiResponse = data;
-      console.log('api: ', this.apiResponse);
-      this.count = this.apiResponse.stock_items.length;
     });
   }
 

@@ -13,8 +13,10 @@ interface Entries {
   styleUrls: ['./entradas.component.scss'],
 })
 export class EntradasComponent implements OnInit {
-  entries: Entries[] = [];
+  currentPage = 1;
+  apiResponse: any;
   stockItemId: string;
+  page = 'next';
 
   constructor(
     private ordersService: OrdersService,
@@ -25,13 +27,20 @@ export class EntradasComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.stockItemId = params['id'];
     });
-    this.getStockEntries(this.stockItemId);
+    this.getContent(this.stockItemId);
   }
 
-  getStockEntries(orderId: string) {
-    this.ordersService.getStockEntries(orderId).subscribe((data) => {
-      this.entries = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent(this.stockItemId);
+  }
+
+  getContent(orderId: string) {
+    this.ordersService
+      .getStockEntries(orderId, this.currentPage.toString())
+      .subscribe((data) => {
+        this.apiResponse = data;
+      });
   }
 
   formatDate(date: string) {

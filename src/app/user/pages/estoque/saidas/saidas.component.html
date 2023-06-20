@@ -14,8 +14,11 @@
         <span>Saídas</span>
       </mat-toolbar>
 
-      <table mat-table [dataSource]="withdrawals" class="mat-elevation-z8">
-
+      <table
+        mat-table
+        [dataSource]="apiResponse?.results"
+        class="mat-elevation-z8"
+      >
         <ng-container matColumnDef="quantity">
           <th mat-header-cell *matHeaderCellDef>Quantidade</th>
           <td mat-cell *matCellDef="let withdrawals">
@@ -32,7 +35,9 @@
 
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef>Data</th>
-          <td mat-cell *matCellDef="let withdrawals">{{ formatDate(withdrawals.withdraw_date) }}</td>
+          <td mat-cell *matCellDef="let withdrawals">
+            {{ formatDate(withdrawals.withdraw_date) }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="delete">
@@ -54,6 +59,12 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <app-user-pagination
+        [currentPage]="currentPage"
+        [apiResponse]="apiResponse"
+        (pageChange)="onPageChange($event)"
+        [page]="page"
+      ></app-user-pagination>
     </mat-card-content>
   </mat-card>
 </user-sidebar>

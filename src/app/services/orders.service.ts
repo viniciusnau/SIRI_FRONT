@@ -104,18 +104,28 @@ export class OrdersService {
     );
   }
 
-  public getStockEntries(stock_item_id): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/stock-entries/?stock_item_id=${stock_item_id}`,
-      this.httpOptions,
-    );
+  public getStockEntries(stock_item_id, pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/stock-entries/?page=${pageChange}&stock_item_id=${stock_item_id}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(
+          `${this.apiUrl}/stock-entries/?stock_item_id=${stock_item_id}`,
+          this.httpOptions,
+        );
   }
 
-  public getStockWithdrawals(stock_item_id): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/stock-withdrawals/?stock_item_id=${stock_item_id}`,
-      this.httpOptions,
-    );
+  public getStockWithdrawals(stock_item_id, pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/stock-withdrawals/?page=${pageChange}&stock_item_id=${stock_item_id}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(
+          `${this.apiUrl}/stock-withdrawals/?stock_item_id=${stock_item_id}`,
+          this.httpOptions,
+        );
   }
 
   public getMaterialsOrderStatusCode(
