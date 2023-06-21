@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Category, Product } from '../../../interfaces/stock/interfaces';
 import {
   GetProductDto,
   ProductsService,
 } from 'src/app/services/products.service';
-import { UserService } from 'src/app/services/user.service';
-import { Category, Product } from '../../../interfaces/stock/interfaces';
 import { OrdersService } from 'src/app/services/orders.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'user-home',
@@ -35,11 +35,10 @@ export class HomeComponent implements OnInit {
     this.getUserData();
   }
 
-  onPageChange(page: number) {
+  onPageChange(page: number): void {
     this.saveFields();
     this.currentPage = page;
     this.getContent([this.selectedCategoryId]);
-    // this.populateFields();
   }
 
   getUserData(): void {
@@ -49,7 +48,9 @@ export class HomeComponent implements OnInit {
         this.client = data.client.id;
         this.getContent(this.categories.map((category) => category.id));
       },
-      (error) => {},
+      (error) => {
+        // Handle error if necessary
+      },
     );
   }
 
@@ -65,10 +66,15 @@ export class HomeComponent implements OnInit {
     const getProductDto: GetProductDto = { categories: categoryIds };
     this.productsService
       .getProducts(getProductDto, this.currentPage.toString())
-      .subscribe((data) => {
-        this.apiResponse = data;
-        this.populateFields();
-      });
+      .subscribe(
+        (data) => {
+          this.apiResponse = data;
+          this.populateFields();
+        },
+        (error) => {
+          // Handle error if necessary
+        },
+      );
   }
 
   firstLetterOnCapital(text: string): string {
@@ -76,7 +82,7 @@ export class HomeComponent implements OnInit {
     return text[0].toUpperCase() + text.substring(1);
   }
 
-  saveFields() {
+  saveFields(): void {
     if (!this.selectedProducts) {
       this.selectedProducts = [];
     }
@@ -88,11 +94,11 @@ export class HomeComponent implements OnInit {
     this.selectedProducts = this.selectedProducts.concat(newSelectedProducts);
   }
 
-  populateFields() {
+  populateFields(): void {
     this.apiResponse?.results?.forEach((product) => {
-      const matchingProduct = this.selectedProducts?.find((selectedProduct) => {
-        return selectedProduct.id === product.id;
-      });
+      const matchingProduct = this.selectedProducts?.find(
+        (selectedProduct) => selectedProduct.id === product.id,
+      );
       if (matchingProduct) {
         product.quantity = matchingProduct.quantity;
         product.option = matchingProduct.option;
@@ -110,41 +116,36 @@ export class HomeComponent implements OnInit {
 
     this.ordersService.createOrder(order).subscribe(
       (orderResponse) => {
-        this.selectedProducts = this.selectedProducts =
-          this.selectedProducts.concat(this.apiResponse?.results);
-        const orderItems = this.selectedProducts.map((product) => {
-          return {
-            product: product.id,
-            quantity: product.quantity,
-            added_quantity: 0,
-            order: orderResponse.id,
-          };
-        });
+        this.selectedProducts = this.selectedProducts.concat(
+          this.apiResponse?.results,
+        );
+        const orderItems = this.selectedProducts.map((product) => ({
+          product: product.id,
+          quantity: product.quantity,
+          added_quantity: 0,
+          order: orderResponse.id,
+        }));
 
         this.ordersService.createOrderItems(orderItems).subscribe(
           (orderItemsResponse) => {
-            this.snackBar.open('Pedido feito!', 'Fechar', {
-              duration: 3000,
-              horizontalPosition: 'end',
-              verticalPosition: 'top',
-            });
+            this.showSnackBar('Pedido feito!');
           },
           (error) => {
-            this.snackBar.open('Erro ao criar itens do pedido.', 'Fechar', {
-              duration: 3000,
-              horizontalPosition: 'end',
-              verticalPosition: 'top',
-            });
+            this.showSnackBar('Erro ao criar itens do pedido.');
           },
         );
       },
       (error) => {
-        this.snackBar.open('Erro ao criar pedido.', 'Fechar', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
+        this.showSnackBar('Erro ao criar pedido.');
       },
     );
+  }
+
+  private showSnackBar(message: string): void {
+    this.snackBar.open(message, 'Fechar', {
+      duration: 3000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+    });
   }
 }
