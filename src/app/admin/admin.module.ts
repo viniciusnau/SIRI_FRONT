@@ -62,6 +62,8 @@ import { CreateProtocolItemsModalComponent } from './pages/admin-protocols/admin
 import {
   DeleteOrderItemModalComponent
 } from './pages/admin-orders/admin-order-items/modal/deleteOrderItem-modal.component.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -125,6 +127,8 @@ import {
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
 })
 export class AdminModule {}

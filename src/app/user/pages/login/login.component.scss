@@ -7,8 +7,8 @@
 }
 
 body {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   height: 100%;
 }
 
@@ -27,9 +27,14 @@ body {
 
 h1 {
   color: #9dc44d;
-  padding-bottom: 10px;
   font-size: 2em;
   font-weight: bold;
+}
+
+h2 {
+  color: #9dc44d;
+  font-size: 1em;
+  font-weight: inherit;
 }
 
 .cardLogin {
@@ -47,7 +52,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0px 0px;
+  margin: 0;
 }
 
 .textField > input {
@@ -71,7 +76,7 @@ h1 {
 .btnLogin {
   position: relative;
   width: 20%;
-  padding: 16px 0px;
+  padding: 16px 0;
   margin: 25px;
   border: none;
   border-radius: 3px;

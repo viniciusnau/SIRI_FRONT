@@ -77,5 +77,4 @@ export class EditProductModalComponent implements OnInit {
       window.location.reload();
     }, 2000);
   }
-
 }
