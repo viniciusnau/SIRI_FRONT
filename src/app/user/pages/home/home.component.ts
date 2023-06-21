@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   products: Product[] = [];
   displayedColumns = ['name', 'description', 'quantity', 'measure', 'option'];
   selectedCategoryId: number;
-  selectedProducts = this.getItems('selectedProducts');
+  selectedProducts: any;
   client: number;
 
   constructor(
@@ -32,17 +32,14 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    localStorage.clear();
     this.getUserData();
   }
 
   onPageChange(page: number) {
-    this.saveItems(this.selectedProducts, 'selectedProducts');
+    this.saveFields();
     this.currentPage = page;
     this.getContent([this.selectedCategoryId]);
-    this.getItems('selectedProducts');
-    this.populateFields();
-    console.log('selectedProducts on pageChange: ', this.selectedProducts);
+    // this.populateFields();
   }
 
   getUserData(): void {
@@ -70,6 +67,7 @@ export class HomeComponent implements OnInit {
       .getProducts(getProductDto, this.currentPage.toString())
       .subscribe((data) => {
         this.apiResponse = data;
+        this.populateFields();
       });
   }
 
@@ -78,42 +76,31 @@ export class HomeComponent implements OnInit {
     return text[0].toUpperCase() + text.substring(1);
   }
 
-  saveItems(items, code: string): void {
-    items = this.apiResponse.results.filter((product) => product.option);
-    localStorage.setItem(code, JSON.stringify(items));
-  }
-
-  getItems(code: string): any {
-    console.log('getItems: ', JSON.parse(localStorage.getItem(code)));
-    code = JSON.parse(localStorage.getItem(code));
-  }
-
-  populateFields(): void {
-    const selectedProducts = JSON.parse(
-      localStorage.getItem('selectedProducts'),
-    );
-    if (selectedProducts) {
-      this.apiResponse.results.forEach((product) => {
-        const selectedProduct = selectedProducts.find(
-          (p) => p.id === product.id,
-        );
-        console.log('selected: ', selectedProduct);
-        if (selectedProduct) {
-          product.option = true;
-          product.quantity = selectedProduct.quantity;
-        }
-      });
+  saveFields() {
+    if (!this.selectedProducts) {
+      this.selectedProducts = [];
     }
+
+    const newSelectedProducts = this.apiResponse?.results.filter(
+      (product) => product.option,
+    );
+
+    this.selectedProducts = this.selectedProducts.concat(newSelectedProducts);
+  }
+
+  populateFields() {
+    this.apiResponse?.results?.forEach((product) => {
+      const matchingProduct = this.selectedProducts?.find((selectedProduct) => {
+        return selectedProduct.id === product.id;
+      });
+      if (matchingProduct) {
+        product.quantity = matchingProduct.quantity;
+        product.option = matchingProduct.option;
+      }
+    });
   }
 
   order(): void {
-    console.log(
-      'selectedProducts on Order',
-      JSON.parse(localStorage.getItem('selectedProducts')),
-    );
-    this.selectedProducts += JSON.parse(
-      localStorage.getItem('selectedProducts'),
-    );
     const order = {
       is_sent: false,
       partially_added_to_stock: false,
@@ -123,6 +110,8 @@ export class HomeComponent implements OnInit {
 
     this.ordersService.createOrder(order).subscribe(
       (orderResponse) => {
+        this.selectedProducts = this.selectedProducts =
+          this.selectedProducts.concat(this.apiResponse?.results);
         const orderItems = this.selectedProducts.map((product) => {
           return {
             product: product.id,

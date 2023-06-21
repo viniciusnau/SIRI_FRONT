@@ -16,7 +16,8 @@ export class UserPaginationComponent {
   }
 
   hasNext(): boolean {
-    return !!this.apiResponse[this.page];
+    if (this.apiResponse) return !!this.apiResponse[this.page];
+    return !!this.page;
   }
 
   goToPreviousPage(): void {
