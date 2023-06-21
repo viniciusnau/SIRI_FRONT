@@ -2,20 +2,22 @@
 <div [formGroup]="formProtocols" mat-dialog-content class="content">
   <div class="date-fields">
     <div class="date-field">
-      <p>Data Inicial</p>
+      <p>Início de Vigência</p>
       <div class="mat-form-field-wrapper">
         <mat-form-field appearance="fill">
-          <mat-label>Data Inicial</mat-label>
-          <input type="date" matInput formControlName="initial_date" />
+          <input matInput [matDatepicker]="startDatePicker" placeholder="Início de Vigência" formControlName="initial_date">
+          <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker></mat-datepicker>
         </mat-form-field>
       </div>
     </div>
     <div class="date-field">
-      <p>Data Final</p>
+      <p>Final de Vigência</p>
       <div class="mat-form-field-wrapper">
         <mat-form-field appearance="fill">
-          <mat-label>Data Final</mat-label>
-          <input type="date" matInput formControlName="final_date" />
+          <input matInput [matDatepicker]="finalDatePicker" placeholder="Final de Vigência" formControlName="final_date">
+          <mat-datepicker-toggle matSuffix [for]="finalDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #finalDatePicker></mat-datepicker>
         </mat-form-field>
       </div>
     </div>

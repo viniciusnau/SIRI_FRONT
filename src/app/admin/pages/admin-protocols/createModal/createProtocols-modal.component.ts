@@ -64,13 +64,18 @@ export class CreateProtocolsModalComponent implements OnInit {
   onClick(): void {
     if (this.formCreateProtocols.valid && this.selectedFile) {
       const protocolData = this.formCreateProtocols.value;
+      const startDate = new Date(protocolData.initial_date);
+      const endDate = new Date(protocolData.final_date);
+      const formattedStartDate = startDate.toISOString();
+      const formattedEndDate = endDate.toISOString();
+
       const formData: FormData = new FormData();
       formData.append('file', this.selectedFile);
       formData.append('code', protocolData.code);
       formData.append('supplier', protocolData.supplier);
       formData.append('category', protocolData.category);
-      formData.append('start_date', protocolData.initial_date);
-      formData.append('end_date', protocolData.final_date);
+      formData.append('start_date', formattedStartDate);
+      formData.append('end_date', formattedEndDate);
 
       this.protocolService.createProtocol(formData).subscribe(
         (response) => {

@@ -2,7 +2,9 @@
 <div [formGroup]="formSupplierOrder" mat-dialog-content class="content">
   <p>Prazo de Entrega</p>
   <mat-form-field appearance="fill">
-    <input type="date" matInput formControlName="delivery_date" />
+    <input matInput [matDatepicker]="startDatePicker" placeholder="Prazo de Entrega" formControlName="delivery_date">
+    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
   </mat-form-field>
   <p>Recebido</p>
   <mat-form-field appearance="fill">
