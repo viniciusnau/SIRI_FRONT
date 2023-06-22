@@ -7,7 +7,7 @@
 
       <table
         mat-table
-        [dataSource]="apiResponse?.stock_items"
+        [dataSource]="response?.stock_items"
         class="mat-elevation-z8"
       >
         <ng-container matColumnDef="name">
@@ -75,7 +75,7 @@
       </table>
       <app-user-pagination
         [currentPage]="currentPage"
-        [apiResponse]="apiResponse"
+        [response]="response"
         (pageChange)="onPageChange($event)"
         [page]="page"
       ></app-user-pagination>

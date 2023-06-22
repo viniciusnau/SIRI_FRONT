@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class PaginationComponent {
   @Input() currentPage: number;
-  @Input() apiResponse: any;
+  @Input() response: any;
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
   hasPrevious(): boolean {
@@ -15,7 +15,7 @@ export class PaginationComponent {
   }
 
   hasNext(): boolean {
-    return !!this.apiResponse?.next;
+    return !!this.response?.next;
   }
 
   goToPreviousPage(): void {

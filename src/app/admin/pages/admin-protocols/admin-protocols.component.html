@@ -14,7 +14,7 @@
 
       <table
         mat-table
-        [dataSource]="apiResponse?.results"
+        [dataSource]="response?.results"
         class="mat-elevation-z8"
       >
         <ng-container matColumnDef="id">
@@ -115,7 +115,7 @@
       </table>
       <app-pagination
         [currentPage]="currentPage"
-        [apiResponse]="apiResponse"
+        [response]="response"
         (pageChange)="onPageChange($event)"
       ></app-pagination>
     </mat-card-content>

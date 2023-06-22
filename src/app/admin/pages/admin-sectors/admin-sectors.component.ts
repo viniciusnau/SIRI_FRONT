@@ -14,7 +14,7 @@ interface AdminSectors {
 })
 export class AdminSectorsComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
 
   constructor(private stocksService: StocksService) {}
 
@@ -31,7 +31,7 @@ export class AdminSectorsComponent implements OnInit {
     this.stocksService
       .getAllSectors(this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

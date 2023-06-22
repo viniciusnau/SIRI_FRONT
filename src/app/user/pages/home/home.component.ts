@@ -15,7 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomeComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
   page = 'next';
   categories: Category[] = [];
   products: Product[] = [];
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
       .getProducts(getProductDto, this.currentPage.toString())
       .subscribe(
         (data) => {
-          this.apiResponse = data;
+          this.response = data;
           this.populateFields();
         },
         (error) => {
@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
       this.selectedProducts = [];
     }
 
-    const newSelectedProducts = this.apiResponse?.results.filter(
+    const newSelectedProducts = this.response?.results.filter(
       (product) => product.option,
     );
 
@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
   }
 
   populateFields(): void {
-    this.apiResponse?.results?.forEach((product) => {
+    this.response?.results?.forEach((product) => {
       const matchingProduct = this.selectedProducts?.find(
         (selectedProduct) => selectedProduct.id === product.id,
       );
@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit {
     this.ordersService.createOrder(order).subscribe(
       (orderResponse) => {
         this.selectedProducts = this.selectedProducts.concat(
-          this.apiResponse?.results,
+          this.response?.results,
         );
         const orderItems = this.selectedProducts.map((product) => ({
           product: product.id,

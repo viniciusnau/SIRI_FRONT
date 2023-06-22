@@ -23,7 +23,7 @@ interface AdminInvoices {
 })
 export class AdminInvoicesComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
   adminInvoices: AdminInvoices[] = [];
 
   modalData: InvoiceModalData = {
@@ -52,7 +52,7 @@ export class AdminInvoicesComponent implements OnInit {
     this.stocksService
       .getInvoices(this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

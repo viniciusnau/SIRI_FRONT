@@ -18,7 +18,7 @@ interface Withdrawals {
 })
 export class SaidasComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
   page = 'next';
 
   stockItemId: string;
@@ -46,7 +46,7 @@ export class SaidasComponent implements OnInit {
     this.ordersService
       .getStockWithdrawals(orderId, this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

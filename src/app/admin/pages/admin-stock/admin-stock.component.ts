@@ -15,7 +15,7 @@ interface AdminStock {
 export class AdminStockComponent implements OnInit {
   stocks: AdminStock[] = [];
   currentPage = 1;
-  apiResponse: any;
+  response: any;
 
   constructor(private stocksService: StocksService, private router: Router) {}
 
@@ -33,7 +33,7 @@ export class AdminStockComponent implements OnInit {
       .getStocks(this.currentPage.toString())
       .subscribe((data) => {
         console.log('data: ', data);
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

@@ -22,7 +22,7 @@ interface Order {
 })
 export class PedidosComponent implements OnInit, AfterViewInit {
   currentPage = 1;
-  apiResponse: any = [];
+  response: any = [];
   page = 'next_orders';
 
   constructor(
@@ -41,7 +41,7 @@ export class PedidosComponent implements OnInit, AfterViewInit {
   }
 
   @ViewChild(MatSort) sort: MatSort;
-  dataSource = new MatTableDataSource(this.apiResponse?.orders);
+  dataSource = new MatTableDataSource(this.response?.orders);
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
@@ -49,8 +49,8 @@ export class PedidosComponent implements OnInit, AfterViewInit {
 
   getContent() {
     this.userService.getUser(this.currentPage.toString()).subscribe((data) => {
-      this.apiResponse = data[this.currentPage == 1 ? 'orders' : 'results'];
-      this.apiResponse.next_orders =
+      this.response = data[this.currentPage == 1 ? 'orders' : 'results'];
+      this.response.next_orders =
         data[this.currentPage == 1 ? 'next_orders' : 'next'];
     });
   }

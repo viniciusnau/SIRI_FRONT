@@ -13,7 +13,7 @@
 
       <table
         mat-table
-        [dataSource]="apiResponse?.results"
+        [dataSource]="response?.results"
         class="mat-elevation-z8"
       >
         <!--- Note that these columns can be defined in any order.
@@ -97,7 +97,7 @@
       </table>
       <app-pagination
         [currentPage]="currentPage"
-        [apiResponse]="apiResponse"
+        [response]="response"
         (pageChange)="onPageChange($event)"
       ></app-pagination>
     </mat-card-content>

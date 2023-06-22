@@ -20,7 +20,7 @@ interface adminProtocols {
 })
 export class AdminProtocolItemsComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
   protocolId;
 
   modalData = {
@@ -52,7 +52,7 @@ export class AdminProtocolItemsComponent implements OnInit {
     this.stockService
       .getProtocolItems(this.protocolId, this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

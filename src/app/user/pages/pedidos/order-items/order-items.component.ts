@@ -20,7 +20,7 @@ interface OrderItems {
   styleUrls: ['./order-items.component.scss'],
 })
 export class OrderItemsComponent implements OnInit {
-  apiResponse: any;
+  response: any;
   currentPage = 1;
   page = 'next';
 
@@ -48,7 +48,7 @@ export class OrderItemsComponent implements OnInit {
     this.ordersService
       .getOrderItems(orderId, this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

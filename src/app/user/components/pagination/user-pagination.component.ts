@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class UserPaginationComponent {
   @Input() currentPage: number;
-  @Input() apiResponse: any;
+  @Input() response: any;
   @Input() page: any;
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
@@ -16,7 +16,7 @@ export class UserPaginationComponent {
   }
 
   hasNext(): boolean {
-    if (this.apiResponse) return !!this.apiResponse[this.page];
+    if (this.response) return !!this.response[this.page];
     return !!this.page;
   }
 

@@ -25,7 +25,7 @@ interface AdminProducts {
 })
 export class AdminProductsComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
   categories = [];
   measures = [];
 
@@ -50,7 +50,7 @@ export class AdminProductsComponent implements OnInit {
     this.stocksService
       .getAllProducts(this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

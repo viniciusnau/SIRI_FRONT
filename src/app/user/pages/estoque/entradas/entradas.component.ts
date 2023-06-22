@@ -14,7 +14,7 @@ interface Entries {
 })
 export class EntradasComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
   stockItemId: string;
   page = 'next';
 
@@ -39,7 +39,7 @@ export class EntradasComponent implements OnInit {
     this.ordersService
       .getStockEntries(orderId, this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

@@ -35,7 +35,7 @@ export class AdminSuppliersComponent implements OnInit {
   ) {}
 
   currentPage = 1;
-  apiResponse: any;
+  response: any;
   categories = [];
 
   ngOnInit(): void {
@@ -52,7 +52,7 @@ export class AdminSuppliersComponent implements OnInit {
     this.suppliersService
       .getSuppliers(this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

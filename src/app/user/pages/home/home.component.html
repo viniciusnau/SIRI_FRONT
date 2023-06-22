@@ -30,7 +30,7 @@
       <form class="example-form">
         <table
           mat-table
-          [dataSource]="apiResponse?.results"
+          [dataSource]="response?.results"
           class="mat-elevation-z8"
         >
           <ng-container matColumnDef="name">
@@ -82,7 +82,7 @@
         </table>
         <app-user-pagination
           [currentPage]="currentPage"
-          [apiResponse]="apiResponse"
+          [response]="response"
           (pageChange)="onPageChange($event)"
           [page]="page"
         ></app-user-pagination>

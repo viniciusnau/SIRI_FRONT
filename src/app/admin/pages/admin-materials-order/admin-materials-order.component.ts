@@ -24,7 +24,7 @@ interface MaterialsOrder {
 })
 export class AdminMaterialsOrderComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
 
   modalData: MaterialsOrderModalData = {
     suppliers: [],
@@ -53,7 +53,7 @@ export class AdminMaterialsOrderComponent implements OnInit {
     this.ordersService
       .getMaterialsOrder(this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

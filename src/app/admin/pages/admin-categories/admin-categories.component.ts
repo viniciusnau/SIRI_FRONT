@@ -18,7 +18,7 @@ interface AdminCategories {
 })
 export class AdminCategoriesComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
 
   constructor(private stocksService: StocksService, public dialog: MatDialog) {}
 
@@ -35,7 +35,7 @@ export class AdminCategoriesComponent implements OnInit {
     this.stocksService
       .getAllCategories(this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

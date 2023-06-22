@@ -53,7 +53,7 @@ interface ReceivingReports {
 })
 export class AdminReceivingReportsComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
 
   constructor(
     private stocksService: StocksService,
@@ -74,7 +74,7 @@ export class AdminReceivingReportsComponent implements OnInit {
     this.stocksService
       .getReceivingReports(this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

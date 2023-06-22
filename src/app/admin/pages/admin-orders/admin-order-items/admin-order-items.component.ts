@@ -44,7 +44,7 @@ interface Supplier {
 })
 export class AdminOrderItemsComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
   orderId = '';
   suppliers: Supplier[] = [];
   supplierQuantityControls: { [key: number]: FormControl } = {};
@@ -81,8 +81,8 @@ export class AdminOrderItemsComponent implements OnInit {
     this.ordersService
       .getOrderItems(orderId, this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
-        this.apiResponse.forEach((orderItem) => {
+        this.response = data;
+        this.response.forEach((orderItem) => {
           this.supplierQuantityControls[orderItem.id] = new FormControl();
         });
       });

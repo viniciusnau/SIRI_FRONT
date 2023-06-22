@@ -5,12 +5,7 @@
         <span>Pedidos</span>
       </mat-toolbar>
 
-      <table
-        mat-table
-        [dataSource]="apiResponse"
-        matSort
-        class="mat-elevation-z8"
-      >
+      <table mat-table [dataSource]="response" matSort class="mat-elevation-z8">
         <ng-container matColumnDef="sent">
           <th mat-header-cell *matHeaderCellDef>Enviado</th>
           <td mat-cell *matCellDef="let orders">
@@ -95,7 +90,7 @@
       </table>
       <app-user-pagination
         [currentPage]="currentPage"
-        [apiResponse]="apiResponse"
+        [response]="response"
         (pageChange)="onPageChange($event)"
         [page]="page"
       ></app-user-pagination>

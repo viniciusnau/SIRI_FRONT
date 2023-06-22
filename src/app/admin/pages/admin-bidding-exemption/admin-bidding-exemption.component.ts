@@ -23,7 +23,7 @@ interface BiddingExemption {
 })
 export class AdminBiddingExemptionComponent {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
   products = [];
   stocks: Stock[] = [];
   invoices = [];
@@ -46,7 +46,7 @@ export class AdminBiddingExemptionComponent {
     this.stocksService
       .getBiddingExemption(this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 
@@ -86,9 +86,7 @@ export class AdminBiddingExemptionComponent {
   deleteBiddingExemption(row: BiddingExemption) {
     this.stocksService.deleteBiddingExemption(row.id).subscribe(
       () => {
-        this.apiResponse = this.apiResponse.filter(
-          (item) => item.id !== row.id,
-        );
+        this.response = this.response.filter((item) => item.id !== row.id);
       },
       (error) => {},
     );

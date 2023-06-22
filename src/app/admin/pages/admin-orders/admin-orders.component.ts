@@ -19,7 +19,7 @@ interface AdminOrder {
 })
 export class AdminOrdersComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
 
   constructor(public ordersService: OrdersService, private router: Router) {}
 
@@ -36,7 +36,7 @@ export class AdminOrdersComponent implements OnInit {
     this.ordersService
       .getAllOrders(this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

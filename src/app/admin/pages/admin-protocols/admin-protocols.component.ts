@@ -26,7 +26,7 @@ interface adminProtocols {
 })
 export class AdminProtocolsComponent implements OnInit {
   currentPage = 1;
-  apiResponse: any;
+  response: any;
 
   modalData: ProtocolsModalData = {
     suppliers: [],
@@ -56,7 +56,7 @@ export class AdminProtocolsComponent implements OnInit {
     this.protocolService
       .getProtocols(this.currentPage.toString())
       .subscribe((data) => {
-        this.apiResponse = data;
+        this.response = data;
       });
   }
 

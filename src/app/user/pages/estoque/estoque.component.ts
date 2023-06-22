@@ -18,7 +18,7 @@ export class EstoqueComponent implements OnInit {
   categories: Category[] = [];
   currentPage = 1;
   page = 'next_stock_items';
-  apiResponse: any;
+  response: any;
   displayedColumns = [
     'name',
     'description',
@@ -48,7 +48,7 @@ export class EstoqueComponent implements OnInit {
 
   getContent(category = 1) {
     this.userService.getUser().subscribe((data) => {
-      this.apiResponse = data;
+      this.response = data;
     });
   }
 
