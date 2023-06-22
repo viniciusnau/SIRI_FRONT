@@ -22,7 +22,7 @@
           <div class="filter-field">
             <p class="textField">Categoria</p>
             <mat-form-field appearance="fill">
-              <mat-select [(ngModel)]="selectedCategories" multiple [disabled]="selectedProducts.length > 0">
+              <mat-select [(ngModel)]="selectedCategories" multiple [disabled]="selectedProducts.length > 0" placeholder="{{ selectedProducts.length > 0 ? '' : 'Todas' }}">
                 <mat-option *ngFor="let category of categories" [value]="category.id">
                   {{ category.name }}
                 </mat-option>
@@ -32,7 +32,7 @@
           <div class="filter-field">
             <p class="textField">Produto</p>
             <mat-form-field appearance="fill">
-              <mat-select [(ngModel)]="selectedProducts" multiple [disabled]="selectedCategories.length > 0">
+              <mat-select [(ngModel)]="selectedProducts" multiple [disabled]="selectedCategories.length > 0" placeholder="{{ selectedCategories.length > 0 ? '' : 'Todos' }}">
                 <mat-option *ngFor="let product of products" [value]="product.id">
                   {{ product.description }}
                 </mat-option>
@@ -60,7 +60,7 @@
             </mat-form-field>
           </div>
           <div class="btnRequest">
-            <button mat-raised-button class="btn" (click)="onSave()">Consultar</button>
+            <button mat-raised-button class="btn" (click)="onSave()" [disabled]="!(selectedProducts.length > 0 || selectedCategories.length > 0)">Consultar</button>
           </div>
         </div>
       </mat-card-content>
