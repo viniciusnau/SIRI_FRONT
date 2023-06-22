@@ -284,7 +284,10 @@ export class StocksService {
   }
 
   getWarehouseReports(): Observable<any[]> {
-    return this.httpClient.get<any[]>(`${this.apiUrl}/warehouse-items/`);
+    return this.httpClient.get<any[]>(
+      `${this.apiUrl}/warehouse-items/`,
+      this.httpOptions,
+    );
   }
 
   getStockReports(queryString: string): Observable<any> {

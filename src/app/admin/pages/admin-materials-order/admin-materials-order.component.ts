@@ -58,7 +58,7 @@ export class AdminMaterialsOrderComponent implements OnInit {
   }
 
   getCategories() {
-    this.stocksService.getCategories().subscribe((data) => {
+    this.stocksService.getAllCategories().subscribe((data) => {
       this.modalData.categories = data;
     });
   }

@@ -61,7 +61,7 @@ export class AdminProtocolsComponent implements OnInit {
   }
 
   getCategories() {
-    this.stockService.getCategories().subscribe((data) => {
+    this.stockService.getAllCategories().subscribe((data) => {
       this.modalData.categories = data;
     });
   }
