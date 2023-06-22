@@ -6,6 +6,7 @@ import { DispatchReportsModalComponent } from './modal/dispatch-reports-modal.co
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as moment from 'moment/moment';
+import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -63,6 +64,7 @@ interface DispatchReports {
   selector: 'app-admin-dispatch-reports',
   templateUrl: './admin-dispatch-reports.component.html',
   styleUrls: ['./admin-dispatch-reports.component.scss'],
+  providers: [PriceFormatPipe],
 })
 export class AdminDispatchReportsComponent implements OnInit {
   currentPage = 1;
@@ -72,6 +74,7 @@ export class AdminDispatchReportsComponent implements OnInit {
     private stocksService: StocksService,
     private productsService: ProductsService,
     public dialog: MatDialog,
+    private priceFormatPipe: PriceFormatPipe,
   ) {}
 
   ngOnInit(): void {
@@ -96,12 +99,13 @@ export class AdminDispatchReportsComponent implements OnInit {
       const originalDate = new Date(date);
 
       const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const year = originalDate.getUTCFullYear().toString();
 
       return `${day}/${month}/${year}`;
-    }
-    else {
+    } else {
       return '';
     }
   }
@@ -140,6 +144,8 @@ export class AdminDispatchReportsComponent implements OnInit {
         };
 
         const total = reportData.quantity * reportData.price;
+        const formattedPrice = this.priceFormatPipe.transform(reportData.price);
+        const formattedTotal = this.priceFormatPipe.transform(total);
 
         const docDefinition = {
           content: [

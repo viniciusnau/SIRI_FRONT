@@ -59,6 +59,7 @@
                 class="btn"
                 mat-mini-fab
                 aria-label="Delete protocol"
+                [disabled]="adminProtocolItem.quantity < adminProtocolItem.original_quantity"
                 (click)="deleteProtocolItem(adminProtocolItem.id)"
               >
                 <mat-icon>delete</mat-icon>

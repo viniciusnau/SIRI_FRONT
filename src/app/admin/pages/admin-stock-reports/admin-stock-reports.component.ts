@@ -3,6 +3,7 @@ import { StocksService } from '../../../services/stocks.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as moment from 'moment/moment';
+import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -45,6 +46,7 @@ interface Product {
   selector: 'app-admin-stock-reports',
   templateUrl: './admin-stock-reports.component.html',
   styleUrls: ['./admin-stock-reports.component.scss'],
+  providers: [PriceFormatPipe],
 })
 export class AdminStockReportsComponent implements OnInit {
   startDate: string;
@@ -71,7 +73,10 @@ export class AdminStockReportsComponent implements OnInit {
   selectedPublicDefenses: string[] = [];
   selectedSectors: string[] = [];
 
-  constructor(private stockService: StocksService) {}
+  constructor(
+    private stockService: StocksService,
+    private priceFormatPipe: PriceFormatPipe,
+  ) {}
 
   ngOnInit() {
     this.fetchCategories();
@@ -162,6 +167,7 @@ export class AdminStockReportsComponent implements OnInit {
   generatePDF() {
     const currentDate = moment().format('DD/MM/YYYY HH:mm:ss');
     const docDefinition = {
+      pageMargins: [20, 70, 20, 20],
       header: {
         columns: [
           {
@@ -179,7 +185,16 @@ export class AdminStockReportsComponent implements OnInit {
         '\n\n',
         {
           table: {
-            layout: 'autoTable',
+            widths: [
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+            ],
             body: [
               [
                 { text: 'Código', alignment: 'center' },
@@ -197,11 +212,17 @@ export class AdminStockReportsComponent implements OnInit {
                 { text: report.entryQuantity, alignment: 'center' },
                 { text: report.withdrawalQuantity, alignment: 'center' },
                 {
-                  text: parseFloat(String(report.entryPrice)).toFixed(2),
+                  text: this.priceFormatPipe.transform(
+                    Number(parseFloat(String(report.entryPrice)).toFixed(2)),
+                  ),
                   alignment: 'center',
                 },
                 {
-                  text: parseFloat(String(report.withdrawalPrice)).toFixed(2),
+                  text: this.priceFormatPipe.transform(
+                    Number(
+                      parseFloat(String(report.withdrawalPrice)).toFixed(2),
+                    ),
+                  ),
                   alignment: 'center',
                 },
                 { text: report.core, alignment: 'center' },

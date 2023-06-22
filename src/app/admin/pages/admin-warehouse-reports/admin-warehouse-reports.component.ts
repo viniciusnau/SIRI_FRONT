@@ -3,6 +3,7 @@ import { StocksService } from '../../../services/stocks.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as moment from 'moment';
+import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -19,6 +20,7 @@ interface WarehouseReport {
   selector: 'app-admin-warehouse-reports',
   templateUrl: './admin-warehouse-reports.component.html',
   styleUrls: ['./admin-warehouse-reports.component.scss'],
+  providers: [PriceFormatPipe],
 })
 export class AdminWarehouseReportsComponent implements OnInit {
   warehouseReports: WarehouseReport[] = [];
@@ -31,7 +33,10 @@ export class AdminWarehouseReportsComponent implements OnInit {
     'averagePrice',
   ];
 
-  constructor(private stockService: StocksService) {}
+  constructor(
+    private stockService: StocksService,
+    private priceFormatPipe: PriceFormatPipe
+  ) {}
 
   ngOnInit() {
     this.fetchWarehouseReports();
@@ -83,7 +88,7 @@ export class AdminWarehouseReportsComponent implements OnInit {
         {
           table: {
             headerRows: 1,
-            widths: ['*', '*', 'auto', '*', '*', '*'],
+            widths: ['*', '*', 'auto', 'auto', 'auto', 'auto'],
             body: [
               [
                 'Código',
@@ -98,8 +103,8 @@ export class AdminWarehouseReportsComponent implements OnInit {
                 this.firstLetterOnCapital(report.productName),
                 report.productMeasure,
                 report.quantity,
-                report.price,
-                report.averagePrice,
+                this.priceFormatPipe.transform(Number(report.price)),
+                this.priceFormatPipe.transform(report.averagePrice),
               ]),
             ],
             layout: 'lightHorizontalLines',
