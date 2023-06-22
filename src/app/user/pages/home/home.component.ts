@@ -116,10 +116,19 @@ export class HomeComponent implements OnInit {
 
     this.ordersService.createOrder(order).subscribe(
       (orderResponse) => {
-        this.selectedProducts = this.selectedProducts.concat(
-          this.response?.results,
+        this.saveFields();
+        this.selectedProducts = [
+          ...this.selectedProducts,
+          ...this.response?.results,
+        ].filter(
+          (product, index, self) =>
+            product.option &&
+            index ===
+              self.findIndex(
+                (p) => p.id === product.id && p.option === product.option,
+              ),
         );
-        const orderItems = this.selectedProducts.map((product) => ({
+        const orderItems = this.selectedProducts?.map((product) => ({
           product: product.id,
           quantity: product.quantity,
           added_quantity: 0,

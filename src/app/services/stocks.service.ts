@@ -81,9 +81,6 @@ export class StocksService {
         )
       : this.httpClient.get<any>(`${this.apiUrl}/products`, this.httpOptions);
   }
-  // public getSectors(): Observable<any> {
-  //   return this.httpClient.get<any>(`${this.apiUrl}/sectors`, this.httpOptions);
-  // } OLD ONE - WITHOUT PAGINATION
 
   public getAllSectors(): Observable<any> {
     return this.httpClient.get<any>(
@@ -92,26 +89,12 @@ export class StocksService {
     );
   }
 
-  // public getCategories(): Observable<any> {
-  //   return this.httpClient.get<any>(
-  //     `${this.apiUrl}/categories`,
-  //     this.httpOptions,
-  //   );
-  // } OLD ONE - WITHOUT PAGINATION
-
   public getAllCategories(): Observable<any> {
     return this.httpClient.get<any>(
       `${this.apiUrl}/categories/all/`,
       this.httpOptions,
     );
   }
-
-  // public getMeasures(): Observable<any> {
-  //   return this.httpClient.get<any>(
-  //     `${this.apiUrl}/measures`,
-  //     this.httpOptions,
-  //   );
-  // } OLD ONE - WITHOUT PAGINATION
 
   public getAllMeasures(): Observable<any> {
     return this.httpClient.get<any>(
@@ -126,13 +109,6 @@ export class StocksService {
       this.httpOptions,
     );
   }
-
-  // public getProducts(): Observable<any> {
-  //   return this.httpClient.get<any>(
-  //     `${this.apiUrl}/products`,
-  //     this.httpOptions,
-  //   );
-  // } OLD ONE - WITHOUT PAGINATION
 
   public getReceivingReports(pageChange = ''): Observable<any> {
     return pageChange
