@@ -64,6 +64,7 @@ import {
 } from './pages/admin-orders/admin-order-items/modal/deleteOrderItem-modal.component.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { PriceFormatPipe } from './pipes/price-format.pipe';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     AdminProtocolItemsComponent,
     CreateProtocolItemsModalComponent,
     DeleteOrderItemModalComponent,
+    PriceFormatPipe,
   ],
   imports: [
     CommonModule,

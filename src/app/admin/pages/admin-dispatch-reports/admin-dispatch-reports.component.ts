@@ -6,6 +6,7 @@ import { DispatchReportsModalComponent } from './modal/dispatch-reports-modal.co
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as moment from 'moment/moment';
+import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -64,6 +65,7 @@ interface DispatchReports {
   selector: 'app-admin-dispatch-reports',
   templateUrl: './admin-dispatch-reports.component.html',
   styleUrls: ['./admin-dispatch-reports.component.scss'],
+  providers: [PriceFormatPipe],
 })
 export class AdminDispatchReportsComponent implements OnInit {
   dispatchReports: DispatchReports[] = [];
@@ -71,7 +73,8 @@ export class AdminDispatchReportsComponent implements OnInit {
   constructor(
     private stocksService: StocksService,
     private productsService: ProductsService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private priceFormatPipe: PriceFormatPipe
   ) {}
 
   ngOnInit(): void {
@@ -131,6 +134,8 @@ export class AdminDispatchReportsComponent implements OnInit {
       };
 
       const total = reportData.quantity * reportData.price;
+      const formattedPrice = this.priceFormatPipe.transform(reportData.price);
+      const formattedTotal = this.priceFormatPipe.transform(total);
 
       const docDefinition = {
         content: [
@@ -206,13 +211,13 @@ export class AdminDispatchReportsComponent implements OnInit {
             margin: [20, 5],
           },
           {
-            text: `Preço: ${reportData.price.toFixed(2)}`,
+            text: `Preço: ${formattedPrice}`,
             style: 'line',
             alignment: 'left',
             margin: [20, 5],
           },
           {
-            text: `Total: ${total.toFixed(2)}`,
+            text: `Total: ${formattedTotal}`,
             style: 'line',
             alignment: 'left',
             margin: [20, 5],
@@ -258,8 +263,7 @@ export class AdminDispatchReportsComponent implements OnInit {
           (response) => {
             window.location.reload()
           },
-          (error) => {
-          }
+          (error) => {}
         );
       });
     });

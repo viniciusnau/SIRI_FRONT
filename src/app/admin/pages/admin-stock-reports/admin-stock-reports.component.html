@@ -22,7 +22,7 @@
           <div class="filter-field">
             <p class="textField">Categoria</p>
             <mat-form-field appearance="fill">
-              <mat-select [(ngModel)]="selectedCategories" multiple>
+              <mat-select [(ngModel)]="selectedCategories" multiple [disabled]="selectedProducts.length > 0">
                 <mat-option *ngFor="let category of categories" [value]="category.id">
                   {{ category.name }}
                 </mat-option>
@@ -32,7 +32,7 @@
           <div class="filter-field">
             <p class="textField">Produto</p>
             <mat-form-field appearance="fill">
-              <mat-select [(ngModel)]="selectedProducts" multiple>
+              <mat-select [(ngModel)]="selectedProducts" multiple [disabled]="selectedCategories.length > 0">
                 <mat-option *ngFor="let product of products" [value]="product.id">
                   {{ product.description }}
                 </mat-option>
@@ -108,14 +108,14 @@
           <ng-container matColumnDef="entryPrice">
             <th mat-header-cell *matHeaderCellDef>Valor de Entrada</th>
             <td mat-cell *matCellDef="let stockReport">
-              {{ stockReport.entryPrice | number: '1.2-2' }}
+              {{ stockReport.entryPrice | priceFormat }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="withdrawalPrice">
             <th mat-header-cell *matHeaderCellDef>Valor de Saída</th>
             <td mat-cell *matCellDef="let stockReport">
-              {{ stockReport.withdrawalPrice }}
+              {{ stockReport.withdrawalPrice | priceFormat }}
             </td>
           </ng-container>
 

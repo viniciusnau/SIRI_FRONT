@@ -5,6 +5,7 @@ import { StocksService } from 'src/app/services/stocks.service';
 import * as moment from 'moment';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { PriceFormatPipe } from '../../../pipes/price-format.pipe';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -31,6 +32,7 @@ export interface AccountantReportsModalData {
   selector: 'accountant-reports-modal',
   templateUrl: 'accountant-reports-modal.component.html',
   styleUrls: ['./accountant-reports-modal.component.scss'],
+  providers: [PriceFormatPipe],
 })
 export class AccountantReportsModalComponent implements OnInit {
   formAccountantReports: FormGroup;
@@ -42,7 +44,8 @@ export class AccountantReportsModalComponent implements OnInit {
     public dialogRef: MatDialogRef<AccountantReportsModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AccountantReportsModalData,
     private formBuilder: FormBuilder,
-    public stocksService: StocksService
+    public stocksService: StocksService,
+    private priceFormatPipe: PriceFormatPipe
   ) {
     this.months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
     this.years = [2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
@@ -136,6 +139,12 @@ export class AccountantReportsModalComponent implements OnInit {
     const formattedPreviousBalanceSum = previousBalanceSum.toFixed(2);
     const formattedCurrentBalanceSum = currentBalanceSum.toFixed(2);
 
+    const newFormattedEntrySum = this.priceFormatPipe.transform(Number(formattedEntrySum));
+    const newFormattedOutputSum = this.priceFormatPipe.transform(Number(formattedOutputSum));
+    const newFormattedBalanceSum = this.priceFormatPipe.transform(Number(formattedBalanceSum));
+    const newFormattedPreviousBalanceSum = this.priceFormatPipe.transform(Number(formattedPreviousBalanceSum));
+    const newFormattedCurrentBalanceSum = this.priceFormatPipe.transform(Number(formattedCurrentBalanceSum));
+
     const docDefinition = {
       header: {
         columns: [
@@ -163,20 +172,20 @@ export class AccountantReportsModalComponent implements OnInit {
               ...this.report.map((report_item) => [
                 { text: report_item.code, alignment: 'center' },
                 { text: report_item.name, alignment: 'center' },
-                { text: parseFloat(String(report_item.entry_value)).toFixed(2), alignment: 'center' },
-                { text: parseFloat(String(report_item.output_value)).toFixed(2), alignment: 'center' },
-                { text: parseFloat(String(report_item.balance)).toFixed(2), alignment: 'center' },
-                { text: parseFloat(String(report_item.previous_balance)).toFixed(2), alignment: 'center' },
-                { text: parseFloat(String(report_item.current_balance)).toFixed(2), alignment: 'center' },
+                { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.entry_value)).toFixed(2))), alignment: 'center' },
+                { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.output_value)).toFixed(2))), alignment: 'center' },
+                { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.balance)).toFixed(2))), alignment: 'center' },
+                { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.previous_balance)).toFixed(2))), alignment: 'center' },
+                { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.current_balance)).toFixed(2))), alignment: 'center' },
               ]),
               [
                 { text: '', colSpan: 1 },
                 { text: 'Total:', alignment: 'right', bold: true },
-                { text: formattedEntrySum, alignment: 'center', bold: true },
-                { text: formattedOutputSum, alignment: 'center', bold: true },
-                { text: formattedBalanceSum, alignment: 'center', bold: true },
-                { text: formattedPreviousBalanceSum, alignment: 'center', bold: true },
-                { text: formattedCurrentBalanceSum, alignment: 'center', bold: true },
+                { text: newFormattedEntrySum, alignment: 'center', bold: true },
+                { text: newFormattedOutputSum, alignment: 'center', bold: true },
+                { text: newFormattedBalanceSum, alignment: 'center', bold: true },
+                { text: newFormattedPreviousBalanceSum, alignment: 'center', bold: true },
+                { text: newFormattedCurrentBalanceSum, alignment: 'center', bold: true },
               ],
             ],
           },

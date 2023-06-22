@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { ProductsService } from '../../../services/products.service';
+import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 
 
 interface ReceivingReport {
@@ -51,6 +52,7 @@ interface ReceivingReports {
   selector: 'app-admin-receiving-reports',
   templateUrl: './admin-receiving-reports.component.html',
   styleUrls: ['./admin-receiving-reports.component.scss'],
+  providers: [PriceFormatPipe],
 })
 export class AdminReceivingReportsComponent implements OnInit {
   receivingReports: ReceivingReports[] = [];
@@ -58,7 +60,8 @@ export class AdminReceivingReportsComponent implements OnInit {
   constructor(
     private stocksService: StocksService,
     private productsService: ProductsService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private priceFormatPipe: PriceFormatPipe
   ) {}
 
   ngOnInit(): void {
@@ -118,6 +121,8 @@ export class AdminReceivingReportsComponent implements OnInit {
       };
 
       const total = reportData.quantity * reportData.price;
+      const formattedPrice = this.priceFormatPipe.transform(reportData.price);
+      const formattedTotal = this.priceFormatPipe.transform(total);
 
       const docDefinition = {
         content: [
@@ -199,13 +204,13 @@ export class AdminReceivingReportsComponent implements OnInit {
             margin: [20, 5],
           },
           {
-            text: `Preço: ${reportData.price.toFixed(2)}`,
+            text: `Preço: ${formattedPrice}`,
             style: 'line',
             alignment: 'left',
             margin: [20, 5],
           },
           {
-            text: `Total: ${total.toFixed(2)}`,
+            text: `Total: ${formattedTotal}`,
             style: 'line',
             alignment: 'left',
             margin: [20, 5],

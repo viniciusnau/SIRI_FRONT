@@ -24,22 +24,22 @@
 
         <ng-container matColumnDef="previousBalance">
           <th mat-header-cell *matHeaderCellDef>Saldo Anterior</th>
-          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.total_previous_value }}</td>
+          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.total_previous_value | priceFormat }}</td>
         </ng-container>
 
         <ng-container matColumnDef="entryValue">
           <th mat-header-cell *matHeaderCellDef>Valor Entrada</th>
-          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.total_entry_value }}</td>
+          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.total_entry_value | priceFormat }}</td>
         </ng-container>
 
         <ng-container matColumnDef="outputValue">
           <th mat-header-cell *matHeaderCellDef>Valor Saída</th>
-          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.total_output_value }}</td>
+          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.total_output_value | priceFormat }}</td>
         </ng-container>
 
         <ng-container matColumnDef="currentBalance">
           <th mat-header-cell *matHeaderCellDef>Saldo Atual</th>
-          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.total_current_value }}</td>
+          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.total_current_value | priceFormat }}</td>
         </ng-container>
 
         <ng-container matColumnDef="file">
