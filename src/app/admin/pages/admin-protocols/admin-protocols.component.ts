@@ -52,6 +52,10 @@ export class AdminProtocolsComponent implements OnInit {
     this.getContent();
   }
 
+  sortAlphabetically(list) {
+    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
+  }
+
   getContent() {
     this.protocolService
       .getProtocols(this.currentPage.toString())
@@ -62,13 +66,13 @@ export class AdminProtocolsComponent implements OnInit {
 
   getAllCategories() {
     this.stockService.getAllCategories().subscribe((data) => {
-      this.modalData.categories = data;
+      this.modalData.categories = this.sortAlphabetically(data);
     });
   }
 
   getSuppliers() {
     this.supplierService.getAllSuppliers().subscribe((data) => {
-      this.modalData.suppliers = data;
+      this.modalData.suppliers = this.sortAlphabetically(data);
     });
   }
 

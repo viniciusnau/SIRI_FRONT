@@ -46,6 +46,10 @@ export class AdminSuppliersComponent implements OnInit {
     this.getContent();
   }
 
+  sortAlphabetically(list) {
+    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
+  }
+
   getContent() {
     this.suppliersService
       .getSuppliers(this.currentPage.toString())
@@ -56,7 +60,7 @@ export class AdminSuppliersComponent implements OnInit {
 
   getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.categories = data;
+      this.categories = this.sortAlphabetically(data);
     });
   }
 

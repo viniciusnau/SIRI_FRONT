@@ -42,6 +42,10 @@ export class AdminBiddingExemptionComponent {
     this.getContent();
   }
 
+  sortAlphabetically(list) {
+    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
+  }
+
   getContent() {
     this.stocksService
       .getBiddingExemption(this.currentPage.toString())
@@ -56,20 +60,20 @@ export class AdminBiddingExemptionComponent {
   }
 
   getProducts() {
-    this.stocksService.getAllProducts().subscribe((data) => {
-      this.products = data;
+    this.stocksService?.getAllProducts().subscribe((data) => {
+      this.products = this.sortAlphabetically(data);
     });
   }
 
   getStocks() {
-    this.stocksService.getAllStocks().subscribe((data) => {
-      this.stocks = data;
+    this.stocksService?.getAllStocks().subscribe((data) => {
+      this.stocks = this.sortAlphabetically(data);
     });
   }
 
   getInvoices() {
-    this.stocksService.getAllInvoices().subscribe((data) => {
-      this.invoices = data;
+    this.stocksService?.getAllInvoices().subscribe((data) => {
+      this.invoices = this.sortAlphabetically(data);
     });
   }
 
@@ -102,12 +106,13 @@ export class AdminBiddingExemptionComponent {
       const originalDate = new Date(date);
 
       const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const year = originalDate.getUTCFullYear().toString();
 
       return `${day}/${month}/${year}`;
-    }
-    else {
+    } else {
       return '';
     }
   }

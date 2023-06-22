@@ -49,6 +49,10 @@ export class AdminMaterialsOrderComponent implements OnInit {
     this.getContent();
   }
 
+  sortAlphabetically(list) {
+    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
+  }
+
   getContent() {
     this.ordersService
       .getMaterialsOrder(this.currentPage.toString())
@@ -59,13 +63,13 @@ export class AdminMaterialsOrderComponent implements OnInit {
 
   getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.modalData.categories = data;
+      this.modalData.categories = this.sortAlphabetically(data);
     });
   }
 
   getSuppliers() {
     this.suppliersService.getAllSuppliers().subscribe((data) => {
-      this.modalData.suppliers = data;
+      this.modalData.suppliers = this.sortAlphabetically(data);
     });
   }
 

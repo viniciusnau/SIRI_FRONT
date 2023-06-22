@@ -32,7 +32,6 @@ export class AdminStockComponent implements OnInit {
     this.stocksService
       .getStocks(this.currentPage.toString())
       .subscribe((data) => {
-        console.log('data: ', data);
         this.response = data;
       });
   }

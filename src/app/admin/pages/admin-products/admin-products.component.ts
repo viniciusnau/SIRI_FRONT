@@ -38,12 +38,16 @@ export class AdminProductsComponent implements OnInit {
   ngOnInit(): void {
     this.getContent();
     this.getAllCategories();
-    this.getMeasures();
+    this.getAllMeasures();
   }
 
   onPageChange(page: number) {
     this.currentPage = page;
     this.getContent();
+  }
+
+  sortAlphabetically(list) {
+    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
   getContent() {
@@ -56,13 +60,13 @@ export class AdminProductsComponent implements OnInit {
 
   getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.categories = data;
+      this.categories = this.sortAlphabetically(data);
     });
   }
 
-  getMeasures() {
+  getAllMeasures() {
     this.stocksService.getAllMeasures().subscribe((data) => {
-      this.measures = data;
+      this.measures = this.sortAlphabetically(data);
     });
   }
 
