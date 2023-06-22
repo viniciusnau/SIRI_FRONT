@@ -81,7 +81,7 @@ export class AdminStockReportsComponent implements OnInit {
   }
 
   fetchCategories() {
-    this.stockService.getCategories().subscribe((categories) => {
+    this.stockService.getAllCategories().subscribe((categories) => {
       this.categories = categories;
     });
   }
