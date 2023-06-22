@@ -9,6 +9,16 @@
     border: none;
     padding: 0.5rem;
   }
+
+  .previous:hover,
+  .next:hover {
+    background-color: #dcdcdc;
+  }
+  .previous:disabled,
+  .next:disabled {
+    background-color: initial;
+  }
+
   .page-number {
     margin: 0 1rem;
   }
