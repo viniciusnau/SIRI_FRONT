@@ -46,7 +46,7 @@ export class StocksService {
     return this.httpClient.get<any>(`${this.apiUrl}/stock-items`, options);
   }
 
-  public getAllSectors(pageChange = ''): Observable<any> {
+  public getSectors(pageChange = ''): Observable<any> {
     return pageChange
       ? this.httpClient.get<any>(
           `${this.apiUrl}/sectors/?page=${pageChange}`,
@@ -55,7 +55,7 @@ export class StocksService {
       : this.httpClient.get<any>(`${this.apiUrl}/sectors`, this.httpOptions);
   }
 
-  public getAllCategories(pageChange = ''): Observable<any> {
+  public getCategories(pageChange = ''): Observable<any> {
     return pageChange
       ? this.httpClient.get<any>(
           `${this.apiUrl}/categories/?page=${pageChange}`,
@@ -64,7 +64,7 @@ export class StocksService {
       : this.httpClient.get<any>(`${this.apiUrl}/categories`, this.httpOptions);
   }
 
-  public getAllMeasures(pageChange = ''): Observable<any> {
+  public getMeasures(pageChange = ''): Observable<any> {
     return pageChange
       ? this.httpClient.get<any>(
           `${this.apiUrl}/measures/?page=${pageChange}`,
@@ -73,7 +73,7 @@ export class StocksService {
       : this.httpClient.get<any>(`${this.apiUrl}/measures`, this.httpOptions);
   }
 
-  public getAllProducts(pageChange = ''): Observable<any> {
+  public getProducts(pageChange = ''): Observable<any> {
     return pageChange
       ? this.httpClient.get<any>(
           `${this.apiUrl}/products/?page=${pageChange}`,
@@ -81,55 +81,58 @@ export class StocksService {
         )
       : this.httpClient.get<any>(`${this.apiUrl}/products`, this.httpOptions);
   }
-  public getSectors(): Observable<any> {
-    return this.httpClient.get<any>(`${this.apiUrl}/sectors`, this.httpOptions);
-  }
+  // public getSectors(): Observable<any> {
+  //   return this.httpClient.get<any>(`${this.apiUrl}/sectors`, this.httpOptions);
+  // } OLD ONE - WITHOUT PAGINATION
 
-  // public getAllSectors(): Observable<any> {
-  //   return this.httpClient.get<any>(`${this.apiUrl}/sectors/all/`, this.httpOptions);
-  // }
-
-  public getCategories(): Observable<any> {
+  public getAllSectors(): Observable<any> {
     return this.httpClient.get<any>(
-      `${this.apiUrl}/categories`,
+      `${this.apiUrl}/sectors/all/`,
       this.httpOptions,
     );
   }
 
-  // public getAllCategories(): Observable<any> {
+  // public getCategories(): Observable<any> {
   //   return this.httpClient.get<any>(
-  //     `${this.apiUrl}/categories/all/`,
+  //     `${this.apiUrl}/categories`,
   //     this.httpOptions,
   //   );
-  // }
+  // } OLD ONE - WITHOUT PAGINATION
 
-  public getMeasures(): Observable<any> {
+  public getAllCategories(): Observable<any> {
     return this.httpClient.get<any>(
-      `${this.apiUrl}/measures`,
+      `${this.apiUrl}/categories/all/`,
       this.httpOptions,
     );
   }
 
-  // public getAllMeasures(): Observable<any> {
+  // public getMeasures(): Observable<any> {
   //   return this.httpClient.get<any>(
-  //     `${this.apiUrl}/measures/all/`,
+  //     `${this.apiUrl}/measures`,
   //     this.httpOptions,
   //   );
-  // }
+  // } OLD ONE - WITHOUT PAGINATION
 
-  // public getAllProducts(): Observable<any> {
-  //   return this.httpClient.get<any>(
-  //     `${this.apiUrl}/products/all/`,
-  //     this.httpOptions,
-  //   );
-  // }
-
-  public getProducts(): Observable<any> {
+  public getAllMeasures(): Observable<any> {
     return this.httpClient.get<any>(
-      `${this.apiUrl}/products`,
+      `${this.apiUrl}/measures/all/`,
       this.httpOptions,
     );
   }
+
+  public getAllProducts(): Observable<any> {
+    return this.httpClient.get<any>(
+      `${this.apiUrl}/products/all/`,
+      this.httpOptions,
+    );
+  }
+
+  // public getProducts(): Observable<any> {
+  //   return this.httpClient.get<any>(
+  //     `${this.apiUrl}/products`,
+  //     this.httpOptions,
+  //   );
+  // } OLD ONE - WITHOUT PAGINATION
 
   public getReceivingReports(pageChange = ''): Observable<any> {
     return pageChange

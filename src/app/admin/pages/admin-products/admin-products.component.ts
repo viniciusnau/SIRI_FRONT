@@ -48,8 +48,7 @@ export class AdminProductsComponent implements OnInit {
 
   getContent() {
     this.stocksService
-      .getAllProducts(this.currentPage.toString())
-      // is getAllProducts or getProducts?
+      .getProducts(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
       });

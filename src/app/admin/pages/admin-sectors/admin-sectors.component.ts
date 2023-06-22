@@ -29,8 +29,7 @@ export class AdminSectorsComponent implements OnInit {
 
   getContent() {
     this.stocksService
-      .getAllSectors(this.currentPage.toString())
-      //  is getAllSectors or getSectors?
+      .getSectors(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
       });

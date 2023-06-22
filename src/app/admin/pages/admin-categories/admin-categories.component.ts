@@ -33,8 +33,7 @@ export class AdminCategoriesComponent implements OnInit {
 
   getContent() {
     this.stocksService
-      .getAllCategories(this.currentPage.toString())
-      // is getCategories or getAllCategories ???
+      .getCategories(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
       });

@@ -81,7 +81,7 @@ export class AdminStockReportsComponent implements OnInit {
   }
 
   fetchCategories() {
-    this.stockService.getAllCategories().subscribe((categories) => {
+    this.stockService.getCategories().subscribe((categories) => {
       this.categories = categories;
     });
   }
@@ -164,7 +164,13 @@ export class AdminStockReportsComponent implements OnInit {
     const docDefinition = {
       header: {
         columns: [
-          { text: 'S.I.R.I', alignment: 'left', margin: [20, 10], fontSize: 14, bold: true },
+          {
+            text: 'S.I.R.I',
+            alignment: 'left',
+            margin: [20, 10],
+            fontSize: 14,
+            bold: true,
+          },
           { text: currentDate, alignment: 'right', margin: [20, 10] },
         ],
       },
@@ -183,17 +189,23 @@ export class AdminStockReportsComponent implements OnInit {
                 { text: 'Valor de Entrada', alignment: 'center' },
                 { text: 'Valor de Saída', alignment: 'center' },
                 { text: 'Núcleo', alignment: 'center' },
-                { text: 'Setor', alignment: 'center' }
+                { text: 'Setor', alignment: 'center' },
               ],
               ...this.stockReports.map((report) => [
                 { text: report.productCode, alignment: 'center' },
                 { text: report.productName, alignment: 'center' },
                 { text: report.entryQuantity, alignment: 'center' },
                 { text: report.withdrawalQuantity, alignment: 'center' },
-                { text: parseFloat(String(report.entryPrice)).toFixed(2), alignment: 'center' },
-                { text: parseFloat(String(report.withdrawalPrice)).toFixed(2), alignment: 'center' },
+                {
+                  text: parseFloat(String(report.entryPrice)).toFixed(2),
+                  alignment: 'center',
+                },
+                {
+                  text: parseFloat(String(report.withdrawalPrice)).toFixed(2),
+                  alignment: 'center',
+                },
                 { text: report.core, alignment: 'center' },
-                { text: report.sector, alignment: 'center' }
+                { text: report.sector, alignment: 'center' },
               ]),
             ],
           },
