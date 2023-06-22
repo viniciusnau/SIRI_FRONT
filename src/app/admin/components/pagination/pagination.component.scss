@@ -13,10 +13,12 @@
   .previous:hover,
   .next:hover {
     background-color: #dcdcdc;
+    cursor: pointer;
   }
   .previous:disabled,
   .next:disabled {
     background-color: initial;
+    cursor: initial;
   }
 
   .page-number {
