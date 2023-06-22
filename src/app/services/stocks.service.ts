@@ -22,12 +22,20 @@ export class StocksService {
     };
   }
 
-  public getStocks(): Observable<any> {
-    return this.httpClient.get<any>(this.apiUrl, this.httpOptions);
+  public getStocks(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(this.apiUrl, this.httpOptions);
   }
 
   public getAllStocks(): Observable<any> {
-    return this.httpClient.get<any>(`${this.apiUrl}/all-stocks/`, this.httpOptions);
+    return this.httpClient.get<any>(
+      `${this.apiUrl}/all-stocks/`,
+      this.httpOptions,
+    );
   }
 
   public getStockItems(stock_id: string): Observable<any> {
@@ -38,17 +46,45 @@ export class StocksService {
     return this.httpClient.get<any>(`${this.apiUrl}/stock-items`, options);
   }
 
-  public getSectors(): Observable<any> {
-    return this.httpClient.get<any>(`${this.apiUrl}/sectors`, this.httpOptions);
+  public getSectors(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/sectors/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/sectors`, this.httpOptions);
+  }
+
+  public getCategories(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/categories/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/categories`, this.httpOptions);
+  }
+
+  public getMeasures(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/measures/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/measures`, this.httpOptions);
+  }
+
+  public getProducts(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/products/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/products`, this.httpOptions);
   }
 
   public getAllSectors(): Observable<any> {
-    return this.httpClient.get<any>(`${this.apiUrl}/sectors/all/`, this.httpOptions);
-  }
-
-  public getCategories(): Observable<any> {
     return this.httpClient.get<any>(
-      `${this.apiUrl}/categories`,
+      `${this.apiUrl}/sectors/all/`,
       this.httpOptions,
     );
   }
@@ -56,13 +92,6 @@ export class StocksService {
   public getAllCategories(): Observable<any> {
     return this.httpClient.get<any>(
       `${this.apiUrl}/categories/all/`,
-      this.httpOptions,
-    );
-  }
-
-  public getMeasures(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/measures`,
       this.httpOptions,
     );
   }
@@ -81,25 +110,28 @@ export class StocksService {
     );
   }
 
-  public getProducts(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/products`,
-      this.httpOptions,
-    );
+  public getReceivingReports(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/receiving-reports/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(
+          `${this.apiUrl}/receiving-reports`,
+          this.httpOptions,
+        );
   }
 
-  public getReceivingReports(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/receiving-reports`,
-      this.httpOptions,
-    );
-  }
-
-  public getDispatchReports(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/dispatch-reports`,
-      this.httpOptions,
-    );
+  public getDispatchReports(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/dispatch-reports/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(
+          `${this.apiUrl}/dispatch-reports`,
+          this.httpOptions,
+        );
   }
 
   public deleteMeasure(measure_id: string): any {
@@ -109,11 +141,13 @@ export class StocksService {
     );
   }
 
-  public getInvoices(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/invoices`,
-      this.httpOptions,
-    );
+  public getInvoices(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/invoices/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/invoices`, this.httpOptions);
   }
 
   public getAllInvoices(): Observable<any> {
@@ -190,11 +224,16 @@ export class StocksService {
     );
   }
 
-  public getBiddingExemption(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/bidding-exemption`,
-      this.httpOptions,
-    );
+  public getBiddingExemption(pageChange = ''): Observable<any> {
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/bidding-exemption/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(
+          `${this.apiUrl}/bidding-exemption`,
+          this.httpOptions,
+        );
   }
 
   public getAccountantReports(): Observable<any> {
@@ -221,7 +260,10 @@ export class StocksService {
   }
 
   getWarehouseReports(): Observable<any[]> {
-    return this.httpClient.get<any[]>(`${this.apiUrl}/warehouse-items/`);
+    return this.httpClient.get<any[]>(
+      `${this.apiUrl}/warehouse-items/`,
+      this.httpOptions,
+    );
   }
 
   getStockReports(queryString: string): Observable<any> {
@@ -310,9 +352,11 @@ export class StocksService {
     return this.httpClient.post<any>(url, body, this.httpOptions);
   }
 
-  getProtocolItems(protocol: string) {
+  getProtocolItems(protocol: string, pageChange = '') {
     const url = this.apiUrl + `/protocol-items/?protocol_id=${protocol}`;
-    return this.httpClient.get<any>(url, this.httpOptions);
+    return pageChange
+      ? this.httpClient.get<any>(`${url}&&page=${pageChange}`, this.httpOptions)
+      : this.httpClient.get<any>(url, this.httpOptions);
   }
 
   getAllProtocolItems(protocol: string) {
@@ -350,5 +394,4 @@ export class StocksService {
     const url = `${this.apiUrl}/protocol-items/${protocolItemId}/`;
     return this.httpClient.delete<any>(url, this.httpOptions);
   }
-
 }

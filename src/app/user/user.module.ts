@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StockWithdrawalsModalComponent } from './pages/estoque/saidas/modal/stockWithdrawals-modal.component';
 import { EditOrderItemModalComponent } from './pages/pedidos/order-items/editModal/edit-order-item-modal.component';
 import { InsideResetPasswordComponent } from './pages/inside-reset-password/inside-reset-password.component';
+import { UserPaginationComponent } from './components/pagination/user-pagination.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { InsideResetPasswordComponent } from './pages/inside-reset-password/insi
     StockWithdrawalsModalComponent,
     EditOrderItemModalComponent,
     InsideResetPasswordComponent,
+    UserPaginationComponent,
   ],
   imports: [
     CommonModule,

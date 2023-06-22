@@ -6,24 +6,48 @@
           <div class="filter-field">
             <p class="textField">Data de Início</p>
             <mat-form-field appearance="fill">
-              <input matInput [matDatepicker]="startDatePicker" placeholder="Data de Início" [(ngModel)]="startDate">
-              <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+              <input
+                matInput
+                [matDatepicker]="startDatePicker"
+                placeholder="Data de Início"
+                [(ngModel)]="startDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="startDatePicker"
+              ></mat-datepicker-toggle>
               <mat-datepicker #startDatePicker></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="filter-field">
             <p class="textField">Data Final</p>
             <mat-form-field appearance="fill">
-              <input matInput [matDatepicker]="finalDatePicker" placeholder="Data Final" [(ngModel)]="finalDate">
-              <mat-datepicker-toggle matSuffix [for]="finalDatePicker"></mat-datepicker-toggle>
+              <input
+                matInput
+                [matDatepicker]="finalDatePicker"
+                placeholder="Data Final"
+                [(ngModel)]="finalDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="finalDatePicker"
+              ></mat-datepicker-toggle>
               <mat-datepicker #finalDatePicker></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="filter-field">
             <p class="textField">Categoria</p>
             <mat-form-field appearance="fill">
-              <mat-select [(ngModel)]="selectedCategories" multiple [disabled]="selectedProducts.length > 0" placeholder="{{ selectedProducts.length > 0 ? '' : 'Todas' }}">
-                <mat-option *ngFor="let category of categories" [value]="category.id">
+              <mat-select
+                [(ngModel)]="selectedCategories"
+                multiple
+                [disabled]="selectedProducts.length > 0"
+                placeholder="{{ selectedProducts.length > 0 ? '' : 'Todas' }}"
+              >
+                <mat-option
+                  *ngFor="let category of categories"
+                  [value]="category.id"
+                >
                   {{ category.name }}
                 </mat-option>
               </mat-select>
@@ -32,8 +56,16 @@
           <div class="filter-field">
             <p class="textField">Produto</p>
             <mat-form-field appearance="fill">
-              <mat-select [(ngModel)]="selectedProducts" multiple [disabled]="selectedCategories.length > 0" placeholder="{{ selectedCategories.length > 0 ? '' : 'Todos' }}">
-                <mat-option *ngFor="let product of products" [value]="product.id">
+              <mat-select
+                [(ngModel)]="selectedProducts"
+                multiple
+                [disabled]="selectedCategories.length > 0"
+                placeholder="{{ selectedCategories.length > 0 ? '' : 'Todos' }}"
+              >
+                <mat-option
+                  *ngFor="let product of products"
+                  [value]="product.id"
+                >
                   {{ product.description }}
                 </mat-option>
               </mat-select>
@@ -42,8 +74,15 @@
           <div class="filter-field">
             <p class="textField">Núcleo</p>
             <mat-form-field appearance="fill">
-              <mat-select [(ngModel)]="selectedPublicDefenses" multiple [disabled]="selectedSectors.length > 0">
-                <mat-option *ngFor="let publicDefense of publicDefenses" [value]="publicDefense.id">
+              <mat-select
+                [(ngModel)]="selectedPublicDefenses"
+                multiple
+                [disabled]="selectedSectors.length > 0"
+              >
+                <mat-option
+                  *ngFor="let publicDefense of publicDefenses"
+                  [value]="publicDefense.id"
+                >
                   {{ publicDefense.name }}
                 </mat-option>
               </mat-select>
@@ -52,7 +91,11 @@
           <div class="filter-field">
             <p class="textField">Setor</p>
             <mat-form-field appearance="fill">
-              <mat-select [(ngModel)]="selectedSectors" multiple [disabled]="selectedPublicDefenses.length > 0">
+              <mat-select
+                [(ngModel)]="selectedSectors"
+                multiple
+                [disabled]="selectedPublicDefenses.length > 0"
+              >
                 <mat-option *ngFor="let sector of sectors" [value]="sector.id">
                   {{ sector.name }}
                 </mat-option>
@@ -60,7 +103,16 @@
             </mat-form-field>
           </div>
           <div class="btnRequest">
-            <button mat-raised-button class="btn" (click)="onSave()" [disabled]="!(selectedProducts.length > 0 || selectedCategories.length > 0)">Consultar</button>
+            <button
+              mat-raised-button
+              class="btn"
+              (click)="onSave()"
+              [disabled]="
+                !(selectedProducts.length > 0 || selectedCategories.length > 0)
+              "
+            >
+              Consultar
+            </button>
           </div>
         </div>
       </mat-card-content>
@@ -134,7 +186,10 @@
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let stockReport; columns: displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let stockReport; columns: displayedColumns"
+          ></tr>
         </table>
       </mat-card-content>
     </mat-card>

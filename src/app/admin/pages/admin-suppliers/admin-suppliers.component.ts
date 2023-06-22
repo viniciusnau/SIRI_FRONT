@@ -25,7 +25,6 @@ interface AdminSuppliers {
   styleUrls: ['./admin-suppliers.component.scss'],
 })
 export class AdminSuppliersComponent implements OnInit {
-
   constructor(
     public suppliersService: SuppliersService,
     private stocksService: StocksService,
@@ -33,21 +32,29 @@ export class AdminSuppliersComponent implements OnInit {
     public dialog: MatDialog,
   ) {}
 
-  suppliers: AdminSuppliers[] = [];
+  currentPage = 1;
+  response: any;
   categories = [];
 
   ngOnInit(): void {
-    this.getSuppliers();
-    this.getCategories();
+    this.getContent();
+    this.getAllCategories();
   }
 
-  getSuppliers() {
-    this.suppliersService.getSuppliers().subscribe((data) => {
-      this.suppliers = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
   }
 
-  getCategories() {
+  getContent() {
+    this.suppliersService
+      .getSuppliers(this.currentPage.toString())
+      .subscribe((data) => {
+        this.response = data;
+      });
+  }
+
+  getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
       this.categories = data;
     });
@@ -57,7 +64,7 @@ export class AdminSuppliersComponent implements OnInit {
     this.stocksService
       .deleteSupplier(supplier_id)
       .toPromise()
-      .then((data: any) => this.getSuppliers());
+      .then((data: any) => this.getContent());
   }
 
   navToSupplierOrders(supplier_id: number) {

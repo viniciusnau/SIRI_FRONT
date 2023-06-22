@@ -75,7 +75,7 @@ export class AdminStockReportsComponent implements OnInit {
 
   constructor(
     private stockService: StocksService,
-    private priceFormatPipe: PriceFormatPipe
+    private priceFormatPipe: PriceFormatPipe,
   ) {}
 
   ngOnInit() {
@@ -170,7 +170,13 @@ export class AdminStockReportsComponent implements OnInit {
       pageMargins: [20, 70, 20, 20],
       header: {
         columns: [
-          { text: 'S.I.R.I', alignment: 'left', margin: [20, 10], fontSize: 14, bold: true },
+          {
+            text: 'S.I.R.I',
+            alignment: 'left',
+            margin: [20, 10],
+            fontSize: 14,
+            bold: true,
+          },
           { text: currentDate, alignment: 'right', margin: [20, 10] },
         ],
       },
@@ -179,7 +185,16 @@ export class AdminStockReportsComponent implements OnInit {
         '\n\n',
         {
           table: {
-            widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+            widths: [
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+            ],
             body: [
               [
                 { text: 'Código', alignment: 'center' },
@@ -189,17 +204,29 @@ export class AdminStockReportsComponent implements OnInit {
                 { text: 'Valor de Entrada', alignment: 'center' },
                 { text: 'Valor de Saída', alignment: 'center' },
                 { text: 'Núcleo', alignment: 'center' },
-                { text: 'Setor', alignment: 'center' }
+                { text: 'Setor', alignment: 'center' },
               ],
               ...this.stockReports.map((report) => [
                 { text: report.productCode, alignment: 'center' },
                 { text: report.productName, alignment: 'center' },
                 { text: report.entryQuantity, alignment: 'center' },
                 { text: report.withdrawalQuantity, alignment: 'center' },
-                { text: this.priceFormatPipe.transform(Number(parseFloat(String(report.entryPrice)).toFixed(2))), alignment: 'center' },
-                { text: this.priceFormatPipe.transform(Number(parseFloat(String(report.withdrawalPrice)).toFixed(2))), alignment: 'center' },
+                {
+                  text: this.priceFormatPipe.transform(
+                    Number(parseFloat(String(report.entryPrice)).toFixed(2)),
+                  ),
+                  alignment: 'center',
+                },
+                {
+                  text: this.priceFormatPipe.transform(
+                    Number(
+                      parseFloat(String(report.withdrawalPrice)).toFixed(2),
+                    ),
+                  ),
+                  alignment: 'center',
+                },
                 { text: report.core, alignment: 'center' },
-                { text: report.sector, alignment: 'center' }
+                { text: report.sector, alignment: 'center' },
               ]),
             ],
           },

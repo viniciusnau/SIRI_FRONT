@@ -13,8 +13,11 @@ export class ProductsService {
   httpOptions: { headers: HttpHeaders };
 
   constructor(private httpClient: HttpClient) {
-    const storedAuth = localStorage.getItem('auth') || sessionStorage.getItem('auth');
-    const [username, password] = storedAuth ? storedAuth.split(':') : [null, null];
+    const storedAuth =
+      localStorage.getItem('auth') || sessionStorage.getItem('auth');
+    const [username, password] = storedAuth
+      ? storedAuth.split(':')
+      : [null, null];
 
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -23,18 +26,27 @@ export class ProductsService {
     };
   }
 
-  public getProducts(getProductDto: GetProductDto): Observable<any> {
+  public getProducts(
+    getProductDto: GetProductDto,
+    pageChange = '',
+  ): Observable<any> {
     if (getProductDto.categories.length !== 0) {
       const options = {
         headers: this.httpOptions.headers,
         params: new HttpParams().set(
           'category_id',
-          getProductDto.categories.join(',')
+          getProductDto.categories.join(','),
         ),
       };
-      return this.httpClient.get<any>(this.apiUrl, options);
+      return this.httpClient.get<any>(
+        `${this.apiUrl}${pageChange ? `/?page=${pageChange}` : ''}`,
+        options,
+      );
     } else {
-      return this.httpClient.get<any>(this.apiUrl, this.httpOptions);
+      return this.httpClient.get<any>(
+        `${this.apiUrl}${pageChange ? `/?page=${pageChange}` : ''}`,
+        this.httpOptions,
+      );
     }
   }
 

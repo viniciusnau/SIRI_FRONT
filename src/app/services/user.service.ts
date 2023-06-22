@@ -5,12 +5,15 @@ import { environment } from '../environments/env.environment';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  apiUrl = environment.apiUrl
+  apiUrl = environment.apiUrl;
   httpOptions: { headers: HttpHeaders };
 
   constructor(private httpClient: HttpClient) {
-    const storedAuth = localStorage.getItem('auth') || sessionStorage.getItem('auth');
-    const [username, password] = storedAuth ? storedAuth.split(':') : [null, null];
+    const storedAuth =
+      localStorage.getItem('auth') || sessionStorage.getItem('auth');
+    const [username, password] = storedAuth
+      ? storedAuth.split(':')
+      : [null, null];
 
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -19,9 +22,13 @@ export class UserService {
     };
   }
 
-  public getUser(
-  ): Observable<any> {
-    return this.httpClient.get<any>(this.apiUrl + '/me/', this.httpOptions);
+  public getUser(pageChange = ''): Observable<any> {
+    return Number(pageChange) > 1
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/order/?page=${pageChange}`,
+          this.httpOptions,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/me/`, this.httpOptions);
   }
 
   resetPassword(email: string): Observable<any> {

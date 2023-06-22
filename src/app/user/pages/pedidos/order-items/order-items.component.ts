@@ -20,7 +20,10 @@ interface OrderItems {
   styleUrls: ['./order-items.component.scss'],
 })
 export class OrderItemsComponent implements OnInit {
-  orderItems: OrderItems[] = [];
+  response: any;
+  currentPage = 1;
+  page = 'next';
+
   orderId = '';
 
   constructor(
@@ -33,13 +36,20 @@ export class OrderItemsComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.orderId = params['id'];
     });
-    this.getOrderItems(this.orderId);
+    this.getContent(this.orderId);
   }
 
-  getOrderItems(orderId: string) {
-    this.ordersService.getOrderItems(orderId).subscribe((data) => {
-      this.orderItems = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent(this.orderId);
+  }
+
+  getContent(orderId: string) {
+    this.ordersService
+      .getOrderItems(orderId, this.currentPage.toString())
+      .subscribe((data) => {
+        this.response = data;
+      });
   }
 
   deleteOrderItem(orderItemId: string) {
@@ -47,7 +57,7 @@ export class OrderItemsComponent implements OnInit {
       .deleteOrderItem(orderItemId)
       .toPromise()
       .then((data: any) => {
-        this.getOrderItems(this.orderId);
+        this.getContent(this.orderId);
       })
       .catch((error: any) => {
         this.snackBar.open('Erro ao excluir item do pedido', 'Fechar', {

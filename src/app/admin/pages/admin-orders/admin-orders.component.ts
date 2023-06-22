@@ -18,18 +18,26 @@ interface AdminOrder {
   styleUrls: ['./admin-orders.component.scss'],
 })
 export class AdminOrdersComponent implements OnInit {
-  orders: AdminOrder[] = [];
+  currentPage = 1;
+  response: any;
 
   constructor(public ordersService: OrdersService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getOrders();
+    this.getContent();
   }
 
-  getOrders() {
-    this.ordersService.getAllOrders().subscribe((data) => {
-      this.orders = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
+    this.ordersService
+      .getAllOrders(this.currentPage.toString())
+      .subscribe((data) => {
+        this.response = data;
+      });
   }
 
   formatDate(date: string) {
@@ -55,7 +63,7 @@ export class AdminOrdersComponent implements OnInit {
     const payload = { is_sent: order.is_sent };
 
     this.ordersService.updateOrder(order.id, payload).subscribe(() => {
-      // Success message or any additional logic after updating the order
+      // Handle success or error if needed
     });
   }
 

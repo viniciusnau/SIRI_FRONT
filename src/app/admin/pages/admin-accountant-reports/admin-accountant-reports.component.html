@@ -11,43 +11,63 @@
         </div>
       </mat-toolbar>
 
-      <table mat-table [dataSource]="adminAccountantReports" class="mat-elevation-z8">
+      <table
+        mat-table
+        [dataSource]="adminAccountantReports"
+        class="mat-elevation-z8"
+      >
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>id</th>
-          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.id }}</td>
+          <td mat-cell *matCellDef="let accountantReport">
+            {{ accountantReport.id }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="month">
           <th mat-header-cell *matHeaderCellDef>Mês</th>
-          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.month }}</td>
+          <td mat-cell *matCellDef="let accountantReport">
+            {{ accountantReport.month }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="previousBalance">
           <th mat-header-cell *matHeaderCellDef>Saldo Anterior</th>
-          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.total_previous_value | priceFormat }}</td>
+          <td mat-cell *matCellDef="let accountantReport">
+            {{ accountantReport.total_previous_value | priceFormat }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="entryValue">
           <th mat-header-cell *matHeaderCellDef>Valor Entrada</th>
-          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.total_entry_value | priceFormat }}</td>
+          <td mat-cell *matCellDef="let accountantReport">
+            {{ accountantReport.total_entry_value | priceFormat }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="outputValue">
           <th mat-header-cell *matHeaderCellDef>Valor Saída</th>
-          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.total_output_value | priceFormat }}</td>
+          <td mat-cell *matCellDef="let accountantReport">
+            {{ accountantReport.total_output_value | priceFormat }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="currentBalance">
           <th mat-header-cell *matHeaderCellDef>Saldo Atual</th>
-          <td mat-cell *matCellDef="let accountantReport">{{ accountantReport.total_current_value | priceFormat }}</td>
+          <td mat-cell *matCellDef="let accountantReport">
+            {{ accountantReport.total_current_value | priceFormat }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="file">
           <th mat-header-cell *matHeaderCellDef>Arquivo</th>
           <td mat-cell *matCellDef="let accountantReport">
             <div class="button-container">
-              <button class="btn" mat-mini-fab aria-label="download"
-                      (click)="downloadAccountantReports(accountantReport.file)">
+              <button
+                class="btn"
+                mat-mini-fab
+                aria-label="download"
+                (click)="downloadAccountantReports(accountantReport.file)"
+              >
                 <mat-icon>download</mat-icon>
               </button>
             </div>
@@ -58,8 +78,12 @@
           <th mat-header-cell *matHeaderCellDef>Excluir</th>
           <td mat-cell *matCellDef="let accountantReport">
             <div class="button-container">
-              <button class="btn" mat-mini-fab aria-label="Delete"
-                      (click)="deleteAccountantReports(accountantReport.id)">
+              <button
+                class="btn"
+                mat-mini-fab
+                aria-label="Delete"
+                (click)="deleteAccountantReports(accountantReport.id)"
+              >
                 <mat-icon>delete</mat-icon>
               </button>
             </div>

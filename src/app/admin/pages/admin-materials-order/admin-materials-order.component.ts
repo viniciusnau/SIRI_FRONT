@@ -23,7 +23,8 @@ interface MaterialsOrder {
   styleUrls: ['./admin-materials-order.component.scss'],
 })
 export class AdminMaterialsOrderComponent implements OnInit {
-  materialsOrder: MaterialsOrder[] = [];
+  currentPage = 1;
+  response: any;
 
   modalData: MaterialsOrderModalData = {
     suppliers: [],
@@ -38,18 +39,25 @@ export class AdminMaterialsOrderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getMaterialsOrder();
-    this.getCategories();
+    this.getContent();
+    this.getAllCategories();
     this.getSuppliers();
   }
 
-  getMaterialsOrder() {
-    this.ordersService.getMaterialsOrder().subscribe((data) => {
-      this.materialsOrder = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
   }
 
-  getCategories() {
+  getContent() {
+    this.ordersService
+      .getMaterialsOrder(this.currentPage.toString())
+      .subscribe((data) => {
+        this.response = data;
+      });
+  }
+
+  getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
       this.modalData.categories = data;
     });
@@ -65,7 +73,7 @@ export class AdminMaterialsOrderComponent implements OnInit {
     this.ordersService
       .deleteMaterialOrder(order_id)
       .toPromise()
-      .then((data: any) => this.getMaterialsOrder());
+      .then((data: any) => this.getContent());
   }
 
   openModal(): void {
@@ -81,12 +89,13 @@ export class AdminMaterialsOrderComponent implements OnInit {
       const originalDate = new Date(date);
 
       const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const year = originalDate.getUTCFullYear().toString();
 
       return `${day}/${month}/${year}`;
-    }
-    else {
+    } else {
       return '';
     }
   }
