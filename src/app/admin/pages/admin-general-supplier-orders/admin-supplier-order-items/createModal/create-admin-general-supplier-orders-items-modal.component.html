@@ -1,21 +1,12 @@
 <h1 mat-dialog-title>Criar</h1>
 <div [formGroup]="formSupplierOrders" mat-dialog-content class="content">
-  <!--  <p>Nome</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="name">
-      <mat-option *ngFor="let supplier of data.Protocols" [value]="supplier.id"
-        >{{ supplier.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field> 
--->
   <p>Produto</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="product">
       <mat-option
         *ngFor="let product of data.products"
         [value]="product.product.id"
-        >{{ firstLetterOnCapital(product.product.name) }}</mat-option
+        >{{ firstLetterOnCapital(product.product.description) }}</mat-option
       >
     </mat-select>
   </mat-form-field>
@@ -27,6 +18,6 @@
 </div>
 
 <div mat-dialog-actions class="actions">
-  <button mat-button (click)="onNoClick()"></button>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
   <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
 </div>

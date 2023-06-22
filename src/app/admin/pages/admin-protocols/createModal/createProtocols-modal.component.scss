@@ -23,6 +23,18 @@ mat-form-field {
   min-width: 95%;
 }
 
+.date-fields {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 95%;
+  margin-bottom: 1rem;
+}
+
+.date-field {
+  margin-right: 0.5rem;
+}
+
 .custom-file-input {
   display: flex;
   flex-direction: column;

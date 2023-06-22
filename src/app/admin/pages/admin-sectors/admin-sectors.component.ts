@@ -30,6 +30,7 @@ export class AdminSectorsComponent implements OnInit {
   getContent() {
     this.stocksService
       .getAllSectors(this.currentPage.toString())
+      //  its getAllSectors or getSectors?
       .subscribe((data) => {
         this.response = data;
       });

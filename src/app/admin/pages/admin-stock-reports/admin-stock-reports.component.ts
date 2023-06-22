@@ -82,25 +82,25 @@ export class AdminStockReportsComponent implements OnInit {
 
   fetchCategories() {
     this.stockService.getAllCategories().subscribe((categories) => {
-      this.categories = categories.results;
+      this.categories = categories;
     });
   }
 
   fetchProducts() {
     this.stockService.getAllProducts().subscribe((products) => {
-      this.products = products.results;
+      this.products = products;
     });
   }
 
   fetchPublicDefenses() {
-    this.stockService.getPublicDefenses().subscribe((publicDefenses) => {
-      this.publicDefenses = publicDefenses.results;
+    this.stockService.getAllPublicDefenses().subscribe((publicDefenses) => {
+      this.publicDefenses = publicDefenses;
     });
   }
 
   fetchSectors() {
     this.stockService.getAllSectors().subscribe((sectors) => {
-      this.sectors = sectors.results;
+      this.sectors = sectors;
     });
   }
 
@@ -148,12 +148,15 @@ export class AdminStockReportsComponent implements OnInit {
   }
 
   formatDate(dateString: string): string {
-    const parts = dateString.split('-');
-    const year = parts[0];
-    const month = parts[1];
-    const day = parts[2];
+    if (dateString) {
+      const date = new Date(dateString);
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = String(date.getFullYear());
 
-    return `${day}/${month}/${year}`;
+      return `${day}/${month}/${year}`;
+    }
+    return '';
   }
 
   generatePDF() {

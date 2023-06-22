@@ -32,6 +32,7 @@ export class AdminMeasuresComponent implements OnInit {
   getContent() {
     this.stocksService
       .getAllMeasures(this.currentPage.toString())
+      // is getAllMeasures or getMeasures?
       .subscribe((data) => {
         this.response = data;
       });

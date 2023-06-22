@@ -49,6 +49,7 @@ export class AdminProductsComponent implements OnInit {
   getContent() {
     this.stocksService
       .getAllProducts(this.currentPage.toString())
+      // is getAllProducts or getProducts?
       .subscribe((data) => {
         this.response = data;
       });
@@ -56,18 +57,30 @@ export class AdminProductsComponent implements OnInit {
 
   getCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.categories = data.results;
+      this.categories = data;
     });
   }
 
   getMeasures() {
     this.stocksService.getAllMeasures().subscribe((data) => {
-      this.measures = data.results;
+      this.measures = data;
     });
   }
 
   formatDate(date: string) {
-    return new Date(date).toLocaleDateString();
+    if (date) {
+      const originalDate = new Date(date);
+
+      const day = originalDate.getUTCDate().toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
+      const year = originalDate.getUTCFullYear().toString();
+
+      return `${day}/${month}/${year}`;
+    } else {
+      return '';
+    }
   }
 
   firstLetterOnCapital(text: string) {

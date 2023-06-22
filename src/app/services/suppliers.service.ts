@@ -31,6 +31,11 @@ export class SuppliersService {
       : this.httpClient.get<any>(this.apiUrl, this.httpOptions);
   }
 
+  public getAllSuppliers(): Observable<any> {
+    const url = `${this.apiUrl}/all`;
+    return this.httpClient.get<any>(url, this.httpOptions);
+  }
+
   public getSupplierById(supplierId: number): Observable<any> {
     const url = `${this.apiUrl}/${supplierId}`;
     return this.httpClient.get<any>(url, this.httpOptions);

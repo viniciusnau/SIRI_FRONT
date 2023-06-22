@@ -6,13 +6,17 @@
           <div class="filter-field">
             <p class="textField">Data de Início</p>
             <mat-form-field appearance="fill">
-              <input type="date" matInput [(ngModel)]="startDate" />
+              <input matInput [matDatepicker]="startDatePicker" placeholder="Data de Início" [(ngModel)]="startDate">
+              <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #startDatePicker></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="filter-field">
             <p class="textField">Data Final</p>
             <mat-form-field appearance="fill">
-              <input type="date" matInput [(ngModel)]="finalDate" />
+              <input matInput [matDatepicker]="finalDatePicker" placeholder="Data Final" [(ngModel)]="finalDate">
+              <mat-datepicker-toggle matSuffix [for]="finalDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #finalDatePicker></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="filter-field">

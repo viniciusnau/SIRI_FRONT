@@ -1,17 +1,10 @@
 <h1 mat-dialog-title>Pedido do Fornecedor</h1>
 <div [formGroup]="formSupplierOrder" mat-dialog-content class="content">
-  <!--  <p>Nome</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="name">
-      <mat-option *ngFor="let supplier of data.Protocols" [value]="supplier.id"
-        >{{ supplier.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field> 
--->
   <p>Prazo de Entrega</p>
   <mat-form-field appearance="fill">
-    <input type="date" matInput formControlName="delivery_date" />
+    <input matInput [matDatepicker]="startDatePicker" placeholder="Prazo de Entrega" formControlName="delivery_date">
+    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
   </mat-form-field>
   <p>Recebido</p>
   <mat-form-field appearance="fill">
@@ -22,6 +15,6 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions class="actions">
-  <button mat-button (click)="onNoClick()"></button>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
   <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
 </div>

@@ -60,6 +60,8 @@ import { CreateProtocolItemsModalComponent } from './pages/admin-protocols/admin
 import { DeleteOrderItemModalComponent } from './pages/admin-orders/admin-order-items/modal/deleteOrderItem-modal.component.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -125,6 +127,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     NgxPaginationModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 })
 export class AdminModule {}

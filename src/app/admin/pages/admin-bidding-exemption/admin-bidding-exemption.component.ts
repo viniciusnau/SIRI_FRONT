@@ -57,19 +57,19 @@ export class AdminBiddingExemptionComponent {
 
   getProducts() {
     this.stocksService.getAllProducts().subscribe((data) => {
-      this.products = data.results;
+      this.products = data;
     });
   }
 
   getStocks() {
-    this.stocksService.getStocks().subscribe((data) => {
-      this.stocks = data.results;
+    this.stocksService.getAllStocks().subscribe((data) => {
+      this.stocks = data;
     });
   }
 
   getInvoices() {
-    this.stocksService.getInvoices().subscribe((data) => {
-      this.invoices = data.results;
+    this.stocksService.getAllInvoices().subscribe((data) => {
+      this.invoices = data;
     });
   }
 
@@ -98,7 +98,18 @@ export class AdminBiddingExemptionComponent {
   }
 
   formatDate(date: string) {
-    return new Date(date).toLocaleDateString();
+    if (date) {
+      const originalDate = new Date(date);
+
+      const day = originalDate.getUTCDate().toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const year = originalDate.getUTCFullYear().toString();
+
+      return `${day}/${month}/${year}`;
+    }
+    else {
+      return '';
+    }
   }
 
   displayedColumns = [

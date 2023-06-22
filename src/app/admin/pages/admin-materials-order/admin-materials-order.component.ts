@@ -59,13 +59,13 @@ export class AdminMaterialsOrderComponent implements OnInit {
 
   getCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.modalData.categories = data.results;
+      this.modalData.categories = data;
     });
   }
 
   getSuppliers() {
-    this.suppliersService.getSuppliers().subscribe((data) => {
-      this.modalData.suppliers = data.results;
+    this.suppliersService.getAllSuppliers().subscribe((data) => {
+      this.modalData.suppliers = data;
     });
   }
 
@@ -85,7 +85,18 @@ export class AdminMaterialsOrderComponent implements OnInit {
   }
 
   formatDate(date: string) {
-    return new Date(date).toLocaleDateString();
+    if (date) {
+      const originalDate = new Date(date);
+
+      const day = originalDate.getUTCDate().toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const year = originalDate.getUTCFullYear().toString();
+
+      return `${day}/${month}/${year}`;
+    }
+    else {
+      return '';
+    }
   }
 
   formatRange(dateRange: string) {

@@ -1,41 +1,17 @@
 <div class="loginContainer">
-  <img
-    src="../../../../assets/logo_defensoria_sc_preferencial_colorido.png"
-    alt="logo_defensoria_sc_colorido.png"
-    class="logoLogin"
-  />
+  <img src="../../../../assets/logo_defensoria_sc_preferencial_colorido.png" alt="logo_defensoria_sc_colorido.png" class="logoLogin" />
   <form class="cardLogin" [formGroup]="formLogin" novalidate>
-    <h1>LOGIN</h1>
+    <h1>SIRI</h1>
+    <h2>Sistema Integrado de Requisições Internas</h2>
     <div class="textField">
-      <input
-        type="text"
-        name="username"
-        id="ilogin"
-        placeholder="Usuário"
-        required
-        matInput
-        formControlName="username"
-      />
+      <input type="text" name="username" id="ilogin" placeholder="Usuário" required matInput formControlName="username" />
     </div>
     <div class="textField">
-      <input
-        type="password"
-        name="password"
-        id="ipassword"
-        placeholder="Senha"
-        required
-        matInput
-        formControlName="password"
-      />
+      <input type="password" name="password" id="ipassword" placeholder="Senha" required matInput formControlName="password" />
     </div>
     <div class="otherServices">
       <div class="rememberService">
-        <input
-          type="checkbox"
-          name="remember"
-          id="iremember"
-          formControlName="remember"
-        />
+        <input type="checkbox" name="remember" id="iremember" formControlName="remember" />
         <label for="iremember">Lembrar</label>
       </div>
       <a href="#" class="forgetPass" (click)="resetPassword($event)">Esqueci a senha</a>

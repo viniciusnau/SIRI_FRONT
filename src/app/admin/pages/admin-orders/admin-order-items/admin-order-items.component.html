@@ -117,7 +117,7 @@
           <td mat-cell *matCellDef="let orderItem">
             <div class="button-container">
               <button
-                [disabled]="orderItem.quantity === orderItem.added_quantity"
+                [disabled]="orderItem.added_quantity > 0"
                 class="btn"
                 mat-mini-fab
                 aria-label="Delete"

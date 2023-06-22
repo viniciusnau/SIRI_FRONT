@@ -20,7 +20,7 @@ export class AdminResetPasswordComponent {
       .subscribe(
         response => {
           this.loading = false;
-          this.openDialog('Sucesso', 'Email enviado com sucesso!');
+          this.openDialog('Sucesso', 'Email enviado!');
         },
         error => {
           this.loading = false;

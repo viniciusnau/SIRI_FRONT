@@ -57,14 +57,14 @@ export class AdminInvoicesComponent implements OnInit {
   }
 
   getSuppliers() {
-    this.suppliersService.getSuppliers().subscribe((data) => {
-      this.modalData.suppliers = data.results;
+    this.suppliersService.getAllSuppliers().subscribe((data) => {
+      this.modalData.suppliers = data;
     });
   }
 
   getPublicDefenses() {
-    this.stocksService.getPublicDefenses().subscribe((data) => {
-      this.modalData.public_defenses = data.results;
+    this.stocksService.getAllPublicDefenses().subscribe((data) => {
+      this.modalData.public_defenses = data;
     });
   }
 

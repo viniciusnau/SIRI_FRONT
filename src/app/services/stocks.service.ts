@@ -31,6 +31,13 @@ export class StocksService {
       : this.httpClient.get<any>(this.apiUrl, this.httpOptions);
   }
 
+  public getAllStocks(): Observable<any> {
+    return this.httpClient.get<any>(
+      `${this.apiUrl}/all-stocks/`,
+      this.httpOptions,
+    );
+  }
+
   public getStockItems(stock_id: string): Observable<any> {
     const options = {
       headers: this.httpOptions.headers,
@@ -74,6 +81,55 @@ export class StocksService {
         )
       : this.httpClient.get<any>(`${this.apiUrl}/products`, this.httpOptions);
   }
+  public getSectors(): Observable<any> {
+    return this.httpClient.get<any>(`${this.apiUrl}/sectors`, this.httpOptions);
+  }
+
+  // public getAllSectors(): Observable<any> {
+  //   return this.httpClient.get<any>(`${this.apiUrl}/sectors/all/`, this.httpOptions);
+  // }
+
+  public getCategories(): Observable<any> {
+    return this.httpClient.get<any>(
+      `${this.apiUrl}/categories`,
+      this.httpOptions,
+    );
+  }
+
+  // public getAllCategories(): Observable<any> {
+  //   return this.httpClient.get<any>(
+  //     `${this.apiUrl}/categories/all/`,
+  //     this.httpOptions,
+  //   );
+  // }
+
+  public getMeasures(): Observable<any> {
+    return this.httpClient.get<any>(
+      `${this.apiUrl}/measures`,
+      this.httpOptions,
+    );
+  }
+
+  // public getAllMeasures(): Observable<any> {
+  //   return this.httpClient.get<any>(
+  //     `${this.apiUrl}/measures/all/`,
+  //     this.httpOptions,
+  //   );
+  // }
+
+  // public getAllProducts(): Observable<any> {
+  //   return this.httpClient.get<any>(
+  //     `${this.apiUrl}/products/all/`,
+  //     this.httpOptions,
+  //   );
+  // }
+
+  public getProducts(): Observable<any> {
+    return this.httpClient.get<any>(
+      `${this.apiUrl}/products`,
+      this.httpOptions,
+    );
+  }
 
   public getReceivingReports(pageChange = ''): Observable<any> {
     return pageChange
@@ -115,6 +171,13 @@ export class StocksService {
       : this.httpClient.get<any>(`${this.apiUrl}/invoices`, this.httpOptions);
   }
 
+  public getAllInvoices(): Observable<any> {
+    return this.httpClient.get<any>(
+      `${this.apiUrl}/invoices/all/`,
+      this.httpOptions,
+    );
+  }
+
   public deleteInvoice(invoice_id: string): any {
     return this.httpClient.delete<any>(
       `${this.apiUrl}/invoices/${invoice_id}`,
@@ -137,9 +200,23 @@ export class StocksService {
     );
   }
 
+  public getAllProtocols(): Observable<any> {
+    return this.httpClient.get<any>(
+      `${this.apiUrl}/protocols/all/`,
+      this.httpOptions,
+    );
+  }
+
   public getPublicDefenses(): Observable<any> {
     return this.httpClient.get<any>(
-      `${this.apiUrl}/publicdefenses`,
+      `${this.apiUrl}/public-defenses`,
+      this.httpOptions,
+    );
+  }
+
+  public getAllPublicDefenses(): Observable<any> {
+    return this.httpClient.get<any>(
+      `${this.apiUrl}/public-defenses/all/`,
       this.httpOptions,
     );
   }
@@ -298,6 +375,11 @@ export class StocksService {
     return pageChange
       ? this.httpClient.get<any>(`${url}&&page=${pageChange}`, this.httpOptions)
       : this.httpClient.get<any>(url, this.httpOptions);
+  }
+
+  getAllProtocolItems(protocol: string) {
+    const url = this.apiUrl + `/protocol-items/all/?protocol_id=${protocol}`;
+    return this.httpClient.get<any>(url, this.httpOptions);
   }
 
   deleteBiddingExemption(biddingExemptionId: number): Observable<void> {

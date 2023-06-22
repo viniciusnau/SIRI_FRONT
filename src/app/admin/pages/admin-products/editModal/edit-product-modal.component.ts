@@ -1,6 +1,6 @@
 import { StocksService } from 'src/app/services/stocks.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -44,7 +44,10 @@ export class EditProductModalComponent implements OnInit {
 
   onClick(): void {
     if (this.formProduct.invalid) return;
-    const editProductData = this.formProduct.getRawValue();
+
+    const editProductData = Object.entries(this.formProduct.getRawValue())
+      .filter(([_, value]) => value !== '' && value !== null)
+      .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
 
     this.stocksService
       .editProduct(this.data.product_id, editProductData)
@@ -69,6 +72,7 @@ export class EditProductModalComponent implements OnInit {
           );
         },
       });
+
     setTimeout(() => {
       window.location.reload();
     }, 2000);

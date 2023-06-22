@@ -74,12 +74,15 @@ export class MaterialsOrderModalComponent implements OnInit {
     const { supplier_id, category_id, initial_date, final_date } =
       this.formMaterialsOrder.getRawValue();
 
+    const formattedInitialDate = moment(initial_date).format('YYYY-MM-DD');
+    const formattedFinalDate = moment(final_date).format('YYYY-MM-DD');
+
     this.ordersService
       .getMaterialsOrderStatusCode(
         supplier_id,
         category_id,
-        initial_date,
-        final_date,
+        formattedInitialDate,
+        formattedFinalDate,
       )
       .subscribe((response) => {
         this.materialsOrder = response;

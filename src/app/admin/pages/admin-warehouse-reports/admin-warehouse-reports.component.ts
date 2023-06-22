@@ -83,7 +83,7 @@ export class AdminWarehouseReportsComponent implements OnInit {
         {
           table: {
             headerRows: 1,
-            widths: ['*', '*', '*', '*', '*', '*'],
+            widths: ['*', '*', 'auto', '*', '*', '*'],
             body: [
               [
                 'Código',
@@ -102,6 +102,7 @@ export class AdminWarehouseReportsComponent implements OnInit {
                 report.averagePrice,
               ]),
             ],
+            layout: 'lightHorizontalLines',
           },
         },
       ],

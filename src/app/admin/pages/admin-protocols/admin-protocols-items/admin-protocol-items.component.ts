@@ -58,7 +58,7 @@ export class AdminProtocolItemsComponent implements OnInit {
 
   getProducts() {
     this.stockService.getAllProducts().subscribe((data) => {
-      this.modalData.products = data.results;
+      this.modalData.products = data;
     });
   }
 
@@ -69,7 +69,18 @@ export class AdminProtocolItemsComponent implements OnInit {
   }
 
   formatDate(date: string) {
-    return new Date(date).toLocaleDateString();
+    if (date) {
+      const originalDate = new Date(date);
+
+      const day = originalDate.getUTCDate().toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const year = originalDate.getUTCFullYear().toString();
+
+      return `${day}/${month}/${year}`;
+    }
+    else {
+      return '';
+    }
   }
 
   firstLetterOnCapital(text: string) {

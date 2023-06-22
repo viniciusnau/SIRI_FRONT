@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Criar</h1>
 <div [formGroup]="formAccountantReports" mat-dialog-content class="content">
-  <p>Mes</p>
+  <p>Mês</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="month" placeholder="Mês">
       <mat-option *ngFor="let month of months" [value]="month">{{ month }}</mat-option>

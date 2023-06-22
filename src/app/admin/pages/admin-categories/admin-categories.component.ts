@@ -34,11 +34,11 @@ export class AdminCategoriesComponent implements OnInit {
   getContent() {
     this.stocksService
       .getAllCategories(this.currentPage.toString())
+      // is getCategories or getAllCategories ???
       .subscribe((data) => {
         this.response = data;
       });
   }
-
   firstLetterOnCapital(text: string) {
     if (text.length == 0) return '';
     return text[0].toUpperCase() + text.substring(1);

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProtocolService } from '../../../../services/protocol.service';
 
@@ -48,9 +48,11 @@ export class ProtocolsModalComponent implements OnInit {
   createForm() {
     this.formProtocols = this.formBuilder.group({
       code: [''],
-      supplier: ['', [Validators.required]],
+      supplier: [''],
       category: [''],
       file: [''],
+      initial_date: [''],
+      final_date: [''],
     });
   }
 
@@ -74,6 +76,16 @@ export class ProtocolsModalComponent implements OnInit {
       }
       if (this.selectedFile) {
         formData.append('file', this.selectedFile);
+      }
+      if (protocolData.initial_date) {
+        const startDate = new Date(protocolData.initial_date);
+        const formattedStartDate = startDate.toISOString();
+        formData.append('start_date', formattedStartDate);
+      }
+      if (protocolData.final_date) {
+        const endDate = new Date(protocolData.final_date);
+        const formattedEndDate = endDate.toISOString();
+        formData.append('end_date', formattedEndDate);
       }
 
       this.protocolService.patchProtocol(this.protocolId, formData).subscribe(

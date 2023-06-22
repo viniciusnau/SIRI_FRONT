@@ -62,13 +62,13 @@ export class AdminProtocolsComponent implements OnInit {
 
   getCategories() {
     this.stockService.getAllCategories().subscribe((data) => {
-      this.modalData.categories = data.results;
+      this.modalData.categories = data;
     });
   }
 
   getSuppliers() {
-    this.supplierService.getSuppliers().subscribe((data) => {
-      this.modalData.suppliers = data.results;
+    this.supplierService.getAllSuppliers().subscribe((data) => {
+      this.modalData.suppliers = data;
     });
   }
 
@@ -77,7 +77,7 @@ export class AdminProtocolsComponent implements OnInit {
       data: {
         suppliers: this.modalData.suppliers,
         categories: this.modalData.categories,
-        protocolId: protocolId, // Pass the protocolId in the data object
+        protocolId: protocolId,
       },
     });
   }
@@ -89,7 +89,18 @@ export class AdminProtocolsComponent implements OnInit {
   }
 
   formatDate(date: string) {
-    return new Date(date).toLocaleDateString();
+    if (date) {
+      const originalDate = new Date(date);
+
+      const day = originalDate.getUTCDate().toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const year = originalDate.getUTCFullYear().toString();
+
+      return `${day}/${month}/${year}`;
+    }
+    else {
+      return '';
+    }
   }
 
   firstLetterOnCapital(text: string) {
@@ -117,6 +128,8 @@ export class AdminProtocolsComponent implements OnInit {
     'code',
     'supplier',
     'category',
+    'start_date',
+    'final_date',
     'file',
     'protocolItems',
     'editProtocols',

@@ -1,15 +1,14 @@
 <admin-sidebar>
-  <section>
-    <div class="btnCreate">
-      <button mat-raised-button class="btn" (click)="openCreateModal()">
-        Criar
-      </button>
-    </div>
-  </section>
   <mat-card>
     <mat-card-content>
       <mat-toolbar>
-        <span>Itens da Ata</span>
+        <span>Itens da ata</span>
+        <span class="spacer"></span>
+        <div class="btnCreate">
+          <button mat-raised-button class="btn" (click)="openCreateModal()">
+            Criar
+          </button>
+        </div>
       </mat-toolbar>
 
       <table

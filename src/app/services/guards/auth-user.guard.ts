@@ -10,7 +10,7 @@ export class AuthUserGuard implements CanActivate {
     if (this.loginService.isLogged) {
       return true;
     }
-    this.router.navigate(['/admin/login']);
+    this.router.navigate(['/login']);
     return false;
   }
 }

@@ -48,8 +48,19 @@ export class AdminAccountantReportsComponent implements OnInit {
     const dialogRef = this.dialog.open(AccountantReportsModalComponent, {});
   }
 
-  formatDate(date: string): string {
-    return new Date(date).toLocaleDateString();
+  formatDate(date: string) {
+    if (date) {
+      const originalDate = new Date(date);
+
+      const day = originalDate.getUTCDate().toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const year = originalDate.getUTCFullYear().toString();
+
+      return `${day}/${month}/${year}`;
+    }
+    else {
+      return '';
+    }
   }
 
   downloadAccountantReports(file: string): void {
