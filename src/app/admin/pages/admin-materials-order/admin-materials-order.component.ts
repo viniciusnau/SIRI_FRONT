@@ -40,7 +40,7 @@ export class AdminMaterialsOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getContent();
-    this.getCategories();
+    this.getAllCategories();
     this.getSuppliers();
   }
 
@@ -57,7 +57,7 @@ export class AdminMaterialsOrderComponent implements OnInit {
       });
   }
 
-  getCategories() {
+  getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
       this.modalData.categories = data;
     });

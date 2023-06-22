@@ -38,7 +38,7 @@ export class AdminSuppliersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getContent();
-    this.getCategories();
+    this.getAllCategories();
   }
 
   onPageChange(page: number) {
@@ -54,7 +54,7 @@ export class AdminSuppliersComponent implements OnInit {
       });
   }
 
-  getCategories() {
+  getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
       this.categories = data;
     });

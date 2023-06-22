@@ -43,7 +43,7 @@ export class AdminProtocolsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getContent();
-    this.getCategories();
+    this.getAllCategories();
     this.getSuppliers();
   }
 
@@ -60,7 +60,7 @@ export class AdminProtocolsComponent implements OnInit {
       });
   }
 
-  getCategories() {
+  getAllCategories() {
     this.stockService.getAllCategories().subscribe((data) => {
       this.modalData.categories = data;
     });

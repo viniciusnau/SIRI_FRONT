@@ -37,7 +37,7 @@ export class AdminProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getContent();
-    this.getCategories();
+    this.getAllCategories();
     this.getMeasures();
   }
 
@@ -54,7 +54,7 @@ export class AdminProductsComponent implements OnInit {
       });
   }
 
-  getCategories() {
+  getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
       this.categories = data;
     });
