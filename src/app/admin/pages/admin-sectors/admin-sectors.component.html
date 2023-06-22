@@ -6,10 +6,11 @@
         <span>Setores</span>
       </mat-toolbar>
 
-      <table mat-table [dataSource]="sectors" class="mat-elevation-z8">
-        <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
+      <table
+        mat-table
+        [dataSource]="response?.results"
+        class="mat-elevation-z8"
+      >
         <!-- id Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Id</th>
@@ -35,6 +36,11 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <app-pagination
+        [currentPage]="currentPage"
+        [response]="response"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
     </mat-card-content>
   </mat-card>
 </admin-sidebar>

@@ -5,8 +5,11 @@
         <span>Itens do Pedido</span>
       </mat-toolbar>
 
-      <table mat-table [dataSource]="orderItems" class="mat-elevation-z8">
-
+      <table
+        mat-table
+        [dataSource]="response?.results"
+        class="mat-elevation-z8"
+      >
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Id</th>
           <td mat-cell *matCellDef="let orderItem">{{ orderItem.id }}</td>
@@ -14,39 +17,64 @@
 
         <ng-container matColumnDef="product">
           <th mat-header-cell *matHeaderCellDef>Produto</th>
-          <td mat-cell *matCellDef="let orderItem">{{ firstLetterOnCapital(orderItem.product.name) }}</td>
+          <td mat-cell *matCellDef="let orderItem">
+            {{ firstLetterOnCapital(orderItem.product.name) }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef>Descrição</th>
-          <td mat-cell *matCellDef="let orderItem">{{ orderItem.product.description }}</td>
+          <td mat-cell *matCellDef="let orderItem">
+            {{ orderItem.product.description }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="quantity">
           <th mat-header-cell *matHeaderCellDef>Quantidade</th>
           <td mat-cell *matCellDef="let orderItem">
             <mat-form-field appearance="fill" class="small-input">
-              <input [disabled]="orderItem.quantity === orderItem.added_quantity" matInput [(ngModel)]="orderItem.quantity" name="quantity" [type]="'number'" placeholder="Quantidade">
+              <input
+                [disabled]="orderItem.quantity === orderItem.added_quantity"
+                matInput
+                [(ngModel)]="orderItem.quantity"
+                name="quantity"
+                [type]="'number'"
+                placeholder="Quantidade"
+              />
             </mat-form-field>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="added_quantity">
           <th mat-header-cell *matHeaderCellDef>Quantidade Adicionada</th>
-          <td mat-cell *matCellDef="let orderItem">{{ orderItem.added_quantity }}</td>
+          <td mat-cell *matCellDef="let orderItem">
+            {{ orderItem.added_quantity }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="measure">
           <th mat-header-cell *matHeaderCellDef>Medida</th>
-          <td mat-cell *matCellDef="let orderItem">{{ orderItem.product.measure.name }}</td>
+          <td mat-cell *matCellDef="let orderItem">
+            {{ orderItem.product.measure.name }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="supplier">
           <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
           <td mat-cell *matCellDef="let orderItem">
             <mat-form-field appearance="fill">
-              <mat-select [disabled]="orderItem.quantity === orderItem.added_quantity" [(value)]="orderItem.supplier && orderItem.supplier.id" (selectionChange)="onSupplierSelectionChange(orderItem, $event.value)" name="supplier">
-                <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">
+              <mat-select
+                [disabled]="orderItem.quantity === orderItem.added_quantity"
+                [(value)]="orderItem.supplier && orderItem.supplier.id"
+                (selectionChange)="
+                  onSupplierSelectionChange(orderItem, $event.value)
+                "
+                name="supplier"
+              >
+                <mat-option
+                  *ngFor="let supplier of suppliers"
+                  [value]="supplier.id"
+                >
                   {{ supplier.name }}
                 </mat-option>
               </mat-select>
@@ -58,7 +86,14 @@
           <th mat-header-cell *matHeaderCellDef>Quantidade do Fornecedor</th>
           <td mat-cell *matCellDef="let orderItem">
             <mat-form-field appearance="fill" class="small-input">
-              <input matInput [(ngModel)]="orderItem.supplier_quantity" name="supplierQuantity" [type]="'number'" [formControl]="supplierQuantityControls[orderItem.id]" placeholder="{{ orderItem.quantity }}">
+              <input
+                matInput
+                [(ngModel)]="orderItem.supplier_quantity"
+                name="supplierQuantity"
+                [type]="'number'"
+                [formControl]="supplierQuantityControls[orderItem.id]"
+                placeholder="{{ orderItem.quantity }}"
+              />
             </mat-form-field>
           </td>
         </ng-container>
@@ -66,7 +101,12 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Salvar</th>
           <td mat-cell *matCellDef="let orderItem">
-            <button [disabled]="orderItem.quantity === orderItem.added_quantity" mat-mini-fab class="btn" (click)="saveItem(orderItem)">
+            <button
+              [disabled]="orderItem.quantity === orderItem.added_quantity"
+              mat-mini-fab
+              class="btn"
+              (click)="saveItem(orderItem)"
+            >
               <mat-icon>save</mat-icon>
             </button>
           </td>
@@ -76,8 +116,13 @@
           <th mat-header-cell *matHeaderCellDef>Excluir</th>
           <td mat-cell *matCellDef="let orderItem">
             <div class="button-container">
-              <button [disabled]="orderItem.added_quantity > 0" class="btn" mat-mini-fab aria-label="Delete"
-                      (click)="deleteOrderItemModal(orderItem.id)">
+              <button
+                [disabled]="orderItem.added_quantity > 0"
+                class="btn"
+                mat-mini-fab
+                aria-label="Delete"
+                (click)="deleteOrderItemModal(orderItem.id)"
+              >
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
@@ -87,6 +132,11 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <app-pagination
+        [currentPage]="currentPage"
+        [response]="response"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
     </mat-card-content>
   </mat-card>
 </admin-sidebar>

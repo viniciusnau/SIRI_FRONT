@@ -15,25 +15,33 @@ interface AdminMeasures {
   styleUrls: ['./admin-measures.component.scss'],
 })
 export class AdminMeasuresComponent implements OnInit {
-  measures: AdminMeasures[] = [];
+  currentPage = 1;
+  response: any;
 
   constructor(private stocksService: StocksService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.getMeasures();
+    this.getContent();
   }
 
-  getMeasures() {
-    this.stocksService.getMeasures().subscribe((data) => {
-      this.measures = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
+    this.stocksService
+      .getMeasures(this.currentPage.toString())
+      .subscribe((data) => {
+        this.response = data;
+      });
   }
 
   deleteMeasure(measure_id: string) {
     this.stocksService
       .deleteMeasure(measure_id)
       .toPromise()
-      .then((data: any) => this.getMeasures());
+      .then((data: any) => this.getContent());
   }
 
   openEditModal(measure_id: string) {

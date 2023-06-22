@@ -22,7 +22,8 @@ interface BiddingExemption {
   styleUrls: ['./admin-bidding-exemption.component.scss'],
 })
 export class AdminBiddingExemptionComponent {
-  adminBiddingExemption: BiddingExemption[] = [];
+  currentPage = 1;
+  response: any;
   products = [];
   stocks: Stock[] = [];
   invoices = [];
@@ -30,16 +31,23 @@ export class AdminBiddingExemptionComponent {
   constructor(private stocksService: StocksService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.getBiddingExemption();
+    this.getContent();
     this.getStocks();
     this.getInvoices();
     this.getProducts();
   }
 
-  getBiddingExemption() {
-    this.stocksService.getBiddingExemption().subscribe((data) => {
-      this.adminBiddingExemption = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
+    this.stocksService
+      .getBiddingExemption(this.currentPage.toString())
+      .subscribe((data) => {
+        this.response = data;
+      });
   }
 
   getStockSector(stockId: number): string {
@@ -76,9 +84,12 @@ export class AdminBiddingExemptionComponent {
   }
 
   deleteBiddingExemption(row: BiddingExemption) {
-    this.stocksService.deleteBiddingExemption(row.id).subscribe(() => {
-      this.adminBiddingExemption = this.adminBiddingExemption.filter(item => item.id !== row.id);
-    }, (error) => {});
+    this.stocksService.deleteBiddingExemption(row.id).subscribe(
+      () => {
+        this.response = this.response.filter((item) => item.id !== row.id);
+      },
+      (error) => {},
+    );
   }
 
   firstLetterOnCapital(text: string) {
@@ -101,5 +112,13 @@ export class AdminBiddingExemptionComponent {
     }
   }
 
-  displayedColumns = ['id', 'quantity', 'product', 'description', 'stock', 'invoice', 'actions'];
+  displayedColumns = [
+    'id',
+    'quantity',
+    'product',
+    'description',
+    'stock',
+    'invoice',
+    'actions',
+  ];
 }

@@ -24,7 +24,8 @@ interface AdminProducts {
   styleUrls: ['./admin-products.component.scss'],
 })
 export class AdminProductsComponent implements OnInit {
-  products: AdminProducts[] = [];
+  currentPage = 1;
+  response: any;
   categories = [];
   measures = [];
 
@@ -35,18 +36,25 @@ export class AdminProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProducts();
-    this.getCategories();
+    this.getContent();
+    this.getAllCategories();
     this.getMeasures();
   }
 
-  getProducts() {
-    this.stocksService.getProducts().subscribe((data) => {
-      this.products = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
   }
 
-  getCategories() {
+  getContent() {
+    this.stocksService
+      .getProducts(this.currentPage.toString())
+      .subscribe((data) => {
+        this.response = data;
+      });
+  }
+
+  getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
       this.categories = data;
     });
@@ -63,12 +71,13 @@ export class AdminProductsComponent implements OnInit {
       const originalDate = new Date(date);
 
       const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const year = originalDate.getUTCFullYear().toString();
 
       return `${day}/${month}/${year}`;
-    }
-    else {
+    } else {
       return '';
     }
   }
@@ -81,7 +90,7 @@ export class AdminProductsComponent implements OnInit {
   deleteProduct(product_id: string) {
     this.stocksService.deleteProduct(product_id).subscribe({
       next: (result) => {
-        this.getProducts();
+        this.getContent();
         this.snackBar.open(
           'Tudo certo!',
           'O produto foi excluído com sucesso!',

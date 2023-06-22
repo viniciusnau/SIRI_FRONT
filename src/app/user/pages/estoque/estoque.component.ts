@@ -16,17 +16,28 @@ interface Category {
 })
 export class EstoqueComponent implements OnInit {
   categories: Category[] = [];
-  stock: any[] = [];
-  displayedColumns = ['name', 'description', 'quantity', 'measure', 'entries', 'withdrawals'];
+  currentPage = 1;
+  page = 'next_stock_items';
+  response: any;
+  displayedColumns = [
+    'name',
+    'description',
+    'quantity',
+    'measure',
+    'entries',
+    'withdrawals',
+  ];
 
-  constructor(
-    public userService: UserService,
-    private router: Router,
-  ) {}
+  constructor(public userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.getCategories();
-    this.getStock();
+    this.getContent();
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
   }
 
   getCategories() {
@@ -35,9 +46,9 @@ export class EstoqueComponent implements OnInit {
     });
   }
 
-  getStock(category = 1) {
+  getContent(category = 1) {
     this.userService.getUser().subscribe((data) => {
-      this.stock = data.stock_items;
+      this.response = data;
     });
   }
 

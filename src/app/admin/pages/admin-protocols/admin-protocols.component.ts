@@ -25,7 +25,8 @@ interface adminProtocols {
   styleUrls: ['./admin-protocols.component.scss'],
 })
 export class AdminProtocolsComponent implements OnInit {
-  adminProtocols: adminProtocols[] = [];
+  currentPage = 1;
+  response: any;
 
   modalData: ProtocolsModalData = {
     suppliers: [],
@@ -41,18 +42,25 @@ export class AdminProtocolsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProtocols();
-    this.getCategories();
+    this.getContent();
+    this.getAllCategories();
     this.getSuppliers();
   }
 
-  getProtocols() {
-    this.protocolService.getProtocols().subscribe((data) => {
-      this.adminProtocols = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
   }
 
-  getCategories() {
+  getContent() {
+    this.protocolService
+      .getProtocols(this.currentPage.toString())
+      .subscribe((data) => {
+        this.response = data;
+      });
+  }
+
+  getAllCategories() {
     this.stockService.getAllCategories().subscribe((data) => {
       this.modalData.categories = data;
     });
@@ -85,12 +93,13 @@ export class AdminProtocolsComponent implements OnInit {
       const originalDate = new Date(date);
 
       const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const year = originalDate.getUTCFullYear().toString();
 
       return `${day}/${month}/${year}`;
-    }
-    else {
+    } else {
       return '';
     }
   }
@@ -108,7 +117,7 @@ export class AdminProtocolsComponent implements OnInit {
     this.protocolService
       .deleteProtocol(protocol_id)
       .toPromise()
-      .then((data: any) => this.getProtocols());
+      .then((data: any) => this.getContent());
   }
 
   navToProtocolItems(protocolId: number) {

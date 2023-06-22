@@ -8,7 +8,6 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { ProductsService } from '../../../services/products.service';
 import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 
-
 interface ReceivingReport {
   id: number;
   supplier: {
@@ -55,23 +54,31 @@ interface ReceivingReports {
   providers: [PriceFormatPipe],
 })
 export class AdminReceivingReportsComponent implements OnInit {
-  receivingReports: ReceivingReports[] = [];
+  currentPage = 1;
+  response: any;
 
   constructor(
     private stocksService: StocksService,
     private productsService: ProductsService,
     public dialog: MatDialog,
-    private priceFormatPipe: PriceFormatPipe
+    private priceFormatPipe: PriceFormatPipe,
   ) {}
 
   ngOnInit(): void {
-    this.getReceivingReports();
+    this.getContent();
   }
 
-  getReceivingReports() {
-    this.stocksService.getReceivingReports().subscribe((data) => {
-      this.receivingReports = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
+    this.stocksService
+      .getReceivingReports(this.currentPage.toString())
+      .subscribe((data) => {
+        this.response = data;
+      });
   }
 
   formatDate(date: string) {
@@ -79,12 +86,13 @@ export class AdminReceivingReportsComponent implements OnInit {
       const originalDate = new Date(date);
 
       const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const year = originalDate.getUTCFullYear().toString();
 
       return `${day}/${month}/${year}`;
-    }
-    else {
+    } else {
       return '';
     }
   }
@@ -108,158 +116,167 @@ export class AdminReceivingReportsComponent implements OnInit {
     const currentDate = moment(receivingReport.created).format('DD/MM/YYYY');
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-    this.productsService.getProductById(receivingReport.product.id).subscribe((product: Product) => {
-      const reportData = {
-        id: receivingReport.id,
-        supplier: receivingReport.supplier.name,
-        name: product.name,
-        description: product.description,
-        code: product.code,
-        measure: product.measure.name,
-        quantity: receivingReport.quantity,
-        price: product.price,
-      };
+    this.productsService
+      .getProductById(receivingReport.product.id)
+      .subscribe((product: Product) => {
+        const reportData = {
+          id: receivingReport.id,
+          supplier: receivingReport.supplier.name,
+          name: product.name,
+          description: product.description,
+          code: product.code,
+          measure: product.measure.name,
+          quantity: receivingReport.quantity,
+          price: product.price,
+        };
 
-      const total = reportData.quantity * reportData.price;
-      const formattedPrice = this.priceFormatPipe.transform(reportData.price);
-      const formattedTotal = this.priceFormatPipe.transform(total);
+        const total = reportData.quantity * reportData.price;
+        const formattedPrice = this.priceFormatPipe.transform(reportData.price);
+        const formattedTotal = this.priceFormatPipe.transform(total);
 
-      const docDefinition = {
-        content: [
-          {
-            layout: 'noBorders',
-            table: {
-              widths: ['*', 'auto'],
-              body: [
-                [
-                  {
-                    text: 'S.I.R.I',
-                    alignment: 'left',
-                    margin: [20, 5],
-                    fontSize: 14,
-                    bold: true,
-                  },
+        const docDefinition = {
+          content: [
+            {
+              layout: 'noBorders',
+              table: {
+                widths: ['*', 'auto'],
+                body: [
+                  [
+                    {
+                      text: 'S.I.R.I',
+                      alignment: 'left',
+                      margin: [20, 5],
+                      fontSize: 14,
+                      bold: true,
+                    },
+                  ],
                 ],
-              ],
+              },
+            },
+            {
+              text: 'Guia de Entrada',
+              style: 'header',
+              alignment: 'center',
+              margin: [0, 10],
+            },
+            {
+              text: `Guia: ${reportData.id}`,
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+            {
+              text: `Data: ${currentDate}`,
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+            {
+              text: `Tipo de documento: Nota fiscal, devolução e outros`,
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+            {
+              text: `Fornecedor: ${reportData.supplier}`,
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+            {
+              text: `Produto: ${reportData.name}`,
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+            {
+              text: `Descrição: ${reportData.description}`,
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+            {
+              text: `Código: ${reportData.code}`,
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+            {
+              text: `Medida: ${reportData.measure}`,
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+            {
+              text: `Quantidade: ${reportData.quantity}`,
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+            {
+              text: `Preço: ${reportData.price.toFixed(2)}`,
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+            {
+              text: `Total: ${total.toFixed(2)}`,
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+            {
+              text: '\n',
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+            {
+              text: 'Obs:',
+              style: 'line',
+              alignment: 'left',
+              margin: [20, 5],
+            },
+          ],
+          styles: {
+            header: {
+              fontSize: 16,
+              bold: true,
+            },
+            line: {
+              fontSize: 12,
+              bold: false,
+              margin: [20, 5],
+              decoration: 'underline',
             },
           },
-          {
-            text: 'Guia de Entrada',
-            style: 'header',
-            alignment: 'center',
-            margin: [0, 10],
-          },
-          {
-            text: `Guia: ${reportData.id}`,
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-          {
-            text: `Data: ${currentDate}`,
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-          {
-            text: `Tipo de documento: Nota fiscal, devolução e outros`,
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-          {
-            text: `Fornecedor: ${reportData.supplier}`,
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-          {
-            text: `Produto: ${reportData.name}`,
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-          {
-            text: `Descrição: ${reportData.description}`,
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-          {
-            text: `Código: ${reportData.code}`,
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-          {
-            text: `Medida: ${reportData.measure}`,
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-          {
-            text: `Quantidade: ${reportData.quantity}`,
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-          {
-            text: `Preço: ${formattedPrice}`,
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-          {
-            text: `Total: ${formattedTotal}`,
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-          {
-            text: '\n',
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-          {
-            text: 'Obs:',
-            style: 'line',
-            alignment: 'left',
-            margin: [20, 5],
-          },
-        ],
-        styles: {
-          header: {
-            fontSize: 16,
-            bold: true,
-          },
-          line: {
+          defaultStyle: {
             fontSize: 12,
-            bold: false,
-            margin: [20, 5],
-            decoration: 'underline',
           },
-        },
-        defaultStyle: {
-          fontSize: 12,
-        },
-      };
+        };
 
-      const pdfDocGenerator = pdfMake.createPdf(docDefinition);
-      pdfDocGenerator.download(`ReceivingReport_${receivingReport.id}.pdf`);
+        const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+        pdfDocGenerator.download(`ReceivingReport_${receivingReport.id}.pdf`);
 
-      pdfDocGenerator.getBlob((blob) => {
-        const formData = new FormData();
-        formData.append('file', blob, `ReceivingReport_${receivingReport.id}.pdf`);
-        formData.append('description', receivingReport.description || "");
+        pdfDocGenerator.getBlob((blob) => {
+          const formData = new FormData();
+          formData.append(
+            'file',
+            blob,
+            `ReceivingReport_${receivingReport.id}.pdf`,
+          );
+          formData.append('description', receivingReport.description || '');
 
-        this.stocksService.updateReceivingReportFile(receivingReport.id, formData).subscribe(
-          (response) => {window.location.reload()},
-          (error) => {}
-        );
+          this.stocksService
+            .updateReceivingReportFile(receivingReport.id, formData)
+            .subscribe(
+              (response) => {
+                window.location.reload();
+              },
+              (error) => {},
+            );
+        });
       });
-    });
-
   }
 
   displayedColumns = [
