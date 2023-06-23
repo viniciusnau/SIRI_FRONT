@@ -1,5 +1,11 @@
 import { StocksService } from 'src/app/services/stocks.service';
-import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
@@ -54,14 +60,17 @@ export class InvoiceModalComponent implements OnInit {
   }
 
   onFileChange() {
-    this.selectedFile = (this.fileInput.nativeElement as HTMLInputElement).files[0];
+    this.selectedFile = (
+      this.fileInput.nativeElement as HTMLInputElement
+    ).files[0];
   }
 
   onClick(): void {
     if (this.formInvoice.invalid || !this.selectedFile) {
       return;
     }
-    const { code, supplier, public_defense, total_value } = this.formInvoice.getRawValue();
+    const { code, supplier, public_defense, total_value } =
+      this.formInvoice.getRawValue();
 
     const formData: FormData = new FormData();
     formData.append('file', this.selectedFile);
@@ -74,7 +83,7 @@ export class InvoiceModalComponent implements OnInit {
       (response) => {
         window.location.reload();
       },
-      (error) => {}
+      (error) => {},
     );
   }
 }

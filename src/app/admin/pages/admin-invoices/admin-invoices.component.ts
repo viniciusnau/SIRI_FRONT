@@ -43,6 +43,10 @@ export class AdminInvoicesComponent implements OnInit {
     this.getPublicDefenses();
   }
 
+  sortAlphabetically(list) {
+    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
+  }
+
   onPageChange(page: number) {
     this.currentPage = page;
     this.getContent();
@@ -58,13 +62,13 @@ export class AdminInvoicesComponent implements OnInit {
 
   getSuppliers() {
     this.suppliersService.getAllSuppliers().subscribe((data) => {
-      this.modalData.suppliers = data;
+      this.modalData.suppliers = this.sortAlphabetically(data);
     });
   }
 
   getPublicDefenses() {
     this.stocksService.getAllPublicDefenses().subscribe((data) => {
-      this.modalData.public_defenses = data;
+      this.modalData.public_defenses = this.sortAlphabetically(data);
     });
   }
 

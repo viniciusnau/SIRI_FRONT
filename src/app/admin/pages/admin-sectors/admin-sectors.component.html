@@ -6,11 +6,7 @@
         <span>Setores</span>
       </mat-toolbar>
 
-      <table
-        mat-table
-        [dataSource]="response?.results"
-        class="mat-elevation-z8"
-      >
+      <table mat-table [dataSource]="response" class="mat-elevation-z8">
         <!-- id Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Id</th>

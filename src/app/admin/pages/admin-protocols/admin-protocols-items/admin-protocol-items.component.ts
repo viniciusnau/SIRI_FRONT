@@ -40,12 +40,16 @@ export class AdminProtocolItemsComponent implements OnInit {
       this.modalData.protocolId = parseInt(params['id']);
     });
     this.getContent();
-    this.getProducts();
+    this.getAllProducts();
   }
 
   onPageChange(page: number) {
     this.currentPage = page;
     this.getContent();
+  }
+
+  sortAlphabetically(list) {
+    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
   getContent() {
@@ -56,9 +60,9 @@ export class AdminProtocolItemsComponent implements OnInit {
       });
   }
 
-  getProducts() {
+  getAllProducts() {
     this.stockService.getAllProducts().subscribe((data) => {
-      this.modalData.products = data;
+      this.modalData.products = this.sortAlphabetically(data);
     });
   }
 
@@ -73,12 +77,13 @@ export class AdminProtocolItemsComponent implements OnInit {
       const originalDate = new Date(date);
 
       const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const year = originalDate.getUTCFullYear().toString();
 
       return `${day}/${month}/${year}`;
-    }
-    else {
+    } else {
       return '';
     }
   }

@@ -85,27 +85,31 @@ export class AdminStockReportsComponent implements OnInit {
     this.fetchSectors();
   }
 
+  sortAlphabetically(list) {
+    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
+  }
+
   fetchCategories() {
     this.stockService.getAllCategories().subscribe((categories) => {
-      this.categories = categories;
+      this.categories = this.sortAlphabetically(categories);
     });
   }
 
   fetchProducts() {
     this.stockService.getAllProducts().subscribe((products) => {
-      this.products = products;
+      this.products = this.sortAlphabetically(products);
     });
   }
 
   fetchPublicDefenses() {
     this.stockService.getAllPublicDefenses().subscribe((publicDefenses) => {
-      this.publicDefenses = publicDefenses;
+      this.publicDefenses = this.sortAlphabetically(publicDefenses);
     });
   }
 
   fetchSectors() {
     this.stockService.getAllSectors().subscribe((sectors) => {
-      this.sectors = sectors;
+      this.sectors = this.sortAlphabetically(sectors);
     });
   }
 

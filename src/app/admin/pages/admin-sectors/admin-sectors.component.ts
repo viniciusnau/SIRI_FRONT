@@ -1,5 +1,6 @@
 import { StocksService } from 'src/app/services/stocks.service';
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 
 interface AdminSectors {
   id: number;
@@ -27,11 +28,20 @@ export class AdminSectorsComponent implements OnInit {
     this.getContent();
   }
 
+  sortContentTableAlphabetically(list) {
+    const sortedResults = list.results.sort((a, b) =>
+      a?.name?.localeCompare(b?.name),
+    );
+    return { ...list, results: sortedResults };
+  }
+
   getContent() {
     this.stocksService
       .getSectors(this.currentPage.toString())
       .subscribe((data) => {
-        this.response = data;
+        const sortedData = this.sortContentTableAlphabetically(data);
+        this.response = new MatTableDataSource(sortedData.results);
+        this.response.count = data.next;
       });
   }
 
