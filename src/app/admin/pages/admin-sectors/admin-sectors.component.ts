@@ -41,7 +41,8 @@ export class AdminSectorsComponent implements OnInit {
       .subscribe((data) => {
         const sortedData = this.sortContentTableAlphabetically(data);
         this.response = new MatTableDataSource(sortedData.results);
-        this.response.count = data.next;
+        this.response.next = data?.next;
+        this.response.count = data?.count;
       });
   }
 

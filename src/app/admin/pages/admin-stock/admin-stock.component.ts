@@ -42,7 +42,8 @@ export class AdminStockComponent implements OnInit {
       .subscribe((data) => {
         const sortedData = this.sortContentTableAlphabetically(data);
         this.response = new MatTableDataSource(data?.results);
-        this.response.count = data?.next;
+        this.response.next = data?.next;
+        this.response.count = data?.count;
       });
   }
 
