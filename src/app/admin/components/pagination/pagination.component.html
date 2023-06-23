@@ -7,7 +7,12 @@
     Voltar
   </button>
   <span class="page-number"
-    >{{ currentPage }} de {{ (response?.count / 15).toFixed(0) }}</span
+    >{{ currentPage }} de
+    {{
+      (response?.count / 15).toFixed(0) == '0'
+        ? 1
+        : (response?.count / 15).toFixed(0)
+    }}</span
   >
   <button class="next" [disabled]="!hasNext()" (click)="goToNextPage()">
     Próximo
