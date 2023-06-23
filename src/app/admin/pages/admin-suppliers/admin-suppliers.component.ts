@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SuppliersModalComponent } from './modal/suppliers-modal.component';
 import { CreateSuppliersModalComponent } from './createModal/createSuppliers-modal.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 interface AdminSuppliers {
   id: number;
@@ -50,11 +51,20 @@ export class AdminSuppliersComponent implements OnInit {
     return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
+  sortContentTableAlphabetically(list) {
+    const sortedResults = list.results.sort((a, b) =>
+      a?.name?.localeCompare(b?.name),
+    );
+    return { ...list, results: sortedResults };
+  }
+
   getContent() {
     this.suppliersService
       .getSuppliers(this.currentPage.toString())
       .subscribe((data) => {
-        this.response = data;
+        const sortedData = this.sortContentTableAlphabetically(data);
+        this.response = new MatTableDataSource(sortedData.results);
+        this.response.count = data.next;
       });
   }
 

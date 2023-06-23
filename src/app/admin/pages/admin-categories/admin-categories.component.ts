@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { EditCategoryModalComponent } from './editModal/edit-category-modal.component';
 import { CreateCategoryModalComponent } from './createModal/create-category-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 
 interface AdminCategories {
   id: number;
@@ -31,13 +32,23 @@ export class AdminCategoriesComponent implements OnInit {
     this.getContent();
   }
 
+  sortContentTableAlphabetically(list) {
+    const sortedResults = list.results.sort((a, b) =>
+      a?.name?.localeCompare(b?.name),
+    );
+    return { ...list, results: sortedResults };
+  }
+
   getContent() {
     this.stocksService
       .getCategories(this.currentPage.toString())
       .subscribe((data) => {
-        this.response = data;
+        const sortedData = this.sortContentTableAlphabetically(data);
+        this.response = new MatTableDataSource(sortedData.results);
+        this.response.count = data.next;
       });
   }
+
   firstLetterOnCapital(text: string) {
     if (text.length == 0) return '';
     return text[0].toUpperCase() + text.substring(1);

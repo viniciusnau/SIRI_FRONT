@@ -1,6 +1,7 @@
 import { StocksService } from './../../../services/stocks.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 
 interface AdminStock {
   id: number;
@@ -28,11 +29,20 @@ export class AdminStockComponent implements OnInit {
     this.getContent();
   }
 
+  sortContentTableAlphabetically(list) {
+    const sortedResults = list.results?.sort((a, b) =>
+      a?.name?.localeCompare(b?.name),
+    );
+    return { ...list, results: sortedResults };
+  }
+
   getContent() {
     this.stocksService
       .getStocks(this.currentPage.toString())
       .subscribe((data) => {
-        this.response = data;
+        const sortedData = this.sortContentTableAlphabetically(data);
+        this.response = new MatTableDataSource(data?.results);
+        this.response.count = data?.next;
       });
   }
 

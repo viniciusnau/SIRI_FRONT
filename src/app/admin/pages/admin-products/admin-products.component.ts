@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateProductModalComponent } from './createModal/create-product-modal.component';
 import { EditProductModalComponent } from './editModal/edit-product-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 
 interface AdminProducts {
   id: number;
@@ -50,11 +51,20 @@ export class AdminProductsComponent implements OnInit {
     return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
+  sortContentTableAlphabetically(list) {
+    const sortedResults = list.results.sort((a, b) =>
+      a?.name?.localeCompare(b?.name),
+    );
+    return { ...list, results: sortedResults };
+  }
+
   getContent() {
     this.stocksService
       .getProducts(this.currentPage.toString())
       .subscribe((data) => {
-        this.response = data;
+        const sortedData = this.sortContentTableAlphabetically(data);
+        this.response = new MatTableDataSource(sortedData.results);
+        this.response.count = data.next;
       });
   }
 
