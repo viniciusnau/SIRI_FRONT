@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Category, Product } from '../../../interfaces/stock/interfaces';
 import {
@@ -7,6 +7,8 @@ import {
 } from 'src/app/services/products.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { UserService } from 'src/app/services/user.service';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { ReviewModal } from './reviewModal/reviewModal.component';
 
 @Component({
   selector: 'user-home',
@@ -19,16 +21,18 @@ export class HomeComponent implements OnInit {
   page = 'next';
   categories: Category[] = [];
   products: Product[] = [];
-  displayedColumns = ['name', 'description', 'quantity', 'measure', 'option'];
+  displayedColumns = ['name', 'description', 'quantity', 'measure'];
   selectedCategoryId: number;
   selectedProducts: any;
   client: number;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public modalContent: any,
     public userService: UserService,
     public productsService: ProductsService,
     public ordersService: OrdersService,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -87,7 +91,7 @@ export class HomeComponent implements OnInit {
       this.selectedProducts = [];
     }
 
-    const newSelectedProducts = this.response?.results.filter(
+    const newSelectedProducts = this.response?.results?.filter(
       (product) => product.option,
     );
 
@@ -103,6 +107,14 @@ export class HomeComponent implements OnInit {
         product.quantity = matchingProduct.quantity;
         product.option = matchingProduct.option;
       }
+    });
+  }
+
+  reviewModal() {
+    const dialogRef = this.dialog.open(ReviewModal, {
+      data: {
+        response: this.response?.results,
+      },
     });
   }
 

@@ -1,46 +1,15 @@
 <user-sidebar>
-  <div class="filter-and-button">
-    <div class="filter-container">
-      <mat-form-field appearance="fill">
-        <mat-label>Categorias</mat-label>
-        <mat-select
-          [(ngModel)]="selectedCategoryId"
-          name="categorySelect"
-          (selectionChange)="updateProducts()"
-        >
-          <mat-option *ngFor="let category of categories" [value]="category.id">
-            {{ firstLetterOnCapital(category.name) }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
-
   <mat-card>
     <mat-card-content>
       <mat-toolbar>
-        <span>Produtos</span>
-        <div class="button-container">
-          <button
-            mat-raised-button
-            class="order-button"
-            (click)="reviewModal()"
-          >
-            Fazer pedido
-          </button>
-        </div>
+        <span>Revisar pedido</span>
       </mat-toolbar>
-
       <form class="example-form">
-        <table
-          mat-table
-          [dataSource]="response?.results"
-          class="mat-elevation-z8"
-        >
+        <table mat-table [dataSource]="data?.response" class="mat-elevation-z8">
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Nome</th>
             <td mat-cell *matCellDef="let product">
-              {{ firstLetterOnCapital(product.name) }}
+              {{ product.name }}
             </td>
           </ng-container>
 
@@ -75,13 +44,11 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
-        <app-user-pagination
-          [currentPage]="currentPage"
-          [response]="response"
-          (pageChange)="onPageChange($event)"
-          [page]="page"
-        ></app-user-pagination>
       </form>
+      <div>
+        <button mat-button (click)="onNoClick()">Cancelar</button>
+        <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
+      </div>
     </mat-card-content>
   </mat-card>
 </user-sidebar>

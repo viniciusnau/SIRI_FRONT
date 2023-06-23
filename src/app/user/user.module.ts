@@ -18,10 +18,12 @@ import { StockWithdrawalsModalComponent } from './pages/estoque/saidas/modal/sto
 import { EditOrderItemModalComponent } from './pages/pedidos/order-items/editModal/edit-order-item-modal.component';
 import { InsideResetPasswordComponent } from './pages/inside-reset-password/inside-reset-password.component';
 import { UserPaginationComponent } from './components/pagination/user-pagination.component';
+import { ReviewModal } from './pages/home/reviewModal/reviewModal.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
+    ReviewModal,
     ResetPasswordComponent,
     EstoqueComponent,
     EntradasComponent,
