@@ -64,7 +64,7 @@ export class AdminOrderItemsComponent implements OnInit {
       this.orderId = params['id'];
     });
     this.getContent(this.orderId);
-    this.getSuppliers();
+    this.getAllSuppliers();
   }
 
   onPageChange(page: number) {
@@ -88,7 +88,7 @@ export class AdminOrderItemsComponent implements OnInit {
       });
   }
 
-  getSuppliers() {
+  getAllSuppliers() {
     this.suppliersService.getAllSuppliers().subscribe((data) => {
       this.suppliers = data;
     });

@@ -4,6 +4,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as moment from 'moment/moment';
 import { PriceFormatPipe } from '../../pipes/price-format.pipe';
+import { HttpClient } from '@angular/common/http';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -76,6 +77,7 @@ export class AdminStockReportsComponent implements OnInit {
   constructor(
     private stockService: StocksService,
     private priceFormatPipe: PriceFormatPipe,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -170,80 +172,92 @@ export class AdminStockReportsComponent implements OnInit {
 
   generatePDF() {
     const currentDate = moment().format('DD/MM/YYYY HH:mm:ss');
-    const docDefinition = {
-      pageMargins: [20, 70, 20, 20],
-      header: {
-        columns: [
-          {
-            text: 'S.I.R.I',
-            alignment: 'left',
-            margin: [20, 10],
-            fontSize: 14,
-            bold: true,
-          },
-          { text: currentDate, alignment: 'right', margin: [20, 10] },
-        ],
-      },
-      content: [
-        { text: 'Relatório de Estoque', style: 'header', alignment: 'center' },
-        '\n\n',
-        {
-          table: {
-            widths: [
-              'auto',
-              'auto',
-              'auto',
-              'auto',
-              'auto',
-              'auto',
-              'auto',
-              'auto',
-            ],
-            body: [
-              [
-                { text: 'Código', alignment: 'center' },
-                { text: 'Produto', alignment: 'center' },
-                { text: 'Quantidade de Entrada', alignment: 'center' },
-                { text: 'Quantidade de Saída', alignment: 'center' },
-                { text: 'Valor de Entrada', alignment: 'center' },
-                { text: 'Valor de Saída', alignment: 'center' },
-                { text: 'Núcleo', alignment: 'center' },
-                { text: 'Setor', alignment: 'center' },
-              ],
-              ...this.stockReports.map((report) => [
-                { text: report.productCode, alignment: 'center' },
-                { text: report.productName, alignment: 'center' },
-                { text: report.entryQuantity, alignment: 'center' },
-                { text: report.withdrawalQuantity, alignment: 'center' },
-                {
-                  text: this.priceFormatPipe.transform(
-                    Number(parseFloat(String(report.entryPrice)).toFixed(2)),
-                  ),
-                  alignment: 'center',
-                },
-                {
-                  text: this.priceFormatPipe.transform(
-                    Number(
-                      parseFloat(String(report.withdrawalPrice)).toFixed(2),
-                    ),
-                  ),
-                  alignment: 'center',
-                },
-                { text: report.core, alignment: 'center' },
-                { text: report.sector, alignment: 'center' },
-              ]),
-            ],
-          },
-        },
-      ],
-      styles: {
-        header: {
-          fontSize: 18,
-          bold: true,
-        },
-      },
-    };
+    const imagePath = 'assets/logo_defensoria_sc_preferencial_colorido.png';
 
-    pdfMake.createPdf(docDefinition).open();
+    this.http
+      .get(imagePath, { responseType: 'blob' })
+      .subscribe((imageBlob: Blob) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const imageDataUrl = reader.result as string;
+
+          const docDefinition = {
+            pageMargins: [20, 70, 20, 20],
+            header: {
+              columns: [
+                {
+                  image: imageDataUrl,
+                  width: 200,
+                  alignment: 'left',
+                },
+                { text: currentDate, alignment: 'right', margin: [20, 10] },
+              ],
+            },
+            content: [
+              { text: 'Relatório de Estoque', style: 'header', alignment: 'center' },
+              '\n\n',
+              {
+                table: {
+                  widths: [
+                    'auto',
+                    'auto',
+                    'auto',
+                    'auto',
+                    'auto',
+                    'auto',
+                    'auto',
+                    'auto',
+                  ],
+                  body: [
+                    [
+                      { text: 'Código', alignment: 'center' },
+                      { text: 'Produto', alignment: 'center' },
+                      { text: 'Quantidade de Entrada', alignment: 'center' },
+                      { text: 'Quantidade de Saída', alignment: 'center' },
+                      { text: 'Valor de Entrada', alignment: 'center' },
+                      { text: 'Valor de Saída', alignment: 'center' },
+                      { text: 'Núcleo', alignment: 'center' },
+                      { text: 'Setor', alignment: 'center' },
+                    ],
+                    ...this.stockReports.map((report) => [
+                      { text: report.productCode, alignment: 'center' },
+                      { text: report.productName, alignment: 'center' },
+                      { text: report.entryQuantity, alignment: 'center' },
+                      { text: report.withdrawalQuantity, alignment: 'center' },
+                      {
+                        text: this.priceFormatPipe.transform(
+                          Number(parseFloat(String(report.entryPrice)).toFixed(2)),
+                        ),
+                        alignment: 'center',
+                      },
+                      {
+                        text: this.priceFormatPipe.transform(
+                          Number(
+                            parseFloat(String(report.withdrawalPrice)).toFixed(2),
+                          ),
+                        ),
+                        alignment: 'center',
+                      },
+                      { text: report.core, alignment: 'center' },
+                      { text: report.sector, alignment: 'center' },
+                    ]),
+                  ],
+                },
+              },
+            ],
+            styles: {
+              header: {
+                fontSize: 18,
+                bold: true,
+                margin: [0, 0, 0, 10],
+              },
+            },
+          };
+
+          pdfMake.createPdf(docDefinition).open();
+        };
+
+        reader.readAsDataURL(imageBlob);
+      });
   }
 }

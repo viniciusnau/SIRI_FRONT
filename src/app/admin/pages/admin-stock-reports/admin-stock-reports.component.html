@@ -42,7 +42,6 @@
                 [(ngModel)]="selectedCategories"
                 multiple
                 [disabled]="selectedProducts.length > 0"
-                placeholder="{{ selectedProducts.length > 0 ? '' : 'Todas' }}"
               >
                 <mat-option
                   *ngFor="let category of categories"
@@ -60,7 +59,6 @@
                 [(ngModel)]="selectedProducts"
                 multiple
                 [disabled]="selectedCategories.length > 0"
-                placeholder="{{ selectedCategories.length > 0 ? '' : 'Todos' }}"
               >
                 <mat-option
                   *ngFor="let product of products"
