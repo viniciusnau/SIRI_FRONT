@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { PriceFormatPipe } from '../../../pipes/price-format.pipe';
+import { HttpClient } from '@angular/common/http';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -45,7 +46,8 @@ export class AccountantReportsModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: AccountantReportsModalData,
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
-    private priceFormatPipe: PriceFormatPipe
+    private priceFormatPipe: PriceFormatPipe,
+    private http: HttpClient
   ) {
     this.months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
     this.years = [2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
@@ -118,6 +120,7 @@ export class AccountantReportsModalComponent implements OnInit {
     const month = this.formAccountantReports.get('month')?.value;
     const year = this.formAccountantReports.get('year')?.value;
     const currentDate = moment().format('DD/MM/YYYY HH:mm:ss');
+    const imageFile = 'assets/logo_defensoria_sc_preferencial_colorido.png';
 
     let entrySum = 0;
     let outputSum = 0;
@@ -145,77 +148,89 @@ export class AccountantReportsModalComponent implements OnInit {
     const newFormattedPreviousBalanceSum = this.priceFormatPipe.transform(Number(formattedPreviousBalanceSum));
     const newFormattedCurrentBalanceSum = this.priceFormatPipe.transform(Number(formattedCurrentBalanceSum));
 
-    const docDefinition = {
-      header: {
-        columns: [
-          { text: 'S.I.R.I', alignment: 'left', margin: [20, 10], fontSize: 14, bold: true },
-          { text: currentDate, alignment: 'right', margin: [20, 10] },
-        ],
-      },
-      content: [
-        { text: 'Relatório do Contador', style: 'header', alignment: 'center' },
-        { text: month + '/' + year, alignment: 'right' },
-        '\n\n',
-        {
-          table: {
-            layout: 'autoTable',
-            body: [
-              [
-                { text: 'Código', alignment: 'center' },
-                { text: 'Categoria', alignment: 'center' },
-                { text: 'Quantidade de Entrada', alignment: 'center' },
-                { text: 'Quantidade de Saída', alignment: 'center' },
-                { text: 'Saldo', alignment: 'center' },
-                { text: 'Saldo Anterior', alignment: 'center' },
-                { text: 'Saldo Atual', alignment: 'center' },
-              ],
-              ...this.report.map((report_item) => [
-                { text: report_item.code, alignment: 'center' },
-                { text: report_item.name, alignment: 'center' },
-                { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.entry_value)).toFixed(2))), alignment: 'center' },
-                { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.output_value)).toFixed(2))), alignment: 'center' },
-                { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.balance)).toFixed(2))), alignment: 'center' },
-                { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.previous_balance)).toFixed(2))), alignment: 'center' },
-                { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.current_balance)).toFixed(2))), alignment: 'center' },
-              ]),
-              [
-                { text: '', colSpan: 1 },
-                { text: 'Total:', alignment: 'right', bold: true },
-                { text: newFormattedEntrySum, alignment: 'center', bold: true },
-                { text: newFormattedOutputSum, alignment: 'center', bold: true },
-                { text: newFormattedBalanceSum, alignment: 'center', bold: true },
-                { text: newFormattedPreviousBalanceSum, alignment: 'center', bold: true },
-                { text: newFormattedCurrentBalanceSum, alignment: 'center', bold: true },
-              ],
+    this.http.get(imageFile, { responseType: 'blob' }).subscribe((blob) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+
+      reader.onloadend = () => {
+        const imageDataUrl = reader.result as string;
+
+        const docDefinition = {
+          header: {
+            columns: [
+              {
+                image: imageDataUrl,
+                width: 200,
+              },
+              { text: currentDate, alignment: 'right', margin: [20, 10] },
             ],
           },
-        },
-      ],
-      styles: {
-        header: {
-          fontSize: 18,
-          bold: true,
-        },
-      },
-    };
+          content: [
+            { text: 'Relatório do Contador', style: 'header', alignment: 'center' },
+            { text: month + '/' + year, alignment: 'right' },
+            '\n\n',
+            {
+              table: {
+                layout: 'autoTable',
+                body: [
+                  [
+                    { text: 'Código', alignment: 'center' },
+                    { text: 'Categoria', alignment: 'center' },
+                    { text: 'Quantidade de Entrada', alignment: 'center' },
+                    { text: 'Quantidade de Saída', alignment: 'center' },
+                    { text: 'Saldo', alignment: 'center' },
+                    { text: 'Saldo Anterior', alignment: 'center' },
+                    { text: 'Saldo Atual', alignment: 'center' },
+                  ],
+                  ...this.report.map((report_item) => [
+                    { text: report_item.code, alignment: 'center' },
+                    { text: report_item.name, alignment: 'center' },
+                    { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.entry_value)).toFixed(2))), alignment: 'center' },
+                    { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.output_value)).toFixed(2))), alignment: 'center' },
+                    { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.balance)).toFixed(2))), alignment: 'center' },
+                    { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.previous_balance)).toFixed(2))), alignment: 'center' },
+                    { text: this.priceFormatPipe.transform(Number(parseFloat(String(report_item.current_balance)).toFixed(2))), alignment: 'center' },
+                  ]),
+                  [
+                    { text: '', colSpan: 1 },
+                    { text: 'Total:', alignment: 'right', bold: true },
+                    { text: newFormattedEntrySum, alignment: 'center', bold: true },
+                    { text: newFormattedOutputSum, alignment: 'center', bold: true },
+                    { text: newFormattedBalanceSum, alignment: 'center', bold: true },
+                    { text: newFormattedPreviousBalanceSum, alignment: 'center', bold: true },
+                    { text: newFormattedCurrentBalanceSum, alignment: 'center', bold: true },
+                  ],
+                ],
+              },
+            },
+          ],
+          styles: {
+            header: {
+              fontSize: 18,
+              bold: true,
+            },
+          },
+        };
 
-    const pdfDocGenerator = pdfMake.createPdf(docDefinition);
-    const monthIndex = this.formAccountantReports.get('month')?.value;
-    const formattedMonth = this.getMonthString(monthIndex);
+        const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+        const monthIndex = this.formAccountantReports.get('month')?.value;
+        const formattedMonth = this.getMonthString(monthIndex);
 
-    pdfDocGenerator.getBlob((pdfBlob) => {
-      const formData = new FormData();
-      formData.append('file', pdfBlob, 'accountant_report.pdf');
-      formData.append('month', formattedMonth);
-      formData.append('total_previous_value', previousBalanceSum.toFixed(2));
-      formData.append('total_entry_value', entrySum.toFixed(2));
-      formData.append('total_output_value', outputSum.toFixed(2));
-      formData.append('total_current_value', currentBalanceSum.toFixed(2));
+        pdfDocGenerator.getBlob((pdfBlob) => {
+          const formData = new FormData();
+          formData.append('file', pdfBlob, 'accountant_report.pdf');
+          formData.append('month', formattedMonth);
+          formData.append('total_previous_value', previousBalanceSum.toFixed(2));
+          formData.append('total_entry_value', entrySum.toFixed(2));
+          formData.append('total_output_value', outputSum.toFixed(2));
+          formData.append('total_current_value', currentBalanceSum.toFixed(2));
 
-      this.stocksService.postAccountantReports(formData).subscribe(
-        (response) => {window.location.reload()},
-        (error) => {}
-      );
+          this.stocksService.postAccountantReports(formData).subscribe(
+            (response) => { window.location.reload() },
+            (error) => { }
+          );
+        });
+      };
     });
   }
 }

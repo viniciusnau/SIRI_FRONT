@@ -1,7 +1,8 @@
-import { StocksService } from 'src/app/services/stocks.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ProductsService } from '../../../services/products.service';
+import { HttpClient } from '@angular/common/http';
+import { StocksService } from 'src/app/services/stocks.service';
+import { ProductsService } from 'src/app/services/products.service';
 import { DispatchReportsModalComponent } from './modal/dispatch-reports-modal.component';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -38,28 +39,6 @@ interface Product {
   };
 }
 
-interface DispatchReports {
-  id: number;
-  product: {
-    id: number;
-    name: string;
-    measure: {
-      name: string;
-    };
-  };
-  quantity: number;
-  publicDefense: {
-    id: number;
-    name: string;
-    district: string;
-    address: string;
-  };
-  file: null;
-  description: string;
-  created: string;
-  updated: string;
-}
-
 @Component({
   selector: 'app-admin-dispatch-reports',
   templateUrl: './admin-dispatch-reports.component.html',
@@ -75,6 +54,7 @@ export class AdminDispatchReportsComponent implements OnInit {
     private productsService: ProductsService,
     public dialog: MatDialog,
     private priceFormatPipe: PriceFormatPipe,
+    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {
@@ -111,7 +91,7 @@ export class AdminDispatchReportsComponent implements OnInit {
   }
 
   firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
+    if (text.length === 0) return '';
     return text[0].toUpperCase() + text.substring(1);
   }
 
@@ -146,142 +126,150 @@ export class AdminDispatchReportsComponent implements OnInit {
         const total = reportData.quantity * reportData.price;
         const formattedPrice = this.priceFormatPipe.transform(reportData.price);
         const formattedTotal = this.priceFormatPipe.transform(total);
+        const imagePath = 'assets/logo_defensoria_sc_preferencial_colorido.png';
 
-        const docDefinition = {
-          content: [
-            {
-              layout: 'noBorders',
-              table: {
-                widths: ['*', 'auto'],
-                body: [
-                  [
+        this.http
+          .get(imagePath, { responseType: 'blob' })
+          .subscribe((imageBlob: Blob) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              const imageDataUrl = reader.result as string;
+
+              const docDefinition = {
+                pageMargins: [20, 70, 20, 20],
+                header: {
+                  columns: [
                     {
-                      text: 'S.I.R.I',
+                      image: imageDataUrl,
+                      width: 200,
                       alignment: 'left',
-                      margin: [20, 5],
-                      fontSize: 14,
-                      bold: true,
                     },
+                    { text: currentDate, alignment: 'right', margin: [20, 10] },
                   ],
+                },
+                content: [
+                  {
+                    layout: 'noBorders',
+                    table: {
+                      widths: ['*', 'auto'],
+                      body: [
+                        [],
+                      ],
+                    },
+                  },
+                  {
+                    text: 'Guia de Saída',
+                    style: 'header',
+                    alignment: 'center',
+                    margin: [0, 10],
+                  },
+                  {
+                    text: `Guia: ${reportData.id}`,
+                    style: 'line',
+                    alignment: 'left',
+                    margin: [20, 5],
+                  },
+                  {
+                    text: `Núcleo: ${reportData.publicDefense}`,
+                    style: 'line',
+                    alignment: 'left',
+                    margin: [20, 5],
+                  },
+                  {
+                    text: `Produto: ${reportData.name}`,
+                    style: 'line',
+                    alignment: 'left',
+                    margin: [20, 5],
+                  },
+                  {
+                    text: `Descrição: ${reportData.description}`,
+                    style: 'line',
+                    alignment: 'left',
+                    margin: [20, 5],
+                  },
+                  {
+                    text: `Código: ${reportData.code}`,
+                    style: 'line',
+                    alignment: 'left',
+                    margin: [20, 5],
+                  },
+                  {
+                    text: `Medida: ${reportData.measure}`,
+                    style: 'line',
+                    alignment: 'left',
+                    margin: [20, 5],
+                  },
+                  {
+                    text: `Quantidade: ${reportData.quantity}`,
+                    style: 'line',
+                    alignment: 'left',
+                    margin: [20, 5],
+                  },
+                  {
+                    text: `Preço: ${formattedPrice}`,
+                    style: 'line',
+                    alignment: 'left',
+                    margin: [20, 5],
+                  },
+                  {
+                    text: `Total: ${formattedTotal}`,
+                    style: 'line',
+                    alignment: 'left',
+                    margin: [20, 5],
+                  },
+                  {
+                    text: '\n',
+                    alignment: 'left',
+                    margin: [20, 5],
+                  },
+                  {
+                    text: 'Obs:',
+                    style: 'line',
+                    alignment: 'left',
+                    margin: [20, 5],
+                  },
                 ],
-              },
-            },
-            {
-              text: 'Guia de Saída',
-              style: 'header',
-              alignment: 'center',
-              margin: [0, 10],
-            },
-            {
-              text: `Guia: ${reportData.id}`,
-              style: 'line',
-              alignment: 'left',
-              margin: [20, 5],
-            },
-            {
-              text: `Data: ${currentDate}`,
-              style: 'line',
-              alignment: 'left',
-              margin: [20, 5],
-            },
-            {
-              text: `Núcleo: ${reportData.publicDefense}`,
-              style: 'line',
-              alignment: 'left',
-              margin: [20, 5],
-            },
-            {
-              text: `Produto: ${reportData.name}`,
-              style: 'line',
-              alignment: 'left',
-              margin: [20, 5],
-            },
-            {
-              text: `Descrição: ${reportData.description}`,
-              style: 'line',
-              alignment: 'left',
-              margin: [20, 5],
-            },
-            {
-              text: `Código: ${reportData.code}`,
-              style: 'line',
-              alignment: 'left',
-              margin: [20, 5],
-            },
-            {
-              text: `Medida: ${reportData.measure}`,
-              style: 'line',
-              alignment: 'left',
-              margin: [20, 5],
-            },
-            {
-              text: `Quantidade: ${reportData.quantity}`,
-              style: 'line',
-              alignment: 'left',
-              margin: [20, 5],
-            },
-            {
-              text: `Preço: ${reportData.price.toFixed(2)}`,
-              style: 'line',
-              alignment: 'left',
-              margin: [20, 5],
-            },
-            {
-              text: `Total: ${total.toFixed(2)}`,
-              style: 'line',
-              alignment: 'left',
-              margin: [20, 5],
-            },
-            {
-              text: '\n',
-              style: 'line',
-              alignment: 'left',
-              margin: [20, 5],
-            },
-            {
-              text: 'Obs:',
-              style: 'line',
-              alignment: 'left',
-              margin: [20, 5],
-            },
-          ],
-          styles: {
-            header: {
-              fontSize: 16,
-              bold: true,
-            },
-            line: {
-              fontSize: 12,
-              bold: false,
-              margin: [20, 5],
-              decoration: 'underline',
-            },
-          },
-          defaultStyle: {
-            fontSize: 12,
-          },
-        };
+                styles: {
+                  header: {
+                    fontSize: 16,
+                    bold: true,
+                  },
+                  line: {
+                    fontSize: 12,
+                    bold: false,
+                    margin: [20, 5],
+                    decoration: 'underline',
+                  },
+                },
+                defaultStyle: {
+                  fontSize: 12,
+                },
+              };
 
-        const pdfDocGenerator = pdfMake.createPdf(docDefinition);
-        pdfDocGenerator.download(`DispatchReport_${dispatchReport.id}.pdf`);
+              const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+              pdfDocGenerator.download(`DispatchReport_${dispatchReport.id}.pdf`);
 
-        pdfDocGenerator.getBlob((blob) => {
-          const formData = new FormData();
-          formData.append(
-            'file',
-            blob,
-            `DispatchReport_${dispatchReport.id}.pdf`,
-          );
+              pdfDocGenerator.getBlob((blob) => {
+                const formData = new FormData();
+                formData.append(
+                  'file',
+                  blob,
+                  `DispatchReport_${dispatchReport.id}.pdf`,
+                );
 
-          this.stocksService
-            .updateDispatchReportFile(dispatchReport.id, formData)
-            .subscribe(
-              (response) => {
-                window.location.reload();
-              },
-              (error) => {},
-            );
-        });
+                this.stocksService
+                  .updateDispatchReportFile(dispatchReport.id, formData)
+                  .subscribe(
+                    (response) => {
+                      window.location.reload();
+                    },
+                    (error) => {},
+                  );
+              });
+            };
+
+            reader.readAsDataURL(imageBlob);
+          });
       });
   }
 

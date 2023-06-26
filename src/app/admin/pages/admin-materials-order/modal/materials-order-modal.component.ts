@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { HttpClient } from '@angular/common/http';
 
 interface Supplier {
   id: number;
@@ -53,6 +54,7 @@ export class MaterialsOrderModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: MaterialsOrderModalData,
     private formBuilder: FormBuilder,
     public ordersService: OrdersService,
+    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {
@@ -141,7 +143,7 @@ export class MaterialsOrderModalComponent implements OnInit {
       const sectionProducts = products.slice(startIndex, endIndex);
 
       const tableHeader = [
-        'Nucleo',
+        'Núcleo',
         ...sectionProducts.map(
           (product) =>
             `${productsMap[product][`${publicDefenses[0]}_${product}_code`]}\n${this.firstLetterOnCapital(
@@ -183,55 +185,63 @@ export class MaterialsOrderModalComponent implements OnInit {
       startIndex += maxColumnsPerPage;
     }
 
-    const docDefinition = {
-      header: {
-        columns: [
-          {
-            text: 'S.I.R.I',
-            alignment: 'left',
-            margin: [20, 5],
-            fontSize: 14,
-            bold: true,
-          },
-          { text: currentDate, alignment: 'right', margin: [20, 10] },
-        ],
-      },
-      content: [
-        {
-          text: 'Pedido de Materiais' + ' - ' + this.materialsOrder.supplier,
-          style: 'header',
-          alignment: 'center',
-          margin: [0, 10],
-        },
-        '\n\n',
-        ...tables,
-      ],
-      styles: {
-        header: {
-          fontSize: 18,
-          bold: true,
-        },
-      },
-      pageSize: 'A4',
-      pageOrientation: 'landscape',
-    };
+    const imagePath = 'assets/logo_defensoria_sc_preferencial_colorido.png';
+    this.http.get(imagePath, { responseType: 'blob' }).subscribe(
+      (imageBlob: Blob) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const imageDataUrl = reader.result as string;
+          const docDefinition = {
+            header: {
+              columns: [
+                {
+                  image: imageDataUrl,
+                  width: 200,
+                  alignment: 'left',
+                },
+                { text: currentDate, alignment: 'right', margin: [20, 10] },
+              ],
+            },
+            content: [
+              {
+                text: 'Pedido de Materiais' + ' - ' + this.materialsOrder.supplier,
+                style: 'header',
+                alignment: 'center',
+                margin: [0, 10],
+              },
+              '\n\n',
+              ...tables,
+            ],
+            styles: {
+              header: {
+                fontSize: 18,
+                bold: true,
+              },
+            },
+            pageSize: 'A4',
+            pageOrientation: 'landscape',
+          };
 
-    const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+          const pdfDocGenerator = pdfMake.createPdf(docDefinition);
 
-    pdfDocGenerator.getBlob((blob) => {
-      const fileName = 'materials_order.pdf';
-      const file = new File([blob], fileName, { type: 'application/pdf' });
+          pdfDocGenerator.getBlob((blob) => {
+            const fileName = 'materials_order.pdf';
+            const file = new File([blob], fileName, { type: 'application/pdf' });
 
-      const objectId = this.materialsOrder.materials_order;
+            const objectId = this.materialsOrder.materials_order;
 
-      const formData = new FormData();
-      formData.append('file', file);
+            const formData = new FormData();
+            formData.append('file', file);
 
-      this.ordersService.patchMaterialsOrder(objectId, formData).subscribe(
-        (response) => {window.location.reload()},
-        (error) => {}
-      );
-    });
+            this.ordersService.patchMaterialsOrder(objectId, formData).subscribe(
+              (response) => {window.location.reload()},
+              (error) => {}
+            );
+          });
+        }
+        reader.readAsDataURL(imageBlob);
+      }
+    )
   }
 
   onNoClick(): void {
