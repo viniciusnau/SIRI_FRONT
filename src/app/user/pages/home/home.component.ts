@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Category, Product } from '../../../interfaces/stock/interfaces';
 import {
@@ -7,7 +7,7 @@ import {
 } from 'src/app/services/products.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { UserService } from 'src/app/services/user.service';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ReviewModal } from './reviewModal/reviewModal.component';
 
 @Component({
@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
   client: number;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public modalContent: any,
     public userService: UserService,
     public productsService: ProductsService,
     public ordersService: OrdersService,
@@ -45,6 +44,14 @@ export class HomeComponent implements OnInit {
     this.getContent([this.selectedCategoryId]);
   }
 
+  isQuantityPopulated(): boolean {
+    if (!this.response || !this.response.results) {
+      return false;
+    }
+
+    return this.response.results.some((product) => !!product.quantity);
+  }
+
   getUserData(): void {
     this.userService.getUser().subscribe(
       (data) => {
@@ -59,11 +66,13 @@ export class HomeComponent implements OnInit {
   }
 
   updateProducts(): void {
+    this.saveFields();
     if (this.selectedCategoryId) {
       this.getContent([this.selectedCategoryId]);
     } else {
       this.products = [];
     }
+    this.populateFields();
   }
 
   getContent(categoryIds: number[]): void {
@@ -92,7 +101,7 @@ export class HomeComponent implements OnInit {
     }
 
     const newSelectedProducts = this.response?.results?.filter(
-      (product) => product.option,
+      (product) => product.quantity,
     );
 
     this.selectedProducts = this.selectedProducts.concat(newSelectedProducts);
@@ -101,19 +110,19 @@ export class HomeComponent implements OnInit {
   populateFields(): void {
     this.response?.results?.forEach((product) => {
       const matchingProduct = this.selectedProducts?.find(
-        (selectedProduct) => selectedProduct.id === product.id,
+        (selected) => selected.id === product.id && selected.quantity,
       );
       if (matchingProduct) {
         product.quantity = matchingProduct.quantity;
-        product.option = matchingProduct.option;
       }
     });
   }
 
   reviewModal() {
+    this.saveFields();
     const dialogRef = this.dialog.open(ReviewModal, {
       data: {
-        response: this.response?.results,
+        response: this.selectedProducts,
       },
     });
   }
@@ -134,11 +143,12 @@ export class HomeComponent implements OnInit {
           ...this.response?.results,
         ].filter(
           (product, index, self) =>
-            product.option &&
+            // product.option &&
             index ===
-              self.findIndex(
-                (p) => p.id === product.id && p.option === product.option,
-              ),
+            self.findIndex(
+              (p) => p.id === product.id,
+              // && p.option === product.option,
+            ),
         );
         const orderItems = this.selectedProducts?.map((product) => ({
           product: product.id,

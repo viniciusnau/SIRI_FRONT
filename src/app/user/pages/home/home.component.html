@@ -25,6 +25,7 @@
             mat-raised-button
             class="order-button"
             (click)="reviewModal()"
+            [disabled]="!isQuantityPopulated()"
           >
             Fazer pedido
           </button>

@@ -11,7 +11,11 @@
   .order-button {
     margin-left: 16px;
     background-color: $primary-color;
-    color: $primary-text-color;;
+    color: $primary-text-color;
+  }
+  .order-button:disabled {
+    background-color: rgba($primary-color-disabled, 1);
+    color: rgba($primary-text-color-disabled, 0.75);
   }
 }
 
@@ -43,7 +47,8 @@ section {
   margin-right: 8px;
 }
 
-td, th {
+td,
+th {
   text-align: center !important;
   vertical-align: middle !important;
 }
