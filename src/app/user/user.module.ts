@@ -18,6 +18,7 @@ import { StockWithdrawalsModalComponent } from './pages/estoque/saidas/modal/sto
 import { EditOrderItemModalComponent } from './pages/pedidos/order-items/editModal/edit-order-item-modal.component';
 import { InsideResetPasswordComponent } from './pages/inside-reset-password/inside-reset-password.component';
 import { UserPaginationComponent } from './components/pagination/user-pagination.component';
+import { OrderModalComponent } from './pages/pedidos/modal/order-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UserPaginationComponent } from './components/pagination/user-pagination
     EditOrderItemModalComponent,
     InsideResetPasswordComponent,
     UserPaginationComponent,
+    OrderModalComponent,
   ],
   imports: [
     CommonModule,

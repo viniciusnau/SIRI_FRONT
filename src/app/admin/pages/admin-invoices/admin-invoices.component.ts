@@ -7,15 +7,6 @@ import {
   InvoiceModalData,
 } from './modal/invoice-modal.component';
 
-interface AdminInvoices {
-  id: number;
-  code: string;
-  supplier: string;
-  public_defense: string;
-  total_value: string;
-  file: string;
-}
-
 @Component({
   selector: 'app-admin-invoices',
   templateUrl: './admin-invoices.component.html',
@@ -24,7 +15,6 @@ interface AdminInvoices {
 export class AdminInvoicesComponent implements OnInit {
   currentPage = 1;
   response: any;
-  adminInvoices: AdminInvoices[] = [];
 
   modalData: InvoiceModalData = {
     suppliers: [],

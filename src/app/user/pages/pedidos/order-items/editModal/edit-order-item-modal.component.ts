@@ -42,7 +42,7 @@ export class EditOrderItemModalComponent implements OnInit {
     const editOrderItemData = this.formOrderItem.getRawValue();
 
     this.ordersService
-      .updateOrderItem(this.data.order_id, editOrderItemData)
+      .updateOrderItem(this.data.order_item_id, editOrderItemData)
       .subscribe({
         next: (result) => {
           this.dialogRef.close();
