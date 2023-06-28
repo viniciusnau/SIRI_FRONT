@@ -3,11 +3,8 @@
     <div class="filter-container">
       <mat-form-field appearance="fill">
         <mat-label>Categorias</mat-label>
-        <mat-select
-          [(ngModel)]="selectedCategoryId"
-          name="categorySelect"
-          (selectionChange)="updateProducts()"
-        >
+        <mat-select [(ngModel)]="selectedCategoryId" name="categorySelect" (selectionChange)="updateProducts(true)">
+          <mat-option value="0">Todas</mat-option>
           <mat-option *ngFor="let category of categories" [value]="category.id">
             {{ firstLetterOnCapital(category.name) }}
           </mat-option>
@@ -16,78 +13,51 @@
     </div>
   </div>
 
-  <mat-card>
+  <mat-card *ngIf="!loading">
     <mat-card-content>
       <mat-toolbar>
         <span>Produtos</span>
         <div class="button-container">
-          <button mat-raised-button class="order-button" (click)="order()">
-            Fazer pedido
-          </button>
+          <button [disabled]="chosenProducts.length === 0" mat-raised-button class="order-button" (click)="order()">Fazer pedido</button>
         </div>
       </mat-toolbar>
 
       <form class="example-form">
-        <table
-          mat-table
-          [dataSource]="response?.results"
-          class="mat-elevation-z8"
-        >
+        <table mat-table [dataSource]="products" class="mat-elevation-z8">
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Nome</th>
-            <td mat-cell *matCellDef="let product">
-              {{ firstLetterOnCapital(product.name) }}
-            </td>
+            <td mat-cell *matCellDef="let product">{{ firstLetterOnCapital(product.name) }}</td>
           </ng-container>
 
           <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef>Descrição</th>
-            <td mat-cell *matCellDef="let product">
-              {{ product.description }}
-            </td>
+            <td mat-cell *matCellDef="let product">{{ product.description }}</td>
           </ng-container>
 
           <ng-container matColumnDef="quantity">
             <th mat-header-cell *matHeaderCellDef>Quantidade</th>
-            <td mat-cell *matCellDef="let material">
+            <td mat-cell *matCellDef="let product">
               <mat-form-field>
-                <input
-                  matInput
-                  [(ngModel)]="material.quantity"
-                  name="quantityInput"
-                  maxlength="3"
-                />
+                <input type="number" matInput [(ngModel)]="product.quantity" (ngModelChange)="updateQuantity(product)" name="quantityInput" appDigitLimit [ngModelOptions]="{standalone: true}" [ngModel]="product.quantity" />
               </mat-form-field>
             </td>
           </ng-container>
 
           <ng-container matColumnDef="measure">
             <th mat-header-cell *matHeaderCellDef>Medida</th>
-            <td mat-cell *matCellDef="let material">
-              {{ material.measure.name }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="option">
-            <th mat-header-cell *matHeaderCellDef>Escolher</th>
-            <td mat-cell *matCellDef="let material">
-              <mat-checkbox
-                [(ngModel)]="material.option"
-                name="optionCheckbox"
-              ></mat-checkbox>
-            </td>
+            <td mat-cell *matCellDef="let material">{{ material.measure.name }}</td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
-        <app-user-pagination
-          [currentPage]="currentPage"
-          [response]="response"
-          (pageChange)="onPageChange($event)"
-          [page]="page"
-        ></app-user-pagination>
       </form>
+      <app-pagination
+        [currentPage]="currentPage"
+        [response]="response"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
     </mat-card-content>
   </mat-card>
+  <div class="custom-spinner" *ngIf="loading"></div>
 </user-sidebar>

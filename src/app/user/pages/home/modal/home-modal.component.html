@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Confirmar Pedido?</h2>
+<mat-dialog-content>
+  <table class="order-review-table">
+    <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Medida</th>
+      <th>Quantidade</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of chosenProducts">
+      <td>{{ product.name }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.measure.name }}</td>
+      <td>{{ product.quantity }}</td>
+    </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onNoClick()">Não</button>
+  <button mat-button (click)="onClick()" cdkFocusInitial [disabled]="!form.valid">Sim</button>
+</div>

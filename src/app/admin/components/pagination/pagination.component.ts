@@ -29,4 +29,8 @@ export class PaginationComponent {
       this.pageChange.emit(this.currentPage + 1);
     }
   }
+
+  handleTotalPage(pages) {
+    return Math.ceil(pages);
+  }
 }
