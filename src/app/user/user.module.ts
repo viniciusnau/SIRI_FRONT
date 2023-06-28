@@ -18,13 +18,14 @@ import { StockWithdrawalsModalComponent } from './pages/estoque/saidas/modal/sto
 import { EditOrderItemModalComponent } from './pages/pedidos/order-items/editModal/edit-order-item-modal.component';
 import { InsideResetPasswordComponent } from './pages/inside-reset-password/inside-reset-password.component';
 import { UserPaginationComponent } from './components/pagination/user-pagination.component';
-import { ReviewModal } from './pages/home/reviewModal/reviewModal.component';
 import { OrderModalComponent } from './pages/pedidos/modal/order-modal.component';
+import { DigitLimitDirective } from './pages/home/digit-limit.directive';
+import { HomeModalComponent } from './pages/home/modal/home-modal.component';
+import { AdminModule } from '../admin/admin.module';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    ReviewModal,
     ResetPasswordComponent,
     EstoqueComponent,
     EntradasComponent,
@@ -38,6 +39,8 @@ import { OrderModalComponent } from './pages/pedidos/modal/order-modal.component
     InsideResetPasswordComponent,
     UserPaginationComponent,
     OrderModalComponent,
+    DigitLimitDirective,
+    HomeModalComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +50,7 @@ import { OrderModalComponent } from './pages/pedidos/modal/order-modal.component
     MaterialCommonsModule,
     FormsModule,
     ReactiveFormsModule,
+    AdminModule,
   ],
   providers: [],
 })

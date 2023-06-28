@@ -27,6 +27,8 @@
 
 .filter-container {
   flex-grow: 1;
+  margin-top: 10px;
+  margin-left: 20px;
 }
 
 table {
@@ -72,4 +74,26 @@ table.mat-table {
 
 .mat-column-name {
   max-width: 200px;
+}
+
+.custom-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border: 2px solid #ccc;
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
