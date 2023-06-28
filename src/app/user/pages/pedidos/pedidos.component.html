@@ -77,10 +77,20 @@
                 class="btn"
                 mat-mini-fab
                 aria-label="Delete order"
+                [disabled]="orders.completely_added_to_stock || orders.partially_added_to_stock"
                 (click)="deleteOrder(orders.id)"
               >
                 <mat-icon>delete</mat-icon>
               </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="confirmation">
+          <th mat-header-cell *matHeaderCellDef>Confirmar Entrega</th>
+          <td mat-cell *matCellDef="let orders">
+            <div class="button-container">
+              <mat-checkbox [checked]="orders.completely_added_to_stock" [disabled]="orders.completely_added_to_stock" (click)="openModal(orders.id)"></mat-checkbox>
             </div>
           </td>
         </ng-container>

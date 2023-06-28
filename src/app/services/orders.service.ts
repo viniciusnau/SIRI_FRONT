@@ -22,13 +22,20 @@ export class OrdersService {
     };
   }
 
-  public getAllOrders(pageChange = ''): Observable<any> {
+  public getOrders(pageChange = ''): Observable<any> {
     return pageChange
       ? this.httpClient.get<any>(
           `${this.apiUrl}/?page=${pageChange}`,
           this.httpOptions,
         )
       : this.httpClient.get<any>(this.apiUrl, this.httpOptions);
+  }
+
+  public getAllOrderItems(orderId): Observable<any> {
+    return this.httpClient.get<any>(
+      `${this.apiUrl}/order-items/all/?order_id=${orderId}`,
+      this.httpOptions,
+    );
   }
 
   public getOrderItems(order_id: string, pageChange = ''): Observable<any> {

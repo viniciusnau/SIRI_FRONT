@@ -77,7 +77,7 @@ export class OrderItemsComponent implements OnInit {
   openEditModal(orderItemId: string) {
     const dialogRef = this.dialog.open(EditOrderItemModalComponent, {
       data: {
-        order_id: orderItemId,
+        order_item_id: orderItemId,
         snackBar: this.snackBar,
       },
     });

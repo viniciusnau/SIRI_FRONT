@@ -62,6 +62,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PriceFormatPipe } from './pipes/price-format.pipe';
+import { AdminOrdersModalComponent } from './pages/admin-orders/modal/admin-orders-modal.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { PriceFormatPipe } from './pipes/price-format.pipe';
     DeleteOrderItemModalComponent,
     PaginationComponent,
     PriceFormatPipe,
+    AdminOrdersModalComponent,
   ],
   imports: [
     CommonModule,

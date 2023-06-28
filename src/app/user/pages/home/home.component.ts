@@ -59,9 +59,7 @@ export class HomeComponent implements OnInit {
         this.client = data.client.id;
         this.getContent(this.categories.map((category) => category.id));
       },
-      (error) => {
-        // Handle error if necessary
-      },
+      (error) => {},
     );
   }
 
@@ -84,9 +82,7 @@ export class HomeComponent implements OnInit {
           this.response = data;
           this.populateFields();
         },
-        (error) => {
-          // Handle error if necessary
-        },
+        (error) => {},
       );
   }
 
@@ -160,6 +156,9 @@ export class HomeComponent implements OnInit {
         this.ordersService.createOrderItems(orderItems).subscribe(
           (orderItemsResponse) => {
             this.showSnackBar('Pedido feito!');
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
           },
           (error) => {
             this.showSnackBar('Erro ao criar itens do pedido.');

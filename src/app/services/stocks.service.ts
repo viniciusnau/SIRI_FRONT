@@ -216,14 +216,6 @@ export class StocksService {
     );
   }
 
-  public postBiddingExemption(body): Observable<any> {
-    return this.httpClient.post<any>(
-      `${this.apiUrl}/bidding-exemption/`,
-      body,
-      this.httpOptions,
-    );
-  }
-
   public getBiddingExemption(pageChange = ''): Observable<any> {
     return pageChange
       ? this.httpClient.get<any>(

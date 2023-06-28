@@ -19,6 +19,7 @@ import { EditOrderItemModalComponent } from './pages/pedidos/order-items/editMod
 import { InsideResetPasswordComponent } from './pages/inside-reset-password/inside-reset-password.component';
 import { UserPaginationComponent } from './components/pagination/user-pagination.component';
 import { ReviewModal } from './pages/home/reviewModal/reviewModal.component';
+import { OrderModalComponent } from './pages/pedidos/modal/order-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ReviewModal } from './pages/home/reviewModal/reviewModal.component';
     EditOrderItemModalComponent,
     InsideResetPasswordComponent,
     UserPaginationComponent,
+    OrderModalComponent,
   ],
   imports: [
     CommonModule,

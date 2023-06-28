@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminOrdersModalComponent } from './modal/admin-orders-modal.component';
 
 interface AdminOrder {
   id: number;
@@ -21,7 +23,11 @@ export class AdminOrdersComponent implements OnInit {
   currentPage = 1;
   response: any;
 
-  constructor(public ordersService: OrdersService, private router: Router) {}
+  constructor(
+    public ordersService: OrdersService,
+    private router: Router,
+    public dialog: MatDialog,
+  ) {}
 
   ngOnInit(): void {
     this.getContent();
@@ -34,10 +40,17 @@ export class AdminOrdersComponent implements OnInit {
 
   getContent() {
     this.ordersService
-      .getAllOrders(this.currentPage.toString())
+      .getOrders(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
       });
+  }
+
+  openModal(file): void {
+    const data = {file: file}
+    const dialogRef = this.dialog.open(AdminOrdersModalComponent, {
+      data: data,
+    });
   }
 
   formatDate(date: string) {
@@ -62,9 +75,7 @@ export class AdminOrdersComponent implements OnInit {
   updateOrderSentStatus(order: AdminOrder) {
     const payload = { is_sent: order.is_sent };
 
-    this.ordersService.updateOrder(order.id, payload).subscribe(() => {
-      // Handle success or error if needed
-    });
+    this.ordersService.updateOrder(order.id, payload).subscribe(() => {});
   }
 
   displayedColumns = [
@@ -76,5 +87,6 @@ export class AdminOrdersComponent implements OnInit {
     'created',
     'updated',
     'actions',
+    'confirm_order',
   ];
 }
