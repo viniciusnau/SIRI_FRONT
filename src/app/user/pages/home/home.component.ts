@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Category, Product } from '../../../interfaces/stock/interfaces';
-import {
-  GetProductDto,
-  ProductsService,
-} from 'src/app/services/products.service';
-import { OrdersService } from 'src/app/services/orders.service';
+import { GetProductDto, ProductsService } from 'src/app/services/products.service';
 import { UserService } from 'src/app/services/user.service';
+import { Category, Product } from '../../../interfaces/stock/interfaces';
+import { OrdersService } from 'src/app/services/orders.service';
+import { MatDialog } from '@angular/material/dialog';
+import { HomeModalComponent } from './modal/home-modal.component';
 
 @Component({
   selector: 'user-home',
@@ -14,31 +12,35 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  currentPage = 1;
-  response: any;
-  page = 'next';
   categories: Category[] = [];
   products: Product[] = [];
-  displayedColumns = ['name', 'description', 'quantity', 'measure', 'option'];
+  displayedColumns = ['name', 'description', 'measure', 'quantity'];
   selectedCategoryId: number;
-  selectedProducts: any;
   client: number;
+  chosenProducts: any[] = [];
+  loading = false;
+  currentPage = 1;
+  response: any;
 
   constructor(
     public userService: UserService,
     public productsService: ProductsService,
     public ordersService: OrdersService,
-    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.getUserData();
   }
 
-  onPageChange(page: number): void {
-    this.saveFields();
+  sortAlphabetically(list) {
+    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
+  }
+
+  onPageChange(page: number) {
     this.currentPage = page;
-    this.getContent([this.selectedCategoryId]);
+    this.updateProducts();
   }
 
   getUserData(): void {
@@ -46,31 +48,65 @@ export class HomeComponent implements OnInit {
       (data) => {
         this.categories = data.categories;
         this.client = data.client.id;
-        this.getContent(this.categories.map((category) => category.id));
+        this.getProducts(this.categories.map((category) => category.id), this.currentPage);
       },
-      (error) => {},
+      (error) => {}
     );
   }
 
-  updateProducts(): void {
-    if (this.selectedCategoryId) {
-      this.getContent([this.selectedCategoryId]);
+  updateProducts(returnToFirstPage = false): void {
+    if (returnToFirstPage) {
+      this.currentPage = 1;
+    }
+
+    this.loading = false;
+    let categoryIds: number[] = [];
+
+    if (Number(this.selectedCategoryId) === 0) {
+      categoryIds = this.categories.map((category) => category.id);
+    } else if (this.selectedCategoryId) {
+      categoryIds = [this.selectedCategoryId];
     } else {
-      this.products = [];
+      categoryIds = this.categories.map((category) => category.id);
+    }
+
+    this.getProducts(categoryIds, this.currentPage);
+  }
+
+  updateQuantity(product: Product): void {
+    const index = this.chosenProducts.findIndex(
+      (chosenProduct) => chosenProduct.id === product.id
+    );
+
+    if (index !== -1) {
+      this.chosenProducts.splice(index, 1);
+    }
+
+    if (Number(product.quantity) !== 0) {
+      this.chosenProducts.push(product);
     }
   }
 
-  getContent(categoryIds: number[]): void {
+  getProducts(categoryIds, pageChange) {
+    this.loading = true;
     const getProductDto: GetProductDto = { categories: categoryIds };
-    this.productsService
-      .getProducts(getProductDto, this.currentPage.toString())
-      .subscribe(
-        (data) => {
-          this.response = data;
-          this.populateFields();
-        },
-        (error) => {},
-      );
+    this.productsService.getProducts(getProductDto, pageChange).subscribe(
+      (data) => {
+        this.response = data;
+        this.products = this.sortAlphabetically(data.results);
+        const chosenProductIds = this.chosenProducts.map((chosenProduct) => chosenProduct.id);
+        this.products.forEach((product) => {
+          if (chosenProductIds.includes(product.id)) {
+            const chosenProduct = this.chosenProducts.find((chosenProduct) => chosenProduct.id === product.id);
+            product.quantity = `${chosenProduct.quantity}`;
+          } else {
+            product.quantity = "0";
+          }
+        });
+        this.loading = false;
+      },
+      (error) => {}
+    );
   }
 
   firstLetterOnCapital(text: string): string {
@@ -78,82 +114,19 @@ export class HomeComponent implements OnInit {
     return text[0].toUpperCase() + text.substring(1);
   }
 
-  saveFields(): void {
-    if (!this.selectedProducts) {
-      this.selectedProducts = [];
-    }
-
-    const newSelectedProducts = this.response?.results.filter(
-      (product) => product.option,
-    );
-
-    this.selectedProducts = this.selectedProducts.concat(newSelectedProducts);
-  }
-
-  populateFields(): void {
-    this.response?.results?.forEach((product) => {
-      const matchingProduct = this.selectedProducts?.find(
-        (selectedProduct) => selectedProduct.id === product.id,
-      );
-      if (matchingProduct) {
-        product.quantity = matchingProduct.quantity;
-        product.option = matchingProduct.option;
-      }
+  openModal(data): void {
+    const value = {chosenProducts: data, client: `${this.client}`}
+    const dialogRef = this.dialog.open(HomeModalComponent, {
+      data: value,
     });
   }
 
   order(): void {
-    const order = {
-      is_sent: false,
-      partially_added_to_stock: false,
-      completely_added_to_stock: false,
-      client: this.client,
-    };
-
-    this.ordersService.createOrder(order).subscribe(
-      (orderResponse) => {
-        this.saveFields();
-        this.selectedProducts = [
-          ...this.selectedProducts,
-          ...this.response?.results,
-        ].filter(
-          (product, index, self) =>
-            product.option &&
-            index ===
-              self.findIndex(
-                (p) => p.id === product.id && p.option === product.option,
-              ),
-        );
-        const orderItems = this.selectedProducts?.map((product) => ({
-          product: product.id,
-          quantity: product.quantity,
-          added_quantity: 0,
-          order: orderResponse.id,
-        }));
-
-        this.ordersService.createOrderItems(orderItems).subscribe(
-          (orderItemsResponse) => {
-            this.showSnackBar('Pedido feito!');
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
-          },
-          (error) => {
-            this.showSnackBar('Erro ao criar itens do pedido.');
-          },
-        );
-      },
-      (error) => {
-        this.showSnackBar('Erro ao criar pedido.');
-      },
-    );
-  }
-
-  private showSnackBar(message: string): void {
-    this.snackBar.open(message, 'Fechar', {
-      duration: 3000,
-      horizontalPosition: 'end',
-      verticalPosition: 'top',
-    });
+    if (this.chosenProducts.length === 0) {
+      const products = this.products.filter((product) => product.quantity);
+      this.openModal(products);
+    } else {
+      this.openModal(this.chosenProducts);
+    }
   }
 }

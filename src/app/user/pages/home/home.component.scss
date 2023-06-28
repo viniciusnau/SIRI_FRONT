@@ -11,7 +11,11 @@
   .order-button {
     margin-left: 16px;
     background-color: $primary-color;
-    color: $primary-text-color;;
+    color: $primary-text-color;
+  }
+  .order-button:disabled {
+    background-color: rgba($primary-color-disabled, 1);
+    color: rgba($primary-text-color-disabled, 0.75);
   }
 }
 
@@ -23,6 +27,8 @@
 
 .filter-container {
   flex-grow: 1;
+  margin-top: 10px;
+  margin-left: 20px;
 }
 
 table {
@@ -43,7 +49,8 @@ section {
   margin-right: 8px;
 }
 
-td, th {
+td,
+th {
   text-align: center !important;
   vertical-align: middle !important;
 }
@@ -67,4 +74,26 @@ table.mat-table {
 
 .mat-column-name {
   max-width: 200px;
+}
+
+.custom-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border: 2px solid #ccc;
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }

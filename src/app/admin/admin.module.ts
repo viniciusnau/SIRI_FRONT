@@ -132,5 +132,8 @@ import { AdminOrdersModalComponent } from './pages/admin-orders/modal/admin-orde
     MatDatepickerModule,
     MatNativeDateModule,
   ],
+  exports: [
+    PaginationComponent,
+  ],
 })
 export class AdminModule {}
