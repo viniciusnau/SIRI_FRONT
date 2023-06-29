@@ -1,5 +1,5 @@
 <user-sidebar>
-  <mat-card>
+  <mat-card *ngIf="!loading">
     <mat-card-content>
       <mat-toolbar>
         <span>Estoque</span>
@@ -82,3 +82,4 @@
     </mat-card-content>
   </mat-card>
 </user-sidebar>
+<div class="custom-spinner" *ngIf="loading"></div>

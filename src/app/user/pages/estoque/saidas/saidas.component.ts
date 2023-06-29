@@ -20,7 +20,7 @@ export class SaidasComponent implements OnInit {
   currentPage = 1;
   response: any;
   page = 'next';
-
+  loading: number | null = null;
   stockItemId: string;
 
   constructor(
@@ -47,10 +47,12 @@ export class SaidasComponent implements OnInit {
       .getStockWithdrawals(orderId, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
+        this.loading = null;
       });
   }
 
   deleteWithdraw(withdraw_id: string) {
+    this.loading = Number(withdraw_id);
     this.ordersService
       .deleteWithdraw(withdraw_id)
       .toPromise()

@@ -27,6 +27,7 @@ export class PedidosComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.getContent();
   }
 
@@ -48,6 +49,7 @@ export class PedidosComponent implements OnInit, AfterViewInit {
       this.response.next_orders =
         data[this.currentPage == 1 ? 'next_orders' : 'next'];
       this.loadingOrderId = null;
+      this.loading = false;
     });
   }
 

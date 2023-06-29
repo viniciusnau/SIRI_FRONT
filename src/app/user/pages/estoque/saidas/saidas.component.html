@@ -47,7 +47,7 @@
                 aria-label="Delete order"
                 (click)="deleteWithdraw(withdrawals.id)"
               >
-                <mat-icon>delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loading === withdrawals.id">delete</mat-icon>
               </button>
             </div>
           </td>

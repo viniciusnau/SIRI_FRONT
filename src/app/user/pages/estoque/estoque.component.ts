@@ -19,6 +19,7 @@ export class EstoqueComponent implements OnInit {
   currentPage = 1;
   page = 'next_stock_items';
   response: any;
+  loading = false;
   displayedColumns = [
     'name',
     'description',
@@ -31,11 +32,13 @@ export class EstoqueComponent implements OnInit {
   constructor(public userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.getCategories();
     this.getContent();
   }
 
   onPageChange(page: number) {
+    this.loading = true;
     this.currentPage = page;
     this.getContent();
   }
@@ -49,6 +52,7 @@ export class EstoqueComponent implements OnInit {
   getContent(category = 1) {
     this.userService.getUser().subscribe((data) => {
       this.response = data;
+      this.loading = false;
     });
   }
 
