@@ -16,6 +16,8 @@ export class PedidosComponent implements OnInit, AfterViewInit {
   currentPage = 1;
   response: any = [];
   page = 'next_orders';
+  loading: boolean = false;
+  loadingOrderId: number | null = null;
 
   constructor(
     public userService: UserService,
@@ -45,10 +47,12 @@ export class PedidosComponent implements OnInit, AfterViewInit {
       this.response = data[this.currentPage == 1 ? 'orders' : 'results'];
       this.response.next_orders =
         data[this.currentPage == 1 ? 'next_orders' : 'next'];
+      this.loadingOrderId = null;
     });
   }
 
   deleteOrder(order_id: string) {
+    this.loadingOrderId = Number(order_id);
     this.ordersService
       .deleteOrder(order_id)
       .toPromise()
@@ -56,6 +60,7 @@ export class PedidosComponent implements OnInit, AfterViewInit {
         this.getContent();
       })
       .catch((error: any) => {
+        this.loadingOrderId = null;
         this.snackBar.open('Erro ao excluir pedido', 'Fechar', {
           duration: 3000,
           horizontalPosition: 'end',
