@@ -80,7 +80,7 @@
                 [disabled]="orders.completely_added_to_stock || orders.partially_added_to_stock"
                 (click)="deleteOrder(orders.id)"
               >
-                <mat-icon>delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loadingOrderId === orders.id">delete</mat-icon>
               </button>
             </div>
           </td>
