@@ -42,12 +42,19 @@ export class SaidasComponent implements OnInit {
     this.getContent(this.stockItemId);
   }
 
-  getContent(orderId: string) {
+  getContent(orderId: string, disableLoading= false) {
     this.ordersService
       .getStockWithdrawals(orderId, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
         this.loading = null;
+        if (disableLoading) {
+          this.snackBar.open('Saída excluída!', 'Fechar', {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          });
+        }
       });
   }
 
@@ -57,7 +64,7 @@ export class SaidasComponent implements OnInit {
       .deleteWithdraw(withdraw_id)
       .toPromise()
       .then((data: any) => {
-        this.getContent(this.stockItemId);
+        this.getContent(this.stockItemId, true);
       })
       .catch((error: any) => {
         this.snackBar.open('Erro ao excluir', 'Fechar', {

@@ -43,13 +43,20 @@ export class PedidosComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  getContent() {
+  getContent(disableLoading = false) {
     this.userService.getUser(this.currentPage.toString()).subscribe((data) => {
       this.response = data[this.currentPage == 1 ? 'orders' : 'results'];
       this.response.next_orders =
         data[this.currentPage == 1 ? 'next_orders' : 'next'];
       this.loadingOrderId = null;
       this.loading = false;
+      if (disableLoading) {
+        this.snackBar.open('Pedido excluído!', 'Fechar', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+        });
+      }
     });
   }
 
@@ -59,26 +66,10 @@ export class PedidosComponent implements OnInit, AfterViewInit {
       .deleteOrder(order_id)
       .toPromise()
       .then((data: any) => {
-        this.getContent();
+        this.getContent(true);
       })
       .catch((error: any) => {
         this.loadingOrderId = null;
-        this.snackBar.open('Erro ao excluir pedido', 'Fechar', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
-      });
-  }
-
-  confirmDelivery(order_id: string) {
-    this.ordersService
-      .deleteOrder(order_id)
-      .toPromise()
-      .then((data: any) => {
-        this.getContent();
-      })
-      .catch((error: any) => {
         this.snackBar.open('Erro ao excluir pedido', 'Fechar', {
           duration: 3000,
           horizontalPosition: 'end',
