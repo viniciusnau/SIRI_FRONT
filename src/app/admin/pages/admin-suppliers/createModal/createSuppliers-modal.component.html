@@ -14,23 +14,30 @@
   </mat-form-field>
   <p>Email</p>
   <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="email" />
+    <input
+      type="text"
+      matInput
+      formControlName="email"
+      (blur)="checkEmailValidity()"
+      [class.invalid]="isInvalidEmail"
+    />
+    <mat-error *ngIf="isInvalidEmail">Email inválido</mat-error>
   </mat-form-field>
   <p>Contato</p>
   <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="phone" />
+    <input type="text" matInput formControlName="phone" contactMask />
   </mat-form-field>
   <p>CNPJ</p>
   <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="ein" />
+    <input type="text" matInput formControlName="ein" cnpjMask maxlength="17" />
   </mat-form-field>
   <p>CPF</p>
   <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="ssn" />
+    <input type="text" matInput formControlName="ssn" cpfMask />
   </mat-form-field>
   <p>RG</p>
   <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="nic" />
+    <input type="text" matInput formControlName="nic" maxlength="20" />
   </mat-form-field>
   <p>Categoria</p>
   <mat-form-field appearance="fill">
