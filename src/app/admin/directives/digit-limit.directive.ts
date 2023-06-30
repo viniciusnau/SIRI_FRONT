@@ -1,7 +1,7 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appDigitLimit]'
+  selector: '[appDigitLimit]',
 })
 export class DigitLimitDirective {
   constructor(private el: ElementRef) {}

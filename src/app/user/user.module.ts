@@ -19,9 +19,10 @@ import { EditOrderItemModalComponent } from './pages/pedidos/order-items/editMod
 import { InsideResetPasswordComponent } from './pages/inside-reset-password/inside-reset-password.component';
 import { UserPaginationComponent } from './components/pagination/user-pagination.component';
 import { OrderModalComponent } from './pages/pedidos/modal/order-modal.component';
-import { DigitLimitDirective } from './pages/home/digit-limit.directive';
 import { HomeModalComponent } from './pages/home/modal/home-modal.component';
 import { AdminModule } from '../admin/admin.module';
+import { DigitLimitDirective } from '../user/directives/digit-limit.directive';
+import { DecimalNotAllowedDirective } from '../user/directives/decimal-not-allowed.directive';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AdminModule } from '../admin/admin.module';
     UserPaginationComponent,
     OrderModalComponent,
     DigitLimitDirective,
+    DecimalNotAllowedDirective,
     HomeModalComponent,
   ],
   imports: [

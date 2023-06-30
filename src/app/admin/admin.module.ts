@@ -63,6 +63,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PriceFormatPipe } from './pipes/price-format.pipe';
 import { AdminOrdersModalComponent } from './pages/admin-orders/modal/admin-orders-modal.component';
+import { DigitLimitDirective } from '../admin/directives/digit-limit.directive';
+import { DecimalNotAllowedDirective } from '../admin/directives/decimal-not-allowed.directive';
+import { IdentityDirective } from './directives/identity.directive';
+import { CpfMaskDirective } from './directives/cpfMask.directive';
+import { CnpjMaskDirective } from './directives/CnpjMask.directive';
+import { ContactMaskDirective } from './directives/contactMask.directive';
 
 @NgModule({
   declarations: [
@@ -119,6 +125,12 @@ import { AdminOrdersModalComponent } from './pages/admin-orders/modal/admin-orde
     PaginationComponent,
     PriceFormatPipe,
     AdminOrdersModalComponent,
+    DigitLimitDirective,
+    DecimalNotAllowedDirective,
+    IdentityDirective,
+    CpfMaskDirective,
+    CnpjMaskDirective,
+    ContactMaskDirective,
   ],
   imports: [
     CommonModule,
@@ -132,8 +144,6 @@ import { AdminOrdersModalComponent } from './pages/admin-orders/modal/admin-orde
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  exports: [
-    PaginationComponent,
-  ],
+  exports: [PaginationComponent],
 })
 export class AdminModule {}
