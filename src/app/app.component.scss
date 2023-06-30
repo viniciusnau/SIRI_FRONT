@@ -4,3 +4,10 @@ mat-sidenav {
   width: 300px;
   background-color: 'black';
 }
+
+::ng-deep .mat-mdc-checkbox.mat-accent {
+  --mdc-checkbox-selected-icon-color: #ffc4bd;
+  --mdc-checkbox-selected-hover-icon-color: #ffc4bd;
+  --mdc-checkbox-selected-focus-icon-color: #ffc4bd;
+  --mdc-checkbox-selected-pressed-icon-color: #ffc4bd;
+}
