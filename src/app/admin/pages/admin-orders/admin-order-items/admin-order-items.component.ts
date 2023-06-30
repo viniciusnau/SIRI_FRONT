@@ -10,6 +10,7 @@ import {
 } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteOrderItemModalComponent } from './modal/deleteOrderItem-modal.component.component';
+import { BehaviorSubject } from 'rxjs';
 
 interface AdminOrderItems {
   id: number;
@@ -50,6 +51,15 @@ export class AdminOrderItemsComponent implements OnInit {
   supplierQuantityControls: { [key: number]: FormControl } = {};
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+  quantityIsValid: boolean = true;
+  supplierQuantityIsValid: boolean = true;
+
+  private supplierQuantityValiditySubject = new BehaviorSubject<boolean>(true);
+  private quantityValiditySubject = new BehaviorSubject<boolean>(true);
+
+  supplierQuantityValidity$ =
+    this.supplierQuantityValiditySubject.asObservable();
+  quantityValidity$ = this.quantityValiditySubject.asObservable();
 
   constructor(
     private ordersService: OrdersService,
@@ -65,11 +75,32 @@ export class AdminOrderItemsComponent implements OnInit {
     });
     this.getContent(this.orderId);
     this.getAllSuppliers();
+    this.supplierQuantityValidity$.subscribe((isValid) => {
+      this.supplierQuantityIsValid = isValid;
+    });
+
+    this.quantityValidity$.subscribe((isValid) => {
+      this.quantityIsValid = isValid;
+    });
   }
 
   onPageChange(page: number) {
     this.currentPage = page;
     this.getContent(this.orderId);
+  }
+
+  isIntegerValue(value: number): boolean {
+    return Number.isInteger(value);
+  }
+
+  validateIntegerValue(orderItem: AdminOrderItems, fieldName: string): void {
+    const isValid = this.isIntegerValue(orderItem[fieldName]);
+
+    if (fieldName === 'quantity') {
+      this.quantityValiditySubject.next(isValid);
+    } else if (fieldName === 'supplier_quantity') {
+      this.supplierQuantityValiditySubject.next(isValid);
+    }
   }
 
   firstLetterOnCapital(text: string) {

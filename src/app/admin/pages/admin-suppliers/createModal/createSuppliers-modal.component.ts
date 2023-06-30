@@ -20,6 +20,7 @@ export interface CreateSuppliersModalData {
 export class CreateSuppliersModalComponent implements OnInit {
   formCreateSuppliers: FormGroup;
   selectedCategories: number[] = [];
+  isInvalidEmail: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<CreateSuppliersModalComponent>,
@@ -37,13 +38,18 @@ export class CreateSuppliersModalComponent implements OnInit {
       name: ['', [Validators.required]],
       agent: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.email]],
       phone: ['', [Validators.required]],
       ein: ['', [Validators.required]],
       ssn: ['', [Validators.required]],
       nic: ['', [Validators.required]],
       category: ['', [Validators.required]],
     });
+  }
+
+  checkEmailValidity() {
+    const emailControl = this.formCreateSuppliers.get('email');
+    this.isInvalidEmail = emailControl.invalid && emailControl.dirty;
   }
 
   firstLetterOnCapital(text: string) {

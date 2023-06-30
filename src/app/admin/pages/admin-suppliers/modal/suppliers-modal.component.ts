@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SuppliersModalComponent implements OnInit {
   formSuppliers: FormGroup;
   selectedCategories: number[] = [];
+  isInvalidEmail: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<SuppliersModalComponent>,
@@ -39,6 +40,11 @@ export class SuppliersModalComponent implements OnInit {
     });
   }
 
+  checkEmailValidity() {
+    const emailControl = this.formSuppliers.get('email');
+    this.isInvalidEmail = emailControl.invalid && emailControl.dirty;
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -64,17 +70,19 @@ export class SuppliersModalComponent implements OnInit {
       }
     });
 
-    if (Array.isArray(this.selectedCategories) && this.selectedCategories.length != 0) {
+    if (
+      Array.isArray(this.selectedCategories) &&
+      this.selectedCategories.length != 0
+    ) {
       editSuppliersData.category = this.selectedCategories;
-    }
-    else {
-      delete editSuppliersData.category
+    } else {
+      delete editSuppliersData.category;
     }
 
     this.stocksService
       .editSupplier(this.data.suppliers_id, editSuppliersData)
       .subscribe((response) => {
-        window.location.reload()
+        window.location.reload();
       });
   }
 }
