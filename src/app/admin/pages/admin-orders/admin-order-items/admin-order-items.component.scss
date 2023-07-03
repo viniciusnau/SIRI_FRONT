@@ -15,6 +15,11 @@
   color: $primary-text-color;
 }
 
+.btn:disabled {
+  background-color: $primary-color-disabled;
+  color: $primary-text-color-disabled;
+}
+
 .small-input {
   width: 100px;
 }

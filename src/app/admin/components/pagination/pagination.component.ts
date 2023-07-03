@@ -31,6 +31,6 @@ export class PaginationComponent {
   }
 
   handleTotalPage(pages) {
-    return Math.ceil(pages);
+    return Math.ceil(pages) > 0 ? Math.ceil(pages) : '1';
   }
 }
