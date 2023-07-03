@@ -5,15 +5,6 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { EditOrderItemModalComponent } from './editModal/edit-order-item-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-interface OrderItems {
-  id: number;
-  product: number;
-  quantity: number;
-  added_quantity: number;
-  order: number;
-  measure: number;
-}
-
 @Component({
   selector: 'app-order-items',
   templateUrl: './order-items.component.html',
@@ -23,7 +14,6 @@ export class OrderItemsComponent implements OnInit {
   response: any;
   currentPage = 1;
   page = 'next';
-
   orderId = '';
 
   constructor(
@@ -74,10 +64,11 @@ export class OrderItemsComponent implements OnInit {
     return text[0].toUpperCase() + text.substring(1);
   }
 
-  openEditModal(orderItemId: string) {
+  openEditModal(orderItemId: string, addedQuantity: string) {
     const dialogRef = this.dialog.open(EditOrderItemModalComponent, {
       data: {
         order_item_id: orderItemId,
+        added_quantity: addedQuantity,
         snackBar: this.snackBar,
       },
     });

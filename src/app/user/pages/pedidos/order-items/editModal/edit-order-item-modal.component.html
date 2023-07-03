@@ -1,5 +1,9 @@
 <h1 mat-dialog-title>Item do pedido</h1>
 <div [formGroup]="formOrderItem" mat-dialog-content class="content">
+  <p *ngIf="!addedQuantity" >Quantidade</p>
+  <mat-form-field *ngIf="!addedQuantity" appearance="fill">
+    <input type="number" matInput formControlName="quantity" />
+  </mat-form-field>
   <p>Quantidade adicionada</p>
   <mat-form-field appearance="fill">
     <input type="number" matInput formControlName="added_quantity" />

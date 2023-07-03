@@ -7,6 +7,7 @@ import {
   MaterialsOrderModalComponent,
   MaterialsOrderModalData,
 } from './modal/materials-order-modal.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface MaterialsOrder {
   id: number;
@@ -25,6 +26,7 @@ interface MaterialsOrder {
 export class AdminMaterialsOrderComponent implements OnInit {
   currentPage = 1;
   response: any;
+  loading: number | null = null;
 
   modalData: MaterialsOrderModalData = {
     suppliers: [],
@@ -36,6 +38,7 @@ export class AdminMaterialsOrderComponent implements OnInit {
     private stocksService: StocksService,
     private suppliersService: SuppliersService,
     public dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -53,11 +56,18 @@ export class AdminMaterialsOrderComponent implements OnInit {
     return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
-  getContent() {
+  getContent(disableLoading = false) {
     this.ordersService
       .getMaterialsOrder(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
+        if (disableLoading) {
+          this.snackBar.open('Pedido excluído!', 'Fechar', {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          });
+        }
       });
   }
 
@@ -74,10 +84,11 @@ export class AdminMaterialsOrderComponent implements OnInit {
   }
 
   deleteMaterialOrder(order_id: string) {
+    this.loading = Number(order_id);
     this.ordersService
       .deleteMaterialOrder(order_id)
       .toPromise()
-      .then((data: any) => this.getContent());
+      .then((data: any) => this.getContent(true));
   }
 
   openModal(): void {

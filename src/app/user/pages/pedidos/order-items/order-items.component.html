@@ -55,7 +55,7 @@
                 color="white"
                 aria-label="Edit order item"
                 [disabled]="orderItems.quantity === orderItems.added_quantity"
-                (click)="openEditModal(orderItems.id)"
+                (click)="openEditModal(orderItems.id, orderItems.added_quantity)"
               >
                 <mat-icon>edit</mat-icon>
               </button>

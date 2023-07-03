@@ -35,7 +35,7 @@ export class EditMeasureModalComponent implements OnInit {
   onClick(): void {
     if (this.formMeasure.invalid) return;
 
-    var editMeasureData = this.formMeasure.getRawValue();
+    const editMeasureData = this.formMeasure.getRawValue();
 
     this.stocksService
       .editMeasure(this.data.measure_id, editMeasureData)

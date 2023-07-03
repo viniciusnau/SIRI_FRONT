@@ -63,16 +63,15 @@ export class AdminStockReportsComponent implements OnInit {
     'core',
     'sector',
   ];
-
   categories: Category[] = [];
   products: Product[] = [];
   publicDefenses: string[] = [];
   sectors: string[] = [];
-
   selectedCategories: number[] = [];
   selectedProducts: number[] = [];
   selectedPublicDefenses: string[] = [];
   selectedSectors: string[] = [];
+  loading: boolean;
 
   constructor(
     private stockService: StocksService,
@@ -116,6 +115,7 @@ export class AdminStockReportsComponent implements OnInit {
   }
 
   onSave() {
+    this.loading = true;
     const queryParams = [];
 
     if (this.startDate) {
@@ -145,16 +145,22 @@ export class AdminStockReportsComponent implements OnInit {
     const queryString = queryParams.join('&');
 
     this.stockService.getStockReports(queryString).subscribe((reports) => {
-      this.stockReports = reports.map((report) => ({
-        productCode: report.product_code,
-        productName: report.product_name,
-        entryQuantity: report.entry_quantity,
-        withdrawalQuantity: report.withdrawal_quantity,
-        entryPrice: report.entry_price,
-        withdrawalPrice: report.withdrawal_price,
-        core: report.public_defense,
-        sector: report.sector,
-      }));
+      this.stockReports = reports
+        .map((report) => ({
+          productCode: report.product_code,
+          productName: report.product_name,
+          entryQuantity: report.entry_quantity,
+          withdrawalQuantity: report.withdrawal_quantity,
+          entryPrice: report.entry_price,
+          withdrawalPrice: report.withdrawal_price,
+          core: report.public_defense,
+          sector: report.sector,
+        }))
+        .filter((report) => (
+          report.entryQuantity ||
+          report.withdrawalQuantity
+        ));
+      this.loading = false;
     });
   }
 
