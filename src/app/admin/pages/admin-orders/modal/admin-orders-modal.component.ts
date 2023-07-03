@@ -105,7 +105,7 @@ export class AdminOrdersModalComponent implements OnInit {
         this.loading = false;
         this.snackBar.open(
           'Erro ao salvar',
-          'Close',
+          'Fechar',
           {
             duration: 3000,
             panelClass: ['snackbar-error'],

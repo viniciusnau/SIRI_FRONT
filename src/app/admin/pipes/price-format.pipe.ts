@@ -9,9 +9,10 @@ export class PriceFormatPipe implements PipeTransform {
       return '';
     }
 
-    const [integerPart, decimalPart] = value.toString().split('.');
+    const roundedValue = Number(value.toFixed(2));
+    const [integerPart, decimalPart] = roundedValue.toFixed(2).split('.');
     const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    const formattedValue = `R$${formattedIntegerPart},${decimalPart || '00'}`;
+    const formattedValue = `R$${formattedIntegerPart},${decimalPart}`;
 
     return formattedValue;
   }

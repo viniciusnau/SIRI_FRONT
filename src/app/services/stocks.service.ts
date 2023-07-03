@@ -103,7 +103,13 @@ export class StocksService {
     );
   }
 
-  public getAllProducts(): Observable<any> {
+  public getAllProducts(protocolId = null): Observable<any> {
+    if (protocolId) {
+      return this.httpClient.get<any>(
+        `${this.apiUrl}/products/all/?protocol_id=${protocolId}`,
+        this.httpOptions,
+      );
+    }
     return this.httpClient.get<any>(
       `${this.apiUrl}/products/all/`,
       this.httpOptions,

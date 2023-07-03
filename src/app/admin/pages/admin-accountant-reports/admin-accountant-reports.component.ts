@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AccountantReportsModalComponent, AccountantReportsModalData } from './modal/accountant-reports-modal.component';
+import { AccountantReportsModalComponent} from './modal/accountant-reports-modal.component';
 import { StocksService } from 'src/app/services/stocks.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface AccountantReport {
   id: number;
@@ -20,7 +21,7 @@ interface AccountantReport {
 })
 export class AdminAccountantReportsComponent implements OnInit {
   adminAccountantReports: AccountantReport[] = [];
-
+  loading: number | null = null;
   displayedColumns = [
     'id',
     'month',
@@ -32,7 +33,11 @@ export class AdminAccountantReportsComponent implements OnInit {
     'deleteAccountantReports',
   ];
 
-  constructor(private stocksService: StocksService, public dialog: MatDialog) {}
+  constructor(
+    private stocksService: StocksService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
+  ) {}
 
   ngOnInit(): void {
     this.getAccountantReports();
@@ -68,6 +73,7 @@ export class AdminAccountantReportsComponent implements OnInit {
   }
 
   deleteAccountantReports(id: number): void {
+    this.loading = id;
     this.stocksService.deleteAccountantReport(id).subscribe(() => {
       this.adminAccountantReports = this.adminAccountantReports.filter((report) => report.id !== id);
     });
