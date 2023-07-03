@@ -1,5 +1,5 @@
 <admin-sidebar>
-  <mat-card>
+  <mat-card *ngIf="!loading">
     <mat-card-content>
       <mat-toolbar>
         <span>Pedidos</span>
@@ -101,3 +101,4 @@
     </mat-card-content>
   </mat-card>
 </admin-sidebar>
+<div class="custom-spinner" *ngIf="loading"></div>

@@ -5,12 +5,6 @@ import { StockWithdrawalsModalComponent } from './modal/stockWithdrawals-modal.c
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-interface Withdrawals {
-  quantity: number;
-  description: string;
-  date: string;
-}
-
 @Component({
   selector: 'user-saidas',
   templateUrl: './saidas.component.html',

@@ -22,6 +22,7 @@ interface AdminOrder {
 export class AdminOrdersComponent implements OnInit {
   currentPage = 1;
   response: any;
+  loading = false;
 
   constructor(
     public ordersService: OrdersService,
@@ -30,6 +31,7 @@ export class AdminOrdersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.getContent();
   }
 
@@ -43,6 +45,7 @@ export class AdminOrdersComponent implements OnInit {
       .getOrders(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
+        this.loading = false;
       });
   }
 

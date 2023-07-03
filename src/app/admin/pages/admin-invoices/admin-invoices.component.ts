@@ -6,6 +6,7 @@ import {
   InvoiceModalComponent,
   InvoiceModalData,
 } from './modal/invoice-modal.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-invoices',
@@ -15,6 +16,7 @@ import {
 export class AdminInvoicesComponent implements OnInit {
   currentPage = 1;
   response: any;
+  loading: number | null = null;
 
   modalData: InvoiceModalData = {
     suppliers: [],
@@ -25,6 +27,7 @@ export class AdminInvoicesComponent implements OnInit {
     private stocksService: StocksService,
     private suppliersService: SuppliersService,
     public dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -42,11 +45,19 @@ export class AdminInvoicesComponent implements OnInit {
     this.getContent();
   }
 
-  getContent() {
+  getContent(disableLoading = false) {
     this.stocksService
       .getInvoices(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
+        this.loading = null;
+        if (disableLoading) {
+          this.snackBar.open('Nota excluída!', 'Fechar', {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          });
+        }
       });
   }
 
@@ -69,10 +80,11 @@ export class AdminInvoicesComponent implements OnInit {
   }
 
   deleteInvoice(invoice_id) {
+    this.loading = Number(invoice_id);
     this.stocksService
       .deleteInvoice(invoice_id)
       .toPromise()
-      .then((data: any) => this.getContent());
+      .then((data: any) => this.getContent(true));
   }
 
   downloadInvoice(file) {

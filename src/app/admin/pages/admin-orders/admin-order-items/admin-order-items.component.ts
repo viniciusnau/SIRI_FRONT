@@ -117,7 +117,7 @@ export class AdminOrderItemsComponent implements OnInit {
 
     this.ordersService.updateOrderItem(orderItem.id, payload).subscribe(
       (response) => {
-        this.snackBar.open('Salvo com sucesso!', 'Close', {
+        this.snackBar.open('Salvo com sucesso!', 'Fechar', {
           duration: 3000,
           panelClass: ['snackbar-success'],
           horizontalPosition: this.horizontalPosition,
@@ -125,7 +125,7 @@ export class AdminOrderItemsComponent implements OnInit {
         });
       },
       (error) => {
-        this.snackBar.open('Erro ao salvar', 'Close', {
+        this.snackBar.open('Erro ao salvar', 'Fechar', {
           duration: 3000,
           panelClass: ['snackbar-error'],
           horizontalPosition: this.horizontalPosition,
