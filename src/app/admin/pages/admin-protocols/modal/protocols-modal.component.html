@@ -5,8 +5,16 @@
       <p>Início de Vigência</p>
       <div class="mat-form-field-wrapper">
         <mat-form-field appearance="fill">
-          <input matInput [matDatepicker]="startDatePicker" placeholder="Início de Vigência" formControlName="initial_date">
-          <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="startDatePicker"
+            placeholder="Início de Vigência"
+            formControlName="initial_date"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="startDatePicker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #startDatePicker></mat-datepicker>
         </mat-form-field>
       </div>
@@ -15,8 +23,16 @@
       <p>Final de Vigência</p>
       <div class="mat-form-field-wrapper">
         <mat-form-field appearance="fill">
-          <input matInput [matDatepicker]="finalDatePicker" placeholder="Final de Vigência" formControlName="final_date">
-          <mat-datepicker-toggle matSuffix [for]="finalDatePicker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="finalDatePicker"
+            placeholder="Final de Vigência"
+            formControlName="final_date"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="finalDatePicker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #finalDatePicker></mat-datepicker>
         </mat-form-field>
       </div>
@@ -29,7 +45,10 @@
   <p class="field-label">Fornecedor</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="supplier">
-      <mat-option *ngFor="let supplier of data?.suppliers" [value]="supplier.id">
+      <mat-option
+        *ngFor="let supplier of data?.suppliers"
+        [value]="supplier.id"
+      >
         {{ supplier.name }}
       </mat-option>
     </mat-select>
@@ -37,7 +56,10 @@
   <p class="field-label">Categoria</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="category">
-      <mat-option *ngFor="let category of data?.categories" [value]="category.id">
+      <mat-option
+        *ngFor="let category of data?.categories"
+        [value]="category.id"
+      >
         {{ category.name }}
       </mat-option>
     </mat-select>
@@ -51,6 +73,8 @@
   </div>
 </div>
 <div mat-dialog-actions class="actions">
-  <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
+  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+  <button mat-button class="proceed" (click)="onClick()" cdkFocusInitial>
+    Salvar
+  </button>
 </div>

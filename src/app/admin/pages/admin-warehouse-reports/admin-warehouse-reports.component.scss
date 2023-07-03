@@ -1,6 +1,16 @@
+@import '../../../../colors.scss';
+
 section {
   display: table;
   padding-left: 20px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.download {
+  background-color: $primary-button-color;
 }
 
 .btnCreate {
@@ -10,8 +20,4 @@ section {
 
 .btnCreate .mat-mdc-button-base {
   margin: 8px 8px 8px 0;
-}
-
-.spacer {
-  flex: 1 1 auto;
 }

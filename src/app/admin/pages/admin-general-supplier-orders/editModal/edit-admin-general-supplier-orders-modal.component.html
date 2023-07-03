@@ -2,8 +2,16 @@
 <div [formGroup]="formSupplierOrder" mat-dialog-content class="content">
   <p>Prazo de Entrega</p>
   <mat-form-field appearance="fill">
-    <input matInput [matDatepicker]="startDatePicker" placeholder="Prazo de Entrega" formControlName="delivery_date">
-    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <input
+      matInput
+      [matDatepicker]="startDatePicker"
+      placeholder="Prazo de Entrega"
+      formControlName="delivery_date"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="startDatePicker"
+    ></mat-datepicker-toggle>
     <mat-datepicker #startDatePicker></mat-datepicker>
   </mat-form-field>
   <p>Recebido</p>
@@ -15,6 +23,8 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions class="actions">
-  <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
+  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+  <button mat-button class="proceed" (click)="onClick()" cdkFocusInitial>
+    Salvar
+  </button>
 </div>

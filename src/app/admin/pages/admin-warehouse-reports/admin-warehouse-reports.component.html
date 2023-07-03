@@ -4,13 +4,12 @@
       <mat-toolbar>
         <span>Relatório do Almoxarifado</span>
         <span class="spacer"></span>
-        <button mat-icon-button (click)="generatePDF()">
+        <button mat-icon-button class="download" (click)="generatePDF()">
           <mat-icon>download</mat-icon>
         </button>
       </mat-toolbar>
 
       <table mat-table [dataSource]="warehouseReports" class="mat-elevation-z8">
-
         <ng-container matColumnDef="productCode">
           <th mat-header-cell *matHeaderCellDef>Código</th>
           <td mat-cell *matCellDef="let warehouseReport">
@@ -49,7 +48,7 @@
         <ng-container matColumnDef="averagePrice">
           <th mat-header-cell *matHeaderCellDef>Valor Médio</th>
           <td mat-cell *matCellDef="let warehouseReport">
-            {{ warehouseReport.averagePrice | priceFormat  }}
+            {{ warehouseReport.averagePrice | priceFormat }}
           </td>
         </ng-container>
 
