@@ -16,6 +16,8 @@ interface AdminStockItems {
 export class AdminStockItemsComponent {
   stockItems: AdminStockItems[] = [];
   stockId = '';
+  currentPage = 1;
+  response: any;
 
   constructor(
     public stocksService: StocksService,
@@ -26,13 +28,22 @@ export class AdminStockItemsComponent {
     this.route.params.subscribe((params) => {
       this.stockId = params['id'];
     });
-    this.getStockItems(this.stockId);
+    this.getContent(this.stockId);
   }
 
-  getStockItems(orderId: string) {
-    this.stocksService.getStockItems(orderId).subscribe((data) => {
-      this.stockItems = data.results;
-    });
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent(this.stockId);
+  }
+
+  getContent(orderId: string) {
+    this.stocksService
+      .getStockItems(orderId, this.currentPage.toString())
+      .subscribe((data) => {
+        this.response = data.results;
+        this.response.next = data?.next;
+        this.response.count = data?.count;
+      });
   }
 
   firstLetterOnCapital(text: string) {

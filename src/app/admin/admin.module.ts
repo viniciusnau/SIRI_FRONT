@@ -70,6 +70,7 @@ import { CpfMaskDirective } from './directives/cpfMask.directive';
 import { CnpjMaskDirective } from './directives/CnpjMask.directive';
 import { ContactMaskDirective } from './directives/contactMask.directive';
 import { PriceFormatDirective } from './directives/price-format.directive';
+import { EmailFormatDirective } from './directives/email-format.directive';
 
 @NgModule({
   declarations: [
@@ -133,6 +134,7 @@ import { PriceFormatDirective } from './directives/price-format.directive';
     CnpjMaskDirective,
     ContactMaskDirective,
     PriceFormatDirective,
+    EmailFormatDirective,
   ],
   imports: [
     CommonModule,
