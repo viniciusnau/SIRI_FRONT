@@ -1,14 +1,5 @@
 <h1 mat-dialog-title>Medida</h1>
 <div [formGroup]="formMeasure" mat-dialog-content class="content">
-  <!--  <p>Nome</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="name">
-      <mat-option *ngFor="let supplier of data.Protocols" [value]="supplier.id"
-        >{{ supplier.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field> 
--->
   <p>Nome</p>
   <mat-form-field appearance="fill">
     <input type="text" matInput formControlName="name" />
@@ -17,6 +8,6 @@
 <div mat-dialog-actions class="actions">
   <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
   <button mat-button class="proceed" (click)="onClick()" cdkFocusInitial>
-    Salvar
+    Criar
   </button>
 </div>

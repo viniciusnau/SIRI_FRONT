@@ -16,9 +16,11 @@ p {
   display: flex;
   justify-content: flex-end;
   .cancel {
+    padding: 0 2.75rem;
     background-color: $secondary-button-color;
   }
   .proceed {
+    padding: 0 2rem;
     background-color: $primary-button-color;
   }
 }

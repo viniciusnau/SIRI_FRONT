@@ -38,14 +38,14 @@
         </ng-container>
 
         <ng-container matColumnDef="entryValue">
-          <th mat-header-cell *matHeaderCellDef>Valor Entrada</th>
+          <th mat-header-cell *matHeaderCellDef>Valor de Entrada</th>
           <td mat-cell *matCellDef="let accountantReport">
             {{ accountantReport.total_entry_value | priceFormat }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="outputValue">
-          <th mat-header-cell *matHeaderCellDef>Valor Saída</th>
+          <th mat-header-cell *matHeaderCellDef>Valor de Saída</th>
           <td mat-cell *matCellDef="let accountantReport">
             {{ accountantReport.total_output_value | priceFormat }}
           </td>
@@ -59,7 +59,7 @@
         </ng-container>
 
         <ng-container matColumnDef="file">
-          <th mat-header-cell *matHeaderCellDef>Arquivo</th>
+          <th mat-header-cell *matHeaderCellDef>Baixar arquivo</th>
           <td mat-cell *matCellDef="let accountantReport">
             <div class="button-container">
               <button
