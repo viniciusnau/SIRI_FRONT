@@ -61,7 +61,7 @@
         </ng-container>
 
         <ng-container matColumnDef="deleteMaterialOrder">
-          <th mat-header-cell *matHeaderCellDef>Excluir Pedido</th>
+          <th mat-header-cell *matHeaderCellDef>Excluir</th>
           <td mat-cell *matCellDef="let materialsOrder">
             <div class="button-container">
               <button
@@ -70,7 +70,7 @@
                 aria-label="Delete order"
                 (click)="deleteMaterialOrder(materialsOrder.id)"
               >
-                <mat-icon>delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loading === materialsOrder.id" >delete</mat-icon>
               </button>
             </div>
           </td>

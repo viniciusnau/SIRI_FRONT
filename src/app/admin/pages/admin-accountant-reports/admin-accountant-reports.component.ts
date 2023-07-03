@@ -76,6 +76,11 @@ export class AdminAccountantReportsComponent implements OnInit {
     this.loading = id;
     this.stocksService.deleteAccountantReport(id).subscribe(() => {
       this.adminAccountantReports = this.adminAccountantReports.filter((report) => report.id !== id);
+      this.snackBar.open('Relatório excluído!', 'Fechar', {
+        duration: 3000,
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+      });
     });
   }
 }

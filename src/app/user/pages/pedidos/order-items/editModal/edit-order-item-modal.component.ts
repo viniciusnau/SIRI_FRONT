@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class EditOrderItemModalComponent implements OnInit {
   formOrderItem: FormGroup;
+  addedQuantity: number;
 
   constructor(
     public dialogRef: MatDialogRef<EditOrderItemModalComponent>,
@@ -19,12 +20,14 @@ export class EditOrderItemModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.addedQuantity = this.data.added_quantity;
     this.createForm();
   }
 
   createForm() {
     this.formOrderItem = this.formBuilder.group({
       added_quantity: ['', Validators.required],
+      quantity: ['',],
     });
   }
 
@@ -40,7 +43,9 @@ export class EditOrderItemModalComponent implements OnInit {
   onClick(): void {
     if (this.formOrderItem.invalid) return;
     const editOrderItemData = this.formOrderItem.getRawValue();
-
+    if (editOrderItemData.quantity === "") {
+      delete editOrderItemData.quantity;
+    }
     this.ordersService
       .updateOrderItem(this.data.order_item_id, editOrderItemData)
       .subscribe({
