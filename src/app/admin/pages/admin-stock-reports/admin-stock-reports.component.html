@@ -116,7 +116,7 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card>
+    <mat-card *ngIf="!loading" >
       <mat-card-content>
         <mat-toolbar>
           <span>Relatório de Estoque</span>
@@ -193,3 +193,4 @@
     </mat-card>
   </div>
 </admin-sidebar>
+<div class="custom-spinner" *ngIf="loading"></div>
