@@ -17,6 +17,7 @@ export class AdminInvoicesComponent implements OnInit {
   currentPage = 1;
   response: any;
   loading: number | null = null;
+  protected readonly Number = Number;
 
   modalData: InvoiceModalData = {
     suppliers: [],
