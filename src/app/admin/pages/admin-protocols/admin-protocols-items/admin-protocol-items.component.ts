@@ -71,8 +71,7 @@ export class AdminProtocolItemsComponent implements OnInit {
   }
 
   openCreateModal(): void {
-    console.log(this.response);
-    console.log(this.modalData);
+    this.removeItems();
     const dialogRef = this.dialog.open(CreateProtocolItemsModalComponent, {
       data: this.modalData,
     });

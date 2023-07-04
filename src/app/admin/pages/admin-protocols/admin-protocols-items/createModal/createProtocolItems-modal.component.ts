@@ -58,7 +58,7 @@ export class CreateProtocolItemsModalComponent implements OnInit {
         window.location.reload();
       },
       (error) => {
-        this.snackBar.open('Item duplicado!', 'Fechar', {
+        this.snackBar.open('Erro ao criar item!', 'Fechar', {
           duration: 3000,
           horizontalPosition: 'end',
           verticalPosition: 'top',

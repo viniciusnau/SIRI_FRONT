@@ -48,6 +48,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
   }
 
   openCreateModal() {
+    this.removeItems();
     const dialogRef = this.dialog.open(
       CreateAdminGeneralSupplierOrdersItemsModalComponent,
       {
