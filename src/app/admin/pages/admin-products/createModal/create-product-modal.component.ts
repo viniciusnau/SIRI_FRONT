@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./create-product-modal.component.scss'],
 })
 export class CreateProductModalComponent implements OnInit {
-  formProduct: FormGroup;
+  formProduct: any;
 
   constructor(
     public dialogRef: MatDialogRef<CreateProductModalComponent>,
@@ -39,6 +39,11 @@ export class CreateProductModalComponent implements OnInit {
     return text[0].toUpperCase() + text.substring(1);
   }
 
+  handlePriceFormat(field: string) {
+    console.log('field: ', field?.replace('R$', '').replace(/[.,]/g, ''));
+    return field?.replace('R$', '').replace(/[.,]/g, '');
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -46,17 +51,14 @@ export class CreateProductModalComponent implements OnInit {
   onClick(): void {
     if (this.formProduct.invalid) return;
     const createProductData = this.formProduct.getRawValue();
+    this.handlePriceFormat(createProductData.price).toString();
 
     this.stocksService.createProduct(createProductData).subscribe({
       next: (result) => {
         this.dialogRef.close();
-        this.data.snackBar.open(
-          'Tudo certo!',
-          'Produto criado com sucesso!',
-          {
-            duration: 3000,
-          },
-        );
+        this.data.snackBar.open('Tudo certo!', 'Produto criado com sucesso!', {
+          duration: 3000,
+        });
       },
       error: (error) => {
         this.data.snackBar.open('Ops!', 'Houve um erro ao criar o produto!', {
