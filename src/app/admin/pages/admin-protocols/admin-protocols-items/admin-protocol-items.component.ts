@@ -1,17 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { CreateProtocolItemsModalComponent } from './createModal/createProtocolItems-modal.component';
 import { StocksService } from '../../../../services/stocks.service';
 import { ActivatedRoute } from '@angular/router';
-
-interface adminProtocols {
-  id: number;
-  code: number;
-  supplier: string;
-  category: string;
-  file: string;
-}
 
 @Component({
   selector: 'app-admin-protocol-items',
@@ -33,7 +24,6 @@ export class AdminProtocolItemsComponent implements OnInit {
     private stockService: StocksService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -41,8 +31,8 @@ export class AdminProtocolItemsComponent implements OnInit {
       this.protocolId = params['id'];
       this.modalData.protocolId = parseInt(params['id']);
     });
-    this.getContent();
     this.getAllProducts();
+    this.getContent();
   }
 
   onPageChange(page: number) {
@@ -54,18 +44,22 @@ export class AdminProtocolItemsComponent implements OnInit {
     return list.sort((a, b) => a?.description?.localeCompare(b?.description));
   }
 
-  getContent(disableLoading= false) {
+  removeItems() {
+    if (this.response?.results?.length) {
+      const responseProductIds = this.response.results.map(result => result.product.id);
+      this.modalData.products = this.modalData.products.filter(product => !responseProductIds.includes(product.id));
+    }
+  }
+
+  getContent(disableLoading = false) {
     this.stockService
       .getProtocolItems(this.protocolId, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
+        this.removeItems();
         this.loading = null;
         if (disableLoading) {
-          this.snackBar.open('Item excluído!', 'Fechar', {
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-          });
+          window.location.reload();
         }
       });
   }
@@ -77,6 +71,7 @@ export class AdminProtocolItemsComponent implements OnInit {
   }
 
   openCreateModal(): void {
+    this.removeItems();
     const dialogRef = this.dialog.open(CreateProtocolItemsModalComponent, {
       data: this.modalData,
     });

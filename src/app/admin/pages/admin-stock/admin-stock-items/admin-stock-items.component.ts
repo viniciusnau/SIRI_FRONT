@@ -40,7 +40,7 @@ export class AdminStockItemsComponent {
     this.stocksService
       .getStockItems(orderId, this.currentPage.toString())
       .subscribe((data) => {
-        this.response = data.results;
+        this.response = data.results.filter((item) => item.quantity > 0);
         this.response.next = data?.next;
         this.response.count = data?.count;
       });

@@ -2,6 +2,7 @@ import { OrdersService } from './../../../../../services/orders.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'create-admin-general-supplier-orders-items-modal-component',
@@ -21,6 +22,7 @@ export class CreateAdminGeneralSupplierOrdersItemsModalComponent
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     public ordersService: OrdersService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -54,8 +56,20 @@ export class CreateAdminGeneralSupplierOrdersItemsModalComponent
 
     this.ordersService
       .createSupplierOrderItem(createSupplierOrderItemData)
-      .subscribe((response) => {
-        window.location.reload()
-      });
+      .subscribe(
+        (response) => {
+          window.location.reload();
+        },
+        (error) => {
+          this.snackBar.open('Erro ao criar item!', 'Fechar', {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      );
   }
 }
