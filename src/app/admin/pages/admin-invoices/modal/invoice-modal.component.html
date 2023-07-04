@@ -7,10 +7,7 @@
   <p>Fornecedor</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="supplier">
-      <mat-option
-        *ngFor="let supplier of data.suppliers"
-        [value]="supplier.id"
-      >
+      <mat-option *ngFor="let supplier of data.suppliers" [value]="supplier.id">
         {{ supplier.name }}
       </mat-option>
     </mat-select>
@@ -28,7 +25,7 @@
   </mat-form-field>
   <p>Valor Total</p>
   <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="total_value" />
+    <input type="text" matInput formControlName="total_value" appPriceFormat />
   </mat-form-field>
   <div class="custom-file-input">
     <label for="fileInput" class="file-label">Escolher arquivo</label>
@@ -39,6 +36,8 @@
   </div>
 </div>
 <div mat-dialog-actions class="actions">
-  <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button (click)="onClick()" cdkFocusInitial>Salvar</button>
+  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+  <button mat-button class="proceed" (click)="onClick()" cdkFocusInitial>
+    Criar
+  </button>
 </div>

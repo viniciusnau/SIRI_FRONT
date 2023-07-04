@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AccountantReportsModalComponent} from './modal/accountant-reports-modal.component';
+import { AccountantReportsModalComponent } from './modal/accountant-reports-modal.component';
 import { StocksService } from 'src/app/services/stocks.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -26,9 +26,9 @@ export class AdminAccountantReportsComponent implements OnInit {
     'id',
     'month',
     'previousBalance',
+    'currentBalance',
     'entryValue',
     'outputValue',
-    'currentBalance',
     'file',
     'deleteAccountantReports',
   ];
@@ -58,12 +58,13 @@ export class AdminAccountantReportsComponent implements OnInit {
       const originalDate = new Date(date);
 
       const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const year = originalDate.getUTCFullYear().toString();
 
       return `${day}/${month}/${year}`;
-    }
-    else {
+    } else {
       return '';
     }
   }
@@ -75,7 +76,9 @@ export class AdminAccountantReportsComponent implements OnInit {
   deleteAccountantReports(id: number): void {
     this.loading = id;
     this.stocksService.deleteAccountantReport(id).subscribe(() => {
-      this.adminAccountantReports = this.adminAccountantReports.filter((report) => report.id !== id);
+      this.adminAccountantReports = this.adminAccountantReports.filter(
+        (report) => report.id !== id,
+      );
       this.snackBar.open('Relatório excluído!', 'Fechar', {
         duration: 3000,
         horizontalPosition: 'end',

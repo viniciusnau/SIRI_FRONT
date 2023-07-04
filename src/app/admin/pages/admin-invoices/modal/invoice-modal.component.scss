@@ -1,3 +1,5 @@
+@import '../../../../../colors.scss';
+
 .content {
   display: flex;
   flex-direction: column;
@@ -31,7 +33,7 @@ mat-form-field {
   margin-bottom: 1rem;
 }
 
-.custom-file-input input[type="file"] {
+.custom-file-input input[type='file'] {
   width: 0.1px;
   height: 0.1px;
   opacity: 0;
@@ -55,4 +57,13 @@ mat-form-field {
   margin-left: 1.6rem;
   font-size: 14px;
   color: #888;
+}
+
+.actions {
+  .cancel {
+    background-color: $secondary-button-color;
+  }
+  .proceed {
+    background-color: $primary-button-color;
+  }
 }

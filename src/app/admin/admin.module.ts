@@ -69,6 +69,7 @@ import { IdentityDirective } from './directives/identity.directive';
 import { CpfMaskDirective } from './directives/cpfMask.directive';
 import { CnpjMaskDirective } from './directives/CnpjMask.directive';
 import { ContactMaskDirective } from './directives/contactMask.directive';
+import { PriceFormatDirective } from './directives/price-format.directive';
 
 @NgModule({
   declarations: [
@@ -131,6 +132,7 @@ import { ContactMaskDirective } from './directives/contactMask.directive';
     CpfMaskDirective,
     CnpjMaskDirective,
     ContactMaskDirective,
+    PriceFormatDirective,
   ],
   imports: [
     CommonModule,

@@ -40,10 +40,6 @@
                 name="quantity"
                 [type]="'number'"
                 placeholder="Quantidade"
-                (blur)="validateIntegerValue(orderItem, 'quantity')"
-                [ngClass]="{
-                  'invalid-input': '!quantityIsValid'
-                }"
                 appDigitLimit
                 decimalNotAllowed
                 [ngModelOptions]="{ standalone: true }"
@@ -102,6 +98,7 @@
                 [formControl]="supplierQuantityControls[orderItem.id]"
                 (input)="orderItem.supplier_quantity = $event.target.value"
                 decimalNotAllowed
+                appDigitLimit
               />
             </mat-form-field>
           </td>
