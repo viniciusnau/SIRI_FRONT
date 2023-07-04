@@ -65,10 +65,15 @@ export class InvoiceModalComponent implements OnInit {
     ).files[0];
   }
 
+  handlePriceFormat(field: string) {
+    return field.replace('R$', '').replace(/[.,]/g, '');
+  }
+
   onClick(): void {
     if (this.formInvoice.invalid || !this.selectedFile) {
       return;
     }
+
     const { code, supplier, public_defense, total_value } =
       this.formInvoice.getRawValue();
 
@@ -77,7 +82,10 @@ export class InvoiceModalComponent implements OnInit {
     formData.append('code', code);
     formData.append('supplier', supplier);
     formData.append('public_defense', public_defense);
-    formData.append('total_value', total_value);
+    formData.append(
+      'total_value',
+      this.handlePriceFormat(total_value).toString(),
+    );
 
     this.stocksService.postInvoice(formData).subscribe(
       (response) => {

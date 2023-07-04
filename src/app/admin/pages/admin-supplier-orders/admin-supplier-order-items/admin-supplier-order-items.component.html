@@ -5,30 +5,44 @@
         <span>Itens do Pedido</span>
       </mat-toolbar>
 
-      <table mat-table [dataSource]="supplierOrderItems" class="mat-elevation-z8">
+      <table
+        mat-table
+        [dataSource]="supplierOrderItems"
+        class="mat-elevation-z8"
+      >
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Id</th>
-          <td mat-cell *matCellDef="let supplierOrderItem">{{ supplierOrderItem.id }}</td>
+          <td mat-cell *matCellDef="let supplierOrderItem">
+            {{ supplierOrderItem.id }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="product">
           <th mat-header-cell *matHeaderCellDef>Produto</th>
-          <td mat-cell *matCellDef="let supplierOrderItem">{{ supplierOrderItem.product.name }}</td>
+          <td mat-cell *matCellDef="let supplierOrderItem">
+            {{ supplierOrderItem.product.name }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef>Descrição</th>
-          <td mat-cell *matCellDef="let supplierOrderItem">{{ supplierOrderItem.product.description }}</td>
+          <td mat-cell *matCellDef="let supplierOrderItem">
+            {{ supplierOrderItem.product.description }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="measure">
           <th mat-header-cell *matHeaderCellDef>Medida</th>
-          <td mat-cell *matCellDef="let supplierOrderItem">{{ supplierOrderItem.product.measure.name }}</td>
+          <td mat-cell *matCellDef="let supplierOrderItem">
+            {{ supplierOrderItem.product.measure.name }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="quantity">
           <th mat-header-cell *matHeaderCellDef>Quantidade</th>
-          <td mat-cell *matCellDef="let supplierOrderItem">{{ supplierOrderItem.quantity }}</td>
+          <td mat-cell *matCellDef="let supplierOrderItem">
+            {{ supplierOrderItem.quantity }}
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
