@@ -38,12 +38,17 @@ export class StocksService {
     );
   }
 
-  public getStockItems(stock_id: string): Observable<any> {
+  public getStockItems(stock_id: string, pageChange = ''): Observable<any> {
     const options = {
       headers: this.httpOptions.headers,
       params: new HttpParams().set('stock_id', stock_id),
     };
-    return this.httpClient.get<any>(`${this.apiUrl}/stock-items`, options);
+    return pageChange
+      ? this.httpClient.get<any>(
+          `${this.apiUrl}/stock-items/?page=${pageChange}`,
+          options,
+        )
+      : this.httpClient.get<any>(`${this.apiUrl}/stock-items`, options);
   }
 
   public getSectors(pageChange = ''): Observable<any> {

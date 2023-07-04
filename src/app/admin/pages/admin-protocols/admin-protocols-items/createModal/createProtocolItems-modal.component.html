@@ -11,11 +11,13 @@
 
   <p>Quantidade</p>
   <mat-form-field appearance="fill">
-    <input type="number" matInput formControlName="quantity" />
+    <input type="number" matInput formControlName="quantity" appDigitLimit />
   </mat-form-field>
 
   <div mat-dialog-actions class="actions">
-    <button mat-button (click)="onNoClick()">Cancelar</button>
-    <button mat-button (click)="onClick()" cdkFocusInitial>Criar</button>
+    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+    <button mat-button class="proceed" (click)="onClick()" cdkFocusInitial>
+      Criar
+    </button>
   </div>
 </div>

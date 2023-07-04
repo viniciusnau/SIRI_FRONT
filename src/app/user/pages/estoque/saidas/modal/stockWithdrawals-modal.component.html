@@ -2,7 +2,12 @@
 <div [formGroup]="formStockWithdrawals" mat-dialog-content class="content">
   <p>Quantidade</p>
   <mat-form-field appearance="fill">
-    <input type="number" matInput formControlName="withdraw_quantity" />
+    <input
+      type="number"
+      matInput
+      formControlName="withdraw_quantity"
+      appDigitLimit
+    />
   </mat-form-field>
   <p>Descrição</p>
   <mat-form-field appearance="fill">
