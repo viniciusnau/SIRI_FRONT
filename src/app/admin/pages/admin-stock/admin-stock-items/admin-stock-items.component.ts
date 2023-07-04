@@ -31,7 +31,7 @@ export class AdminStockItemsComponent {
 
   getStockItems(orderId: string) {
     this.stocksService.getStockItems(orderId).subscribe((data) => {
-      this.stockItems = data.results;
+      this.stockItems = data.results.filter(item => item.quantity > 0);
     });
   }
 

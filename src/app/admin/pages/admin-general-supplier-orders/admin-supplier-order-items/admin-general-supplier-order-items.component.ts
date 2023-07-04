@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./admin-general-supplier-order-items.component.scss'],
 })
 export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
+  loading: number | null = null;
   supplierOrderItems = [];
   supplierOrderId = '';
   protocolId = '';
@@ -70,13 +71,26 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
   getProtocolItems() {
     this.stocksService.getAllProtocolItems(this.protocolId).subscribe((data) => {
       this.protocolItems = data.results;
+      this.removeItems();
+    });
+  }
+
+  removeItems() {
+    if (this.supplierOrderItems.length === 0 || this.protocolItems.length === 0) {
+      return;
+    }
+    this.protocolItems = this.protocolItems.filter((item) => {
+      return !this.supplierOrderItems.some((orderItem) => orderItem.product.id === item.product.id);
     });
   }
 
   deleteOrderItem(order_item_id) {
+    this.loading = Number(order_item_id);
     this.ordersService
       .deleteGeneralOrderItem(order_item_id)
       .toPromise()
-      .then((data: any) => this.getSupplierOrderItems());
+      .then((data: any) => {
+        window.location.reload()
+      });
   }
 }

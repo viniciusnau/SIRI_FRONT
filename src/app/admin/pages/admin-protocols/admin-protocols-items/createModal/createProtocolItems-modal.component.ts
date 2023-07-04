@@ -2,6 +2,7 @@ import { StocksService } from 'src/app/services/stocks.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface ProtocolsModalData {
   products: [];
@@ -21,6 +22,7 @@ export class CreateProtocolItemsModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: ProtocolsModalData,
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +57,16 @@ export class CreateProtocolItemsModalComponent implements OnInit {
       (response) => {
         window.location.reload();
       },
-      (error) => {},
+      (error) => {
+        this.snackBar.open('Item duplicado!', 'Fechar', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      },
     );
   }
 }
