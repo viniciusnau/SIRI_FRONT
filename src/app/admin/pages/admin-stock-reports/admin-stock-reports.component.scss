@@ -85,12 +85,16 @@ section {
 .btnRequest {
   .btn {
     background-color: $primary-color;
-    color: $primary-text-color;;
+    color: $primary-text-color;
   }
 }
 
 .spacer {
   flex: 1 1 auto;
+}
+
+.download {
+  background-color: $primary-button-color;
 }
 
 .custom-spinner {

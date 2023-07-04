@@ -5,7 +5,11 @@ import { OrdersService } from '../../../../services/orders.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { StocksService } from '../../../../services/stocks.service';
 import { SuppliersService } from '../../../../services/suppliers.service';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'admin-orders-modal',
@@ -45,8 +49,12 @@ export class AdminOrdersModalComponent implements OnInit {
       code: ['', Validators.required],
       supplier: [null, Validators.required],
       public_defense: [null, Validators.required],
-      total_value: ['', Validators.required]
+      total_value: ['', Validators.required],
     });
+  }
+
+  handlePriceFormat(field: string) {
+    return field.replace('R$', '').replace(/[.,]/g, '');
   }
 
   sortAlphabetically(list) {
@@ -74,7 +82,9 @@ export class AdminOrdersModalComponent implements OnInit {
     }
     const byteArray = new Uint8Array(byteNumbers);
     this.decodedFileData = new Blob([byteArray], { type: 'application/pdf' });
-    this.fileData = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(this.decodedFileData));
+    this.fileData = this.sanitizer.bypassSecurityTrustResourceUrl(
+      URL.createObjectURL(this.decodedFileData),
+    );
   }
 
   onNoClick(): void {
@@ -87,14 +97,18 @@ export class AdminOrdersModalComponent implements OnInit {
       this.loading = false;
       return;
     }
-    const { code, supplier, public_defense, total_value } = this.formOrder.getRawValue();
+    const { code, supplier, public_defense, total_value } =
+      this.formOrder.getRawValue();
 
     const formData: FormData = new FormData();
     formData.append('file', this.decodedFileData);
     formData.append('code', code);
     formData.append('supplier', supplier);
     formData.append('public_defense', public_defense);
-    formData.append('total_value', total_value);
+    formData.append(
+      'total_value',
+      this.handlePriceFormat(total_value).toString(),
+    );
 
     this.stocksService.postInvoice(formData).subscribe(
       (response) => {
@@ -103,17 +117,13 @@ export class AdminOrdersModalComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-        this.snackBar.open(
-          'Erro ao salvar',
-          'Fechar',
-          {
-            duration: 3000,
-            panelClass: ['snackbar-error'],
-            horizontalPosition: this.horizontalPosition,
-            verticalPosition: this.verticalPosition,
-          }
-          );
-        },
+        this.snackBar.open('Erro ao salvar', 'Fechar', {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
+      },
     );
   }
 }

@@ -116,12 +116,12 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card *ngIf="!loading" >
+    <mat-card *ngIf="!loading">
       <mat-card-content>
         <mat-toolbar>
           <span>Relatório de Estoque</span>
           <span class="spacer"></span>
-          <button mat-icon-button (click)="generatePDF()">
+          <button mat-icon-button class="download" (click)="generatePDF()">
             <mat-icon>download</mat-icon>
           </button>
         </mat-toolbar>

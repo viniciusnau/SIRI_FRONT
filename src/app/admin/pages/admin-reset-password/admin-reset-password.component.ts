@@ -11,12 +11,8 @@ import { DialogComponent } from '../../components/modal/dialog.component';
 export class AdminResetPasswordComponent {
   email: string;
   loading: boolean = false;
-  isValidEmail: boolean;
 
   constructor(private userService: UserService, private dialog: MatDialog) {}
-  ngOnInit(): void {
-    this.isValidEmail = true;
-  }
 
   resetPassword() {
     this.loading = true;
@@ -30,10 +26,6 @@ export class AdminResetPasswordComponent {
         this.openDialog('Erro', 'Oops! Email invalido');
       },
     );
-  }
-
-  checkEmailValidity(): void {
-    this.isValidEmail = this.email.includes('@');
   }
 
   openDialog(title: string, message: string): void {
