@@ -13,8 +13,14 @@ import { AuthUserGuard } from '../services/guards/auth-user.guard';
 import { InsideResetPasswordComponent } from './pages/inside-reset-password/inside-reset-password.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthUserGuard] },
-  { path: 'login', component: LoginComponent, canActivate: [UnauthUserGuard] },
+  {
+    path: '',
+    component: HomeComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   {
     path: 'esqueci-a-senha',
     component: ResetPasswordComponent,

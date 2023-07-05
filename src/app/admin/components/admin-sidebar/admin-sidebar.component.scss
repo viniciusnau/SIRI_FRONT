@@ -18,6 +18,12 @@ span {
 }
 
 .account {
+  display: flex;
   margin: 0 1rem;
   font-size: 1.1rem;
+  align-items: center;
+}
+
+.icon {
+  margin: 0 0.5rem 0 0;
 }

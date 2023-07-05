@@ -12,6 +12,7 @@ import { DialogComponent } from '../admin/components/modal/dialog.component';
 })
 export class LoginService {
   apiUrl = environment.apiUrl;
+  isAdmin: string;
 
   constructor(
     private httpClient: HttpClient,
@@ -27,7 +28,7 @@ export class LoginService {
     };
     return this.httpClient
       .get<any>(`${this.apiUrl}/me/`, options)
-      .pipe(map((response) => response.is_admin));
+      .pipe(map((response) => (this.isAdmin = response.is_admin)));
   }
 
   loginAdmin(loginData): Observable<any> {
@@ -107,12 +108,12 @@ export class LoginService {
                 if (remember) {
                   localStorage.setItem('token', token);
                   localStorage.setItem('auth', `${username}:${password}`);
-                  localStorage.setItem('is_admin', 'true');
+                  localStorage.setItem('is_admin', 'false');
                   localStorage.setItem('userName', username);
                 } else {
                   sessionStorage.setItem('token', token);
                   sessionStorage.setItem('auth', `${username}:${password}`);
-                  sessionStorage.setItem('is_admin', 'true');
+                  sessionStorage.setItem('is_admin', 'false');
                   sessionStorage.setItem('userName', username);
                 }
 
@@ -149,16 +150,27 @@ export class LoginService {
   }
 
   get isLogged(): boolean {
-    const local = localStorage.getItem('token') ? true : false;
-    const section = sessionStorage.getItem('token') ? true : false;
+    const localIsAdmin = localStorage.getItem('is_admin') === 'true';
+    const sessionIsAdmin = sessionStorage.getItem('is_admin') === 'true';
+    const isAdmin = localIsAdmin || sessionIsAdmin;
+    const isLoggedIn = this.isAuthenticated();
 
-    return local || section;
+    return isLoggedIn && !isAdmin;
   }
 
   get isAdminLogged(): boolean {
-    const local = localStorage.getItem('token') ? true : false;
-    const section = sessionStorage.getItem('token') ? true : false;
+    const localIsAdmin = localStorage.getItem('is_admin') === 'true';
+    const sessionIsAdmin = sessionStorage.getItem('is_admin') === 'true';
+    const isAdmin = localIsAdmin || sessionIsAdmin;
+    const isLoggedIn = this.isAuthenticated();
 
-    return local || section;
+    return isLoggedIn && isAdmin;
+  }
+
+  private isAuthenticated(): boolean {
+    const localToken = localStorage.getItem('token');
+    const sessionToken = sessionStorage.getItem('token');
+    const token = localToken || sessionToken;
+    return !!token;
   }
 }
