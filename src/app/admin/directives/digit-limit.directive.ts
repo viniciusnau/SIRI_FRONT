@@ -7,7 +7,7 @@ export class DigitLimitDirective {
   constructor(private el: ElementRef) {}
 
   @HostListener('input', ['$event']) onInputChange(event: any) {
-    const maxLength = 3;
+    const maxLength = 6;
     let inputValue = this.el.nativeElement.value;
 
     if (inputValue.startsWith('-')) {

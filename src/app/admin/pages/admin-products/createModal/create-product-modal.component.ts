@@ -40,7 +40,6 @@ export class CreateProductModalComponent implements OnInit {
   }
 
   handlePriceFormat(field: string) {
-    console.log('field: ', field?.replace('R$', '').replace(/[.,]/g, ''));
     return field?.replace('R$', '').replace(/[.,]/g, '');
   }
 

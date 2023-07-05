@@ -29,9 +29,7 @@ import { AdminWarehouseReportsComponent } from './pages/admin-warehouse-reports/
 import { AdminSendEmailComponent } from './pages/admin-send-email/admin-send-email.component';
 import { AdminGeneralSupplierOrdersComponent } from './pages/admin-general-supplier-orders/admin-general-supplier-orders.component';
 import { AdminGeneralSupplierOrderItemsComponent } from './pages/admin-general-supplier-orders/admin-supplier-order-items/admin-general-supplier-order-items.component';
-import {
-  AdminProtocolItemsComponent
-} from './pages/admin-protocols/admin-protocols-items/admin-protocol-items.component';
+import { AdminProtocolItemsComponent } from './pages/admin-protocols/admin-protocols-items/admin-protocol-items.component';
 
 const routes: Routes = [
   {
@@ -128,7 +126,7 @@ const routes: Routes = [
   {
     path: 'admin/login',
     component: AdminLoginComponent,
-    canActivate: [UnauthAdminGuard],
+    // canActivate: [UnauthAdminGuard],
   },
   {
     path: 'admin/esqueci-a-senha',

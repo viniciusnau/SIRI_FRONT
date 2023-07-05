@@ -12,11 +12,12 @@ import { DialogComponent } from '../admin/components/modal/dialog.component';
 })
 export class LoginService {
   apiUrl = environment.apiUrl;
+  isAdmin: string;
 
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
 
   private checkForAdmin({ user, password }): Observable<boolean> {
@@ -27,7 +28,7 @@ export class LoginService {
     };
     return this.httpClient
       .get<any>(`${this.apiUrl}/me/`, options)
-      .pipe(map((response) => response.is_admin));
+      .pipe(map((response) => (this.isAdmin = response.is_admin)));
   }
 
   loginAdmin(loginData): Observable<any> {
@@ -41,40 +42,42 @@ export class LoginService {
 
           const token = btoa(JSON.stringify(response['token']));
 
-          this.checkForAdmin({ user: username, password }).subscribe((isAdmin) => {
-            if (!isAdmin) {
-              const dialogRef = this.dialog.open(DialogComponent, {
-                width: '300px',
-                data: {
-                  title: "Senha ou usuário incorreto",
-                  message: "Verifique suas credenciais"
-                }
-              });
-            } else {
-              if (remember) {
-                localStorage.setItem('token', token);
-                localStorage.setItem('auth', `${username}:${password}`);
-                localStorage.setItem('is_admin', 'true');
+          this.checkForAdmin({ user: username, password }).subscribe(
+            (isAdmin) => {
+              if (!isAdmin) {
+                const dialogRef = this.dialog.open(DialogComponent, {
+                  width: '300px',
+                  data: {
+                    title: 'Senha ou usuário incorreto',
+                    message: 'Verifique suas credenciais',
+                  },
+                });
               } else {
-                sessionStorage.setItem('token', token);
-                sessionStorage.setItem('auth', `${username}:${password}`);
-                sessionStorage.setItem('is_admin', 'true');
-              }
+                if (remember) {
+                  localStorage.setItem('token', token);
+                  localStorage.setItem('auth', `${username}:${password}`);
+                  localStorage.setItem('is_admin', 'true');
+                } else {
+                  sessionStorage.setItem('token', token);
+                  sessionStorage.setItem('auth', `${username}:${password}`);
+                  sessionStorage.setItem('is_admin', 'true');
+                }
 
-              this.router.navigate(['/admin']);
-            }
-          });
+                this.router.navigate(['/admin']);
+              }
+            },
+          );
         },
         (error) => {
-            const dialogRef = this.dialog.open(DialogComponent, {
-              width: '300px',
-              data: {
-                title: "Erro de autenticação",
-                message: "Verifique seus dados de login"
-              }
-            });
-        }
-      )
+          const dialogRef = this.dialog.open(DialogComponent, {
+            width: '300px',
+            data: {
+              title: 'Erro de autenticação',
+              message: 'Verifique seus dados de login',
+            },
+          });
+        },
+      ),
     );
   }
 
@@ -89,40 +92,42 @@ export class LoginService {
 
           const token = btoa(JSON.stringify(response['token']));
 
-          this.checkForAdmin({ user: username, password }).subscribe((isAdmin) => {
-            if (isAdmin) {
-              const dialogRef = this.dialog.open(DialogComponent, {
-                width: '300px',
-                data: {
-                  title: "Senha ou usuário incorreto",
-                  message: "Verifique suas credenciais"
-                }
-              });
-            } else {
-              if (remember) {
-                localStorage.setItem('token', token);
-                localStorage.setItem('auth', `${username}:${password}`);
-                localStorage.setItem('is_admin', 'true');
+          this.checkForAdmin({ user: username, password }).subscribe(
+            (isAdmin) => {
+              if (isAdmin) {
+                const dialogRef = this.dialog.open(DialogComponent, {
+                  width: '300px',
+                  data: {
+                    title: 'Senha ou usuário incorreto',
+                    message: 'Verifique suas credenciais',
+                  },
+                });
               } else {
-                sessionStorage.setItem('token', token);
-                sessionStorage.setItem('auth', `${username}:${password}`);
-                sessionStorage.setItem('is_admin', 'true');
-              }
+                if (remember) {
+                  localStorage.setItem('token', token);
+                  localStorage.setItem('auth', `${username}:${password}`);
+                  localStorage.setItem('is_admin', 'false');
+                } else {
+                  sessionStorage.setItem('token', token);
+                  sessionStorage.setItem('auth', `${username}:${password}`);
+                  sessionStorage.setItem('is_admin', 'false');
+                }
 
-              this.router.navigate(['/']);
-            }
-          });
+                this.router.navigate(['/']);
+              }
+            },
+          );
         },
         (error) => {
           const dialogRef = this.dialog.open(DialogComponent, {
             width: '300px',
             data: {
-              title: "Erro de autenticação",
-              message: "Verifique seus dados de login"
-            }
+              title: 'Erro de autenticação',
+              message: 'Verifique seus dados de login',
+            },
           });
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -141,16 +146,27 @@ export class LoginService {
   }
 
   get isLogged(): boolean {
-    const local = localStorage.getItem('token') ? true : false;
-    const section = sessionStorage.getItem('token') ? true : false;
+    const localIsAdmin = localStorage.getItem('is_admin') === 'true';
+    const sessionIsAdmin = sessionStorage.getItem('is_admin') === 'true';
+    const isAdmin = localIsAdmin || sessionIsAdmin;
+    const isLoggedIn = this.isAuthenticated();
 
-    return local || section;
+    return isLoggedIn && !isAdmin;
   }
 
   get isAdminLogged(): boolean {
-    const local = localStorage.getItem('token') ? true : false;
-    const section = sessionStorage.getItem('token') ? true : false;
+    const localIsAdmin = localStorage.getItem('is_admin') === 'true';
+    const sessionIsAdmin = sessionStorage.getItem('is_admin') === 'true';
+    const isAdmin = localIsAdmin || sessionIsAdmin;
+    const isLoggedIn = this.isAuthenticated();
 
-    return local || section;
+    return isLoggedIn && isAdmin;
+  }
+
+  private isAuthenticated(): boolean {
+    const localToken = localStorage.getItem('token');
+    const sessionToken = sessionStorage.getItem('token');
+    const token = localToken || sessionToken;
+    return !!token;
   }
 }
