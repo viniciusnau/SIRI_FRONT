@@ -8,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AdminSidebarComponent {
   constructor(private loginService: LoginService) {}
+  userName: string = '';
+  ngOnInit(): void {
+    this.userName = sessionStorage.getItem('userName')
+      ? sessionStorage.getItem('userName')
+      : localStorage.getItem('userName');
+  }
 
   logout = () => this.loginService.logoutAdmin();
 }
