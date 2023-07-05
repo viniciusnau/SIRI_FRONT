@@ -57,10 +57,12 @@ export class LoginService {
                   localStorage.setItem('token', token);
                   localStorage.setItem('auth', `${username}:${password}`);
                   localStorage.setItem('is_admin', 'true');
+                  localStorage.setItem('userName', username);
                 } else {
                   sessionStorage.setItem('token', token);
                   sessionStorage.setItem('auth', `${username}:${password}`);
                   sessionStorage.setItem('is_admin', 'true');
+                  sessionStorage.setItem('userName', username);
                 }
 
                 this.router.navigate(['/admin']);
@@ -107,10 +109,12 @@ export class LoginService {
                   localStorage.setItem('token', token);
                   localStorage.setItem('auth', `${username}:${password}`);
                   localStorage.setItem('is_admin', 'false');
+                  localStorage.setItem('userName', username);
                 } else {
                   sessionStorage.setItem('token', token);
                   sessionStorage.setItem('auth', `${username}:${password}`);
                   sessionStorage.setItem('is_admin', 'false');
+                  sessionStorage.setItem('userName', username);
                 }
 
                 this.router.navigate(['/']);

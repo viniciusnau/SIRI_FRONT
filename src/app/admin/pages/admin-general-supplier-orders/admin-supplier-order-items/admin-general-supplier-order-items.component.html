@@ -13,7 +13,7 @@
 
       <table
         mat-table
-        [dataSource]="supplierOrderItems"
+        [dataSource]="response?.results"
         class="mat-elevation-z8"
       >
         <ng-container matColumnDef="id">
@@ -72,6 +72,11 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <app-pagination
+        [currentPage]="currentPage"
+        [response]="response"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
     </mat-card-content>
   </mat-card>
 </admin-sidebar>

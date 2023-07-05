@@ -33,6 +33,7 @@ export class AdminProtocolItemsComponent implements OnInit {
     });
     this.getAllProducts();
     this.getContent();
+    this.removeItems();
   }
 
   onPageChange(page: number) {

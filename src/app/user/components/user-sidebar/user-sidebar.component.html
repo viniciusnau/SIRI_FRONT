@@ -8,7 +8,10 @@
           class="logoSide"
         />
       </a>
-      <mat-divider></mat-divider>
+      <span *ngIf="userName" class="account"
+        ><mat-icon class="icon">account_circle</mat-icon> {{ userName }}</span
+      >
+      <mat-divider class="divider"></mat-divider>
       <mat-nav-list>
         <mat-list-item routerLink="/">
           <span matListItemTitle>Criar Pedido</span>

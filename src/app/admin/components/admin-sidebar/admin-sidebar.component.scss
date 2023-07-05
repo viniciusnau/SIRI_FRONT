@@ -2,7 +2,7 @@
 
 mat-sidenav {
   width: 300px;
-  background-color: $secondary-color; 
+  background-color: $secondary-color;
 }
 
 span {
@@ -11,4 +11,19 @@ span {
 
 .logoSide {
   width: 281.33222222222221111111111111px;
+}
+
+.divider {
+  margin: 0.2rem 0 0 0;
+}
+
+.account {
+  display: flex;
+  margin: 0 1rem;
+  font-size: 1.1rem;
+  align-items: center;
+}
+
+.icon {
+  margin: 0 0.5rem 0 0;
 }

@@ -81,15 +81,20 @@ export class OrdersService {
     );
   }
 
-  public getSupplierOrderItems(supplier_order_id: string): Observable<any> {
+  public getSupplierOrderItems(supplier_order_id: string, pageChange = ''): Observable<any> {
     const options = {
       headers: this.httpOptions.headers,
       params: new HttpParams().set('supplier_order_id', supplier_order_id),
     };
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/supplier-order-items`,
-      options,
-    );
+    return pageChange
+      ? this.httpClient.get<any>(
+        `${this.apiUrl}/supplier-order-items/?page=${pageChange}`,
+        options,
+      )
+      : this.httpClient.get<any>(
+        `${this.apiUrl}/supplier-order-items`,
+        options,
+      );
   }
 
   public getMaterialsOrder(pageChange = ''): Observable<any> {

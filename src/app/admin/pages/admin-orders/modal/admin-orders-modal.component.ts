@@ -54,7 +54,7 @@ export class AdminOrdersModalComponent implements OnInit {
   }
 
   handlePriceFormat(field: string) {
-    return field.replace('R$', '').replace(/[.,]/g, '');
+    return field.replace('R$', '').replace(/[.]/g, '').replace(/[,]/g, '.');
   }
 
   sortAlphabetically(list) {

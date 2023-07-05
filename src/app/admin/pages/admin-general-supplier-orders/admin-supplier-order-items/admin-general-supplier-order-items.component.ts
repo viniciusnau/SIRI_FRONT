@@ -11,8 +11,9 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./admin-general-supplier-order-items.component.scss'],
 })
 export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
+  currentPage = 1;
+  response: any;
   loading: number | null = null;
-  supplierOrderItems = [];
   supplierOrderId = '';
   protocolId = '';
   protocolItems = [];
@@ -38,7 +39,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
 
     this.protocolId = this.route.snapshot.paramMap.get('protocol');
 
-    this.getSupplierOrderItems();
+    this.getContent();
     this.getProtocolItems();
   }
 
@@ -61,11 +62,17 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
     );
   }
 
-  getSupplierOrderItems() {
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
+  getContent() {
     this.ordersService
-      .getSupplierOrderItems(this.supplierOrderId)
+      .getSupplierOrderItems(this.supplierOrderId, this.currentPage.toString())
       .subscribe((data) => {
-        this.supplierOrderItems = data;
+        this.response = data;
+        console.log(this.response);
       });
   }
 
@@ -77,11 +84,11 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
   }
 
   removeItems() {
-    if (this.supplierOrderItems.length === 0 || this.protocolItems.length === 0) {
+    if (this.response.results === 0 || this.protocolItems.length === 0) {
       return;
     }
     this.protocolItems = this.protocolItems.filter((item) => {
-      return !this.supplierOrderItems.some((orderItem) => orderItem.product.id === item.product.id);
+      return !this.response.results.some((orderItem) => orderItem.product.id === item.product.id);
     });
   }
 

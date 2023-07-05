@@ -8,14 +8,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-sidebar.component.scss'],
 })
 export class UserSidebarComponent {
-  constructor(
-    private loginService: LoginService,
-    private router: Router
-  ) {}
+  constructor(private loginService: LoginService, private router: Router) {}
+  userName: string = '';
+
+  ngOnInit(): void {
+    this.userName = sessionStorage.getItem('userName')
+      ? sessionStorage.getItem('userName')
+      : localStorage.getItem('userName');
+  }
 
   logout = () => this.loginService.logoutUser();
 
   resetPassword() {
-    this.router.navigate(['mudar-senha/']).then(r => {});
+    this.router.navigate(['mudar-senha/']).then((r) => {});
   }
 }

@@ -126,7 +126,6 @@ const routes: Routes = [
   {
     path: 'admin/login',
     component: AdminLoginComponent,
-    // canActivate: [UnauthAdminGuard],
   },
   {
     path: 'admin/esqueci-a-senha',

@@ -16,12 +16,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    // canActivate: [AuthUserGuard]
   },
   {
     path: 'login',
     component: LoginComponent,
-    // canActivate: [UnauthUserGuard]
   },
   {
     path: 'esqueci-a-senha',
