@@ -16,7 +16,7 @@ export class LoginService {
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
 
   private checkForAdmin({ user, password }): Observable<boolean> {
@@ -41,40 +41,44 @@ export class LoginService {
 
           const token = btoa(JSON.stringify(response['token']));
 
-          this.checkForAdmin({ user: username, password }).subscribe((isAdmin) => {
-            if (!isAdmin) {
-              const dialogRef = this.dialog.open(DialogComponent, {
-                width: '300px',
-                data: {
-                  title: "Senha ou usuário incorreto",
-                  message: "Verifique suas credenciais"
-                }
-              });
-            } else {
-              if (remember) {
-                localStorage.setItem('token', token);
-                localStorage.setItem('auth', `${username}:${password}`);
-                localStorage.setItem('is_admin', 'true');
+          this.checkForAdmin({ user: username, password }).subscribe(
+            (isAdmin) => {
+              if (!isAdmin) {
+                const dialogRef = this.dialog.open(DialogComponent, {
+                  width: '300px',
+                  data: {
+                    title: 'Senha ou usuário incorreto',
+                    message: 'Verifique suas credenciais',
+                  },
+                });
               } else {
-                sessionStorage.setItem('token', token);
-                sessionStorage.setItem('auth', `${username}:${password}`);
-                sessionStorage.setItem('is_admin', 'true');
-              }
+                if (remember) {
+                  localStorage.setItem('token', token);
+                  localStorage.setItem('auth', `${username}:${password}`);
+                  localStorage.setItem('is_admin', 'true');
+                  localStorage.setItem('userName', username);
+                } else {
+                  sessionStorage.setItem('token', token);
+                  sessionStorage.setItem('auth', `${username}:${password}`);
+                  sessionStorage.setItem('is_admin', 'true');
+                  sessionStorage.setItem('userName', username);
+                }
 
-              this.router.navigate(['/admin']);
-            }
-          });
+                this.router.navigate(['/admin']);
+              }
+            },
+          );
         },
         (error) => {
-            const dialogRef = this.dialog.open(DialogComponent, {
-              width: '300px',
-              data: {
-                title: "Erro de autenticação",
-                message: "Verifique seus dados de login"
-              }
-            });
-        }
-      )
+          const dialogRef = this.dialog.open(DialogComponent, {
+            width: '300px',
+            data: {
+              title: 'Erro de autenticação',
+              message: 'Verifique seus dados de login',
+            },
+          });
+        },
+      ),
     );
   }
 
@@ -89,40 +93,44 @@ export class LoginService {
 
           const token = btoa(JSON.stringify(response['token']));
 
-          this.checkForAdmin({ user: username, password }).subscribe((isAdmin) => {
-            if (isAdmin) {
-              const dialogRef = this.dialog.open(DialogComponent, {
-                width: '300px',
-                data: {
-                  title: "Senha ou usuário incorreto",
-                  message: "Verifique suas credenciais"
-                }
-              });
-            } else {
-              if (remember) {
-                localStorage.setItem('token', token);
-                localStorage.setItem('auth', `${username}:${password}`);
-                localStorage.setItem('is_admin', 'true');
+          this.checkForAdmin({ user: username, password }).subscribe(
+            (isAdmin) => {
+              if (isAdmin) {
+                const dialogRef = this.dialog.open(DialogComponent, {
+                  width: '300px',
+                  data: {
+                    title: 'Senha ou usuário incorreto',
+                    message: 'Verifique suas credenciais',
+                  },
+                });
               } else {
-                sessionStorage.setItem('token', token);
-                sessionStorage.setItem('auth', `${username}:${password}`);
-                sessionStorage.setItem('is_admin', 'true');
-              }
+                if (remember) {
+                  localStorage.setItem('token', token);
+                  localStorage.setItem('auth', `${username}:${password}`);
+                  localStorage.setItem('is_admin', 'true');
+                  localStorage.setItem('userName', username);
+                } else {
+                  sessionStorage.setItem('token', token);
+                  sessionStorage.setItem('auth', `${username}:${password}`);
+                  sessionStorage.setItem('is_admin', 'true');
+                  sessionStorage.setItem('userName', username);
+                }
 
-              this.router.navigate(['/']);
-            }
-          });
+                this.router.navigate(['/']);
+              }
+            },
+          );
         },
         (error) => {
           const dialogRef = this.dialog.open(DialogComponent, {
             width: '300px',
             data: {
-              title: "Erro de autenticação",
-              message: "Verifique seus dados de login"
-            }
+              title: 'Erro de autenticação',
+              message: 'Verifique seus dados de login',
+            },
           });
-        }
-      )
+        },
+      ),
     );
   }
 

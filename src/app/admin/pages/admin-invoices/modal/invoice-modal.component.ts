@@ -66,7 +66,7 @@ export class InvoiceModalComponent implements OnInit {
   }
 
   handlePriceFormat(field: string) {
-    return field.replace('R$', '').replace(/[.,]/g, '');
+    return field.replace('R$', '').replace(/[.]/g, '').replace(/[,]/g, '.');
   }
 
   onClick(): void {
