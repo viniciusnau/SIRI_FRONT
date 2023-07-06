@@ -20,17 +20,39 @@ export class EditProductModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    console.log('data: ', this.data);
   }
 
   createForm() {
     this.formProduct = this.formBuilder.group({
-      name: [''],
-      description: [''],
-      code: [''],
-      category: [''],
-      price: [''],
-      is_available: [''],
+      name: this.notEmpty(this.data.product.name),
+      description: this.notEmpty(this.data.product.description),
+      code: this.notEmpty(this.data.product.code),
+      category: this.notEmpty(this.data.product.category),
+      price: this.notEmpty(this.data.product.price),
+      is_available: this.notEmpty(this.data.product.is_available),
     });
+  }
+
+  handlePriceFormat(field: any) {
+    return field.replace('R$', '').replace(/[.]/g, '').replace(/[,]/g, '.');
+  }
+
+  notEmpty(content: any) {
+    return content ? content : '';
+  }
+
+  getChangedProperties(): any {
+    const formValue = this.formProduct.getRawValue();
+    const changedProperties: any = {};
+
+    Object.entries(formValue).forEach(([key, value]) => {
+      if (value !== this.data.product[key]) {
+        changedProperties[key] = value;
+      }
+    });
+
+    return changedProperties;
   }
 
   firstLetterOnCapital(text: string) {
@@ -45,12 +67,14 @@ export class EditProductModalComponent implements OnInit {
   onClick(): void {
     if (this.formProduct.invalid) return;
 
-    const editProductData = Object.entries(this.formProduct.getRawValue())
-      .filter(([_, value]) => value !== '' && value !== null)
-      .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+    const changedProperties = this.getChangedProperties();
+
+    if (changedProperties.hasOwnProperty('price')) {
+      changedProperties.price = this.handlePriceFormat(changedProperties.price);
+    }
 
     this.stocksService
-      .editProduct(this.data.product_id, editProductData)
+      .editProduct(this.data.product.id, changedProperties)
       .subscribe({
         next: (result) => {
           this.dialogRef.close();

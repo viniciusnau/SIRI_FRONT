@@ -126,10 +126,10 @@ export class AdminProductsComponent implements OnInit {
     });
   }
 
-  openEditModal(product_id: string) {
+  openEditModal(product_id: string, product: any) {
     const dialogRef = this.dialog.open(EditProductModalComponent, {
       data: {
-        product_id,
+        product,
         categories: this.categories,
         snackBar: this.snackBar,
       },
