@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class EditProductModalComponent implements OnInit {
   formProduct: FormGroup;
+  hasChanges: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<EditProductModalComponent>,
@@ -49,6 +50,7 @@ export class EditProductModalComponent implements OnInit {
     Object.entries(formValue).forEach(([key, value]) => {
       if (value !== this.data.product[key]) {
         changedProperties[key] = value;
+        this.hasChanges = true;
       }
     });
 
