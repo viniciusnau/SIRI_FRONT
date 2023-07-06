@@ -1,22 +1,24 @@
 <h1 mat-dialog-title>Categoria</h1>
 <div [formGroup]="formCategory" mat-dialog-content class="content">
-  <!--  <p>Nome</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="name">
-      <mat-option *ngFor="let supplier of data.Protocols" [value]="supplier.id"
-        >{{ supplier.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field> 
--->
   <p>Código</p>
   <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="code" />
+    <input
+      type="text"
+      matInput
+      formControlName="code"
+      (blur)="getChangedProperties()"
+    />
   </mat-form-field>
 </div>
 <div mat-dialog-actions class="actions">
   <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button mat-button class="proceed" (click)="onClick()" cdkFocusInitial>
+  <button
+    mat-button
+    class="proceed"
+    (click)="onClick()"
+    [disabled]="!hasChanges"
+    cdkFocusInitial
+  >
     Salvar
   </button>
 </div>

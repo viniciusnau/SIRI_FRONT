@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class EditCategoryModalComponent implements OnInit {
   formCategory: FormGroup;
+  hasChanges: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<EditCategoryModalComponent>,
@@ -24,8 +25,26 @@ export class EditCategoryModalComponent implements OnInit {
 
   createForm() {
     this.formCategory = this.formBuilder.group({
-      code: ['', [Validators.required]],
+      code: [this.notEmpty(this.data.category.code), [Validators.required]],
     });
+  }
+
+  notEmpty(content: any) {
+    return content ? content : '';
+  }
+
+  getChangedProperties(): any {
+    const formValue = this.formCategory.getRawValue();
+    const changedProperties: any = {};
+
+    Object.entries(formValue).forEach(([key, value]) => {
+      if (value !== this.data.category[key]) {
+        changedProperties[key] = value;
+        this.hasChanges = true;
+      }
+    });
+
+    return changedProperties;
   }
 
   onNoClick(): void {
@@ -35,10 +54,10 @@ export class EditCategoryModalComponent implements OnInit {
   onClick(): void {
     if (this.formCategory.invalid) return;
 
-    var editCategoryData = this.formCategory.getRawValue();
+    var editCategoryData = this.getChangedProperties();
 
     this.stocksService
-      .editCategory(this.data.category_id, editCategoryData)
+      .editCategory(this.data.category.id, editCategoryData)
       .subscribe((response) => {
         this.dialogRef.close();
       });

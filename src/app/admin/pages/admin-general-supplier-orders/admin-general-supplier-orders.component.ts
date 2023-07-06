@@ -95,20 +95,21 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
       const originalDate = new Date(date);
 
       const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const year = originalDate.getUTCFullYear().toString();
 
       return `${day}/${month}/${year}`;
-    }
-    else {
+    } else {
       return '';
     }
   }
 
-  openEditModal(supplier_order_id) {
+  openEditModal(supplier_order) {
     const dialogRef = this.dialog.open(
       EditAdminGeneralSuppliersOrdersModalComponent,
-      { data: { supplier_order_id } },
+      { data: { supplier_order } },
     );
   }
 

@@ -10,11 +10,16 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class DispatchReportsModalComponent implements OnInit {
   formDescription: FormGroup;
+  hasChanges: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<DispatchReportsModalComponent>,
     private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { id: string },
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      description: string;
+      id: string;
+    },
     public stocksService: StocksService,
   ) {}
 
@@ -24,8 +29,29 @@ export class DispatchReportsModalComponent implements OnInit {
 
   createForm() {
     this.formDescription = this.formBuilder.group({
-      description: ['', [Validators.required]],
+      description: [
+        this.notEmpty(this.data.description),
+        [Validators.required],
+      ],
     });
+  }
+
+  notEmpty(content: any) {
+    return content ? content : '';
+  }
+
+  getChangedProperties(): any {
+    const formValue = this.formDescription.getRawValue();
+    const changedProperties: any = {};
+
+    Object.entries(formValue).forEach(([key, value]) => {
+      if (value !== this.data[key]) {
+        changedProperties[key] = value;
+        this.hasChanges = true;
+      }
+    });
+
+    return changedProperties;
   }
 
   onNoClick(): void {
@@ -35,9 +61,11 @@ export class DispatchReportsModalComponent implements OnInit {
   onClick(): void {
     if (this.formDescription.invalid) return;
     const description = this.formDescription.getRawValue();
-    this.stocksService.patchDispatchReport(this.data, description).subscribe(
-      response => {window.location.reload()},
-      error => {}
+    this.stocksService.patchDispatchReport(this.data.id, description).subscribe(
+      (response) => {
+        window.location.reload();
+      },
+      (error) => {},
     );
   }
 }

@@ -86,9 +86,9 @@ export class AdminSuppliersComponent implements OnInit {
     this.router.navigate([`admin/fornecedor/pedidos/${supplier_id}`]);
   }
 
-  openModal(suppliers_id): void {
+  openModal(suppliers): void {
     const dialogRef = this.dialog.open(SuppliersModalComponent, {
-      data: { suppliers_id, categories: this.categories },
+      data: { suppliers, categories: this.categories },
     });
   }
 

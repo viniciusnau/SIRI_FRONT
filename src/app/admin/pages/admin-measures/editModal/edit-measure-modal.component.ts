@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class EditMeasureModalComponent implements OnInit {
   formMeasure: FormGroup;
+  hasChanges: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<EditMeasureModalComponent>,
@@ -24,8 +25,26 @@ export class EditMeasureModalComponent implements OnInit {
 
   createForm() {
     this.formMeasure = this.formBuilder.group({
-      name: ['', [Validators.required]],
+      name: [this.notEmpty(this.data.measure.name), [Validators.required]],
     });
+  }
+
+  notEmpty(content: any) {
+    return content ? content : '';
+  }
+
+  getChangedProperties(): any {
+    const formValue = this.formMeasure.getRawValue();
+    const changedProperties: any = {};
+
+    Object.entries(formValue).forEach(([key, value]) => {
+      if (value !== this.data.measure[key]) {
+        changedProperties[key] = value;
+        this.hasChanges = true;
+      }
+    });
+
+    return changedProperties;
   }
 
   onNoClick(): void {
@@ -35,10 +54,10 @@ export class EditMeasureModalComponent implements OnInit {
   onClick(): void {
     if (this.formMeasure.invalid) return;
 
-    const editMeasureData = this.formMeasure.getRawValue();
+    const editMeasureData = this.getChangedProperties();
 
     this.stocksService
-      .editMeasure(this.data.measure_id, editMeasureData)
+      .editMeasure(this.data.measure.id, editMeasureData)
       .subscribe((response) => {
         this.dialogRef.close();
       });

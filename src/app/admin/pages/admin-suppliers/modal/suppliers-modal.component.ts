@@ -13,6 +13,7 @@ export class SuppliersModalComponent implements OnInit {
   formSuppliers: FormGroup;
   selectedCategories: number[] = [];
   isInvalidEmail: boolean;
+  hasChanges: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<SuppliersModalComponent>,
@@ -28,16 +29,34 @@ export class SuppliersModalComponent implements OnInit {
 
   createForm() {
     this.formSuppliers = this.formBuilder.group({
-      name: [''],
-      agent: [''],
-      address: [''],
-      email: ['', Validators.email],
-      phone: [''],
-      ein: [''],
-      ssn: [''],
-      nic: [''],
-      category: [''],
+      name: this.notEmpty(this.data.suppliers.name),
+      agent: this.notEmpty(this.data.suppliers.agent),
+      address: this.notEmpty(this.data.suppliers.address),
+      email: [this.notEmpty(this.data.suppliers.email), Validators.email],
+      phone: this.notEmpty(this.data.suppliers.phone),
+      ein: this.notEmpty(this.data.suppliers.ein),
+      ssn: this.notEmpty(this.data.suppliers.ssn),
+      nic: this.notEmpty(this.data.suppliers.nic),
+      category: this.notEmpty(this.data.suppliers.category),
     });
+  }
+
+  notEmpty(content: any) {
+    return content ? content : '';
+  }
+
+  getChangedProperties(): any {
+    const formValue = this.formSuppliers.getRawValue();
+    const changedProperties: any = {};
+
+    Object.entries(formValue).forEach(([key, value]) => {
+      if (value !== this.data.suppliers[key] && key !== 'category') {
+        changedProperties[key] = value;
+        this.hasChanges = true;
+      }
+    });
+
+    return changedProperties;
   }
 
   checkEmailValidity() {
@@ -62,7 +81,7 @@ export class SuppliersModalComponent implements OnInit {
       return;
     }
 
-    const editSuppliersData = this.formSuppliers.getRawValue();
+    const editSuppliersData = this.getChangedProperties();
 
     Object.keys(editSuppliersData).forEach((key) => {
       if (editSuppliersData[key] === '') {

@@ -26,7 +26,6 @@ export class ReceivingReportsModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    console.log(this.data);
   }
 
   createForm() {

@@ -21,7 +21,6 @@ export class EditProductModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    console.log('data: ', this.data);
   }
 
   createForm() {
