@@ -40,7 +40,6 @@ export class ProtocolsModalComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.protocolId = this.data.protocolId;
-    console.log('data: ', this.data);
   }
 
   onFileChange(event: any) {
@@ -50,9 +49,9 @@ export class ProtocolsModalComponent implements OnInit {
   createForm() {
     this.formProtocols = this.formBuilder.group({
       code: [this.data.protocolId.code],
-      supplier: [this.data.protocolId.supplier],
-      category: [this.data.protocolId.category],
-      file: [this.data.protocolId.file],
+      supplier: [this.data.protocolId.supplier.id],
+      category: [this.data.protocolId.category.id],
+      file: [this.data.protocolId.file.name],
       initial_date: [this.data.protocolId.initial_date],
       final_date: [this.data.protocolId.final_date],
     });

@@ -28,7 +28,7 @@ export class EditProductModalComponent implements OnInit {
       name: this.notEmpty(this.data.product.name),
       description: this.notEmpty(this.data.product.description),
       code: this.notEmpty(this.data.product.code),
-      category: this.notEmpty(this.data.product.category),
+      category: this.notEmpty(this.data.product.category.id),
       price: this.notEmpty(this.data.product.price),
       is_available: this.notEmpty(this.data.product.is_available),
     });

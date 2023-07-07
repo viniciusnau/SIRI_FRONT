@@ -167,6 +167,10 @@ export class LoginService {
     return isLoggedIn && isAdmin;
   }
 
+  get getUrl(): string {
+    return this.router.url;
+  }
+
   private isAuthenticated(): boolean {
     const localToken = localStorage.getItem('token');
     const sessionToken = sessionStorage.getItem('token');

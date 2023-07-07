@@ -37,7 +37,7 @@ export class SuppliersModalComponent implements OnInit {
       ein: this.notEmpty(this.data.suppliers.ein),
       ssn: this.notEmpty(this.data.suppliers.ssn),
       nic: this.notEmpty(this.data.suppliers.nic),
-      category: this.notEmpty(this.data.suppliers.category),
+      category: this.notEmpty(this.data.suppliers.category.id),
     });
   }
 

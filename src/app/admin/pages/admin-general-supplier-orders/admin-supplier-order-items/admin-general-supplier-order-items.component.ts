@@ -72,15 +72,16 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
       .getSupplierOrderItems(this.supplierOrderId, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
-        console.log(this.response);
       });
   }
 
   getProtocolItems() {
-    this.stocksService.getAllProtocolItems(this.protocolId).subscribe((data) => {
-      this.protocolItems = data.results;
-      this.removeItems();
-    });
+    this.stocksService
+      .getAllProtocolItems(this.protocolId)
+      .subscribe((data) => {
+        this.protocolItems = data.results;
+        this.removeItems();
+      });
   }
 
   removeItems() {
@@ -88,7 +89,9 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
       return;
     }
     this.protocolItems = this.protocolItems.filter((item) => {
-      return !this.response.results.some((orderItem) => orderItem.product.id === item.product.id);
+      return !this.response.results.some(
+        (orderItem) => orderItem.product.id === item.product.id,
+      );
     });
   }
 
@@ -98,7 +101,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
       .deleteGeneralOrderItem(order_item_id)
       .toPromise()
       .then((data: any) => {
-        window.location.reload()
+        window.location.reload();
       });
   }
 }

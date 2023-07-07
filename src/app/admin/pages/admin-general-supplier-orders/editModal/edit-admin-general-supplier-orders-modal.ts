@@ -27,12 +27,9 @@ export class EditAdminGeneralSuppliersOrdersModalComponent implements OnInit {
 
   createForm() {
     this.formSupplierOrder = this.formBuilder.group({
-      delivery_date: [
-        this.notEmpty(this.data.supplier_order.delivery_date),
-        [Validators.required],
-      ],
+      delivery_date: ['', [Validators.required]],
       received: [
-        this.notEmpty(this.data.supplier_order.received),
+        this.data.supplier_order.received ? 'Sim' : 'Não',
         [Validators.required],
       ],
     });
@@ -65,7 +62,7 @@ export class EditAdminGeneralSuppliersOrdersModalComponent implements OnInit {
 
     const editSupplierOrderId = this.getChangedProperties();
     this.ordersService
-      .editSupplierOrder(this.data.supplier_order_id, editSupplierOrderId)
+      .editSupplierOrder(this.data.supplier_order.id, editSupplierOrderId)
       .subscribe((response) => {
         this.dialogRef.close();
       });
