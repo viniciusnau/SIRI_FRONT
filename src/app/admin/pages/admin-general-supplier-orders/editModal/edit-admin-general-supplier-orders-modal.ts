@@ -11,6 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class EditAdminGeneralSuppliersOrdersModalComponent implements OnInit {
   formSupplierOrder: FormGroup;
+  hasChanges: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<EditAdminGeneralSuppliersOrdersModalComponent>,
@@ -27,8 +28,29 @@ export class EditAdminGeneralSuppliersOrdersModalComponent implements OnInit {
   createForm() {
     this.formSupplierOrder = this.formBuilder.group({
       delivery_date: ['', [Validators.required]],
-      received: ['', [Validators.required]],
+      received: [
+        this.data.supplier_order.received ? 'Sim' : 'Não',
+        [Validators.required],
+      ],
     });
+  }
+
+  notEmpty(content: any) {
+    return content ? content : '';
+  }
+
+  getChangedProperties(): any {
+    const formValue = this.formSupplierOrder.getRawValue();
+    const changedProperties: any = {};
+
+    Object.entries(formValue).forEach(([key, value]) => {
+      if (value !== this.data.supplier_order[key] && key !== 'received') {
+        changedProperties[key] = value;
+        this.hasChanges = true;
+      }
+    });
+
+    return changedProperties;
   }
 
   onNoClick(): void {
@@ -38,10 +60,9 @@ export class EditAdminGeneralSuppliersOrdersModalComponent implements OnInit {
   onClick(): void {
     if (this.formSupplierOrder.invalid) return;
 
-    const editSupplierOrderId = this.formSupplierOrder.getRawValue();
-
+    const editSupplierOrderId = this.getChangedProperties();
     this.ordersService
-      .editSupplierOrder(this.data.supplier_order_id, editSupplierOrderId)
+      .editSupplierOrder(this.data.supplier_order.id, editSupplierOrderId)
       .subscribe((response) => {
         this.dialogRef.close();
       });

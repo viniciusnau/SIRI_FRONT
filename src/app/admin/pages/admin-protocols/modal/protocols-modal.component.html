@@ -10,6 +10,7 @@
             [matDatepicker]="startDatePicker"
             placeholder="Início de Vigência"
             formControlName="initial_date"
+            (blur)="getChangedProperties()"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -28,6 +29,7 @@
             [matDatepicker]="finalDatePicker"
             placeholder="Fim de Vigência"
             formControlName="final_date"
+            (blur)="getChangedProperties()"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -40,7 +42,12 @@
   </div>
   <p class="field-label">Código</p>
   <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="code" />
+    <input
+      type="text"
+      matInput
+      formControlName="code"
+      (blur)="getChangedProperties()"
+    />
   </mat-form-field>
   <p class="field-label">Fornecedor</p>
   <mat-form-field appearance="fill">
@@ -66,7 +73,12 @@
   </mat-form-field>
   <div class="custom-file-input">
     <label for="fileInput" class="file-label">Escolher arquivo</label>
-    <input type="file" id="fileInput" (change)="onFileChange($event)" />
+    <input
+      type="file"
+      id="fileInput"
+      (change)="onFileChange($event)"
+      (blur)="getChangedProperties()"
+    />
   </div>
   <div *ngIf="selectedFile" class="file-info">
     Arquivo selecionado: {{ selectedFile.name }}
@@ -74,7 +86,13 @@
 </div>
 <div mat-dialog-actions class="actions">
   <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button mat-button class="proceed" (click)="onClick()" cdkFocusInitial>
+  <button
+    mat-button
+    class="proceed"
+    (click)="onClick()"
+    [disabled]="!hasChanges"
+    cdkFocusInitial
+  >
     Salvar
   </button>
 </div>

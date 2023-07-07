@@ -16,7 +16,7 @@ interface Category {
 export interface ProtocolsModalData {
   suppliers: Supplier[];
   categories: Category[];
-  protocolId?: number;
+  protocolId?: any;
 }
 
 @Component({
@@ -28,6 +28,7 @@ export class ProtocolsModalComponent implements OnInit {
   formProtocols: FormGroup;
   selectedFile: File;
   protocolId?: number;
+  hasChanges: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<ProtocolsModalComponent>,
@@ -47,13 +48,31 @@ export class ProtocolsModalComponent implements OnInit {
 
   createForm() {
     this.formProtocols = this.formBuilder.group({
-      code: [''],
-      supplier: [''],
-      category: [''],
-      file: [''],
-      initial_date: [''],
-      final_date: [''],
+      code: [this.data.protocolId.code],
+      supplier: [this.data.protocolId.supplier.id],
+      category: [this.data.protocolId.category.id],
+      file: [this.data.protocolId.file.name],
+      initial_date: [this.data.protocolId.initial_date],
+      final_date: [this.data.protocolId.final_date],
     });
+  }
+
+  notEmpty(content: any) {
+    return content ? content : '';
+  }
+
+  getChangedProperties(): any {
+    const formValue = this.formProtocols.getRawValue();
+    const changedProperties: any = {};
+
+    Object.entries(formValue).forEach(([key, value]) => {
+      if (value !== this.data.protocolId[key]) {
+        changedProperties[key] = value;
+        this.hasChanges = true;
+      }
+    });
+
+    return changedProperties;
   }
 
   onNoClick(): void {
@@ -62,7 +81,8 @@ export class ProtocolsModalComponent implements OnInit {
 
   onClick(): void {
     if (this.formProtocols.valid && this.protocolId) {
-      const protocolData = this.formProtocols.value;
+      // const protocolData = this.formProtocols.value;
+      const protocolData = this.getChangedProperties();
       const formData: FormData = new FormData();
 
       if (protocolData.code) {

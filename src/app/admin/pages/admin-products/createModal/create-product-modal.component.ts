@@ -40,7 +40,7 @@ export class CreateProductModalComponent implements OnInit {
   }
 
   handlePriceFormat(field: string) {
-    return field?.replace('R$', '').replace(/[.]/g, '').replace(/[,]/g, '.');
+    return field?.replace('R$ ', '').replace(/[.]/g, '').replace(/[,]/g, '.');
   }
 
   onNoClick(): void {
@@ -50,7 +50,7 @@ export class CreateProductModalComponent implements OnInit {
   onClick(): void {
     if (this.formProduct.invalid) return;
     const createProductData = this.formProduct.getRawValue();
-    this.handlePriceFormat(createProductData.price).toString();
+    createProductData.price = this.handlePriceFormat(createProductData.price);
 
     this.stocksService.createProduct(createProductData).subscribe({
       next: (result) => {

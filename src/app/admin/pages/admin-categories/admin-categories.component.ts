@@ -62,9 +62,9 @@ export class AdminCategoriesComponent implements OnInit {
       .then((data: any) => this.getContent());
   }
 
-  openEditModal(category_id: string) {
+  openEditModal(category: string) {
     const dialogRef = this.dialog.open(EditCategoryModalComponent, {
-      data: { category_id },
+      data: { category },
     });
   }
 

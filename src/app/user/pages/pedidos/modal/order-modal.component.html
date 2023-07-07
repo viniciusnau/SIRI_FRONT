@@ -1,7 +1,9 @@
 <h1 mat-dialog-title>Seu pedido chegou?</h1>
 <div [formGroup]="formOrder" mat-dialog-content class="content">
   <div class="custom-file-input">
-    <label for="fileInput" class="file-label">Anexar confirmação de recebimento</label>
+    <label for="fileInput" class="file-label"
+      >Anexar confirmação de recebimento</label
+    >
     <input type="file" id="fileInput" #fileInput (change)="onFileChange()" />
   </div>
   <div *ngIf="selectedFile" class="file-info">
@@ -9,7 +11,18 @@
   </div>
 </div>
 <div mat-dialog-actions class="actions">
-  <button *ngIf="!loading" mat-button (click)="onNoClick()">Não</button>
-  <button *ngIf="!loading" mat-button (click)="onClick()" cdkFocusInitial [disabled]="!selectedFile" >Sim</button>
+  <button *ngIf="!loading" mat-button class="cancel" (click)="onNoClick()">
+    Não
+  </button>
+  <button
+    *ngIf="!loading"
+    mat-button
+    class="proceed"
+    (click)="onClick()"
+    cdkFocusInitial
+    [disabled]="!selectedFile"
+  >
+    Sim
+  </button>
   <div class="custom-spinner" *ngIf="loading"></div>
 </div>

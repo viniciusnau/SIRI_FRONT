@@ -55,9 +55,9 @@ export class AdminMeasuresComponent implements OnInit {
       .then((data: any) => this.getContent());
   }
 
-  openEditModal(measure_id: string) {
+  openEditModal(measure: string) {
     const dialogRef = this.dialog.open(EditMeasureModalComponent, {
-      data: { measure_id },
+      data: { measure },
     });
   }
 
