@@ -18,7 +18,6 @@ export class DigitLimitDirective {
     for (var i = 0; i < maxLength; i++) {
       newValue += inputValue.charAt(i);
     }
-
     this.el.nativeElement.value = newValue;
   }
 }

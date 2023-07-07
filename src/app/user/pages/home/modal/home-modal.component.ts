@@ -23,7 +23,7 @@ export class HomeModalComponent implements OnInit {
     private snackBar: MatSnackBar,
   ) {
     this.chosenProducts = this.sortAlphabetically(data.chosenProducts);
-    this.client = data.client
+    this.client = data.client;
   }
 
   ngOnInit(): void {
@@ -67,7 +67,7 @@ export class HomeModalComponent implements OnInit {
               horizontalPosition: 'end',
               verticalPosition: 'top',
             });
-          }
+          },
         );
       },
       (error) => {
@@ -76,7 +76,7 @@ export class HomeModalComponent implements OnInit {
           horizontalPosition: 'end',
           verticalPosition: 'top',
         });
-      }
+      },
     );
   }
 
@@ -90,7 +90,7 @@ export class HomeModalComponent implements OnInit {
 
   onClick(): void {
     this.dialogRef.close();
-    this.createOrder(this.chosenProducts)
+    this.createOrder(this.chosenProducts);
     setTimeout(() => {
       window.location.reload();
     }, 2000);
