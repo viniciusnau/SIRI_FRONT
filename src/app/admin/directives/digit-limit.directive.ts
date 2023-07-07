@@ -9,15 +9,16 @@ export class DigitLimitDirective {
   @HostListener('input', ['$event']) onInputChange(event: any) {
     const maxLength = 6;
     let inputValue = this.el.nativeElement.value;
+    let newValue = '';
 
     if (inputValue.startsWith('-')) {
       inputValue = inputValue.slice(1);
     }
 
-    if (inputValue.length > maxLength) {
-      inputValue = inputValue.slice(0, maxLength);
+    for (var i = 0; i < maxLength; i++) {
+      newValue += inputValue.charAt(i);
     }
 
-    this.el.nativeElement.value = inputValue;
+    this.el.nativeElement.value = newValue;
   }
 }
