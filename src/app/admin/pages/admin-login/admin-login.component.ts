@@ -37,7 +37,10 @@ export class AdminLoginComponent implements OnInit {
 
   login() {
     this.loading = true;
-    if (this.formLogin.invalid) return;
+    if (this.formLogin.invalid) {
+      this.loading = false;
+      return;
+    }
 
     const loginData = this.formLogin.getRawValue();
 

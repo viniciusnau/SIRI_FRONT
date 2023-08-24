@@ -84,7 +84,7 @@ h2 {
   font-weight: 800;
   letter-spacing: 3px;
   color: white;
-  background: #2f5141;
+  background: #4b8168;
   cursor: pointer;
   box-shadow: 0 10px 10px -12px #5c732e;
   transition: 0.2s;
@@ -92,6 +92,15 @@ h2 {
 
 .btnLogin:hover {
   background-color: #416e59;
+}
+
+.btnLogin:disabled {
+  cursor: default;
+  background: #2f5141;
+}
+
+.btnLoginText {
+  color: white;
 }
 
 .otherServices {

@@ -21,11 +21,11 @@ export class AdminSendEmailComponent {
       .subscribe(
         response => {
           this.loading = false;
-          this.openDialog('Sucesso', 'Email enviado com sucesso!');
+          this.openDialog('Sucesso', 'Email enviado!');
         },
         error => {
           this.loading = false;
-          this.openDialog('Erro', 'Oops! Tente novamente mais tarde');
+          this.openDialog('Oops!', 'Tente novamente mais tarde');
         }
       );
   }

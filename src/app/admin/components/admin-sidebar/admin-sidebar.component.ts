@@ -23,7 +23,7 @@ export class AdminSidebarComponent {
   logout = () => this.loginService.logoutAdmin();
 
   resetPassword() {
-    this.router.navigate(['mudar-senha/']).then((r) => {});
+    this.router.navigate(['/admin/esqueci-a-senha']).then((r) => {});
   }
 
   toggleUserSection() {

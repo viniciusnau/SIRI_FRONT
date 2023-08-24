@@ -16,8 +16,8 @@
       </div>
       <a href="#" class="forgetPass" (click)="resetPassword($event)">Esqueci a senha</a>
     </div>
-    <button [disabled]="loading" class="btnLogin" (click)="login()">
-      <span *ngIf="!loading">LOGIN</span>
+    <button [disabled]="loading || formLogin.invalid" class="btnLogin" (click)="login()">
+      <span class='btnLoginText' *ngIf="!loading">LOGIN</span>
       <div class="custom-spinner" *ngIf="loading"></div>
     </button>
   </form>

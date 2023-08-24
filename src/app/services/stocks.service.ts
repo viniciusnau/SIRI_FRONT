@@ -259,7 +259,7 @@ export class StocksService {
       message: message,
     };
 
-    return this.httpClient.post(`${this.apiUrl}/email/`, payload);
+    return this.httpClient.post(`${this.apiUrl}/email/`, payload, this.httpOptions);
   }
 
   getWarehouseReports(): Observable<any[]> {
