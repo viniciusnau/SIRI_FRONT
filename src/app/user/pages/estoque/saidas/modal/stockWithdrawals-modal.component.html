@@ -15,6 +15,6 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions class="actions">
-  <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button (click)="onClick()" cdkFocusInitial>Criar</button>
+  <button class="cancel" mat-button (click)="onNoClick()">Cancelar</button>
+  <button [disabled]="!formStockWithdrawals.valid" class="proceed" mat-button (click)="onClick()" cdkFocusInitial>Criar</button>
 </div>

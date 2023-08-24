@@ -8,8 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-sidebar.component.scss'],
 })
 export class UserSidebarComponent {
-  constructor(private loginService: LoginService, private router: Router) {}
+  userSectionExpanded: boolean = false;
   userName: string = '';
+
+  constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {
     this.userName = sessionStorage.getItem('userName')
@@ -17,9 +19,15 @@ export class UserSidebarComponent {
       : localStorage.getItem('userName');
   }
 
-  logout = () => this.loginService.logoutUser();
+  logout() {
+    this.loginService.logoutUser();
+  }
 
   resetPassword() {
     this.router.navigate(['mudar-senha/']).then((r) => {});
+  }
+
+  toggleUserSection() {
+    this.userSectionExpanded = !this.userSectionExpanded;
   }
 }

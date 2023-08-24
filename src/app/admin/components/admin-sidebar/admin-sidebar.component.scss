@@ -25,5 +25,63 @@ span {
 }
 
 .icon {
-  margin: 0 0.5rem 0 0;
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.account-button {
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.account-icon {
+  margin-right: -0.9rem;
+}
+
+.account-text {
+  display: flex;
+  align-items: center;
+}
+
+.arrow-icon {
+  margin-left: 1rem;
+}
+
+.user-arrow-icon {
+  margin-left: auto;
+}
+
+.user-section {
+  background-color: $secondary-color;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.reports-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.reports-text {
+  color: white;
+  display: flex;
+  align-items: center;
+  margin-left: 0.6rem;
+  font-size: 1.1rem;
+}
+
+.reports-section {
+  background-color: $secondary-color;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }

@@ -2,81 +2,106 @@
   <mat-sidenav-container mode="side">
     <mat-sidenav opened mode="side" disableClose="true" fixedInViewport="true">
       <a href="/admin">
-        <img
-          src="../../../../assets/logo_defensoria_sc_preferencial_branco.png"
-          alt=""
-          class="logoSide"
-        />
+        <img src="../../../../assets/logo_defensoria_sc_preferencial_branco.png" alt="" class="logoSide" />
       </a>
-      <span *ngIf="userName" class="account"
-        ><mat-icon class="icon">account_circle</mat-icon> {{ userName }}</span
-      >
       <mat-divider class="divider"></mat-divider>
       <mat-nav-list>
         <mat-list-item routerLink="/admin/pedidos">
-          <span matListItemTitle>Pedidos</span></mat-list-item
-        >
+          <span matListItemTitle>Pedidos</span>
+        </mat-list-item>
         <mat-list-item routerLink="/admin/estoque">
-          <span matListItemTitle>Estoque</span></mat-list-item
-        >
+          <span matListItemTitle>Estoque</span>
+        </mat-list-item>
         <mat-list-item routerLink="/admin/setores">
-          <span matListItemTitle>Setores</span></mat-list-item
-        >
+          <span matListItemTitle>Setores</span>
+        </mat-list-item>
         <mat-list-item routerLink="/admin/notas">
-          <span matListItemTitle>Controle de notas</span></mat-list-item
-        >
+          <span matListItemTitle>Controle de notas</span>
+        </mat-list-item>
         <mat-list-item routerLink="/admin/guias-de-entrada">
-          <span matListItemTitle>Guias de entrada</span></mat-list-item
-        >
+          <span matListItemTitle>Guias de entrada</span>
+        </mat-list-item>
         <mat-list-item routerLink="/admin/guias-de-saida">
-          <span matListItemTitle>Guias de saída</span></mat-list-item
-        >
+          <span matListItemTitle>Guias de saída</span>
+        </mat-list-item>
         <mat-list-item routerLink="/admin/categorias">
-          <span matListItemTitle>Categorias</span></mat-list-item
-        >
+          <span matListItemTitle>Categorias</span>
+        </mat-list-item>
         <mat-list-item routerLink="/admin/medidas">
-          <span matListItemTitle>Medidas</span></mat-list-item
-        >
+          <span matListItemTitle>Medidas</span>
+        </mat-list-item>
+        <mat-list-item routerLink="/admin/produtos">
+          <span matListItemTitle>Produtos</span>
+        </mat-list-item>
         <mat-list-item routerLink="/admin/fornecedores">
-          <span matListItemTitle>Fornecedores</span></mat-list-item
-        >
+          <span matListItemTitle>Fornecedores</span>
+        </mat-list-item>
         <mat-list-item routerLink="/admin/pedidos-fornecedor">
           <span matListItemTitle>Pedidos do Fornecedor</span>
         </mat-list-item>
         <mat-list-item routerLink="/admin/atas">
-          <span matListItemTitle>Atas</span></mat-list-item
-        >
-        <mat-list-item routerLink="/admin/produtos">
-          <span matListItemTitle>Produtos</span></mat-list-item
-        >
+          <span matListItemTitle>Atas</span>
+        </mat-list-item>
         <mat-list-item routerLink="/admin/pedido-de-AF">
-          <span matListItemTitle>Pedidos de AF</span></mat-list-item
-        >
+          <span matListItemTitle>Pedidos de AF</span>
+        </mat-list-item>
         <mat-list-item routerLink="/admin/dispensa-de-licitacao">
-          <span matListItemTitle>Dispensa de Licitação</span></mat-list-item
-        >
-        <mat-list-item routerLink="/admin/relatorio-do-contador">
-          <span matListItemTitle>Relatório do Contador</span></mat-list-item
-        >
-        <mat-list-item routerLink="/admin/relatorio-de-estoque">
-          <span matListItemTitle>Relatório de Estoque</span></mat-list-item
-        >
-        <mat-list-item routerLink="/admin/relatorio-do-almoxarifado">
-          <span matListItemTitle
-            >Inventário do Almoxarifado</span
-          ></mat-list-item
-        >
-        <mat-list-item routerLink="/admin/enviar-email">
-          <span matListItemTitle>Enviar Email</span></mat-list-item
-        >
-        <mat-divider></mat-divider>
-        <mat-list-item routerLink="/admin/esqueci-a-senha">
-          <span matListItemTitle>Alterar senha</span></mat-list-item
-        >
-        <mat-list-item (click)="logout()">
-          <span matListItemTitle>Sair</span></mat-list-item
-        >
+          <span matListItemTitle>Dispensa de Licitação</span>
+        </mat-list-item>
       </mat-nav-list>
+
+      <button (click)="toggleReportsSection()" class="reports-button">
+        <div class="reports-text">
+          <span class="reports">Relatórios</span>
+        </div>
+        <div class="arrow-icon">
+          <mat-icon *ngIf="!reportsSectionExpanded">expand_more</mat-icon>
+          <mat-icon *ngIf="reportsSectionExpanded">expand_less</mat-icon>
+        </div>
+      </button>
+
+      <div *ngIf="reportsSectionExpanded" class="reports-section">
+        <mat-divider class="divider"></mat-divider>
+        <mat-nav-list>
+          <mat-list-item routerLink="/admin/relatorio-do-contador">
+            <span matListItemTitle>Relatório do Contador</span>
+          </mat-list-item>
+          <mat-list-item routerLink="/admin/relatorio-de-estoque">
+            <span matListItemTitle>Relatório de Estoque</span>
+          </mat-list-item>
+          <mat-list-item routerLink="/admin/relatorio-do-almoxarifado">
+            <span matListItemTitle>Inventário do Almoxarifado</span>
+          </mat-list-item>
+        </mat-nav-list>
+      </div>
+
+      <button (click)="toggleUserSection()" class="account-button">
+        <div class="account-icon">
+          <mat-icon class="icon">account_circle</mat-icon>
+        </div>
+        <div class="account-text">
+          <span *ngIf="userName" class="account">{{ userName }}</span>
+        </div>
+        <div class="user-arrow-icon">
+          <mat-icon *ngIf="!userSectionExpanded">expand_more</mat-icon>
+          <mat-icon *ngIf="userSectionExpanded">expand_less</mat-icon>
+        </div>
+      </button>
+
+      <div *ngIf="userSectionExpanded" class="user-section">
+        <mat-divider class="divider"></mat-divider>
+        <mat-nav-list>
+          <mat-list-item routerLink="/admin/enviar-email">
+            <span matListItemTitle>Enviar Email</span>
+          </mat-list-item>
+          <mat-list-item (click)="resetPassword()">
+            <span matListItemTitle>Alterar Senha</span>
+          </mat-list-item>
+          <mat-list-item (click)="logout()">
+            <span matListItemTitle>Sair</span>
+          </mat-list-item>
+        </mat-nav-list>
+      </div>
     </mat-sidenav>
     <mat-sidenav-content> <ng-content></ng-content> </mat-sidenav-content>
   </mat-sidenav-container>

@@ -2,15 +2,8 @@
   <mat-sidenav-container mode="side">
     <mat-sidenav opened mode="side" disableClose="true" fixedInViewport="true">
       <a href="/">
-        <img
-          src="../../../../assets/logo_defensoria_sc_preferencial_branco.png"
-          alt=""
-          class="logoSide"
-        />
+        <img src="../../../../assets/logo_defensoria_sc_preferencial_branco.png" alt="" class="logoSide" />
       </a>
-      <span *ngIf="userName" class="account"
-        ><mat-icon class="icon">account_circle</mat-icon> {{ userName }}</span
-      >
       <mat-divider class="divider"></mat-divider>
       <mat-nav-list>
         <mat-list-item routerLink="/">
@@ -22,14 +15,32 @@
         <mat-list-item routerLink="/pedidos">
           <span matListItemTitle>Pedidos</span>
         </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item (click)="resetPassword()">
-          <span matListItemTitle>Alterar Senha</span>
-        </mat-list-item>
-        <mat-list-item (click)="logout()">
-          <span matListItemTitle>Sair</span>
-        </mat-list-item>
       </mat-nav-list>
+
+      <button (click)="toggleUserSection()" class="account-button">
+        <div class="account-icon">
+          <mat-icon class="icon">account_circle</mat-icon>
+        </div>
+        <div class="account-text">
+          <span *ngIf="userName" class="account">{{ userName }}</span>
+        </div>
+        <div class="arrow-icon">
+          <mat-icon *ngIf="!userSectionExpanded">expand_more</mat-icon>
+          <mat-icon *ngIf="userSectionExpanded">expand_less</mat-icon>
+        </div>
+      </button>
+
+      <div *ngIf="userSectionExpanded" class="user-section">
+        <mat-divider class="divider"></mat-divider>
+        <mat-nav-list>
+          <mat-list-item (click)="resetPassword()">
+            <span matListItemTitle>Alterar Senha</span>
+          </mat-list-item>
+          <mat-list-item (click)="logout()">
+            <span matListItemTitle>Sair</span>
+          </mat-list-item>
+        </mat-nav-list>
+      </div>
     </mat-sidenav>
     <mat-sidenav-content> <ng-content></ng-content> </mat-sidenav-content>
   </mat-sidenav-container>
