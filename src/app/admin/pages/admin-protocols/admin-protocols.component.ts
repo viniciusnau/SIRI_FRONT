@@ -25,6 +25,7 @@ interface adminProtocols {
   styleUrls: ['./admin-protocols.component.scss'],
 })
 export class AdminProtocolsComponent implements OnInit {
+  loading: number | null = null;
   currentPage = 1;
   response: any;
 
@@ -61,6 +62,7 @@ export class AdminProtocolsComponent implements OnInit {
       .getProtocols(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
+        this.loading = null;
       });
   }
 
@@ -118,10 +120,16 @@ export class AdminProtocolsComponent implements OnInit {
   }
 
   deleteProtocol(protocol_id: string) {
+    this.loading = Number(protocol_id);
     this.protocolService
       .deleteProtocol(protocol_id)
       .toPromise()
-      .then((data: any) => this.getContent());
+      .then((data: any) => {
+        this.getContent();
+      })
+      .catch((error: any) => {
+        this.loading = null;
+      });
   }
 
   navToProtocolItems(protocolId: number) {

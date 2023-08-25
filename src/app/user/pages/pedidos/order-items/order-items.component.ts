@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./order-items.component.scss'],
 })
 export class OrderItemsComponent implements OnInit {
+  loading: number | null = null;
   response: any;
   currentPage = 1;
   page = 'next';
@@ -39,10 +40,12 @@ export class OrderItemsComponent implements OnInit {
       .getOrderItems(orderId, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
+        this.loading = null;
       });
   }
 
   deleteOrderItem(orderItemId: string) {
+    this.loading = Number(orderItemId);
     this.ordersService
       .deleteOrderItem(orderItemId)
       .toPromise()

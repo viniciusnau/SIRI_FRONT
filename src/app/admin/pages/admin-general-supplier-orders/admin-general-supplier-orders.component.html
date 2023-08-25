@@ -117,7 +117,7 @@
                 aria-label="Delete supplier order"
                 (click)="deleteSupplierOrder(adminSuppliers.id)"
               >
-                <mat-icon>delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loading === adminSuppliers.id">delete</mat-icon>
               </button>
             </div>
           </td>

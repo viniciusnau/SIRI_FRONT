@@ -109,7 +109,7 @@
                 aria-label="Delete product"
                 (click)="deleteProduct(products.id)"
               >
-                <mat-icon>delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loading === products.id">delete</mat-icon>
               </button>
             </div>
           </td>

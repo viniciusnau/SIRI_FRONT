@@ -5,12 +5,6 @@ import { CreateCategoryModalComponent } from './createModal/create-category-moda
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 
-interface AdminCategories {
-  id: number;
-  name: string;
-  code: number;
-  sector: number[];
-}
 
 @Component({
   selector: 'app-admin-categories',
@@ -18,6 +12,7 @@ interface AdminCategories {
   styleUrls: ['./admin-categories.component.scss'],
 })
 export class AdminCategoriesComponent implements OnInit {
+  loading: number | null = null;
   currentPage = 1;
   response: any;
 
@@ -47,6 +42,7 @@ export class AdminCategoriesComponent implements OnInit {
         this.response = new MatTableDataSource(sortedData.results);
         this.response.next = data?.next;
         this.response.count = data?.count;
+        this.loading = null;
       });
   }
 
@@ -56,10 +52,16 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   deleteCategory(category_id: string) {
+    this.loading = Number(category_id);
     this.stocksService
       .deleteCategory(category_id)
       .toPromise()
-      .then((data: any) => this.getContent());
+      .then((data: any) => {
+        this.getContent();
+      })
+      .catch(() => {
+        this.loading = null;
+      });
   }
 
   openEditModal(category: string) {

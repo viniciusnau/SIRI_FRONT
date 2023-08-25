@@ -6,18 +6,6 @@ import { EditProductModalComponent } from './editModal/edit-product-modal.compon
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 
-interface AdminProducts {
-  id: number;
-  price: number;
-  name: string;
-  description: string;
-  code: number;
-  is_available: boolean;
-  created: string;
-  updated: string;
-  category: number;
-  measure: number;
-}
 
 @Component({
   selector: 'app-admin-products',
@@ -25,6 +13,7 @@ interface AdminProducts {
   styleUrls: ['./admin-products.component.scss'],
 })
 export class AdminProductsComponent implements OnInit {
+  loading: number | null = null;
   currentPage = 1;
   response: any;
   categories = [];
@@ -66,6 +55,7 @@ export class AdminProductsComponent implements OnInit {
         this.response = new MatTableDataSource(sortedData.results);
         this.response.next = data?.next;
         this.response.count = data?.count;
+        this.loading = null
       });
   }
 
@@ -103,6 +93,7 @@ export class AdminProductsComponent implements OnInit {
   }
 
   deleteProduct(product_id: string) {
+    this.loading = Number(product_id);
     this.stocksService.deleteProduct(product_id).subscribe({
       next: (result) => {
         this.getContent();
@@ -117,6 +108,7 @@ export class AdminProductsComponent implements OnInit {
         );
       },
       error: (error) => {
+        this.loading = null;
         this.snackBar.open('Ops!', 'Houve um erro ao excluir o produto!', {
           duration: 3000,
           horizontalPosition: 'end',

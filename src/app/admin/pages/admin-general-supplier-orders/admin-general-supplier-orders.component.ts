@@ -1,4 +1,4 @@
-import { StocksService } from './../../../services/stocks.service';
+import { StocksService } from '../../../services/stocks.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
@@ -26,6 +26,7 @@ interface SupplierOrders {
   styleUrls: ['./admin-general-supplier-orders.component.scss'],
 })
 export class AdminGeneralSupplierOrdersComponent implements OnInit {
+  loading: number | null = null;
   supplierOrders: SupplierOrders[] = [];
   suppliers = [];
   protocols = [];
@@ -62,6 +63,7 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
   getSupplierOrders() {
     this.ordersService.getSupplierOrders().subscribe((data) => {
       this.supplierOrders = data.results;
+      this.loading = null;
     });
   }
 
@@ -128,10 +130,16 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
   }
 
   deleteSupplierOrder(order_id) {
+    this.loading = Number(order_id);
     this.ordersService
       .deleteGeneralSupplierOrder(order_id)
       .toPromise()
-      .then((data: any) => this.getSupplierOrders());
+      .then((data: any) => {
+        this.getSupplierOrders();
+      })
+      .catch((error: any) => {
+        this.loading = null
+      });
   }
 
   displayedColumns = [

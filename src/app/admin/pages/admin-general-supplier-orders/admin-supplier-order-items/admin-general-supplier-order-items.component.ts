@@ -1,4 +1,4 @@
-import { StocksService } from './../../../../services/stocks.service';
+import { StocksService } from '../../../../services/stocks.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
@@ -72,6 +72,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
       .getSupplierOrderItems(this.supplierOrderId, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
+        this.loading = null
       });
   }
 
@@ -101,7 +102,10 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
       .deleteGeneralOrderItem(order_item_id)
       .toPromise()
       .then((data: any) => {
-        window.location.reload();
+        this.getContent();
+      })
+      .catch((error: any) => {
+        this.loading = null
       });
   }
 }

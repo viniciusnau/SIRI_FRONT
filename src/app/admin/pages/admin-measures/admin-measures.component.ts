@@ -16,6 +16,7 @@ interface AdminMeasures {
   styleUrls: ['./admin-measures.component.scss'],
 })
 export class AdminMeasuresComponent implements OnInit {
+  loading: number | null = null;
   currentPage = 1;
   response: any;
 
@@ -45,15 +46,23 @@ export class AdminMeasuresComponent implements OnInit {
         this.response = new MatTableDataSource(sortedData.results);
         this.response.next = data?.next;
         this.response.count = data?.count;
+        this.loading = null;
       });
   }
 
   deleteMeasure(measure_id: string) {
+    this.loading = Number(measure_id);
     this.stocksService
       .deleteMeasure(measure_id)
       .toPromise()
-      .then((data: any) => this.getContent());
+      .then((data: any) => {
+        this.getContent();
+      })
+      .catch((error: any) => {
+        this.loading = null;
+      });
   }
+
 
   openEditModal(measure: string) {
     const dialogRef = this.dialog.open(EditMeasureModalComponent, {

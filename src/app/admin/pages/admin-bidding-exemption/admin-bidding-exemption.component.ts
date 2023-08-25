@@ -22,6 +22,7 @@ interface BiddingExemption {
   styleUrls: ['./admin-bidding-exemption.component.scss'],
 })
 export class AdminBiddingExemptionComponent {
+  loading: number | null = null;
   currentPage = 1;
   response: any;
   products = [];
@@ -51,6 +52,7 @@ export class AdminBiddingExemptionComponent {
       .getBiddingExemption(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
+        this.loading = null;
       });
   }
 
@@ -88,12 +90,16 @@ export class AdminBiddingExemptionComponent {
   }
 
   deleteBiddingExemption(row: BiddingExemption) {
-    this.stocksService.deleteBiddingExemption(row.id).subscribe(
-      () => {
-        this.response = this.response.filter((item) => item.id !== row.id);
-      },
-      (error) => {},
-    );
+    this.loading = row.id;
+    this.stocksService
+      .deleteBiddingExemption(row.id)
+      .toPromise()
+      .then((data: any) => {
+        this.getContent();
+      })
+      .catch((error: any) => {
+        this.loading = null;
+      });
   }
 
   firstLetterOnCapital(text: string) {

@@ -60,7 +60,7 @@
                 aria-label="Delete category"
                 (click)="deleteCategory(categories.id)"
               >
-                <mat-icon>delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loading === categories.id">delete</mat-icon>
               </button>
             </div>
           </td>

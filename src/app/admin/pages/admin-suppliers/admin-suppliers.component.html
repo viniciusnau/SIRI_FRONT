@@ -119,7 +119,7 @@
                 aria-label="Delete measure"
                 (click)="deleteSupplier(adminSuppliers.id)"
               >
-                <mat-icon>delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loading === adminSuppliers.id">delete</mat-icon>
               </button>
             </div>
           </td>

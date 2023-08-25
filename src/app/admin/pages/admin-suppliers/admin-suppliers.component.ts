@@ -1,5 +1,5 @@
 import { StocksService } from 'src/app/services/stocks.service';
-import { SuppliersService } from './../../../services/suppliers.service';
+import { SuppliersService } from '../../../services/suppliers.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,18 +7,6 @@ import { SuppliersModalComponent } from './modal/suppliers-modal.component';
 import { CreateSuppliersModalComponent } from './createModal/createSuppliers-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
 
-interface AdminSuppliers {
-  id: number;
-  name: string;
-  agent: string;
-  address: string;
-  email: string;
-  phone: string;
-  ein: number;
-  ssn: number;
-  nic: number;
-  category: number[];
-}
 
 @Component({
   selector: 'app-admin-suppliers',
@@ -26,6 +14,8 @@ interface AdminSuppliers {
   styleUrls: ['./admin-suppliers.component.scss'],
 })
 export class AdminSuppliersComponent implements OnInit {
+  loading: number | null = null;
+
   constructor(
     public suppliersService: SuppliersService,
     private stocksService: StocksService,
@@ -66,6 +56,7 @@ export class AdminSuppliersComponent implements OnInit {
         this.response = new MatTableDataSource(sortedData.results);
         this.response.next = data?.next;
         this.response.count = data?.count;
+        this.loading = null;
       });
   }
 
@@ -76,10 +67,16 @@ export class AdminSuppliersComponent implements OnInit {
   }
 
   deleteSupplier(supplier_id: string) {
+    this.loading = Number(supplier_id);
     this.stocksService
       .deleteSupplier(supplier_id)
       .toPromise()
-      .then((data: any) => this.getContent());
+      .then((data: any) => {
+        this.getContent();
+      })
+      .catch((error: any) => {
+        this.loading = null
+      });
   }
 
   navToSupplierOrders(supplier_id: number) {
