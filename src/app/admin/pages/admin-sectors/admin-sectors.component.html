@@ -1,4 +1,3 @@
-<!-- http://localhost:4200/admin-setores -->
 <admin-sidebar>
   <mat-card>
     <mat-card-content>
@@ -7,13 +6,11 @@
       </mat-toolbar>
 
       <table mat-table [dataSource]="response" class="mat-elevation-z8">
-        <!-- id Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Id</th>
           <td mat-cell *matCellDef="let sectors">{{ sectors.id }}</td>
         </ng-container>
 
-        <!-- Nome Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Nome</th>
           <td mat-cell *matCellDef="let sectors">
@@ -21,7 +18,6 @@
           </td>
         </ng-container>
 
-        <!-- Defensoria Column -->
         <ng-container matColumnDef="public_defense">
           <th mat-header-cell *matHeaderCellDef>Defensoria</th>
           <td mat-cell *matCellDef="let sectors">
