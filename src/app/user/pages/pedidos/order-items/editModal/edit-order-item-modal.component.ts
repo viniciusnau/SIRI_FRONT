@@ -1,4 +1,4 @@
-import { OrdersService } from './../../../../../services/orders.service';
+import { OrdersService } from '../../../../../services/orders.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -41,10 +41,12 @@ export class EditOrderItemModalComponent implements OnInit {
   }
 
   onClick(): void {
-    if (this.formOrderItem.invalid) return;
     const editOrderItemData = this.formOrderItem.getRawValue();
     if (editOrderItemData.quantity === "") {
       delete editOrderItemData.quantity;
+    }
+    if (!editOrderItemData.added_quantity) {
+      editOrderItemData.added_quantity = 0;
     }
     this.ordersService
       .updateOrderItem(this.data.order_item_id, editOrderItemData)
