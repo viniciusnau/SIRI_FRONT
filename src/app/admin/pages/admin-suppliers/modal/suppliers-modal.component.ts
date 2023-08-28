@@ -99,7 +99,7 @@ export class SuppliersModalComponent implements OnInit {
     }
 
     this.stocksService
-      .editSupplier(this.data.suppliers_id, editSuppliersData)
+      .editSupplier(this.data.suppliers.id, editSuppliersData)
       .subscribe((response) => {
         window.location.reload();
       });

@@ -22,7 +22,8 @@ interface BiddingExemption {
   styleUrls: ['./admin-bidding-exemption.component.scss'],
 })
 export class AdminBiddingExemptionComponent {
-  loading: number | null = null;
+  loading: boolean = false;
+  loadingBiddingExemptionId: number | null = null;
   currentPage = 1;
   response: any;
   products = [];
@@ -32,6 +33,7 @@ export class AdminBiddingExemptionComponent {
   constructor(private stocksService: StocksService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.getContent();
     this.getStocks();
     this.getInvoices();
@@ -52,7 +54,8 @@ export class AdminBiddingExemptionComponent {
       .getBiddingExemption(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
-        this.loading = null;
+        this.loadingBiddingExemptionId = null;
+        this.loading = false;
       });
   }
 
@@ -90,7 +93,7 @@ export class AdminBiddingExemptionComponent {
   }
 
   deleteBiddingExemption(row: BiddingExemption) {
-    this.loading = row.id;
+    this.loadingBiddingExemptionId = row.id;
     this.stocksService
       .deleteBiddingExemption(row.id)
       .toPromise()
@@ -98,7 +101,7 @@ export class AdminBiddingExemptionComponent {
         this.getContent();
       })
       .catch((error: any) => {
-        this.loading = null;
+        this.loadingBiddingExemptionId = null;
       });
   }
 

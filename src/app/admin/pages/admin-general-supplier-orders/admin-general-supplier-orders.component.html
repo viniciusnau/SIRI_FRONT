@@ -1,5 +1,5 @@
 <admin-sidebar>
-  <mat-card>
+  <mat-card *ngIf="!loading">
     <mat-card-content>
       <mat-toolbar>
         <span>Pedidos do Fornecedor</span>
@@ -117,7 +117,7 @@
                 aria-label="Delete supplier order"
                 (click)="deleteSupplierOrder(adminSuppliers.id)"
               >
-                <mat-icon [class.custom-spinner]="loading === adminSuppliers.id">delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loadingOrderId === adminSuppliers.id">delete</mat-icon>
               </button>
             </div>
           </td>
@@ -129,3 +129,4 @@
     </mat-card-content>
   </mat-card>
 </admin-sidebar>
+<div class="initial-custom-spinner" *ngIf="loading"></div>

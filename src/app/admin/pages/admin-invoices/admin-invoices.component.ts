@@ -1,4 +1,4 @@
-import { SuppliersService } from './../../../services/suppliers.service';
+import { SuppliersService } from '../../../services/suppliers.service';
 import { StocksService } from 'src/app/services/stocks.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,7 +16,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AdminInvoicesComponent implements OnInit {
   currentPage = 1;
   response: any;
-  loading: number | null = null;
+  loading: boolean = false;
+  loadingInvoiceId: number | null = null;
   protected readonly Number = Number;
 
   modalData: InvoiceModalData = {
@@ -32,6 +33,7 @@ export class AdminInvoicesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.getContent();
     this.getSuppliers();
     this.getPublicDefenses();
@@ -51,7 +53,8 @@ export class AdminInvoicesComponent implements OnInit {
       .getInvoices(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
-        this.loading = null;
+        this.loadingInvoiceId = null;
+        this.loading = false;
         if (disableLoading) {
           this.snackBar.open('Nota excluída!', 'Fechar', {
             duration: 3000,
@@ -81,7 +84,7 @@ export class AdminInvoicesComponent implements OnInit {
   }
 
   deleteInvoice(invoice_id) {
-    this.loading = Number(invoice_id);
+    this.loadingInvoiceId = Number(invoice_id);
     this.stocksService
       .deleteInvoice(invoice_id)
       .toPromise()

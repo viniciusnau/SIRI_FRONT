@@ -26,7 +26,8 @@ interface SupplierOrders {
   styleUrls: ['./admin-general-supplier-orders.component.scss'],
 })
 export class AdminGeneralSupplierOrdersComponent implements OnInit {
-  loading: number | null = null;
+  loading: boolean = false;
+  loadingOrderId: number | null = null;
   supplierOrders: SupplierOrders[] = [];
   suppliers = [];
   protocols = [];
@@ -44,6 +45,7 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
     private dialog: MatDialog,
   ) {}
   ngOnInit(): void {
+    this.loading = true;
     this.route.params.subscribe((params) => {
       this.supplierId = params['id'];
     });
@@ -63,7 +65,8 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
   getSupplierOrders() {
     this.ordersService.getSupplierOrders().subscribe((data) => {
       this.supplierOrders = data.results;
-      this.loading = null;
+      this.loadingOrderId = null;
+      this.loading = false;
     });
   }
 
@@ -130,7 +133,7 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
   }
 
   deleteSupplierOrder(order_id) {
-    this.loading = Number(order_id);
+    this.loadingOrderId = Number(order_id);
     this.ordersService
       .deleteGeneralSupplierOrder(order_id)
       .toPromise()
@@ -138,7 +141,7 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
         this.getSupplierOrders();
       })
       .catch((error: any) => {
-        this.loading = null
+        this.loadingOrderId = null
       });
   }
 

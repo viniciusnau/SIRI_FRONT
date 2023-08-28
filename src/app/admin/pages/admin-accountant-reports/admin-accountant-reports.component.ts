@@ -21,7 +21,8 @@ interface AccountantReport {
 })
 export class AdminAccountantReportsComponent implements OnInit {
   adminAccountantReports: AccountantReport[] = [];
-  loading: number | null = null;
+  loading: boolean = false;
+  loadingAccountantReport: number | null = null;
   displayedColumns = [
     'id',
     'month',
@@ -40,12 +41,15 @@ export class AdminAccountantReportsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.getAccountantReports();
   }
 
   getAccountantReports(): void {
     this.stocksService.getAccountantReports().subscribe((data) => {
       this.adminAccountantReports = data;
+      this.loadingAccountantReport = null;
+      this.loading = false;
     });
   }
 
@@ -74,7 +78,7 @@ export class AdminAccountantReportsComponent implements OnInit {
   }
 
   deleteAccountantReports(id: number): void {
-    this.loading = id;
+    this.loadingAccountantReport = id;
     this.stocksService.deleteAccountantReport(id).subscribe(() => {
       this.adminAccountantReports = this.adminAccountantReports.filter(
         (report) => report.id !== id,

@@ -1,5 +1,5 @@
 <admin-sidebar>
-  <mat-card>
+  <mat-card *ngIf="!loading">
     <mat-card-content>
       <mat-toolbar>
         <span>Atas</span>
@@ -117,7 +117,7 @@
                 aria-label="Delete protocol"
                 (click)="deleteProtocol(protocol.id)"
               >
-                <mat-icon [class.custom-spinner]="loading === protocol.id">delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loadingProtocolId === protocol.id">delete</mat-icon>
               </button>
             </div>
           </td>
@@ -134,3 +134,4 @@
     </mat-card-content>
   </mat-card>
 </admin-sidebar>
+<div class="initial-custom-spinner" *ngIf="loading"></div>

@@ -1,5 +1,5 @@
 <admin-sidebar>
-  <mat-card>
+  <mat-card *ngIf="!loading">
     <mat-card-content>
       <mat-toolbar>
         <span>Relatório do Contador</span>
@@ -84,7 +84,7 @@
                 aria-label="Delete"
                 (click)="deleteAccountantReports(accountantReport.id)"
               >
-                <mat-icon [class.custom-spinner]="loading === accountantReport.id" >delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loadingAccountantReport === accountantReport.id">delete</mat-icon>
               </button>
             </div>
           </td>
@@ -96,3 +96,4 @@
     </mat-card-content>
   </mat-card>
 </admin-sidebar>
+<div class="initial-custom-spinner" *ngIf="loading"></div>

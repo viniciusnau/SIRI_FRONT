@@ -14,7 +14,8 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./admin-suppliers.component.scss'],
 })
 export class AdminSuppliersComponent implements OnInit {
-  loading: number | null = null;
+  loading: boolean = false;
+  loadingSupplierId: number | null = null;
 
   constructor(
     public suppliersService: SuppliersService,
@@ -28,6 +29,7 @@ export class AdminSuppliersComponent implements OnInit {
   categories = [];
 
   ngOnInit(): void {
+    this.loading = true;
     this.getContent();
     this.getAllCategories();
   }
@@ -56,7 +58,8 @@ export class AdminSuppliersComponent implements OnInit {
         this.response = new MatTableDataSource(sortedData.results);
         this.response.next = data?.next;
         this.response.count = data?.count;
-        this.loading = null;
+        this.loadingSupplierId = null;
+        this.loading = false;
       });
   }
 
@@ -67,7 +70,7 @@ export class AdminSuppliersComponent implements OnInit {
   }
 
   deleteSupplier(supplier_id: string) {
-    this.loading = Number(supplier_id);
+    this.loadingSupplierId = Number(supplier_id);
     this.stocksService
       .deleteSupplier(supplier_id)
       .toPromise()
@@ -75,7 +78,7 @@ export class AdminSuppliersComponent implements OnInit {
         this.getContent();
       })
       .catch((error: any) => {
-        this.loading = null
+        this.loadingSupplierId = null
       });
   }
 
@@ -85,7 +88,7 @@ export class AdminSuppliersComponent implements OnInit {
 
   openModal(suppliers): void {
     const dialogRef = this.dialog.open(SuppliersModalComponent, {
-      data: { suppliers, categories: this.categories },
+      data: { suppliers: suppliers, categories: this.categories },
     });
   }
 

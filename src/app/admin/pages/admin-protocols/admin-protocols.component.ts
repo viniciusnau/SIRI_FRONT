@@ -11,13 +11,6 @@ import {
   ProtocolsModalData,
 } from './modal/protocols-modal.component';
 
-interface adminProtocols {
-  id: number;
-  code: number;
-  supplier: string;
-  category: string;
-  file: string;
-}
 
 @Component({
   selector: 'app-admin-protocols',
@@ -25,7 +18,8 @@ interface adminProtocols {
   styleUrls: ['./admin-protocols.component.scss'],
 })
 export class AdminProtocolsComponent implements OnInit {
-  loading: number | null = null;
+  loading: boolean = false;
+  loadingProtocolId: number | null = null;
   currentPage = 1;
   response: any;
 
@@ -43,6 +37,7 @@ export class AdminProtocolsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.getContent();
     this.getAllCategories();
     this.getSuppliers();
@@ -62,7 +57,8 @@ export class AdminProtocolsComponent implements OnInit {
       .getProtocols(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
-        this.loading = null;
+        this.loadingProtocolId = null;
+        this.loading = false;
       });
   }
 
@@ -120,7 +116,7 @@ export class AdminProtocolsComponent implements OnInit {
   }
 
   deleteProtocol(protocol_id: string) {
-    this.loading = Number(protocol_id);
+    this.loadingProtocolId = Number(protocol_id);
     this.protocolService
       .deleteProtocol(protocol_id)
       .toPromise()
@@ -128,7 +124,7 @@ export class AdminProtocolsComponent implements OnInit {
         this.getContent();
       })
       .catch((error: any) => {
-        this.loading = null;
+        this.loadingProtocolId = null;
       });
   }
 

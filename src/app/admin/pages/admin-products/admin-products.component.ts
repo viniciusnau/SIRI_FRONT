@@ -13,7 +13,8 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./admin-products.component.scss'],
 })
 export class AdminProductsComponent implements OnInit {
-  loading: number | null = null;
+  loading: boolean = false;
+  loadingProductId: number | null = null;
   currentPage = 1;
   response: any;
   categories = [];
@@ -26,6 +27,7 @@ export class AdminProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.getContent();
     this.getAllCategories();
     this.getAllMeasures();
@@ -55,7 +57,8 @@ export class AdminProductsComponent implements OnInit {
         this.response = new MatTableDataSource(sortedData.results);
         this.response.next = data?.next;
         this.response.count = data?.count;
-        this.loading = null
+        this.loadingProductId = null;
+        this.loading = false;
       });
   }
 
@@ -93,7 +96,7 @@ export class AdminProductsComponent implements OnInit {
   }
 
   deleteProduct(product_id: string) {
-    this.loading = Number(product_id);
+    this.loadingProductId = Number(product_id);
     this.stocksService.deleteProduct(product_id).subscribe({
       next: (result) => {
         this.getContent();
@@ -108,7 +111,7 @@ export class AdminProductsComponent implements OnInit {
         );
       },
       error: (error) => {
-        this.loading = null;
+        this.loadingProductId = null;
         this.snackBar.open('Ops!', 'Houve um erro ao excluir o produto!', {
           duration: 3000,
           horizontalPosition: 'end',

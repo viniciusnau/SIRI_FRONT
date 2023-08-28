@@ -1,5 +1,5 @@
 <admin-sidebar>
-  <mat-card>
+  <mat-card *ngIf="!loading">
     <mat-card-content>
       <mat-toolbar>
         <span>Dispensa de Licitação</span>
@@ -66,7 +66,7 @@
               class="btn"
               (click)="deleteBiddingExemption(biddingExemption)"
             >
-              <mat-icon [class.custom-spinner]="loading === biddingExemption.id">delete</mat-icon>
+              <mat-icon [class.custom-spinner]="loadingBiddingExemptionId === biddingExemption.id">delete</mat-icon>
             </button>
           </td>
         </ng-container>
@@ -82,3 +82,4 @@
     </mat-card-content>
   </mat-card>
 </admin-sidebar>
+<div class="initial-custom-spinner" *ngIf="loading"></div>

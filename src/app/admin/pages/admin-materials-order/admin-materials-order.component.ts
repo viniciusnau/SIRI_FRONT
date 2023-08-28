@@ -1,4 +1,4 @@
-import { SuppliersService } from './../../../services/suppliers.service';
+import { SuppliersService } from '../../../services/suppliers.service';
 import { StocksService } from 'src/app/services/stocks.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,15 +9,6 @@ import {
 } from './modal/materials-order-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-interface MaterialsOrder {
-  id: number;
-  supplier: number;
-  file_url: string;
-  date_range: string;
-  created: string;
-  updated: string;
-}
-
 @Component({
   selector: 'app-admin-materials-order',
   templateUrl: './admin-materials-order.component.html',
@@ -26,7 +17,8 @@ interface MaterialsOrder {
 export class AdminMaterialsOrderComponent implements OnInit {
   currentPage = 1;
   response: any;
-  loading: number | null = null;
+  loading: boolean = false;
+  loadingMaterialOrder: number | null = null;
 
   modalData: MaterialsOrderModalData = {
     suppliers: [],
@@ -42,6 +34,7 @@ export class AdminMaterialsOrderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.getContent();
     this.getAllCategories();
     this.getSuppliers();
@@ -61,6 +54,8 @@ export class AdminMaterialsOrderComponent implements OnInit {
       .getMaterialsOrder(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
+        this.loadingMaterialOrder = null;
+        this.loading = false;
         if (disableLoading) {
           this.snackBar.open('Pedido excluído!', 'Fechar', {
             duration: 3000,
@@ -84,7 +79,7 @@ export class AdminMaterialsOrderComponent implements OnInit {
   }
 
   deleteMaterialOrder(order_id: string) {
-    this.loading = Number(order_id);
+    this.loadingMaterialOrder = Number(order_id);
     this.ordersService
       .deleteMaterialOrder(order_id)
       .toPromise()

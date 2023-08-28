@@ -24,6 +24,7 @@ interface WarehouseReport {
   providers: [PriceFormatPipe],
 })
 export class AdminWarehouseReportsComponent implements OnInit {
+  loading: boolean = false;
   warehouseReports: WarehouseReport[] = [];
   displayedColumns = [
     'productCode',
@@ -41,6 +42,7 @@ export class AdminWarehouseReportsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loading = true;
     this.fetchWarehouseReports();
   }
 
@@ -55,8 +57,11 @@ export class AdminWarehouseReportsComponent implements OnInit {
           price: item.price,
           averagePrice: item.average_price,
         }));
+        this.loading = false;
       },
-      (error) => {},
+      (error) => {
+        this.loading = false;
+        },
     );
   }
 

@@ -1,5 +1,5 @@
 <admin-sidebar>
-  <mat-card>
+  <mat-card *ngIf="!loading">
     <mat-card-content>
       <mat-toolbar>
         <span>Produtos</span>
@@ -109,7 +109,7 @@
                 aria-label="Delete product"
                 (click)="deleteProduct(products.id)"
               >
-                <mat-icon [class.custom-spinner]="loading === products.id">delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loadingProductId === products.id">delete</mat-icon>
               </button>
             </div>
           </td>
@@ -126,3 +126,4 @@
     </mat-card-content>
   </mat-card>
 </admin-sidebar>
+<div class="initial-custom-spinner" *ngIf="loading"></div>
