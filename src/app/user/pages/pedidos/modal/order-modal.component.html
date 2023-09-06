@@ -2,12 +2,21 @@
 <div [formGroup]="formOrder" mat-dialog-content class="content">
   <div class="custom-file-input">
     <label for="fileInput" class="file-label"
-      >Anexar confirmação de recebimento</label
+      >Anexar NF</label
     >
     <input type="file" id="fileInput" #fileInput (change)="onFileChange()" />
   </div>
   <div *ngIf="selectedFile" class="file-info">
-    Arquivo selecionado: {{ selectedFile.name }}
+    NF selecionada: {{ selectedFile.name }}
+  </div>
+  <div class="custom-file-input">
+    <label for="confirmFileInput" class="file-label"
+    >Anexar confirmação de recebimento</label
+    >
+    <input type="file" id="confirmFileInput" #confirmFileInput (change)="onFileChange()" />
+  </div>
+  <div *ngIf="selectedConfirmFile" class="file-info">
+    Confirmação selecionada: {{ selectedConfirmFile.name }}
   </div>
 </div>
 <div mat-dialog-actions class="actions">
@@ -20,7 +29,7 @@
     class="proceed"
     (click)="onClick()"
     cdkFocusInitial
-    [disabled]="!selectedFile"
+    [disabled]="!selectedFile || !selectedConfirmFile"
   >
     Sim
   </button>

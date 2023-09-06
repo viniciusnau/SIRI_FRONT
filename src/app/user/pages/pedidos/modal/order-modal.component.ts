@@ -17,9 +17,11 @@ import { OrdersService } from '../../../../services/orders.service';
 export class OrderModalComponent implements OnInit {
   formOrder: FormGroup;
   selectedFile: File;
+  selectedConfirmFile: File;
   loading: boolean = false;
 
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
+  @ViewChild('confirmFileInput', { static: false }) confirmFileInput: ElementRef;
 
   constructor(
     public dialogRef: MatDialogRef<OrderModalComponent>,
@@ -41,6 +43,9 @@ export class OrderModalComponent implements OnInit {
     this.selectedFile = (
       this.fileInput.nativeElement as HTMLInputElement
     ).files[0];
+    this.selectedConfirmFile = (
+      this.confirmFileInput.nativeElement as HTMLInputElement
+    ).files[0];
   }
 
   onClick(): void {
@@ -53,6 +58,7 @@ export class OrderModalComponent implements OnInit {
         this.ordersService.updateOrderItem(itemId, updateData).subscribe(result => {
           const formData = new FormData();
           formData.append('file', this.selectedFile, `confirm_order_${orderId}.pdf`);
+          formData.append('confirm_file', this.selectedConfirmFile, `confirm_file_order_${orderId}.pdf`);
           this.ordersService.updateOrder(orderId, formData).subscribe(updateOrderResult => {
             window.location.reload();
           })

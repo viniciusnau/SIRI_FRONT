@@ -19,7 +19,9 @@ import {
 export class AdminOrdersModalComponent implements OnInit {
   formOrder: FormGroup;
   fileData: SafeResourceUrl;
+  confirmFileData: SafeResourceUrl;
   decodedFileData: Blob;
+  decodedConfirmFileData: Blob;
   suppliers: any;
   public_defenses: any;
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
@@ -75,15 +77,33 @@ export class AdminOrdersModalComponent implements OnInit {
 
   decodeFileData(): void {
     const base64Data = this.data.file;
+    const confirmBase64Data = this.data.confirm_file;
     const byteCharacters = atob(base64Data);
+    const confirmByteCharacters = atob(confirmBase64Data);
+
     const byteNumbers = new Array(byteCharacters.length);
+    const confirmByteNumbers = new Array(confirmByteCharacters.length);
+
     for (let i = 0; i < byteCharacters.length; i++) {
       byteNumbers[i] = byteCharacters.charCodeAt(i);
     }
+
+    for (let i = 0; i < confirmByteCharacters.length; i++) {
+      confirmByteNumbers[i] = confirmByteCharacters.charCodeAt(i);
+    }
+
     const byteArray = new Uint8Array(byteNumbers);
+    const confirmByteArray = new Uint8Array(confirmByteNumbers);
+
     this.decodedFileData = new Blob([byteArray], { type: 'application/pdf' });
+    this.decodedConfirmFileData = new Blob([confirmByteArray], { type: 'application/pdf' });
+
     this.fileData = this.sanitizer.bypassSecurityTrustResourceUrl(
-      URL.createObjectURL(this.decodedFileData),
+      URL.createObjectURL(this.decodedFileData)
+    );
+
+    this.confirmFileData = this.sanitizer.bypassSecurityTrustResourceUrl(
+      URL.createObjectURL(this.decodedConfirmFileData)
     );
   }
 
@@ -93,7 +113,7 @@ export class AdminOrdersModalComponent implements OnInit {
 
   onClick(): void {
     this.loading = true;
-    if (this.formOrder.invalid || !this.decodedFileData) {
+    if (this.formOrder.invalid || !this.decodedFileData || !this.decodedConfirmFileData) {
       this.loading = false;
       return;
     }

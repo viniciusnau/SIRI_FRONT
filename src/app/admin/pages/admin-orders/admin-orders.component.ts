@@ -49,8 +49,8 @@ export class AdminOrdersComponent implements OnInit {
       });
   }
 
-  openModal(file): void {
-    const data = {file: file}
+  openModal(file, confirm_file): void {
+    const data = {file: file, confirm_file: confirm_file}
     const dialogRef = this.dialog.open(AdminOrdersModalComponent, {
       data: data,
     });

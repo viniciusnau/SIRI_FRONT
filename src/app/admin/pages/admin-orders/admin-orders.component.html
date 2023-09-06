@@ -87,7 +87,7 @@
               mat-mini-fab
               class="btn"
               [disabled]="!order.file"
-              (click)="openModal(order.file)"
+              (click)="openModal(order.file, order.confirm_file)"
             >
               <mat-icon>remove_red_eye</mat-icon>
             </button>

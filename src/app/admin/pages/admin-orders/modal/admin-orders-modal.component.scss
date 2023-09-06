@@ -22,9 +22,11 @@
 .actions {
   display: flex;
   justify-content: flex-end;
+
   .cancel {
     background-color: $secondary-button-color;
   }
+
   .proceed {
     background-color: $primary-button-color;
   }
@@ -58,4 +60,19 @@ mat-form-field {
   100% {
     transform: translate(-50%, -50%) rotate(360deg);
   }
+}
+
+.pdf-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.pdf-container object {
+  flex: 1;
+  height: 600px;
+  width: 600px;
+  margin-right: 10px;
 }
