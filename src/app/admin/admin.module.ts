@@ -70,6 +70,7 @@ import { CpfMaskDirective } from './directives/cpfMask.directive';
 import { CnpjMaskDirective } from './directives/CnpjMask.directive';
 import { ContactMaskDirective } from './directives/contactMask.directive';
 import { PriceFormatDirective } from './directives/price-format.directive';
+import { NegativeNotAllowedDirective } from './directives/negative-not-allowed.directive';
 
 @NgModule({
   declarations: [
@@ -127,6 +128,7 @@ import { PriceFormatDirective } from './directives/price-format.directive';
     PriceFormatPipe,
     AdminOrdersModalComponent,
     DigitLimitDirective,
+    NegativeNotAllowedDirective,
     DecimalNotAllowedDirective,
     IdentityDirective,
     CpfMaskDirective,

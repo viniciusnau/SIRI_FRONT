@@ -41,14 +41,18 @@ export class BiddingExemptionModalComponent implements OnInit {
   }
 
   onClick(): void {
-    if (this.formBiddingExemption.invalid) return;
-
     const createBiddingExemptionData = this.formBiddingExemption.getRawValue();
 
+    const modifiedItem = { ...createBiddingExemptionData };
+
+    modifiedItem.quantity = Number(
+      createBiddingExemptionData.quantity.toString().slice(0, 6),
+    );
+
     this.stocksService
-      .createBiddingExemption(createBiddingExemptionData)
+      .createBiddingExemption(modifiedItem)
       .subscribe((response) => {
-        window.location.reload()
+        window.location.reload();
       });
   }
 }

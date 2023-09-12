@@ -1,20 +1,18 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appDigitLimit]',
+  selector: '[negativeNotAllowed]',
 })
-export class DigitLimitDirective {
+export class NegativeNotAllowedDirective {
   constructor(private el: ElementRef) {}
 
   @HostListener('input', ['$event']) onInputChange(event: any) {
-    const maxLength = 3;
     let inputValue = this.el.nativeElement.value;
-    let newValue = '';
 
-    for (var i = 0; i < maxLength; i++) {
-      newValue += inputValue.charAt(i);
+    if (inputValue.startsWith('-')) {
+      inputValue = inputValue.slice(1);
     }
 
-    this.el.nativeElement.value = newValue;
+    this.el.nativeElement.value = inputValue;
   }
 }

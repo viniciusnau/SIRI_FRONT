@@ -46,14 +46,15 @@ export class CreateAdminGeneralSupplierOrdersItemsModalComponent
   }
 
   onClick(): void {
-    if (this.formSupplierOrders.invalid) return;
-
     const createSupplierOrderItemData = this.formSupplierOrders.getRawValue();
+    const modifiedItem = { ...createSupplierOrderItemData };
+    modifiedItem.quantity = Number(
+      createSupplierOrderItemData.quantity.toString().slice(0, 6),
+    );
 
     createSupplierOrderItemData.supplier_order = parseInt(
       this.data.supplier_order,
     );
-
     this.ordersService
       .createSupplierOrderItem(createSupplierOrderItemData)
       .subscribe(
@@ -69,7 +70,7 @@ export class CreateAdminGeneralSupplierOrdersItemsModalComponent
           setTimeout(() => {
             window.location.reload();
           }, 2000);
-        }
+        },
       );
   }
 }

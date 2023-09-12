@@ -44,6 +44,7 @@
                 decimalNotAllowed
                 [ngModelOptions]="{ standalone: true }"
                 [ngModel]="orderItem.quantity"
+                negativeNotAllowed
               />
             </mat-form-field>
           </td>
@@ -99,6 +100,7 @@
                 (input)="orderItem.supplier_quantity = $event.target.value"
                 decimalNotAllowed
                 appDigitLimit
+                negativeNotAllowed
               />
             </mat-form-field>
           </td>

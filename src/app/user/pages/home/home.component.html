@@ -60,6 +60,7 @@
                   (ngModelChange)="updateQuantity(product)"
                   name="quantityInput"
                   appDigitLimit
+                  negativeNotAllowed
                   decimalNotAllowed
                   [ngModelOptions]="{ standalone: true }"
                   [ngModel]="product.quantity"

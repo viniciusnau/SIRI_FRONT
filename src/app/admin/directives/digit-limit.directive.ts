@@ -11,10 +11,6 @@ export class DigitLimitDirective {
     let inputValue = this.el.nativeElement.value;
     let newValue = '';
 
-    if (inputValue.startsWith('-')) {
-      inputValue = inputValue.slice(1);
-    }
-
     for (var i = 0; i < maxLength; i++) {
       newValue += inputValue.charAt(i);
     }

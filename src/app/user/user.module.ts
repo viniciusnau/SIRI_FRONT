@@ -23,6 +23,7 @@ import { HomeModalComponent } from './pages/home/modal/home-modal.component';
 import { AdminModule } from '../admin/admin.module';
 import { DigitLimitDirective } from '../user/directives/digit-limit.directive';
 import { DecimalNotAllowedDirective } from '../user/directives/decimal-not-allowed.directive';
+import { NegativeNotAllowedDirective } from '../user/directives/negative-not-allowed.directive';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { DecimalNotAllowedDirective } from '../user/directives/decimal-not-allow
     UserPaginationComponent,
     OrderModalComponent,
     DigitLimitDirective,
+    NegativeNotAllowedDirective,
     DecimalNotAllowedDirective,
     HomeModalComponent,
   ],

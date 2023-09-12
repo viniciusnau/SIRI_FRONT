@@ -46,14 +46,17 @@ export class CreateProtocolItemsModalComponent implements OnInit {
   }
 
   onClick(): void {
-    if (this.formCreateProtocolItems.invalid) return;
-
     const createProtocolItemData = this.formCreateProtocolItems.getRawValue();
+    const modifiedItem = { ...createProtocolItemData };
 
-    createProtocolItemData.original_quantity = createProtocolItemData.quantity;
-    createProtocolItemData.protocol = this.data.protocolId;
-
-    this.stocksService.createProtocolItem(createProtocolItemData).subscribe(
+    modifiedItem.protocol = this.data.protocolId;
+    modifiedItem.quantity = Number(
+      createProtocolItemData.quantity.toString().slice(0, 6),
+    );
+    modifiedItem.original_quantity = Number(
+      createProtocolItemData.quantity.toString().slice(0, 6),
+    );
+    this.stocksService.createProtocolItem(modifiedItem).subscribe(
       (response) => {
         window.location.reload();
       },

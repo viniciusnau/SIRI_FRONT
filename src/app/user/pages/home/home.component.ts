@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { GetProductDto, ProductsService } from 'src/app/services/products.service';
+import {
+  GetProductDto,
+  ProductsService,
+} from 'src/app/services/products.service';
 import { UserService } from 'src/app/services/user.service';
 import { Category, Product } from '../../../interfaces/stock/interfaces';
 import { OrdersService } from 'src/app/services/orders.service';
@@ -48,9 +51,12 @@ export class HomeComponent implements OnInit {
       (data) => {
         this.categories = data.categories;
         this.client = data.client.id;
-        this.getProducts(this.categories.map((category) => category.id), this.currentPage);
+        this.getProducts(
+          this.categories.map((category) => category.id),
+          this.currentPage,
+        );
       },
-      (error) => {}
+      (error) => {},
     );
   }
 
@@ -75,7 +81,7 @@ export class HomeComponent implements OnInit {
 
   updateQuantity(product: Product): void {
     const index = this.chosenProducts.findIndex(
-      (chosenProduct) => chosenProduct.id === product.id
+      (chosenProduct) => chosenProduct.id === product.id,
     );
 
     if (index !== -1) {
@@ -94,18 +100,22 @@ export class HomeComponent implements OnInit {
       (data) => {
         this.response = data;
         this.products = this.sortAlphabetically(data.results);
-        const chosenProductIds = this.chosenProducts.map((chosenProduct) => chosenProduct.id);
+        const chosenProductIds = this.chosenProducts.map(
+          (chosenProduct) => chosenProduct.id,
+        );
         this.products.forEach((product) => {
           if (chosenProductIds.includes(product.id)) {
-            const chosenProduct = this.chosenProducts.find((chosenProduct) => chosenProduct.id === product.id);
+            const chosenProduct = this.chosenProducts.find(
+              (chosenProduct) => chosenProduct.id === product.id,
+            );
             product.quantity = `${chosenProduct.quantity}`;
           } else {
-            product.quantity = "0";
+            product.quantity = '0';
           }
         });
         this.loading = false;
       },
-      (error) => {}
+      (error) => {},
     );
   }
 
@@ -115,18 +125,20 @@ export class HomeComponent implements OnInit {
   }
 
   openModal(data): void {
-    const value = {chosenProducts: data, client: `${this.client}`}
+    const value = { chosenProducts: data, client: `${this.client}` };
     const dialogRef = this.dialog.open(HomeModalComponent, {
       data: value,
     });
   }
 
   order(): void {
-    if (this.chosenProducts.length === 0) {
-      const products = this.products.filter((product) => product.quantity);
-      this.openModal(products);
-    } else {
-      this.openModal(this.chosenProducts);
-    }
+    const products = this.chosenProducts.map((product) => {
+      const modifiedProduct = { ...product };
+      const slicedQuantity = product.quantity.toString().slice(0, 3);
+      modifiedProduct.quantity = parseInt(slicedQuantity, 10);
+      return modifiedProduct;
+    });
+
+    this.openModal(products);
   }
 }
