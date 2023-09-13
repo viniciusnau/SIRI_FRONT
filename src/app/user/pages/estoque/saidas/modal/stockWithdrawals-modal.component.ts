@@ -45,8 +45,6 @@ export class StockWithdrawalsModalComponent implements OnInit {
   }
 
   onClick(): void {
-    if (this.formStockWithdrawals.invalid) return;
-
     const createStockWithdrawalData = this.formStockWithdrawals.getRawValue();
 
     createStockWithdrawalData.stock_item = this.data.stock_item_id;
@@ -55,7 +53,7 @@ export class StockWithdrawalsModalComponent implements OnInit {
       .createStockWithdrawal(createStockWithdrawalData)
       .subscribe(
         (response) => {
-          window.location.reload();
+          // window.location.reload();
         },
         (error) => {},
       );

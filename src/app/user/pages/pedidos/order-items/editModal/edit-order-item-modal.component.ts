@@ -27,7 +27,7 @@ export class EditOrderItemModalComponent implements OnInit {
   createForm() {
     this.formOrderItem = this.formBuilder.group({
       added_quantity: ['', Validators.required],
-      quantity: ['',],
+      quantity: [''],
     });
   }
 
@@ -42,14 +42,22 @@ export class EditOrderItemModalComponent implements OnInit {
 
   onClick(): void {
     const editOrderItemData = this.formOrderItem.getRawValue();
-    if (editOrderItemData.quantity === "") {
+    const modifiedItem = { ...editOrderItemData };
+    modifiedItem.quantity = Number(
+      editOrderItemData.quantity.toString().slice(0, 3),
+    );
+    modifiedItem.added_quantity = Number(
+      editOrderItemData.added_quantity.toString().slice(0, 3),
+    );
+
+    if (editOrderItemData.quantity === '') {
       delete editOrderItemData.quantity;
     }
     if (!editOrderItemData.added_quantity) {
       editOrderItemData.added_quantity = 0;
     }
     this.ordersService
-      .updateOrderItem(this.data.order_item_id, editOrderItemData)
+      .updateOrderItem(this.data.order_item_id, modifiedItem)
       .subscribe({
         next: (result) => {
           this.dialogRef.close();
