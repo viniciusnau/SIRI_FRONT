@@ -2,10 +2,10 @@
 <div [formGroup]="formOrder" mat-dialog-content class="content">
   <div class="form-row">
     <mat-form-field class="form-field">
-      <input matInput formControlName="code" placeholder="Código" required />
+      <input matInput formControlName="code" placeholder="Código*" required />
     </mat-form-field>
     <mat-form-field class="form-field">
-      <mat-select formControlName="supplier" placeholder="Fornecedor" required>
+      <mat-select formControlName="supplier" placeholder="Fornecedor*" required>
         <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">{{
           supplier.name
         }}</mat-option>
@@ -14,7 +14,7 @@
     <mat-form-field class="form-field">
       <mat-select
         formControlName="public_defense"
-        placeholder="Núcleo"
+        placeholder="Núcleo*"
         required
       >
         <mat-option
@@ -28,7 +28,7 @@
       <input
         matInput
         formControlName="total_value"
-        placeholder="Valor"
+        placeholder="Valor*"
         required
         appPriceFormat
       />

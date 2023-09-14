@@ -1,14 +1,13 @@
-<h1 mat-dialog-title>Criar</h1>
+<h1 mat-dialog-title>Criar ata</h1>
 <div [formGroup]="formCreateProtocols" mat-dialog-content class="content">
   <div class="date-fields">
     <div class="date-field">
-      <p>Início de Vigência</p>
+      <p>Início de Vigência*</p>
       <div class="mat-form-field-wrapper">
         <mat-form-field appearance="fill">
           <input
             matInput
             [matDatepicker]="startDatePicker"
-            placeholder="Início de Vigência"
             formControlName="initial_date"
           />
           <mat-datepicker-toggle
@@ -20,13 +19,12 @@
       </div>
     </div>
     <div class="date-field">
-      <p>Fim de Vigência</p>
+      <p>Fim de Vigência*</p>
       <div class="mat-form-field-wrapper">
         <mat-form-field appearance="fill">
           <input
             matInput
             [matDatepicker]="finalDatePicker"
-            placeholder="Fim de Vigência"
             formControlName="final_date"
           />
           <mat-datepicker-toggle
@@ -38,11 +36,11 @@
       </div>
     </div>
   </div>
-  <p>Código</p>
+  <p>Código*</p>
   <mat-form-field appearance="fill">
     <input type="text" matInput formControlName="code" />
   </mat-form-field>
-  <p>Fornecedor</p>
+  <p>Fornecedor*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="supplier">
       <mat-option *ngFor="let supplier of data.suppliers" [value]="supplier.id">
@@ -50,7 +48,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <p>Categoria</p>
+  <p>Categoria*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="category">
       <mat-option

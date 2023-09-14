@@ -1,10 +1,10 @@
-<h1 mat-dialog-title>Criar Nota</h1>
+<h1 mat-dialog-title>Criar nota</h1>
 <div [formGroup]="formInvoice" mat-dialog-content class="content">
-  <p>Código</p>
+  <p>Código*</p>
   <mat-form-field appearance="fill">
     <input type="text" matInput formControlName="code" />
   </mat-form-field>
-  <p>Fornecedor</p>
+  <p>Fornecedor*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="supplier">
       <mat-option *ngFor="let supplier of data.suppliers" [value]="supplier.id">
@@ -12,7 +12,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <p>Núcleo</p>
+  <p>Núcleo*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="public_defense">
       <mat-option
@@ -23,7 +23,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <p>Valor Total</p>
+  <p>Valor Total*</p>
   <mat-form-field appearance="fill">
     <input type="text" matInput formControlName="total_value" appPriceFormat />
   </mat-form-field>

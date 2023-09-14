@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Criar Pedido de AF</h1>
+<h1 mat-dialog-title>Criar pedido de AF</h1>
 <div mat-dialog-content class="content" [formGroup]="formMaterialsOrder">
-  <p>Fornecedor</p>
+  <p>Fornecedor*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="supplier_id">
       <mat-option
@@ -10,7 +10,7 @@
       >
     </mat-select>
   </mat-form-field>
-  <p>Categoria</p>
+  <p>Categoria*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="category_id">
       <mat-option
@@ -20,7 +20,7 @@
       >
     </mat-select>
   </mat-form-field>
-  <p>Data Inicial</p>
+  <p>Data Inicial*</p>
   <mat-form-field appearance="fill">
     <input
       matInput
@@ -34,7 +34,7 @@
     ></mat-datepicker-toggle>
     <mat-datepicker #initialDatePicker></mat-datepicker>
   </mat-form-field>
-  <p>Data Final</p>
+  <p>Data Final*</p>
   <mat-form-field appearance="fill">
     <input
       matInput

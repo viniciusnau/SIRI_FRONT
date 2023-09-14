@@ -1,26 +1,26 @@
-<h1 mat-dialog-title>Criar</h1>
+<h1 mat-dialog-title>Criar produto</h1>
 <div [formGroup]="formProduct" mat-dialog-content class="content">
-  <p>Nome</p>
+  <p>Nome*</p>
   <mat-form-field appearance="fill">
     <input type="text" matInput formControlName="name" />
   </mat-form-field>
 
-  <p>Código</p>
+  <p>Código*</p>
   <mat-form-field appearance="fill">
     <input type="text" matInput formControlName="code" />
   </mat-form-field>
 
-  <p>Descrição</p>
+  <p>Descrição*</p>
   <mat-form-field appearance="fill">
     <input type="text" matInput formControlName="description" />
   </mat-form-field>
 
-  <p>Preço</p>
+  <p>Preço*</p>
   <mat-form-field appearance="fill">
     <input type="text" matInput formControlName="price" appPriceFormat />
   </mat-form-field>
 
-  <p>Categoria</p>
+  <p>Categoria*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="category">
       <mat-option
@@ -31,7 +31,7 @@
     </mat-select>
   </mat-form-field>
 
-  <p>Medida</p>
+  <p>Medida*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="measure">
       <mat-option *ngFor="let measure of data.measures" [value]="measure.id">{{
@@ -40,7 +40,7 @@
     </mat-select>
   </mat-form-field>
 
-  <p>Disponível</p>
+  <p>Disponível*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="is_available">
       <mat-option [value]="true">Sim</mat-option>

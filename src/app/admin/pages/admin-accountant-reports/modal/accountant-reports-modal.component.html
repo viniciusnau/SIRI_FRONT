@@ -1,16 +1,16 @@
-<h1 mat-dialog-title>Criar</h1>
+<h1 mat-dialog-title>Criar relatório do contador</h1>
 <div [formGroup]="formAccountantReports" mat-dialog-content class="content">
-  <p>Mês</p>
+  <p>Mês*</p>
   <mat-form-field appearance="fill">
-    <mat-select formControlName="month" placeholder="Mês">
+    <mat-select formControlName="month">
       <mat-option *ngFor="let month of months" [value]="month">{{
         month
       }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <p>Ano</p>
+  <p>Ano*</p>
   <mat-form-field appearance="fill">
-    <mat-select formControlName="year" placeholder="Ano">
+    <mat-select formControlName="year">
       <mat-option *ngFor="let year of years" [value]="year">{{
         year
       }}</mat-option>

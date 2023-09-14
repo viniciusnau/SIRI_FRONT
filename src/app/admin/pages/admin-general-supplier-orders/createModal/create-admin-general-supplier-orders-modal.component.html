@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Criar</h1>
+<h1 mat-dialog-title>Criar pedido do fornecedor</h1>
 <div [formGroup]="formSupplierOrders" mat-dialog-content class="content">
-  <p>Fornecedor</p>
+  <p>Fornecedor*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="supplier">
       <mat-option
@@ -11,7 +11,7 @@
     </mat-select>
   </mat-form-field>
 
-  <p>Ata</p>
+  <p>Ata*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="protocol">
       <mat-option
@@ -22,7 +22,7 @@
     </mat-select>
   </mat-form-field>
 
-  <p>Defensoria</p>
+  <p>Defensoria*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="public_defense">
       <mat-option
