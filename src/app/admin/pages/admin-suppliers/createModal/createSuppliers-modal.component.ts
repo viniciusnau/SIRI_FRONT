@@ -62,8 +62,6 @@ export class CreateSuppliersModalComponent implements OnInit {
   }
 
   onClick(): void {
-    if (this.formCreateSuppliers.invalid) return;
-
     var data = this.formCreateSuppliers.getRawValue();
 
     data.category = this.selectedCategories;

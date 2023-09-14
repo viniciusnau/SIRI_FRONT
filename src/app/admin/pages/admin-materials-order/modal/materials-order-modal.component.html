@@ -57,6 +57,7 @@
     [mat-dialog-close]=""
     cdkFocusInitial
     (click)="onClick()"
+    [disabled]="this.formMaterialsOrder.invalid"
   >
     Ok
   </button>

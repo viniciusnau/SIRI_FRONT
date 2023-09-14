@@ -6,31 +6,69 @@
     </mat-form-field>
     <mat-form-field class="form-field">
       <mat-select formControlName="supplier" placeholder="Fornecedor" required>
-        <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">{{supplier.name}}</mat-option>
+        <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">{{
+          supplier.name
+        }}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="form-field">
-      <mat-select formControlName="public_defense" placeholder="Núcleo" required>
-        <mat-option *ngFor="let publicDefense of public_defenses" [value]="publicDefense.id">{{publicDefense.name}}</mat-option>
+      <mat-select
+        formControlName="public_defense"
+        placeholder="Núcleo"
+        required
+      >
+        <mat-option
+          *ngFor="let publicDefense of public_defenses"
+          [value]="publicDefense.id"
+          >{{ publicDefense.name }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
     <mat-form-field class="form-field">
-      <input matInput formControlName="total_value" placeholder="Valor" required appPriceFormat />
+      <input
+        matInput
+        formControlName="total_value"
+        placeholder="Valor"
+        required
+        appPriceFormat
+      />
     </mat-form-field>
   </div>
 
   <div class="pdf-container">
     <object [data]="fileData" type="application/pdf" width="50%" height="500px">
-      <p>Seu navegador não suporta PDFs. <a [href]="fileData" target="_blank">Clique aqui para baixar.</a></p>
+      <p>
+        Seu navegador não suporta PDFs.
+        <a [href]="fileData" target="_blank">Clique aqui para baixar.</a>
+      </p>
     </object>
-    <object [data]="confirmFileData" type="application/pdf" width="50%" height="500px">
-      <p>Seu navegador não suporta PDFs. <a [href]="confirmFileData" target="_blank">Clique aqui para baixar.</a></p>
+    <object
+      [data]="confirmFileData"
+      type="application/pdf"
+      width="50%"
+      height="500px"
+    >
+      <p>
+        Seu navegador não suporta PDFs.
+        <a [href]="confirmFileData" target="_blank">Clique aqui para baixar.</a>
+      </p>
     </object>
   </div>
 </div>
 
 <div mat-dialog-actions class="actions">
-  <button *ngIf="!loading" mat-button class="cancel" (click)="onNoClick()">Não</button>
-  <button *ngIf="!loading" mat-button class="proceed" (click)="onClick()" cdkFocusInitial [disabled]="!formOrder.valid">Sim</button>
+  <button *ngIf="!loading" mat-button class="cancel" (click)="onNoClick()">
+    Não
+  </button>
+  <button
+    *ngIf="!loading"
+    mat-button
+    class="proceed"
+    (click)="onClick()"
+    cdkFocusInitial
+    [disabled]="!formOrder.valid || formOrder.total_value === 'R$ '"
+  >
+    Sim
+  </button>
   <div class="custom-spinner" *ngIf="loading"></div>
 </div>

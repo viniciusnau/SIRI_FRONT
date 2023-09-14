@@ -19,7 +19,13 @@
 </div>
 <div mat-dialog-actions class="actions">
   <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button mat-button class="proceed" (click)="onOkClick()" cdkFocusInitial>
+  <button
+    mat-button
+    class="proceed"
+    (click)="onClick()"
+    cdkFocusInitial
+    [disabled]="this.formAccountantReports.invalid"
+  >
     Criar
   </button>
 </div>

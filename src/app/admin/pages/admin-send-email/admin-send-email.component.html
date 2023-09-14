@@ -4,16 +4,21 @@
       <mat-card-content>
         <p class="textField">Assunto</p>
         <mat-form-field appearance="fill">
-          <mat-label>Assunto</mat-label>
+          <!-- <mat-label>Assunto</mat-label> -->
           <input matInput [(ngModel)]="subject" />
         </mat-form-field>
         <p class="textField">Mensagem</p>
         <mat-form-field appearance="fill">
-          <mat-label>Mensagem</mat-label>
+          <!-- <mat-label>Mensagem</mat-label> -->
           <textarea matInput [(ngModel)]="message"></textarea>
         </mat-form-field>
         <div class="btnRequest">
-          <button mat-raised-button class="btn" (click)="sendEmail()" [disabled]="loading">
+          <button
+            mat-raised-button
+            class="btn"
+            (click)="sendEmail()"
+            [disabled]="loading || !this.subject || !this.message"
+          >
             <span *ngIf="!loading">Enviar</span>
             <div class="custom-spinner" *ngIf="loading"></div>
           </button>

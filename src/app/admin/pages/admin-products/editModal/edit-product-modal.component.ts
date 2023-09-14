@@ -50,6 +50,8 @@ export class EditProductModalComponent implements OnInit {
       if (value !== this.data.product[key]) {
         changedProperties[key] = value;
         this.hasChanges = true;
+      } else {
+        this.hasChanges = false;
       }
     });
 

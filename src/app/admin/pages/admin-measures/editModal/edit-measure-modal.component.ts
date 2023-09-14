@@ -41,6 +41,8 @@ export class EditMeasureModalComponent implements OnInit {
       if (value !== this.data.measure[key]) {
         changedProperties[key] = value;
         this.hasChanges = true;
+      } else {
+        this.hasChanges = false;
       }
     });
 

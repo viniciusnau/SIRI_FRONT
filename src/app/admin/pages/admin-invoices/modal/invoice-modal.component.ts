@@ -70,10 +70,6 @@ export class InvoiceModalComponent implements OnInit {
   }
 
   onClick(): void {
-    if (this.formInvoice.invalid || !this.selectedFile) {
-      return;
-    }
-
     const { code, supplier, public_defense, total_value } =
       this.formInvoice.getRawValue();
 

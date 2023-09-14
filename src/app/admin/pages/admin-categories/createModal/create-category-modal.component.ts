@@ -34,8 +34,6 @@ export class CreateCategoryModalComponent implements OnInit {
   }
 
   onClick(): void {
-    if (this.formCategory.invalid) return;
-
     var createCategoryData = this.formCategory.getRawValue();
 
     this.stocksService

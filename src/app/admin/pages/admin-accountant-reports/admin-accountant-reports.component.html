@@ -84,7 +84,12 @@
                 aria-label="Delete"
                 (click)="deleteAccountantReports(accountantReport.id)"
               >
-                <mat-icon [class.custom-spinner]="loadingAccountantReport === accountantReport.id">delete</mat-icon>
+                <mat-icon
+                  [class.custom-spinner]="
+                    loadingAccountantReport === accountantReport.id
+                  "
+                  >delete</mat-icon
+                >
               </button>
             </div>
           </td>

@@ -71,8 +71,6 @@ export class MaterialsOrderModalComponent implements OnInit {
   }
 
   onClick() {
-    if (this.formMaterialsOrder.invalid) return;
-
     const { supplier_id, category_id, initial_date, final_date } =
       this.formMaterialsOrder.getRawValue();
 
@@ -98,8 +96,10 @@ export class MaterialsOrderModalComponent implements OnInit {
 
     const publicDefenses = Array.from(
       new Set(
-        this.materialsOrder.supplier_orders.map((order) => order.public_defense)
-      )
+        this.materialsOrder.supplier_orders.map(
+          (order) => order.public_defense,
+        ),
+      ),
     );
 
     const productsSet = new Set<string>();
@@ -139,16 +139,19 @@ export class MaterialsOrderModalComponent implements OnInit {
     let startIndex = 0;
 
     while (remainingProducts > 0) {
-      const endIndex = Math.min(startIndex + maxColumnsPerPage, products.length);
+      const endIndex = Math.min(
+        startIndex + maxColumnsPerPage,
+        products.length,
+      );
       const sectionProducts = products.slice(startIndex, endIndex);
 
       const tableHeader = [
         'Núcleo',
         ...sectionProducts.map(
           (product) =>
-            `${productsMap[product][`${publicDefenses[0]}_${product}_code`]}\n${this.firstLetterOnCapital(
-              product
-            )}`
+            `${
+              productsMap[product][`${publicDefenses[0]}_${product}_code`]
+            }\n${this.firstLetterOnCapital(product)}`,
         ),
       ];
       const tableData = [tableHeader];
@@ -186,8 +189,9 @@ export class MaterialsOrderModalComponent implements OnInit {
     }
 
     const imagePath = 'assets/logo_defensoria_sc_preferencial_colorido.png';
-    this.http.get(imagePath, { responseType: 'blob' }).subscribe(
-      (imageBlob: Blob) => {
+    this.http
+      .get(imagePath, { responseType: 'blob' })
+      .subscribe((imageBlob: Blob) => {
         const reader = new FileReader();
         reader.onloadend = () => {
           const imageDataUrl = reader.result as string;
@@ -204,7 +208,8 @@ export class MaterialsOrderModalComponent implements OnInit {
             },
             content: [
               {
-                text: 'Pedido de Materiais' + ' - ' + this.materialsOrder.supplier,
+                text:
+                  'Pedido de Materiais' + ' - ' + this.materialsOrder.supplier,
                 style: 'header',
                 alignment: 'center',
                 margin: [0, 10],
@@ -226,22 +231,27 @@ export class MaterialsOrderModalComponent implements OnInit {
 
           pdfDocGenerator.getBlob((blob) => {
             const fileName = 'materials_order.pdf';
-            const file = new File([blob], fileName, { type: 'application/pdf' });
+            const file = new File([blob], fileName, {
+              type: 'application/pdf',
+            });
 
             const objectId = this.materialsOrder.materials_order;
 
             const formData = new FormData();
             formData.append('file', file);
 
-            this.ordersService.patchMaterialsOrder(objectId, formData).subscribe(
-              (response) => {window.location.reload()},
-              (error) => {}
-            );
+            this.ordersService
+              .patchMaterialsOrder(objectId, formData)
+              .subscribe(
+                (response) => {
+                  window.location.reload();
+                },
+                (error) => {},
+              );
           });
-        }
+        };
         reader.readAsDataURL(imageBlob);
-      }
-    )
+      });
   }
 
   onNoClick(): void {

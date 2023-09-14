@@ -40,8 +40,6 @@ export class CreateAdminGeneralSupplierOrdersModalComponent implements OnInit {
   }
 
   onClick(): void {
-    if (this.formSupplierOrders.invalid) return;
-
     var createSupplierOrderData = this.formSupplierOrders.getRawValue();
 
     createSupplierOrderData.received = false;

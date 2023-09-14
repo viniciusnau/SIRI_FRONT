@@ -53,6 +53,8 @@ export class SuppliersModalComponent implements OnInit {
       if (value !== this.data.suppliers[key] && key !== 'category') {
         changedProperties[key] = value;
         this.hasChanges = true;
+      } else {
+        this.hasChanges = false;
       }
     });
 

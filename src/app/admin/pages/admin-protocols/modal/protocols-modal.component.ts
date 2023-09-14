@@ -69,6 +69,8 @@ export class ProtocolsModalComponent implements OnInit {
       if (value !== this.data.protocolId[key]) {
         changedProperties[key] = value;
         this.hasChanges = true;
+      } else {
+        this.hasChanges = false;
       }
     });
 
@@ -80,40 +82,37 @@ export class ProtocolsModalComponent implements OnInit {
   }
 
   onClick(): void {
-    if (this.formProtocols.valid && this.protocolId) {
-      // const protocolData = this.formProtocols.value;
-      const protocolData = this.getChangedProperties();
-      const formData: FormData = new FormData();
+    const protocolData = this.getChangedProperties();
+    const formData: FormData = new FormData();
 
-      if (protocolData.code) {
-        formData.append('code', protocolData.code);
-      }
-      if (protocolData.supplier) {
-        formData.append('supplier', protocolData.supplier);
-      }
-      if (protocolData.category) {
-        formData.append('category', protocolData.category);
-      }
-      if (this.selectedFile) {
-        formData.append('file', this.selectedFile);
-      }
-      if (protocolData.initial_date) {
-        const startDate = new Date(protocolData.initial_date);
-        const formattedStartDate = startDate.toISOString();
-        formData.append('start_date', formattedStartDate);
-      }
-      if (protocolData.final_date) {
-        const endDate = new Date(protocolData.final_date);
-        const formattedEndDate = endDate.toISOString();
-        formData.append('end_date', formattedEndDate);
-      }
-
-      this.protocolService.patchProtocol(this.protocolId, formData).subscribe(
-        (response) => {
-          window.location.reload();
-        },
-        (error) => {},
-      );
+    if (protocolData.code) {
+      formData.append('code', protocolData.code);
     }
+    if (protocolData.supplier) {
+      formData.append('supplier', protocolData.supplier);
+    }
+    if (protocolData.category) {
+      formData.append('category', protocolData.category);
+    }
+    if (this.selectedFile) {
+      formData.append('file', this.selectedFile);
+    }
+    if (protocolData.initial_date) {
+      const startDate = new Date(protocolData.initial_date);
+      const formattedStartDate = startDate.toISOString();
+      formData.append('start_date', formattedStartDate);
+    }
+    if (protocolData.final_date) {
+      const endDate = new Date(protocolData.final_date);
+      const formattedEndDate = endDate.toISOString();
+      formData.append('end_date', formattedEndDate);
+    }
+
+    this.protocolService.patchProtocol(this.protocolId, formData).subscribe(
+      (response) => {
+        window.location.reload();
+      },
+      (error) => {},
+    );
   }
 }

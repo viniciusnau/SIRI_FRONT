@@ -90,7 +90,7 @@
     mat-button
     class="proceed"
     (click)="onClick()"
-    [disabled]="!hasChanges"
+    [disabled]="!hasChanges || this.formProtocols.invalid || !this.protocolId"
     cdkFocusInitial
   >
     Salvar

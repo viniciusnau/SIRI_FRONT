@@ -48,6 +48,8 @@ export class DispatchReportsModalComponent implements OnInit {
       if (value !== this.data[key]) {
         changedProperties[key] = value;
         this.hasChanges = true;
+      } else {
+        this.hasChanges = false;
       }
     });
 

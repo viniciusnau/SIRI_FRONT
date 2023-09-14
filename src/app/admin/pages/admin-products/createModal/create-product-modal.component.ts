@@ -48,16 +48,17 @@ export class CreateProductModalComponent implements OnInit {
   }
 
   onClick(): void {
-    if (this.formProduct.invalid) return;
     const createProductData = this.formProduct.getRawValue();
     createProductData.price = this.handlePriceFormat(createProductData.price);
-
     this.stocksService.createProduct(createProductData).subscribe({
       next: (result) => {
         this.dialogRef.close();
         this.data.snackBar.open('Tudo certo!', 'Produto criado com sucesso!', {
           duration: 3000,
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 3500);
       },
       error: (error) => {
         this.data.snackBar.open('Ops!', 'Houve um erro ao criar o produto!', {
@@ -65,8 +66,5 @@ export class CreateProductModalComponent implements OnInit {
         });
       },
     });
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
   }
 }

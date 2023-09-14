@@ -29,7 +29,7 @@
     mat-button
     class="proceed"
     (click)="onClick()"
-    [disabled]="!hasChanges"
+    [disabled]="!hasChanges || this.formSupplierOrder.invalid"
     cdkFocusInitial
   >
     Salvar

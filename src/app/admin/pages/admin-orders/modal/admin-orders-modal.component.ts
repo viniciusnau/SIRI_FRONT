@@ -96,24 +96,29 @@ export class AdminOrdersModalComponent implements OnInit {
     const confirmByteArray = new Uint8Array(confirmByteNumbers);
 
     this.decodedFileData = new Blob([byteArray], { type: 'application/pdf' });
-    this.decodedConfirmFileData = new Blob([confirmByteArray], { type: 'application/pdf' });
+    this.decodedConfirmFileData = new Blob([confirmByteArray], {
+      type: 'application/pdf',
+    });
 
     this.fileData = this.sanitizer.bypassSecurityTrustResourceUrl(
-      URL.createObjectURL(this.decodedFileData)
+      URL.createObjectURL(this.decodedFileData),
     );
 
     this.confirmFileData = this.sanitizer.bypassSecurityTrustResourceUrl(
-      URL.createObjectURL(this.decodedConfirmFileData)
+      URL.createObjectURL(this.decodedConfirmFileData),
     );
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
   onClick(): void {
     this.loading = true;
-    if (this.formOrder.invalid || !this.decodedFileData || !this.decodedConfirmFileData) {
+    if (
+      this.formOrder.invalid ||
+      !this.decodedFileData ||
+      !this.decodedConfirmFileData
+    ) {
       this.loading = false;
       return;
     }

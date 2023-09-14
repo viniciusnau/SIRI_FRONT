@@ -41,6 +41,8 @@ export class EditCategoryModalComponent implements OnInit {
       if (value !== this.data.category[key]) {
         changedProperties[key] = value;
         this.hasChanges = true;
+      } else {
+        this.hasChanges = false;
       }
     });
 

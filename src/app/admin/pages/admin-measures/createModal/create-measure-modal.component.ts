@@ -33,8 +33,6 @@ export class CreateMeasureModalComponent implements OnInit {
   }
 
   onClick(): void {
-    if (this.formMeasure.invalid) return;
-
     const createMeasureData = this.formMeasure.getRawValue();
 
     this.stocksService

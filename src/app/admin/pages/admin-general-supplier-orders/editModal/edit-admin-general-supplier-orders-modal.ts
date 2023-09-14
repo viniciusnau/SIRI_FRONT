@@ -58,8 +58,6 @@ export class EditAdminGeneralSuppliersOrdersModalComponent implements OnInit {
   }
 
   onClick(): void {
-    if (this.formSupplierOrder.invalid) return;
-
     const editSupplierOrderId = this.getChangedProperties();
     this.ordersService
       .editSupplierOrder(this.data.supplier_order.id, editSupplierOrderId)
