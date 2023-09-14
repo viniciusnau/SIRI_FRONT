@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Ata</h1>
+<h1 mat-dialog-title>Editar ata</h1>
 <div [formGroup]="formProtocols" mat-dialog-content class="content">
   <div class="date-fields">
     <div class="date-field">
@@ -8,7 +8,6 @@
           <input
             matInput
             [matDatepicker]="startDatePicker"
-            placeholder="Início de Vigência"
             formControlName="initial_date"
             (blur)="getChangedProperties()"
           />
@@ -27,7 +26,6 @@
           <input
             matInput
             [matDatepicker]="finalDatePicker"
-            placeholder="Fim de Vigência"
             formControlName="final_date"
             (blur)="getChangedProperties()"
           />
