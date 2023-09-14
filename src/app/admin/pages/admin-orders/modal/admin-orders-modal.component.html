@@ -66,7 +66,9 @@
     class="proceed"
     (click)="onClick()"
     cdkFocusInitial
-    [disabled]="!formOrder.valid || formOrder.total_value === 'R$ '"
+    [disabled]="
+      !formOrder.valid || this.formOrder.get('total_value')?.value === 'R$ '
+    "
   >
     Sim
   </button>

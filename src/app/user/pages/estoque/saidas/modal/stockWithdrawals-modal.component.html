@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Criar</h1>
 <div [formGroup]="formStockWithdrawals" mat-dialog-content class="content">
-  <p>Quantidade</p>
+  <p>Quantidade*</p>
   <mat-form-field appearance="fill">
     <input
       type="number"
@@ -10,7 +10,7 @@
       negativeNotAllowed
     />
   </mat-form-field>
-  <p>Descrição</p>
+  <p>Descrição*</p>
   <mat-form-field appearance="fill">
     <input type="text" matInput formControlName="description" />
   </mat-form-field>
