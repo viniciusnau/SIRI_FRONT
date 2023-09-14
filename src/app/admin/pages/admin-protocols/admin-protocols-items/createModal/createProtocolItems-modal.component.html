@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Criar</h1>
+<h1 mat-dialog-title>Criar item da ata</h1>
 <div [formGroup]="formCreateProtocolItems" mat-dialog-content class="content">
-  <p>Produto</p>
+  <p>Produto*</p>
   <mat-form-field appearance="fill">
     <mat-select formControlName="product">
       <mat-option *ngFor="let product of data.products" [value]="product.id">
@@ -9,7 +9,7 @@
     </mat-select>
   </mat-form-field>
 
-  <p>Quantidade</p>
+  <p>Quantidade*</p>
   <mat-form-field appearance="fill">
     <input
       type="number"
