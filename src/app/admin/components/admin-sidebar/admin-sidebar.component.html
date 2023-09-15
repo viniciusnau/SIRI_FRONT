@@ -2,50 +2,54 @@
   <mat-sidenav-container mode="side">
     <mat-sidenav opened mode="side" disableClose="true" fixedInViewport="true">
       <a href="/admin">
-        <img src="../../../../assets/logo_defensoria_sc_preferencial_branco.png" alt="" class="logoSide" />
+        <img
+          src="../../../../assets/logo_defensoria_sc_preferencial_branco.png"
+          alt=""
+          class="logoSide"
+        />
       </a>
       <mat-divider class="divider"></mat-divider>
       <mat-nav-list>
-        <mat-list-item routerLink="/admin/pedidos">
+        <mat-list-item routerLink="/gerenciar-pedidos">
           <span matListItemTitle>Pedidos</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/estoque">
+        <mat-list-item routerLink="/estoque-por-setor">
           <span matListItemTitle>Estoque</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/setores">
+        <mat-list-item routerLink="/setores">
           <span matListItemTitle>Setores</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/notas">
+        <mat-list-item routerLink="/notas">
           <span matListItemTitle>Controle de notas</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/guias-de-entrada">
+        <mat-list-item routerLink="/guias-de-entrada">
           <span matListItemTitle>Guias de entrada</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/guias-de-saida">
+        <mat-list-item routerLink="/guias-de-saida">
           <span matListItemTitle>Guias de saída</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/categorias">
+        <mat-list-item routerLink="/categorias">
           <span matListItemTitle>Categorias</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/medidas">
+        <mat-list-item routerLink="/medidas">
           <span matListItemTitle>Medidas</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/produtos">
+        <mat-list-item routerLink="/produtos">
           <span matListItemTitle>Produtos</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/fornecedores">
+        <mat-list-item routerLink="/fornecedores">
           <span matListItemTitle>Fornecedores</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/pedidos-fornecedor">
+        <mat-list-item routerLink="/pedidos-fornecedor">
           <span matListItemTitle>Pedidos do Fornecedor</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/atas">
+        <mat-list-item routerLink="/atas">
           <span matListItemTitle>Atas</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/pedido-de-AF">
+        <mat-list-item routerLink="/pedido-de-AF">
           <span matListItemTitle>Pedidos de AF</span>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/dispensa-de-licitacao">
+        <mat-list-item routerLink="/dispensa-de-licitacao">
           <span matListItemTitle>Dispensa de Licitação</span>
         </mat-list-item>
       </mat-nav-list>
@@ -63,13 +67,13 @@
       <div *ngIf="reportsSectionExpanded" class="reports-section">
         <mat-divider class="divider"></mat-divider>
         <mat-nav-list>
-          <mat-list-item routerLink="/admin/relatorio-do-contador">
+          <mat-list-item routerLink="/relatorio-do-contador">
             <span matListItemTitle>Relatório do Contador</span>
           </mat-list-item>
-          <mat-list-item routerLink="/admin/relatorio-de-estoque">
+          <mat-list-item routerLink="/relatorio-de-estoque">
             <span matListItemTitle>Relatório de Estoque</span>
           </mat-list-item>
-          <mat-list-item routerLink="/admin/relatorio-do-almoxarifado">
+          <mat-list-item routerLink="/relatorio-do-almoxarifado">
             <span matListItemTitle>Inventário do Almoxarifado</span>
           </mat-list-item>
         </mat-nav-list>
@@ -91,7 +95,7 @@
       <div *ngIf="userSectionExpanded" class="user-section">
         <mat-divider class="divider"></mat-divider>
         <mat-nav-list>
-          <mat-list-item routerLink="/admin/enviar-email">
+          <mat-list-item routerLink="/enviar-email">
             <span matListItemTitle>Enviar Email</span>
           </mat-list-item>
           <mat-list-item (click)="resetPassword()">
