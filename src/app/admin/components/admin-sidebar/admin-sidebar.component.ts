@@ -20,7 +20,7 @@ export class AdminSidebarComponent {
       : localStorage.getItem('userName');
   }
 
-  logout = () => this.loginService.logoutAdmin();
+  logout = () => this.loginService.logout();
 
   resetPassword() {
     this.router.navigate(['/admin/esqueci-a-senha']).then((r) => {});

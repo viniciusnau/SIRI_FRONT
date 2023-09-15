@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   resetPassword(event: Event) {
     event.preventDefault();
-    this.router.navigate(['esqueci-a-senha/']).then(r => {});
+    this.router.navigate(['esqueci-a-senha/']).then((r) => {});
   }
 
   login() {
@@ -44,13 +44,13 @@ export class LoginComponent implements OnInit {
 
     const loginData = this.formLogin.getRawValue();
 
-    this.loginService.loginUser(loginData).subscribe(
+    this.loginService.login(loginData).subscribe(
       (response) => {
         this.loading = false;
       },
       (error) => {
         this.loading = false;
-      }
+      },
     );
   }
 }

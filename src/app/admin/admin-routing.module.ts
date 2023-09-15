@@ -21,7 +21,6 @@ import { AdminCategoriesComponent } from './pages/admin-categories/admin-categor
 import { AdminMeasuresComponent } from './pages/admin-measures/admin-measures.component';
 import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
 import { AdminBiddingExemptionComponent } from './pages/admin-bidding-exemption/admin-bidding-exemption.component';
-import { UnauthAdminGuard } from '../services/guards/unauth-admin.guard';
 import { AuthAdminGuard } from '../services/guards/auth-admin.guard';
 import { AdminAccountantReportsComponent } from './pages/admin-accountant-reports/admin-accountant-reports.component';
 import { AdminStockReportsComponent } from './pages/admin-stock-reports/admin-stock-reports.component';

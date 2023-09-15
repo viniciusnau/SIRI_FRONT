@@ -20,7 +20,7 @@ export class UserSidebarComponent {
   }
 
   logout() {
-    this.loginService.logoutUser();
+    this.loginService.logout();
   }
 
   resetPassword() {

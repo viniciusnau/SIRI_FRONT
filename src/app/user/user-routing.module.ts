@@ -8,7 +8,6 @@ import { SaidasComponent } from './pages/estoque/saidas/saidas.component';
 import { PedidosComponent } from './pages/pedidos/pedidos.component';
 import { OrderItemsComponent } from './pages/pedidos/order-items/order-items.component';
 import { LoginComponent } from './pages/login/login.component';
-import { UnauthUserGuard } from '../services/guards/unauth-user.guard';
 import { AuthUserGuard } from '../services/guards/auth-user.guard';
 import { InsideResetPasswordComponent } from './pages/inside-reset-password/inside-reset-password.component';
 
