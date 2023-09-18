@@ -14,7 +14,6 @@ import { AdminReceivingReportsComponent } from './pages/admin-receiving-reports/
 import { AdminDispatchReportsComponent } from './pages/admin-dispatch-reports/admin-dispatch-reports.component';
 import { AdminMaterialsOrderComponent } from './pages/admin-materials-order/admin-materials-order.component';
 import { AdminProtocolsComponent } from './pages/admin-protocols/admin-protocols.component';
-import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { AdminResetPasswordComponent } from './pages/admin-reset-password/admin-reset-password.component';
 import { AdminSectorsComponent } from './pages/admin-sectors/admin-sectors.component';
 import { AdminCategoriesComponent } from './pages/admin-categories/admin-categories.component';
@@ -122,10 +121,6 @@ const routes: Routes = [
     component: AdminProtocolsComponent,
     canActivate: [AuthAdminGuard],
   },
-  // {
-  //   path: 'login',
-  //   component: AdminLoginComponent,
-  // },
   {
     path: 'esqueci-a-senha',
     component: AdminResetPasswordComponent,

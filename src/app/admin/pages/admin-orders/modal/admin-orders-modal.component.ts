@@ -135,21 +135,20 @@ export class AdminOrdersModalComponent implements OnInit {
       this.handlePriceFormat(total_value).toString(),
     );
 
-    // this.stocksService.postInvoice(formData).subscribe(
-    //   (response) => {
-    //     this.loading = false;
-    //     window.location.reload();
-    //   },
-    //   (error) => {
-    //     this.loading = false;
-    //     this.snackBar.open('Erro ao salvar', 'Fechar', {
-    //       duration: 3000,
-    //       panelClass: ['snackbar-error'],
-    //       horizontalPosition: this.horizontalPosition,
-    //       verticalPosition: this.verticalPosition,
-    //     });
-    //   },
-    // );
-    console.log('a: ', total_value === 'R$ ');
+    this.stocksService.postInvoice(formData).subscribe(
+      (response) => {
+        this.loading = false;
+        window.location.reload();
+      },
+      (error) => {
+        this.loading = false;
+        this.snackBar.open('Erro ao salvar', 'Fechar', {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
+      },
+    );
   }
 }

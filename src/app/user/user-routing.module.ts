@@ -22,14 +22,6 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'esqueci-a-senha',
-    component: ResetPasswordComponent,
-  },
-  {
-    path: 'mudar-senha',
-    component: InsideResetPasswordComponent,
-  },
-  {
     path: 'estoque',
     component: EstoqueComponent,
     canActivate: [AuthUserGuard],

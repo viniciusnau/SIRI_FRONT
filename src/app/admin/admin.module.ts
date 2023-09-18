@@ -71,6 +71,7 @@ import { CnpjMaskDirective } from './directives/CnpjMask.directive';
 import { ContactMaskDirective } from './directives/contactMask.directive';
 import { PriceFormatDirective } from './directives/price-format.directive';
 import { NegativeNotAllowedDirective } from './directives/negative-not-allowed.directive';
+import { CommonRoutingModule } from '../common-routing.module';
 
 @NgModule({
   declarations: [
@@ -147,6 +148,7 @@ import { NegativeNotAllowedDirective } from './directives/negative-not-allowed.d
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    CommonRoutingModule,
   ],
   exports: [PaginationComponent],
 })

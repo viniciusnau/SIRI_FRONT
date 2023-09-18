@@ -7,7 +7,10 @@ import { LoginService } from '../login.service';
 export class AuthAdminGuard implements CanActivate {
   constructor(private loginService: LoginService, private router: Router) {}
   canActivate() {
-    if (this.loginService.isLogged) {
+    const local = JSON.parse(localStorage.getItem('is_admin'));
+    const session = JSON.parse(sessionStorage.getItem('is_admin'));
+    const isAdmin = local || session;
+    if (this.loginService.isLogged() && isAdmin) {
       return true;
     }
     this.loginService.logout();
