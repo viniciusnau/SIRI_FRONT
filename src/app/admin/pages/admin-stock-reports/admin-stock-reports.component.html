@@ -4,12 +4,11 @@
       <mat-card-content>
         <div class="filter-container">
           <div class="filter-field">
-            <p class="textField">Data de Início</p>
+            <p class="textField">Data inicial</p>
             <mat-form-field appearance="fill">
               <input
                 matInput
                 [matDatepicker]="startDatePicker"
-                placeholder="Data de Início"
                 [(ngModel)]="startDate"
               />
               <mat-datepicker-toggle
@@ -20,12 +19,11 @@
             </mat-form-field>
           </div>
           <div class="filter-field">
-            <p class="textField">Data Final</p>
+            <p class="textField">Data final</p>
             <mat-form-field appearance="fill">
               <input
                 matInput
                 [matDatepicker]="finalDatePicker"
-                placeholder="Data Final"
                 [(ngModel)]="finalDate"
               />
               <mat-datepicker-toggle

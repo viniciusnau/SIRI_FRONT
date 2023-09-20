@@ -76,7 +76,7 @@ export class AdminStockReportsComponent implements OnInit {
   constructor(
     private stockService: StocksService,
     private priceFormatPipe: PriceFormatPipe,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   ngOnInit() {
@@ -156,10 +156,7 @@ export class AdminStockReportsComponent implements OnInit {
           core: report.public_defense,
           sector: report.sector,
         }))
-        .filter((report) => (
-          report.entryQuantity ||
-          report.withdrawalQuantity
-        ));
+        .filter((report) => report.entryQuantity || report.withdrawalQuantity);
       this.loading = false;
     });
   }
@@ -200,7 +197,11 @@ export class AdminStockReportsComponent implements OnInit {
               ],
             },
             content: [
-              { text: 'Relatório de Estoque', style: 'header', alignment: 'center' },
+              {
+                text: 'Relatório de Estoque',
+                style: 'header',
+                alignment: 'center',
+              },
               '\n\n',
               {
                 table: {
@@ -232,14 +233,18 @@ export class AdminStockReportsComponent implements OnInit {
                       { text: report.withdrawalQuantity, alignment: 'center' },
                       {
                         text: this.priceFormatPipe.transform(
-                          Number(parseFloat(String(report.entryPrice)).toFixed(2)),
+                          Number(
+                            parseFloat(String(report.entryPrice)).toFixed(2),
+                          ),
                         ),
                         alignment: 'center',
                       },
                       {
                         text: this.priceFormatPipe.transform(
                           Number(
-                            parseFloat(String(report.withdrawalPrice)).toFixed(2),
+                            parseFloat(String(report.withdrawalPrice)).toFixed(
+                              2,
+                            ),
                           ),
                         ),
                         alignment: 'center',
