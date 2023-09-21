@@ -25,6 +25,10 @@ import { DigitLimitDirective } from '../user/directives/digit-limit.directive';
 import { DecimalNotAllowedDirective } from '../user/directives/decimal-not-allowed.directive';
 import { NegativeNotAllowedDirective } from '../user/directives/negative-not-allowed.directive';
 import { CommonRoutingModule } from '../common-routing.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,10 @@ import { CommonRoutingModule } from '../common-routing.module';
     ReactiveFormsModule,
     AdminModule,
     CommonRoutingModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
 })

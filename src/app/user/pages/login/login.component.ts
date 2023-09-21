@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
   loading = false;
+  inputType = 'password';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,6 +29,10 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
       remember: [''],
     });
+  }
+
+  togglePasswordVisibility() {
+    this.inputType = this.inputType === 'password' ? 'text' : 'password';
   }
 
   resetPassword(event: Event) {

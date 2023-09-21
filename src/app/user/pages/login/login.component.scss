@@ -54,9 +54,8 @@ h2 {
   justify-content: center;
   margin: 0;
 }
-
-.textField > input {
-  width: 20%;
+.textField > input,
+.textField > div > input {
   height: 20%;
   border: none;
   border-radius: 3px;
@@ -66,11 +65,30 @@ h2 {
   font-size: 1em;
   box-sizing: border-box;
 }
-
+.textField > div > input::placeholder,
 .textField > input::placeholder {
   color: #78797994;
   font-weight: bold;
   padding-left: 5px;
+}
+
+.input-container {
+  position: relative;
+  display: inline-block;
+}
+
+.password-toggle-button {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.mat-input-element {
+  width: calc(100% - 30px);
 }
 
 .btnLogin {
