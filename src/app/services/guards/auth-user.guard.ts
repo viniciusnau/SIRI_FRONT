@@ -17,9 +17,7 @@ export class AuthUserGuard implements CanActivate {
     }
 
     this.loginService.logout();
-    this.router.navigate([
-      this.loginService.getUrl ? '/login' : '/admin/login',
-    ]);
+    this.router.navigate(['/login']);
     return false;
   }
 }

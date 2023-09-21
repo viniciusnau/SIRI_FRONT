@@ -7,7 +7,6 @@ import { SuppliersModalComponent } from './modal/suppliers-modal.component';
 import { CreateSuppliersModalComponent } from './createModal/createSuppliers-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
 
-
 @Component({
   selector: 'app-admin-suppliers',
   templateUrl: './admin-suppliers.component.html',
@@ -78,12 +77,12 @@ export class AdminSuppliersComponent implements OnInit {
         this.getContent();
       })
       .catch((error: any) => {
-        this.loadingSupplierId = null
+        this.loadingSupplierId = null;
       });
   }
 
   navToSupplierOrders(supplier_id: number) {
-    this.router.navigate([`admin/fornecedor/pedidos/${supplier_id}`]);
+    this.router.navigate([`fornecedor/pedidos/${supplier_id}`]);
   }
 
   openModal(suppliers): void {

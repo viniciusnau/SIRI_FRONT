@@ -3,6 +3,8 @@ import { StocksService } from 'src/app/services/stocks.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Supplier {
   id: number;
@@ -27,6 +29,7 @@ export class StockWithdrawalsModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
     public ordersService: OrdersService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -53,9 +56,30 @@ export class StockWithdrawalsModalComponent implements OnInit {
       .createStockWithdrawal(createStockWithdrawalData)
       .subscribe(
         (response) => {
-          // window.location.reload();
+          this.snackBar.open(
+            snackbarConsts.user.stock.output.create.success,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
         },
-        (error) => {},
+        (error) => {
+          this.snackBar.open(
+            snackbarConsts.user.stock.output.create.error,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+        },
       );
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   }
 }

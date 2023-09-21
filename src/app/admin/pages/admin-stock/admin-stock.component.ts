@@ -48,7 +48,7 @@ export class AdminStockComponent implements OnInit {
   }
 
   navigateToStockItems(stock_id: number) {
-    this.router.navigate([`/admin/estoque/itens/${stock_id}`]);
+    this.router.navigate([`/estoque-por-setor/itens/${stock_id}`]);
   }
 
   displayedColumns = ['id', 'sector'];

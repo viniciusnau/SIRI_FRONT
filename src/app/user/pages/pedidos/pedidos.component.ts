@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderModalComponent } from './modal/order-modal.component';
+import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
   selector: 'user-pedidos',
@@ -44,20 +45,39 @@ export class PedidosComponent implements OnInit, AfterViewInit {
   }
 
   getContent(disableLoading = false) {
-    this.userService.getUser(this.currentPage.toString()).subscribe((data) => {
-      this.response = data[this.currentPage == 1 ? 'orders' : 'results'];
-      this.response.next_orders =
-        data[this.currentPage == 1 ? 'next_orders' : 'next'];
-      this.loadingOrderId = null;
-      this.loading = false;
-      if (disableLoading) {
-        this.snackBar.open('Pedido excluído!', 'Fechar', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
-      }
-    });
+    this.userService.getUser(this.currentPage.toString()).subscribe(
+      (data) => {
+        this.response = data[this.currentPage == 1 ? 'orders' : 'results'];
+        this.response.next_orders =
+          data[this.currentPage == 1 ? 'next_orders' : 'next'];
+        this.loadingOrderId = null;
+        this.loading = false;
+        if (disableLoading) {
+          this.snackBar.open(
+            snackbarConsts.user.orders.exclude.success,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+        }
+      },
+      (error) => {
+        if (disableLoading) {
+          this.snackBar.open(
+            snackbarConsts.user.orders.exclude.error,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+        }
+      },
+    );
   }
 
   deleteOrder(order_id: string) {
@@ -67,19 +87,32 @@ export class PedidosComponent implements OnInit, AfterViewInit {
       .toPromise()
       .then((data: any) => {
         this.getContent(true);
+        this.snackBar.open(
+          snackbarConsts.user.orders.exclude.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
       })
       .catch((error: any) => {
         this.loadingOrderId = null;
-        this.snackBar.open('Erro ao excluir pedido', 'Fechar', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
+        this.snackBar.open(
+          snackbarConsts.user.orders.exclude.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
       });
   }
 
   openModal(orderId): void {
-    const data = {order_id: orderId}
+    const data = { order_id: orderId };
     const dialogRef = this.dialog.open(OrderModalComponent, {
       data: data,
     });
@@ -90,12 +123,13 @@ export class PedidosComponent implements OnInit, AfterViewInit {
       const originalDate = new Date(date);
 
       const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const year = originalDate.getUTCFullYear().toString();
 
       return `${day}/${month}/${year}`;
-    }
-    else {
+    } else {
       return '';
     }
   }

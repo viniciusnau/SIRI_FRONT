@@ -72,7 +72,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
       .getSupplierOrderItems(this.supplierOrderId, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
-        this.loading = null
+        this.loading = null;
       });
   }
 
@@ -86,7 +86,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
   }
 
   removeItems() {
-    if (this.response.results === 0 || this.protocolItems.length === 0) {
+    if (this.response?.results === 0 || this.protocolItems.length === 0) {
       return;
     }
     this.protocolItems = this.protocolItems.filter((item) => {
@@ -105,7 +105,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
         this.getContent();
       })
       .catch((error: any) => {
-        this.loading = null
+        this.loading = null;
       });
   }
 }

@@ -11,7 +11,6 @@ import {
   ProtocolsModalData,
 } from './modal/protocols-modal.component';
 
-
 @Component({
   selector: 'app-admin-protocols',
   templateUrl: './admin-protocols.component.html',
@@ -129,7 +128,7 @@ export class AdminProtocolsComponent implements OnInit {
   }
 
   navToProtocolItems(protocolId: number) {
-    this.router.navigate([`/admin/atas/itens/${protocolId}`]);
+    this.router.navigate([`/atas/itens/${protocolId}`]);
   }
 
   displayedColumns = [

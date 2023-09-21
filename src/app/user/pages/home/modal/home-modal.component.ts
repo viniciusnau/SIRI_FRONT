@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { OrdersService } from '../../../../services/orders.service';
 import { Product } from '../../../../interfaces/stock/interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
   selector: 'admin-orders-modal',
@@ -23,7 +24,7 @@ export class HomeModalComponent implements OnInit {
     private snackBar: MatSnackBar,
   ) {
     this.chosenProducts = this.sortAlphabetically(data.chosenProducts);
-    this.client = data.client
+    this.client = data.client;
   }
 
   ngOnInit(): void {
@@ -55,28 +56,40 @@ export class HomeModalComponent implements OnInit {
 
         this.ordersService.createOrderItems(orderItems).subscribe(
           (orderItemsResponse) => {
-            this.snackBar.open('Pedido feito!', 'Fechar', {
-              duration: 3000,
-              horizontalPosition: 'end',
-              verticalPosition: 'top',
-            });
+            this.snackBar.open(
+              snackbarConsts.user.createOrder.success,
+              snackbarConsts.close,
+              {
+                duration: 3000,
+                horizontalPosition: 'end',
+                verticalPosition: 'top',
+              },
+            );
           },
           (error) => {
-            this.snackBar.open('Erro ao criar itens do pedido.', 'Fechar', {
-              duration: 3000,
-              horizontalPosition: 'end',
-              verticalPosition: 'top',
-            });
-          }
+            this.snackBar.open(
+              snackbarConsts.user.createOrder.error,
+              snackbarConsts.close,
+              {
+                duration: 3000,
+                horizontalPosition: 'end',
+                verticalPosition: 'top',
+              },
+            );
+          },
         );
       },
       (error) => {
-        this.snackBar.open('Erro ao criar pedido.', 'Fechar', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
-      }
+        this.snackBar.open(
+          snackbarConsts.user.createOrder.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+      },
     );
   }
 
@@ -90,7 +103,7 @@ export class HomeModalComponent implements OnInit {
 
   onClick(): void {
     this.dialogRef.close();
-    this.createOrder(this.chosenProducts)
+    this.createOrder(this.chosenProducts);
     setTimeout(() => {
       window.location.reload();
     }, 2000);

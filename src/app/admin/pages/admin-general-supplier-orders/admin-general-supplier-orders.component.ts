@@ -90,7 +90,7 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
 
   navToSupplierOrderItems(order_id: number, protocol: string) {
     this.router.navigate([
-      `admin/pedidos-fornecedor/itens/${order_id}`,
+      `pedidos-fornecedor/itens/${order_id}`,
       { protocol },
     ]);
   }
@@ -141,7 +141,7 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
         this.getSupplierOrders();
       })
       .catch((error: any) => {
-        this.loadingOrderId = null
+        this.loadingOrderId = null;
       });
   }
 

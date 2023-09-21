@@ -25,7 +25,7 @@ export class AdminSidebarComponent {
   }
 
   resetPassword() {
-    this.router.navigate(['/admin/esqueci-a-senha']).then((r) => {});
+    this.router.navigate(['/esqueci-a-senha']).then((r) => {});
   }
 
   toggleUserSection() {

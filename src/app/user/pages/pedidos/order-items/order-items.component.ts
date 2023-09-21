@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
 import { EditOrderItemModalComponent } from './editModal/edit-order-item-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
   selector: 'app-order-items',
@@ -51,14 +52,28 @@ export class OrderItemsComponent implements OnInit {
       .toPromise()
       .then((data: any) => {
         this.getContent(this.orderId);
+        this.snackBar.open(
+          snackbarConsts.user.orders.itens.exclude.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            panelClass: 'error-snackbar',
+          },
+        );
       })
       .catch((error: any) => {
-        this.snackBar.open('Erro ao excluir item do pedido', 'Fechar', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: 'error-snackbar',
-        });
+        this.snackBar.open(
+          snackbarConsts.user.orders.itens.exclude.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            panelClass: 'error-snackbar',
+          },
+        );
       });
   }
 

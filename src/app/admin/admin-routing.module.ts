@@ -47,7 +47,7 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard],
   },
   {
-    path: 'pedidos/itens/:id',
+    path: 'gerenciar-pedidos/itens/:id',
     component: AdminOrderItemsComponent,
     canActivate: [AuthAdminGuard],
     pathMatch: 'full',
@@ -58,7 +58,7 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard],
   },
   {
-    path: 'estoque/itens/:id',
+    path: 'estoque-por-setor/itens/:id',
     component: AdminStockItemsComponent,
     canActivate: [AuthAdminGuard],
     pathMatch: 'full',

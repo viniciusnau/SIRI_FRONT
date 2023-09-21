@@ -2,6 +2,7 @@ import { OrdersService } from '../../../../../services/orders.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
   selector: 'edit-order-item-modal',
@@ -62,8 +63,8 @@ export class EditOrderItemModalComponent implements OnInit {
         next: (result) => {
           this.dialogRef.close();
           this.data.snackBar.open(
-            'Tudo certo!',
-            'Item do pedido editado com sucesso!',
+            snackbarConsts.user.orders.itens.edit.success,
+            snackbarConsts.close,
             {
               duration: 3000,
               horizontalPosition: 'end',
@@ -73,8 +74,8 @@ export class EditOrderItemModalComponent implements OnInit {
         },
         error: (error) => {
           this.data.snackBar.open(
-            'Ops!',
-            'Houve um erro ao editar o item do pedido!',
+            snackbarConsts.user.orders.itens.edit.error,
+            snackbarConsts.close,
             {
               duration: 3000,
               horizontalPosition: 'end',

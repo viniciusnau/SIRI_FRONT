@@ -68,6 +68,6 @@ export class CreateSuppliersModalComponent implements OnInit {
     this.stocksService.createSupplier(data).subscribe((response) => {
       this.dialogRef.close();
     });
-    window.location.reload();
+    // window.location.reload();
   }
 }

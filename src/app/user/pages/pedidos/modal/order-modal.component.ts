@@ -8,6 +8,8 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { OrdersService } from '../../../../services/orders.service';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'invoice-modal',
@@ -21,13 +23,15 @@ export class OrderModalComponent implements OnInit {
   loading: boolean = false;
 
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
-  @ViewChild('confirmFileInput', { static: false }) confirmFileInput: ElementRef;
+  @ViewChild('confirmFileInput', { static: false })
+  confirmFileInput: ElementRef;
 
   constructor(
     public dialogRef: MatDialogRef<OrderModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     public ordersService: OrdersService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +40,7 @@ export class OrderModalComponent implements OnInit {
   }
 
   onNoClick(): void {
-    window.location.reload()
+    window.location.reload();
   }
 
   onFileChange() {
@@ -51,18 +55,52 @@ export class OrderModalComponent implements OnInit {
   onClick(): void {
     this.loading = true;
     const orderId = this.data.order_id;
-    this.ordersService.getAllOrderItems(orderId).subscribe(orderItems => {
+
+    this.ordersService.getAllOrderItems(orderId).subscribe((orderItems) => {
       for (const orderItem of orderItems) {
         const itemId = orderItem.id;
         const updateData = { added_quantity: orderItem.quantity };
-        this.ordersService.updateOrderItem(itemId, updateData).subscribe(result => {
-          const formData = new FormData();
-          formData.append('file', this.selectedFile, `confirm_order_${orderId}.pdf`);
-          formData.append('confirm_file', this.selectedConfirmFile, `confirm_file_order_${orderId}.pdf`);
-          this.ordersService.updateOrder(orderId, formData).subscribe(updateOrderResult => {
-            window.location.reload();
-          })
-        });
+
+        this.ordersService.updateOrderItem(itemId, updateData).subscribe(
+          (result) => {
+            const formData = new FormData();
+            formData.append(
+              'file',
+              this.selectedFile,
+              `confirm_order_${orderId}.pdf`,
+            );
+            formData.append(
+              'confirm_file',
+              this.selectedConfirmFile,
+              `confirm_file_order_${orderId}.pdf`,
+            );
+            this.ordersService
+              .updateOrder(orderId, formData)
+              .subscribe((updateOrderResult) => {
+                window.location.reload();
+              });
+            this.snackBar.open(
+              snackbarConsts.user.orders.confirmDelivery.success,
+              snackbarConsts.close,
+              {
+                duration: 3000,
+                horizontalPosition: 'end',
+                verticalPosition: 'top',
+              },
+            );
+          },
+          (error) => {
+            this.snackBar.open(
+              snackbarConsts.user.orders.confirmDelivery.error,
+              snackbarConsts.close,
+              {
+                duration: 3000,
+                horizontalPosition: 'end',
+                verticalPosition: 'top',
+              },
+            );
+          },
+        );
       }
     });
   }

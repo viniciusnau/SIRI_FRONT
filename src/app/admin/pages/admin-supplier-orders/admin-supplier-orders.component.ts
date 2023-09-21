@@ -44,9 +44,7 @@ export class AdminSupplierOrdersComponent implements OnInit {
   }
 
   navToSupplierOrderItems(supplier_order_id: number) {
-    this.router.navigate([
-      `admin/fornecedor/pedidos/itens/${supplier_order_id}`,
-    ]);
+    this.router.navigate([`fornecedor/pedidos/itens/${supplier_order_id}`]);
   }
 
   formatDate(date: string) {
@@ -54,12 +52,13 @@ export class AdminSupplierOrdersComponent implements OnInit {
       const originalDate = new Date(date);
 
       const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const year = originalDate.getUTCFullYear().toString();
 
       return `${day}/${month}/${year}`;
-    }
-    else {
+    } else {
       return '';
     }
   }
