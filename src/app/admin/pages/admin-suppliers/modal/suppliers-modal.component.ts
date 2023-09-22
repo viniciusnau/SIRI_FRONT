@@ -39,6 +39,10 @@ export class SuppliersModalComponent implements OnInit {
       nic: this.notEmpty(this.data.suppliers.nic),
       category: this.notEmpty(this.data.suppliers.category.id),
     });
+
+    this.formSuppliers.valueChanges.subscribe(() => {
+      this.getChangedProperties();
+    });
   }
 
   notEmpty(content: any) {
@@ -52,11 +56,10 @@ export class SuppliersModalComponent implements OnInit {
     Object.entries(formValue).forEach(([key, value]) => {
       if (value !== this.data.suppliers[key] && key !== 'category') {
         changedProperties[key] = value;
-        this.hasChanges = true;
-      } else {
-        this.hasChanges = false;
       }
     });
+
+    this.hasChanges = Object.keys(changedProperties).length > 0;
 
     return changedProperties;
   }
