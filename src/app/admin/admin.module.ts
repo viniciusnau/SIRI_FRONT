@@ -29,7 +29,7 @@ import { AdminBiddingExemptionComponent } from './pages/admin-bidding-exemption/
 import { MaterialsOrderModalComponent } from './pages/admin-materials-order/modal/materials-order-modal.component';
 import { InvoiceModalComponent } from './pages/admin-invoices/modal/invoice-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminAccountantReportsComponent } from './pages/admin-accountant-reports/admin-accountant-reports.component';
+import { AccountantReports } from './pages/accountant-reports/accountant-reports.component';
 import { AdminStockReportsComponent } from './pages/admin-stock-reports/admin-stock-reports.component';
 import { AdminWarehouseReportsComponent } from './pages/admin-warehouse-reports/admin-warehouse-reports.component';
 import { AdminSendEmailComponent } from './pages/admin-send-email/admin-send-email.component';
@@ -39,7 +39,7 @@ import { DispatchReportsModalComponent } from './pages/admin-dispatch-reports/mo
 import { CreateSuppliersModalComponent } from './pages/admin-suppliers/createModal/createSuppliers-modal.component';
 import { CreateProtocolsModalComponent } from './pages/admin-protocols/createModal/createProtocols-modal.component';
 import { BiddingExemptionModalComponent } from './pages/admin-bidding-exemption/modal/bidding-exemption-modal.component';
-import { AccountantReportsModalComponent } from './pages/admin-accountant-reports/modal/accountant-reports-modal.component';
+import { AccountantReportsModalComponent } from './pages/accountant-reports/modal/accountant-reports-modal.component';
 import { DialogComponent } from './components/modal/dialog.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EditMeasureModalComponent } from './pages/admin-measures/editModal/edit-measure-modal.component';
@@ -96,7 +96,7 @@ import { CommonRoutingModule } from '../common-routing.module';
     AdminBiddingExemptionComponent,
     MaterialsOrderModalComponent,
     InvoiceModalComponent,
-    AdminAccountantReportsComponent,
+    AccountantReports,
     AdminStockReportsComponent,
     AdminWarehouseReportsComponent,
     AdminSendEmailComponent,

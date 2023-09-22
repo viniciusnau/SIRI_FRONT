@@ -21,7 +21,7 @@ import { AdminMeasuresComponent } from './pages/admin-measures/admin-measures.co
 import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
 import { AdminBiddingExemptionComponent } from './pages/admin-bidding-exemption/admin-bidding-exemption.component';
 import { AuthAdminGuard } from '../services/guards/auth-admin.guard';
-import { AdminAccountantReportsComponent } from './pages/admin-accountant-reports/admin-accountant-reports.component';
+import { AccountantReports } from './pages/accountant-reports/accountant-reports.component';
 import { AdminStockReportsComponent } from './pages/admin-stock-reports/admin-stock-reports.component';
 import { AdminWarehouseReportsComponent } from './pages/admin-warehouse-reports/admin-warehouse-reports.component';
 import { AdminSendEmailComponent } from './pages/admin-send-email/admin-send-email.component';
@@ -153,7 +153,7 @@ const routes: Routes = [
   },
   {
     path: 'relatorio-do-contador',
-    component: AdminAccountantReportsComponent,
+    component: AccountantReports,
   },
   { path: 'relatorio-de-estoque', component: AdminStockReportsComponent },
   {

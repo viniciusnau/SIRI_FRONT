@@ -16,11 +16,11 @@ interface AccountantReport {
 }
 
 @Component({
-  selector: 'app-admin-accountant-reports',
-  templateUrl: './admin-accountant-reports.component.html',
-  styleUrls: ['./admin-accountant-reports.component.scss'],
+  selector: 'app-accountant-reports',
+  templateUrl: './accountant-reports.component.html',
+  styleUrls: ['./accountant-reports.component.scss'],
 })
-export class AdminAccountantReportsComponent implements OnInit {
+export class AccountantReports implements OnInit {
   adminAccountantReports: AccountantReport[] = [];
   loading: boolean = false;
   loadingAccountantReport: number | null = null;
