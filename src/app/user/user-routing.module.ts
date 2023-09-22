@@ -47,6 +47,11 @@ const routes: Routes = [
     canActivate: [AuthUserGuard],
     pathMatch: 'full',
   },
+  {
+    path: 'mudar-senha-user',
+    component: InsideResetPasswordComponent,
+    canActivate: [AuthUserGuard],
+  },
 ];
 
 @NgModule({

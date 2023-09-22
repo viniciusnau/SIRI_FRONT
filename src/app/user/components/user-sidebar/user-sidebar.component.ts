@@ -24,7 +24,7 @@ export class UserSidebarComponent {
   }
 
   resetPassword() {
-    this.router.navigate(['mudar-senha/']).then((r) => {});
+    this.router.navigate(['mudar-senha-user/']).then((r) => {});
   }
 
   toggleUserSection() {

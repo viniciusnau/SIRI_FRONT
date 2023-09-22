@@ -122,7 +122,7 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard],
   },
   {
-    path: 'esqueci-a-senha',
+    path: 'mudar-senha-admin',
     component: AdminResetPasswordComponent,
     canActivate: [AuthAdminGuard],
   },

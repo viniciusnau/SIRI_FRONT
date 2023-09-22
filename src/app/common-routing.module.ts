@@ -8,7 +8,6 @@ const routes: Routes = [
   {
     path: 'esqueci-a-senha',
     component: ResetPasswordComponent,
-    canActivate: [AuthCommonGuard],
   },
   {
     path: 'mudar-senha',
