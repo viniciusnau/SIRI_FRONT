@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
 import { CreateAdminGeneralSupplierOrdersItemsModalComponent } from './createModal/create-admin-general-supplier-orders-items-modal-component';
 import { MatDialog } from '@angular/material/dialog';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-supplier-order-items',
@@ -31,6 +33,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
     private stocksService: StocksService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -96,16 +99,36 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
     });
   }
 
-  deleteOrderItem(order_item_id) {
+  deleteItem(order_item_id) {
     this.loading = Number(order_item_id);
     this.ordersService
       .deleteGeneralOrderItem(order_item_id)
       .toPromise()
       .then((data: any) => {
-        this.getContent();
+        this.snackBar.open(
+          snackbarConsts.admin.suppliersOrders.itens.exclude.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       })
       .catch((error: any) => {
         this.loading = null;
+        this.snackBar.open(
+          snackbarConsts.admin.suppliersOrders.itens.exclude.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
       });
   }
 }

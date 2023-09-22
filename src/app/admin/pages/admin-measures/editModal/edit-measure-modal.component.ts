@@ -2,6 +2,8 @@ import { StocksService } from 'src/app/services/stocks.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'edit-measure-modal',
@@ -17,6 +19,7 @@ export class EditMeasureModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -60,9 +63,33 @@ export class EditMeasureModalComponent implements OnInit {
 
     this.stocksService
       .editMeasure(this.data.measure.id, editMeasureData)
-      .subscribe((response) => {
-        this.dialogRef.close();
-      });
-    window.location.reload();
+      .subscribe(
+        (response) => {
+          this.dialogRef.close();
+          this.snackBar.open(
+            snackbarConsts.admin.category.edit.success,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+        (error) => {
+          this.snackBar.open(
+            snackbarConsts.admin.category.edit.error,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+        },
+      );
   }
 }

@@ -7,6 +7,7 @@ import {
   InvoiceModalData,
 } from './modal/invoice-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
   selector: 'app-admin-invoices',
@@ -48,20 +49,13 @@ export class AdminInvoicesComponent implements OnInit {
     this.getContent();
   }
 
-  getContent(disableLoading = false) {
+  getContent() {
     this.stocksService
       .getInvoices(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
         this.loadingInvoiceId = null;
         this.loading = false;
-        if (disableLoading) {
-          this.snackBar.open('Nota excluída!', 'Fechar', {
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-          });
-        }
       });
   }
 
@@ -83,12 +77,36 @@ export class AdminInvoicesComponent implements OnInit {
     });
   }
 
-  deleteInvoice(invoice_id) {
+  deleteItem(invoice_id) {
     this.loadingInvoiceId = Number(invoice_id);
     this.stocksService
       .deleteInvoice(invoice_id)
       .toPromise()
-      .then((data: any) => this.getContent(true));
+      .then((data: any) => {
+        this.snackBar.open(
+          snackbarConsts.admin.invoice.exclude.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      })
+      .catch((error) => {
+        this.snackBar.open(
+          snackbarConsts.admin.invoice.exclude.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+      });
   }
 
   downloadInvoice(file) {

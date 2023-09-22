@@ -117,9 +117,14 @@
                 class="btn"
                 mat-mini-fab
                 aria-label="Delete measure"
-                (click)="deleteSupplier(adminSuppliers.id)"
+                (click)="deleteItem(adminSuppliers.id)"
               >
-                <mat-icon [class.custom-spinner]="loadingSupplierId === adminSuppliers.id">delete</mat-icon>
+                <mat-icon
+                  [class.custom-spinner]="
+                    loadingSupplierId === adminSuppliers.id
+                  "
+                  >delete</mat-icon
+                >
               </button>
             </div>
           </td>

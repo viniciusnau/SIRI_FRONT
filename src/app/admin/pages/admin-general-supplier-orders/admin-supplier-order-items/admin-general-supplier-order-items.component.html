@@ -59,7 +59,7 @@
                 class="btn"
                 mat-mini-fab
                 aria-label="Delete order item"
-                (click)="deleteOrderItem(orderItem.id)"
+                (click)="deleteItem(orderItem.id)"
               >
                 <mat-icon [class.custom-spinner]="loading === orderItem.id"
                   >delete</mat-icon

@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { SuppliersModalComponent } from './modal/suppliers-modal.component';
 import { CreateSuppliersModalComponent } from './createModal/createSuppliers-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-suppliers',
@@ -21,6 +23,7 @@ export class AdminSuppliersComponent implements OnInit {
     private stocksService: StocksService,
     private router: Router,
     public dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {}
 
   currentPage = 1;
@@ -68,16 +71,37 @@ export class AdminSuppliersComponent implements OnInit {
     });
   }
 
-  deleteSupplier(supplier_id: string) {
+  deleteItem(supplier_id: string) {
     this.loadingSupplierId = Number(supplier_id);
     this.stocksService
       .deleteSupplier(supplier_id)
       .toPromise()
       .then((data: any) => {
         this.getContent();
+        this.snackBar.open(
+          snackbarConsts.admin.suppliers.exclude.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       })
       .catch((error: any) => {
         this.loadingSupplierId = null;
+        this.snackBar.open(
+          snackbarConsts.admin.suppliers.exclude.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
       });
   }
 

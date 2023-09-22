@@ -3,6 +3,8 @@ import { StocksService } from 'src/app/services/stocks.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'edit-admin-general-supplier-orders-modal',
@@ -19,6 +21,7 @@ export class EditAdminGeneralSuppliersOrdersModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
     public ordersService: OrdersService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -61,9 +64,34 @@ export class EditAdminGeneralSuppliersOrdersModalComponent implements OnInit {
     const editSupplierOrderId = this.getChangedProperties();
     this.ordersService
       .editSupplierOrder(this.data.supplier_order.id, editSupplierOrderId)
-      .subscribe((response) => {
-        this.dialogRef.close();
-      });
+      .subscribe(
+        (response) => {
+          this.dialogRef.close();
+          this.snackBar.open(
+            snackbarConsts.admin.suppliersOrders.edit.success,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+        (error) => {
+          this.snackBar.open(
+            snackbarConsts.admin.suppliersOrders.edit.error,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+        },
+      );
     window.location.reload();
   }
 }

@@ -10,6 +10,8 @@ import {
   ProtocolsModalComponent,
   ProtocolsModalData,
 } from './modal/protocols-modal.component';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-protocols',
@@ -33,6 +35,7 @@ export class AdminProtocolsComponent implements OnInit {
     private supplierService: SuppliersService,
     public dialog: MatDialog,
     private router: Router,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -114,16 +117,36 @@ export class AdminProtocolsComponent implements OnInit {
     window.open(file, '_blank');
   }
 
-  deleteProtocol(protocol_id: string) {
+  deleteItem(protocol_id: string) {
     this.loadingProtocolId = Number(protocol_id);
     this.protocolService
       .deleteProtocol(protocol_id)
       .toPromise()
       .then((data: any) => {
-        this.getContent();
+        this.snackBar.open(
+          snackbarConsts.admin.protocols.exclude.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       })
       .catch((error: any) => {
         this.loadingProtocolId = null;
+        this.snackBar.open(
+          snackbarConsts.admin.protocols.exclude.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
       });
   }
 

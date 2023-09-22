@@ -64,9 +64,14 @@
             <button
               mat-mini-fab
               class="btn"
-              (click)="deleteBiddingExemption(biddingExemption)"
+              (click)="deleteItem(biddingExemption)"
             >
-              <mat-icon [class.custom-spinner]="loadingBiddingExemptionId === biddingExemption.id">delete</mat-icon>
+              <mat-icon
+                [class.custom-spinner]="
+                  loadingBiddingExemptionId === biddingExemption.id
+                "
+                >delete</mat-icon
+              >
             </button>
           </td>
         </ng-container>

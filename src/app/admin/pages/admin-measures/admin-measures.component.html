@@ -50,9 +50,11 @@
                 class="btn"
                 mat-mini-fab
                 aria-label="Delete measure"
-                (click)="deleteMeasure(measures.id)"
+                (click)="deleteItem(measures.id)"
               >
-                <mat-icon [class.custom-spinner]="loading === measures.id">delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loading === measures.id"
+                  >delete</mat-icon
+                >
               </button>
             </div>
           </td>

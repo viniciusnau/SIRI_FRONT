@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Supplier {
   id: number;
@@ -40,6 +42,7 @@ export class InvoiceModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: InvoiceModalData,
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -85,9 +88,30 @@ export class InvoiceModalComponent implements OnInit {
 
     this.stocksService.postInvoice(formData).subscribe(
       (response) => {
-        window.location.reload();
+        this.snackBar.open(
+          snackbarConsts.admin.invoice.create.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       },
-      (error) => {},
+      (error) => {
+        this.snackBar.open(
+          snackbarConsts.admin.invoice.create.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+      },
     );
   }
 }

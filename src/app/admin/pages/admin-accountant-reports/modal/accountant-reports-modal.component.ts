@@ -7,6 +7,8 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { PriceFormatPipe } from '../../../pipes/price-format.pipe';
 import { HttpClient } from '@angular/common/http';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -48,6 +50,7 @@ export class AccountantReportsModalComponent implements OnInit {
     public stocksService: StocksService,
     private priceFormatPipe: PriceFormatPipe,
     private http: HttpClient,
+    private snackBar: MatSnackBar,
   ) {
     this.months = [
       'Janeiro',
@@ -85,10 +88,35 @@ export class AccountantReportsModalComponent implements OnInit {
 
     this.stocksService
       .getAccountantReportsWithQueryString(inputValue)
-      .subscribe((result) => {
-        this.report = result.categories;
-        this.generatePDF();
-      });
+      .subscribe(
+        (result) => {
+          this.report = result.categories;
+          this.generatePDF();
+          this.snackBar.open(
+            snackbarConsts.admin.accountantReports.create.success,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+        (error) => {
+          this.snackBar.open(
+            snackbarConsts.admin.accountantReports.create.error,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+        },
+      );
 
     this.dialogRef.close();
   }

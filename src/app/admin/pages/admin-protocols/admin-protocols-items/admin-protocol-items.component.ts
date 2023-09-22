@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateProtocolItemsModalComponent } from './createModal/createProtocolItems-modal.component';
 import { StocksService } from '../../../../services/stocks.service';
 import { ActivatedRoute } from '@angular/router';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-protocol-items',
@@ -24,6 +26,7 @@ export class AdminProtocolItemsComponent implements OnInit {
     private stockService: StocksService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -47,8 +50,12 @@ export class AdminProtocolItemsComponent implements OnInit {
 
   removeItems() {
     if (this.response?.results?.length) {
-      const responseProductIds = this.response.results.map(result => result.product.id);
-      this.modalData.products = this.modalData.products.filter(product => !responseProductIds.includes(product.id));
+      const responseProductIds = this.response.results.map(
+        (result) => result.product.id,
+      );
+      this.modalData.products = this.modalData.products.filter(
+        (product) => !responseProductIds.includes(product.id),
+      );
     }
   }
 
@@ -101,12 +108,38 @@ export class AdminProtocolItemsComponent implements OnInit {
     return '';
   }
 
-  deleteProtocolItem(protocol_item_id: string) {
+  deleteItem(protocol_item_id: string) {
     this.loading = Number(protocol_item_id);
     this.stockService
       .deleteProtocolItem(protocol_item_id)
       .toPromise()
-      .then((data: any) => this.getContent(true));
+      .then(
+        (data: any) => {
+          this.snackBar.open(
+            snackbarConsts.admin.protocols.itens.exclude.success,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+        (error) => {
+          this.snackBar.open(
+            snackbarConsts.admin.protocols.itens.exclude.error,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+        },
+      );
   }
 
   displayedColumns = [

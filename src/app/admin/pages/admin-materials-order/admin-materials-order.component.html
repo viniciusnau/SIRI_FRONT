@@ -68,9 +68,14 @@
                 class="btn"
                 mat-mini-fab
                 aria-label="Delete order"
-                (click)="deleteMaterialOrder(materialsOrder.id)"
+                (click)="deleteItem(materialsOrder.id)"
               >
-                <mat-icon [class.custom-spinner]="loadingMaterialOrder === materialsOrder.id">delete</mat-icon>
+                <mat-icon
+                  [class.custom-spinner]="
+                    loadingMaterialOrder === materialsOrder.id
+                  "
+                  >delete</mat-icon
+                >
               </button>
             </div>
           </td>

@@ -5,7 +5,7 @@ import { CreateProductModalComponent } from './createModal/create-product-modal.
 import { EditProductModalComponent } from './editModal/edit-product-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
-
+import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
   selector: 'app-admin-products',
@@ -95,14 +95,14 @@ export class AdminProductsComponent implements OnInit {
     return text[0].toUpperCase() + text.substring(1);
   }
 
-  deleteProduct(product_id: string) {
+  deleteItem(product_id: string) {
     this.loadingProductId = Number(product_id);
     this.stocksService.deleteProduct(product_id).subscribe({
       next: (result) => {
         this.getContent();
         this.snackBar.open(
-          'Tudo certo!',
-          'O produto foi excluído com sucesso!',
+          snackbarConsts.admin.products.exclude.success,
+          snackbarConsts.close,
           {
             duration: 3000,
             horizontalPosition: 'end',
@@ -112,11 +112,15 @@ export class AdminProductsComponent implements OnInit {
       },
       error: (error) => {
         this.loadingProductId = null;
-        this.snackBar.open('Ops!', 'Houve um erro ao excluir o produto!', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
+        this.snackBar.open(
+          snackbarConsts.admin.products.exclude.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
       },
     });
   }

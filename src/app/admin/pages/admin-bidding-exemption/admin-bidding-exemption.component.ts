@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BiddingExemptionModalComponent } from './modal/bidding-exemption-modal.component';
 import { StocksService } from 'src/app/services/stocks.service';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Stock {
   id: number;
@@ -30,7 +32,11 @@ export class AdminBiddingExemptionComponent {
   stocks: Stock[] = [];
   invoices = [];
 
-  constructor(private stocksService: StocksService, public dialog: MatDialog) {}
+  constructor(
+    private stocksService: StocksService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -92,16 +98,36 @@ export class AdminBiddingExemptionComponent {
     });
   }
 
-  deleteBiddingExemption(row: BiddingExemption) {
+  deleteItem(row: BiddingExemption) {
     this.loadingBiddingExemptionId = row.id;
     this.stocksService
       .deleteBiddingExemption(row.id)
       .toPromise()
       .then((data: any) => {
-        this.getContent();
+        this.snackBar.open(
+          snackbarConsts.admin.biddingExemption.exclude.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       })
       .catch((error: any) => {
         this.loadingBiddingExemptionId = null;
+        this.snackBar.open(
+          snackbarConsts.admin.biddingExemption.exclude.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
       });
   }
 

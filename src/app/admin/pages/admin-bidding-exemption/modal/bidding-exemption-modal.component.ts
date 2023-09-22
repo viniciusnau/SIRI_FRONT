@@ -2,6 +2,8 @@ import { StocksService } from 'src/app/services/stocks.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'bidding-exemption-modal',
@@ -16,6 +18,7 @@ export class BiddingExemptionModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -49,10 +52,32 @@ export class BiddingExemptionModalComponent implements OnInit {
       createBiddingExemptionData.quantity.toString().slice(0, 6),
     );
 
-    this.stocksService
-      .createBiddingExemption(modifiedItem)
-      .subscribe((response) => {
-        window.location.reload();
-      });
+    this.stocksService.createBiddingExemption(modifiedItem).subscribe(
+      (response) => {
+        this.snackBar.open(
+          snackbarConsts.admin.biddingExemption.create.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      },
+      (error) => {
+        this.snackBar.open(
+          snackbarConsts.admin.biddingExemption.create.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+      },
+    );
   }
 }

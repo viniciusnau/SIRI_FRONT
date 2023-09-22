@@ -2,6 +2,8 @@ import { StocksService } from 'src/app/services/stocks.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'create-product-modal',
@@ -16,6 +18,7 @@ export class CreateProductModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -53,17 +56,29 @@ export class CreateProductModalComponent implements OnInit {
     this.stocksService.createProduct(createProductData).subscribe({
       next: (result) => {
         this.dialogRef.close();
-        this.data.snackBar.open('Tudo certo!', 'Produto criado com sucesso!', {
-          duration: 3000,
-        });
+        this.snackBar.open(
+          snackbarConsts.admin.products.create.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
         setTimeout(() => {
           window.location.reload();
         }, 3500);
       },
       error: (error) => {
-        this.data.snackBar.open('Ops!', 'Houve um erro ao criar o produto!', {
-          duration: 3000,
-        });
+        this.snackBar.open(
+          snackbarConsts.admin.products.create.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
       },
     });
   }

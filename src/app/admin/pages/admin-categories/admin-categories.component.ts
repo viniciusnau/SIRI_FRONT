@@ -4,7 +4,8 @@ import { EditCategoryModalComponent } from './editModal/edit-category-modal.comp
 import { CreateCategoryModalComponent } from './createModal/create-category-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-categories',
@@ -16,7 +17,11 @@ export class AdminCategoriesComponent implements OnInit {
   currentPage = 1;
   response: any;
 
-  constructor(private stocksService: StocksService, public dialog: MatDialog) {}
+  constructor(
+    private stocksService: StocksService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
+  ) {}
 
   ngOnInit(): void {
     this.getContent();
@@ -51,16 +56,34 @@ export class AdminCategoriesComponent implements OnInit {
     return text[0].toUpperCase() + text.substring(1);
   }
 
-  deleteCategory(category_id: string) {
+  deleteItem(category_id: string) {
     this.loading = Number(category_id);
     this.stocksService
       .deleteCategory(category_id)
       .toPromise()
       .then((data: any) => {
         this.getContent();
+        this.snackBar.open(
+          snackbarConsts.admin.category.exclude.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
       })
       .catch(() => {
         this.loading = null;
+        this.snackBar.open(
+          snackbarConsts.admin.category.exclude.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
       });
   }
 

@@ -2,6 +2,8 @@ import { OrdersService } from './../../../../services/orders.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
   selector: 'create-admin-general-supplier-orders-modal-component',
@@ -16,6 +18,7 @@ export class CreateAdminGeneralSupplierOrdersModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     public ordersService: OrdersService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -45,11 +48,33 @@ export class CreateAdminGeneralSupplierOrdersModalComponent implements OnInit {
     createSupplierOrderData.received = false;
     createSupplierOrderData.client = this.data.client;
 
-    this.ordersService
-      .createSupplierOrder(createSupplierOrderData)
-      .subscribe((response) => {
+    this.ordersService.createSupplierOrder(createSupplierOrderData).subscribe(
+      (response) => {
         this.dialogRef.close();
-      });
-    window.location.reload();
+        this.snackBar.open(
+          snackbarConsts.admin.suppliersOrders.create.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      },
+      (error) => {
+        this.snackBar.open(
+          snackbarConsts.admin.suppliersOrders.create.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+      },
+    );
   }
 }

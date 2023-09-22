@@ -8,6 +8,7 @@ import {
   MaterialsOrderModalData,
 } from './modal/materials-order-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
   selector: 'app-admin-materials-order',
@@ -78,12 +79,35 @@ export class AdminMaterialsOrderComponent implements OnInit {
     });
   }
 
-  deleteMaterialOrder(order_id: string) {
+  deleteItem(order_id: string) {
     this.loadingMaterialOrder = Number(order_id);
     this.ordersService
       .deleteMaterialOrder(order_id)
       .toPromise()
-      .then((data: any) => this.getContent(true));
+      .then(
+        (data: any) => {
+          this.snackBar.open(
+            snackbarConsts.admin.materialsOrder.exclude.success,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+        },
+        (error) => {
+          this.snackBar.open(
+            snackbarConsts.admin.materialsOrder.exclude.error,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+        },
+      );
   }
 
   openModal(): void {

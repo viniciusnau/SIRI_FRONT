@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateAdminGeneralSupplierOrdersModalComponent } from './createModal/create-admin-general-supplier-orders-modal-component';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 import { UserService } from 'src/app/services/user.service';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface SupplierOrders {
   id: number;
@@ -43,6 +45,7 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {}
   ngOnInit(): void {
     this.loading = true;
@@ -132,16 +135,37 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
     );
   }
 
-  deleteSupplierOrder(order_id) {
+  deleteItem(order_id) {
     this.loadingOrderId = Number(order_id);
     this.ordersService
       .deleteGeneralSupplierOrder(order_id)
       .toPromise()
       .then((data: any) => {
         this.getSupplierOrders();
+        this.snackBar.open(
+          snackbarConsts.admin.suppliersOrders.exclude.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       })
       .catch((error: any) => {
         this.loadingOrderId = null;
+        this.snackBar.open(
+          snackbarConsts.admin.suppliersOrders.exclude.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
       });
   }
 

@@ -58,9 +58,11 @@
                 class="btn"
                 mat-mini-fab
                 aria-label="Delete category"
-                (click)="deleteCategory(categories.id)"
+                (click)="deleteItem(categories.id)"
               >
-                <mat-icon [class.custom-spinner]="loading === categories.id">delete</mat-icon>
+                <mat-icon [class.custom-spinner]="loading === categories.id"
+                  >delete</mat-icon
+                >
               </button>
             </div>
           </td>

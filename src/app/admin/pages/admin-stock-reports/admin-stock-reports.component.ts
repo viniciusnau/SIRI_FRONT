@@ -5,6 +5,8 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as moment from 'moment/moment';
 import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 import { HttpClient } from '@angular/common/http';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -77,6 +79,7 @@ export class AdminStockReportsComponent implements OnInit {
     private stockService: StocksService,
     private priceFormatPipe: PriceFormatPipe,
     private http: HttpClient,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -144,21 +147,36 @@ export class AdminStockReportsComponent implements OnInit {
 
     const queryString = queryParams.join('&');
 
-    this.stockService.getStockReports(queryString).subscribe((reports) => {
-      this.stockReports = reports
-        .map((report) => ({
-          productCode: report.product_code,
-          productName: report.product_name,
-          entryQuantity: report.entry_quantity,
-          withdrawalQuantity: report.withdrawal_quantity,
-          entryPrice: report.entry_price,
-          withdrawalPrice: report.withdrawal_price,
-          core: report.public_defense,
-          sector: report.sector,
-        }))
-        .filter((report) => report.entryQuantity || report.withdrawalQuantity);
-      this.loading = false;
-    });
+    this.stockService.getStockReports(queryString).subscribe(
+      (reports) => {
+        this.stockReports = reports
+          .map((report) => ({
+            productCode: report.product_code,
+            productName: report.product_name,
+            entryQuantity: report.entry_quantity,
+            withdrawalQuantity: report.withdrawal_quantity,
+            entryPrice: report.entry_price,
+            withdrawalPrice: report.withdrawal_price,
+            core: report.public_defense,
+            sector: report.sector,
+          }))
+          .filter(
+            (report) => report.entryQuantity || report.withdrawalQuantity,
+          );
+        this.loading = false;
+      },
+      (error) => {
+        this.snackBar.open(
+          snackbarConsts.admin.stockReports.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+      },
+    );
   }
 
   formatDate(dateString: string): string {

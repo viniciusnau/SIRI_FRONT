@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
   selector: 'create-admin-general-supplier-orders-items-modal-component',
@@ -59,17 +60,29 @@ export class CreateAdminGeneralSupplierOrdersItemsModalComponent
       .createSupplierOrderItem(createSupplierOrderItemData)
       .subscribe(
         (response) => {
-          window.location.reload();
-        },
-        (error) => {
-          this.snackBar.open('Erro ao criar item!', 'Fechar', {
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-          });
+          this.snackBar.open(
+            snackbarConsts.admin.suppliersOrders.itens.create.success,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
           setTimeout(() => {
             window.location.reload();
-          }, 2000);
+          }, 3000);
+        },
+        (error) => {
+          this.snackBar.open(
+            snackbarConsts.admin.suppliersOrders.itens.create.error,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
         },
       );
   }

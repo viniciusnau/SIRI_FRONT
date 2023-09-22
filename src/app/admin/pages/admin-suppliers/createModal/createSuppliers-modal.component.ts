@@ -2,6 +2,8 @@ import { StocksService } from 'src/app/services/stocks.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import snackbarConsts from 'src/snackbarConsts';
 
 interface Supplier {
   id: number;
@@ -27,6 +29,7 @@ export class CreateSuppliersModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -65,9 +68,33 @@ export class CreateSuppliersModalComponent implements OnInit {
     var data = this.formCreateSuppliers.getRawValue();
 
     data.category = this.selectedCategories;
-    this.stocksService.createSupplier(data).subscribe((response) => {
-      this.dialogRef.close();
-    });
-    // window.location.reload();
+    this.stocksService.createSupplier(data).subscribe(
+      (response) => {
+        this.dialogRef.close();
+        this.snackBar.open(
+          snackbarConsts.admin.suppliers.create.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      },
+      (error) => {
+        this.snackBar.open(
+          snackbarConsts.admin.suppliers.create.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+      },
+    );
   }
 }

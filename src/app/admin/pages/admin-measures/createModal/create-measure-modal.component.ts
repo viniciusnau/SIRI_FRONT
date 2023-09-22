@@ -2,6 +2,8 @@ import { StocksService } from 'src/app/services/stocks.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'create-measure-modal',
@@ -16,6 +18,7 @@ export class CreateMeasureModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -35,11 +38,33 @@ export class CreateMeasureModalComponent implements OnInit {
   onClick(): void {
     const createMeasureData = this.formMeasure.getRawValue();
 
-    this.stocksService
-      .createMeasure(createMeasureData)
-      .subscribe((response) => {
+    this.stocksService.createMeasure(createMeasureData).subscribe(
+      (response) => {
         this.dialogRef.close();
-      });
-    window.location.reload();
+        this.snackBar.open(
+          snackbarConsts.admin.category.create.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      },
+      (error) => {
+        this.snackBar.open(
+          snackbarConsts.admin.category.create.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+      },
+    );
   }
 }

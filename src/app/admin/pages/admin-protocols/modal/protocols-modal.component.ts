@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProtocolService } from '../../../../services/protocol.service';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Supplier {
   id: number;
@@ -35,6 +37,7 @@ export class ProtocolsModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: ProtocolsModalData,
     private formBuilder: FormBuilder,
     public protocolService: ProtocolService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -110,9 +113,30 @@ export class ProtocolsModalComponent implements OnInit {
 
     this.protocolService.patchProtocol(this.protocolId, formData).subscribe(
       (response) => {
-        window.location.reload();
+        this.snackBar.open(
+          snackbarConsts.admin.protocols.edit.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       },
-      (error) => {},
+      (error) => {
+        this.snackBar.open(
+          snackbarConsts.admin.protocols.edit.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+      },
     );
   }
 }

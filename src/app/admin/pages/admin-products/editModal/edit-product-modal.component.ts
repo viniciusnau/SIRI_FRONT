@@ -2,6 +2,8 @@ import { StocksService } from 'src/app/services/stocks.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'edit-product-modal',
@@ -17,6 +19,7 @@ export class EditProductModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -81,20 +84,27 @@ export class EditProductModalComponent implements OnInit {
       .subscribe({
         next: (result) => {
           this.dialogRef.close();
-          this.data.snackBar.open(
-            'Tudo certo!',
-            'O produto foi editado com sucesso!',
+          this.snackBar.open(
+            snackbarConsts.admin.products.edit.success,
+            snackbarConsts.close,
             {
               duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
             },
           );
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
         },
         error: (error) => {
-          this.data.snackBar.open(
-            'Ops!',
-            'Houve um erro ao editar o produto!',
+          this.snackBar.open(
+            snackbarConsts.admin.products.edit.error,
+            snackbarConsts.close,
             {
               duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
             },
           );
         },

@@ -2,6 +2,8 @@ import { StocksService } from 'src/app/services/stocks.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'receiving-reports-modal',
@@ -22,6 +24,7 @@ export class ReceivingReportsModalComponent implements OnInit {
       id: string;
     },
     public stocksService: StocksService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -68,9 +71,30 @@ export class ReceivingReportsModalComponent implements OnInit {
       .patchReceivingReport(this.data.id, changedProperties)
       .subscribe(
         (response) => {
-          window.location.reload();
+          this.snackBar.open(
+            snackbarConsts.admin.receivingReports.edit.success,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
         },
-        (error) => {},
+        (error) => {
+          this.snackBar.open(
+            snackbarConsts.admin.receivingReports.edit.error,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+        },
       );
   }
 }

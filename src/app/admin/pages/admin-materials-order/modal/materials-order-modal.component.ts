@@ -6,6 +6,8 @@ import * as moment from 'moment';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { HttpClient } from '@angular/common/http';
+import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Supplier {
   id: number;
@@ -55,6 +57,7 @@ export class MaterialsOrderModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public ordersService: OrdersService,
     private http: HttpClient,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -84,10 +87,35 @@ export class MaterialsOrderModalComponent implements OnInit {
         formattedInitialDate,
         formattedFinalDate,
       )
-      .subscribe((response) => {
-        this.materialsOrder = response;
-        this.generatePDF();
-      });
+      .subscribe(
+        (response) => {
+          this.materialsOrder = response;
+          this.generatePDF();
+          this.snackBar.open(
+            snackbarConsts.admin.materialsOrder.create.success,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+        (error) => {
+          this.snackBar.open(
+            snackbarConsts.admin.materialsOrder.create.error,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+        },
+      );
   }
 
   generatePDF() {

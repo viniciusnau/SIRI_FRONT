@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
   selector: 'suppliers-modal',
@@ -102,8 +103,30 @@ export class SuppliersModalComponent implements OnInit {
 
     this.stocksService
       .editSupplier(this.data.suppliers.id, editSuppliersData)
-      .subscribe((response) => {
-        window.location.reload();
-      });
+      .subscribe(
+        (response) => {
+          this.snackBar.open(
+            snackbarConsts.admin.suppliers.edit.success,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+          window.location.reload();
+        },
+        (error) => {
+          this.snackBar.open(
+            snackbarConsts.admin.suppliers.edit.error,
+            snackbarConsts.close,
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            },
+          );
+        },
+      );
   }
 }

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AccountantReportsModalComponent } from './modal/accountant-reports-modal.component';
 import { StocksService } from 'src/app/services/stocks.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import snackbarConsts from 'src/snackbarConsts';
 
 interface AccountantReport {
   id: number;
@@ -77,17 +78,37 @@ export class AdminAccountantReportsComponent implements OnInit {
     window.open(file, '_blank');
   }
 
-  deleteAccountantReports(id: number): void {
+  deleteItem(id: number): void {
     this.loadingAccountantReport = id;
-    this.stocksService.deleteAccountantReport(id).subscribe(() => {
-      this.adminAccountantReports = this.adminAccountantReports.filter(
-        (report) => report.id !== id,
-      );
-      this.snackBar.open('Relatório excluído!', 'Fechar', {
-        duration: 3000,
-        horizontalPosition: 'end',
-        verticalPosition: 'top',
-      });
-    });
+    this.stocksService.deleteAccountantReport(id).subscribe(
+      () => {
+        this.adminAccountantReports = this.adminAccountantReports.filter(
+          (report) => report.id !== id,
+        );
+        this.snackBar.open(
+          snackbarConsts.admin.accountantReports.exclude.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      },
+      (error) => {
+        this.snackBar.open(
+          snackbarConsts.admin.accountantReports.exclude.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+      },
+    );
   }
 }
