@@ -35,6 +35,10 @@ export class EditProductModalComponent implements OnInit {
       price: this.notEmpty(this.data.product.price),
       is_available: this.notEmpty(this.data.product.is_available),
     });
+
+    this.formProduct.valueChanges.subscribe(() => {
+      this.getChangedProperties();
+    });
   }
 
   handlePriceFormat(field: any) {
@@ -52,11 +56,10 @@ export class EditProductModalComponent implements OnInit {
     Object.entries(formValue).forEach(([key, value]) => {
       if (value !== this.data.product[key]) {
         changedProperties[key] = value;
-        this.hasChanges = true;
-      } else {
-        this.hasChanges = false;
       }
     });
+
+    this.hasChanges = Object.keys(changedProperties).length > 0;
 
     return changedProperties;
   }
