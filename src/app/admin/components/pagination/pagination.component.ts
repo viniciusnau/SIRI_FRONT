@@ -15,7 +15,8 @@ export class PaginationComponent {
   }
 
   hasNext(): boolean {
-    return !!this.response?.next;
+    const totalPage = this.response?.count / 15;
+    return !!this.response?.next && this.currentPage < totalPage;
   }
 
   goToPreviousPage(): void {

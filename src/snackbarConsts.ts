@@ -231,6 +231,10 @@ const snackbarConsts = {
       error: 'Erro ao alterar senha.',
     },
   },
+  changePassword: {
+    success: 'Acesse o email para continuar com a troca da senha!',
+    error: 'Erro ao efetuar login.',
+  },
   login: {
     error: 'Erro ao efetuar login.',
   },
