@@ -10,6 +10,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
   selector: 'admin-orders-modal',
@@ -138,16 +139,31 @@ export class AdminOrdersModalComponent implements OnInit {
     this.stocksService.postInvoice(formData).subscribe(
       (response) => {
         this.loading = false;
-        window.location.reload();
+        this.snackBar.open(
+          snackbarConsts.admin.manageOrders.invoiceControl.create.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          },
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       },
       (error) => {
         this.loading = false;
-        this.snackBar.open('Erro ao salvar', 'Fechar', {
-          duration: 3000,
-          panelClass: ['snackbar-error'],
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-        });
+        this.snackBar.open(
+          snackbarConsts.admin.manageOrders.invoiceControl.create.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            panelClass: ['snackbar-error'],
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+          },
+        );
       },
     );
   }

@@ -11,6 +11,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteOrderItemModalComponent } from './modal/deleteOrderItem-modal.component.component';
 import { BehaviorSubject } from 'rxjs';
+import snackbarConsts from 'src/snackbarConsts';
 
 interface AdminOrderItems {
   id: number;
@@ -148,20 +149,28 @@ export class AdminOrderItemsComponent implements OnInit {
 
     this.ordersService.updateOrderItem(orderItem.id, payload).subscribe(
       (response) => {
-        this.snackBar.open('Salvo com sucesso!', 'Fechar', {
-          duration: 3000,
-          panelClass: ['snackbar-success'],
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-        });
+        this.snackBar.open(
+          snackbarConsts.admin.manageOrders.itens.edit.success,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            panelClass: ['snackbar-success'],
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+          },
+        );
       },
       (error) => {
-        this.snackBar.open('Erro ao salvar', 'Fechar', {
-          duration: 3000,
-          panelClass: ['snackbar-error'],
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-        });
+        this.snackBar.open(
+          snackbarConsts.admin.manageOrders.itens.edit.error,
+          snackbarConsts.close,
+          {
+            duration: 3000,
+            panelClass: ['snackbar-error'],
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+          },
+        );
       },
     );
   }
@@ -170,7 +179,7 @@ export class AdminOrderItemsComponent implements OnInit {
     orderItem.supplier = { id: supplierId, name: '' };
   }
 
-  deleteOrderItemModal(orderItemId: string): void {
+  deleteItem(orderItemId: string): void {
     const dialogRef = this.dialog.open(DeleteOrderItemModalComponent, {
       data: orderItemId,
     });
