@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit {
     this.productsService.getProducts(getProductDto, pageChange).subscribe(
       (data) => {
         this.response = data;
-        this.products = this.sortAlphabetically(data.results);
+        this.products = this.sortAlphabetically(data.results.filter(product => product.is_available));
         const chosenProductIds = this.chosenProducts.map(
           (chosenProduct) => chosenProduct.id,
         );
