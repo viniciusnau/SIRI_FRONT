@@ -71,13 +71,12 @@ export class AdminSuppliersComponent implements OnInit {
     });
   }
 
-  deleteItem(supplier_id: string) {
-    this.loadingSupplierId = Number(supplier_id);
+  deleteItem(id: string) {
+    this.loadingSupplierId = Number(id);
     this.stocksService
-      .deleteSupplier(supplier_id)
+      .deleteSupplier(id)
       .toPromise()
       .then((data: any) => {
-        this.getContent();
         this.snackBar.open(
           snackbarConsts.admin.suppliers.exclude.success,
           snackbarConsts.close,
@@ -87,9 +86,7 @@ export class AdminSuppliersComponent implements OnInit {
             verticalPosition: 'top',
           },
         );
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        this.getContent();
       })
       .catch((error: any) => {
         this.loadingSupplierId = null;

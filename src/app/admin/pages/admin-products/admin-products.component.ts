@@ -95,11 +95,10 @@ export class AdminProductsComponent implements OnInit {
     return text[0].toUpperCase() + text.substring(1);
   }
 
-  deleteItem(product_id: string) {
-    this.loadingProductId = Number(product_id);
-    this.stocksService.deleteProduct(product_id).subscribe({
+  deleteItem(id: string) {
+    this.loadingProductId = Number(id);
+    this.stocksService.deleteProduct(id).subscribe({
       next: (result) => {
-        this.getContent();
         this.snackBar.open(
           snackbarConsts.admin.products.exclude.success,
           snackbarConsts.close,
@@ -109,6 +108,7 @@ export class AdminProductsComponent implements OnInit {
             verticalPosition: 'top',
           },
         );
+        this.getContent();
       },
       error: (error) => {
         this.loadingProductId = null;

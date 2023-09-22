@@ -79,10 +79,10 @@ export class AdminMaterialsOrderComponent implements OnInit {
     });
   }
 
-  deleteItem(order_id: string) {
-    this.loadingMaterialOrder = Number(order_id);
+  deleteItem(id: string) {
+    this.loadingMaterialOrder = Number(id);
     this.ordersService
-      .deleteMaterialOrder(order_id)
+      .deleteMaterialOrder(id)
       .toPromise()
       .then(
         (data: any) => {
@@ -95,6 +95,7 @@ export class AdminMaterialsOrderComponent implements OnInit {
               verticalPosition: 'top',
             },
           );
+          this.getContent();
         },
         (error) => {
           this.snackBar.open(

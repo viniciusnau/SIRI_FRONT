@@ -117,10 +117,10 @@ export class AdminProtocolsComponent implements OnInit {
     window.open(file, '_blank');
   }
 
-  deleteItem(protocol_id: string) {
-    this.loadingProtocolId = Number(protocol_id);
+  deleteItem(id: string) {
+    this.loadingProtocolId = Number(id);
     this.protocolService
-      .deleteProtocol(protocol_id)
+      .deleteProtocol(id)
       .toPromise()
       .then((data: any) => {
         this.snackBar.open(
@@ -132,9 +132,7 @@ export class AdminProtocolsComponent implements OnInit {
             verticalPosition: 'top',
           },
         );
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        this.getContent();
       })
       .catch((error: any) => {
         this.loadingProtocolId = null;

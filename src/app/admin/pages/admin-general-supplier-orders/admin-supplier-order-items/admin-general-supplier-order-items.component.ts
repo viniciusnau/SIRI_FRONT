@@ -99,10 +99,10 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
     });
   }
 
-  deleteItem(order_item_id) {
-    this.loading = Number(order_item_id);
+  deleteItem(id: string) {
+    this.loading = Number(id);
     this.ordersService
-      .deleteGeneralOrderItem(order_item_id)
+      .deleteGeneralOrderItem(id)
       .toPromise()
       .then((data: any) => {
         this.snackBar.open(
@@ -114,9 +114,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
             verticalPosition: 'top',
           },
         );
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        this.getContent();
       })
       .catch((error: any) => {
         this.loading = null;

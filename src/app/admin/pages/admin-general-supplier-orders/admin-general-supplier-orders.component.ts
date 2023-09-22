@@ -52,7 +52,7 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.supplierId = params['id'];
     });
-    this.getSupplierOrders();
+    this.getContent();
     this.getSuppliers();
     this.getProtocols();
     this.getPublicDefenses();
@@ -65,7 +65,7 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
     });
   }
 
-  getSupplierOrders() {
+  getContent() {
     this.ordersService.getSupplierOrders().subscribe((data) => {
       this.supplierOrders = data.results;
       this.loadingOrderId = null;
@@ -135,13 +135,13 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
     );
   }
 
-  deleteItem(order_id) {
-    this.loadingOrderId = Number(order_id);
+  deleteItem(id: string) {
+    this.loadingOrderId = Number(id);
     this.ordersService
-      .deleteGeneralSupplierOrder(order_id)
+      .deleteGeneralSupplierOrder(id)
       .toPromise()
       .then((data: any) => {
-        this.getSupplierOrders();
+        this.getContent();
         this.snackBar.open(
           snackbarConsts.admin.suppliersOrders.exclude.success,
           snackbarConsts.close,
@@ -151,9 +151,7 @@ export class AdminGeneralSupplierOrdersComponent implements OnInit {
             verticalPosition: 'top',
           },
         );
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        this.getContent();
       })
       .catch((error: any) => {
         this.loadingOrderId = null;

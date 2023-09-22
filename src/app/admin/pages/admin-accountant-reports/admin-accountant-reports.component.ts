@@ -43,10 +43,10 @@ export class AdminAccountantReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.getAccountantReports();
+    this.getContent();
   }
 
-  getAccountantReports(): void {
+  getContent(): void {
     this.stocksService.getAccountantReports().subscribe((data) => {
       this.adminAccountantReports = data;
       this.loadingAccountantReport = null;
@@ -94,9 +94,7 @@ export class AdminAccountantReportsComponent implements OnInit {
             verticalPosition: 'top',
           },
         );
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        this.getContent();
       },
       (error) => {
         this.snackBar.open(

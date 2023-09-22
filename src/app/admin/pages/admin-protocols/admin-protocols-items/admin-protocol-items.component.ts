@@ -108,10 +108,10 @@ export class AdminProtocolItemsComponent implements OnInit {
     return '';
   }
 
-  deleteItem(protocol_item_id: string) {
-    this.loading = Number(protocol_item_id);
+  deleteItem(id: string) {
+    this.loading = Number(id);
     this.stockService
-      .deleteProtocolItem(protocol_item_id)
+      .deleteProtocolItem(id)
       .toPromise()
       .then(
         (data: any) => {
@@ -124,9 +124,7 @@ export class AdminProtocolItemsComponent implements OnInit {
               verticalPosition: 'top',
             },
           );
-          setTimeout(() => {
-            window.location.reload();
-          }, 3000);
+          this.getContent();
         },
         (error) => {
           this.snackBar.open(

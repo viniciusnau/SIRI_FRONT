@@ -56,10 +56,10 @@ export class AdminCategoriesComponent implements OnInit {
     return text[0].toUpperCase() + text.substring(1);
   }
 
-  deleteItem(category_id: string) {
-    this.loading = Number(category_id);
+  deleteItem(id: string) {
+    this.loading = Number(id);
     this.stocksService
-      .deleteCategory(category_id)
+      .deleteCategory(id)
       .toPromise()
       .then((data: any) => {
         this.getContent();
@@ -72,6 +72,7 @@ export class AdminCategoriesComponent implements OnInit {
             verticalPosition: 'top',
           },
         );
+        this.getContent();
       })
       .catch(() => {
         this.loading = null;

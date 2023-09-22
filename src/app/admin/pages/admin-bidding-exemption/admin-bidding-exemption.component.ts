@@ -98,10 +98,9 @@ export class AdminBiddingExemptionComponent {
     });
   }
 
-  deleteItem(row: BiddingExemption) {
-    this.loadingBiddingExemptionId = row.id;
+  deleteItem(id: number) {
     this.stocksService
-      .deleteBiddingExemption(row.id)
+      .deleteBiddingExemption(id)
       .toPromise()
       .then((data: any) => {
         this.snackBar.open(
@@ -113,9 +112,7 @@ export class AdminBiddingExemptionComponent {
             verticalPosition: 'top',
           },
         );
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        this.getContent();
       })
       .catch((error: any) => {
         this.loadingBiddingExemptionId = null;

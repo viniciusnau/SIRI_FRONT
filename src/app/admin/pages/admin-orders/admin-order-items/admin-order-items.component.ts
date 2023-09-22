@@ -179,9 +179,9 @@ export class AdminOrderItemsComponent implements OnInit {
     orderItem.supplier = { id: supplierId, name: '' };
   }
 
-  deleteItem(orderItemId: string): void {
+  deleteItem(id: string): void {
     const dialogRef = this.dialog.open(DeleteOrderItemModalComponent, {
-      data: orderItemId,
+      data: id,
     });
   }
 

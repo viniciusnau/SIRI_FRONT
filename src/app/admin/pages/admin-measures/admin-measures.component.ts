@@ -56,10 +56,10 @@ export class AdminMeasuresComponent implements OnInit {
       });
   }
 
-  deleteItem(measure_id: string) {
-    this.loading = Number(measure_id);
+  deleteItem(id: string) {
+    this.loading = Number(id);
     this.stocksService
-      .deleteMeasure(measure_id)
+      .deleteMeasure(id)
       .toPromise()
       .then((data: any) => {
         this.getContent();
@@ -72,9 +72,7 @@ export class AdminMeasuresComponent implements OnInit {
             verticalPosition: 'top',
           },
         );
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        this.getContent();
       })
       .catch((error: any) => {
         this.loading = null;

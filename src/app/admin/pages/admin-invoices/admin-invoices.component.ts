@@ -77,10 +77,10 @@ export class AdminInvoicesComponent implements OnInit {
     });
   }
 
-  deleteItem(invoice_id) {
-    this.loadingInvoiceId = Number(invoice_id);
+  deleteItem(id: string) {
+    this.loadingInvoiceId = Number(id);
     this.stocksService
-      .deleteInvoice(invoice_id)
+      .deleteInvoice(id)
       .toPromise()
       .then((data: any) => {
         this.snackBar.open(
@@ -92,9 +92,7 @@ export class AdminInvoicesComponent implements OnInit {
             verticalPosition: 'top',
           },
         );
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        this.getContent();
       })
       .catch((error) => {
         this.snackBar.open(
