@@ -3,31 +3,30 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { OrdersComponent } from './pages/orders/orders.component';
 import { OrderItemsComponent } from './pages/orders/order-items/order-items.component';
-import { AdminStockComponent } from './pages/admin-stock/admin-stock.component';
-import { AdminStockItemsComponent } from './pages/admin-stock/admin-stock-items/admin-stock-items.component';
-import { AdminRequestComponent } from './pages/admin-request/admin-request.component';
+import { StockComponent } from './pages/stock/stock.component';
+import { StockItemsComponent } from './pages/stock/stock-items/stock-items.component';
 import { InvoicesComponent } from './pages/invoices/invoices.component';
-import { AdminSupplierOrdersComponent } from './pages/admin-supplier-orders/admin-supplier-orders.component';
-import { AdminSupplierOrderItemsComponent } from './pages/admin-supplier-orders/admin-supplier-order-items/admin-supplier-order-items.component';
-import { AdminSuppliersComponent } from './pages/admin-suppliers/admin-suppliers.component';
-import { AdminReceivingReportsComponent } from './pages/admin-receiving-reports/admin-receiving-reports.component';
+import { SupplierOrdersComponent } from './pages/supplier-orders/supplier-orders.component';
+import { SupplierOrderItemsComponent } from './pages/supplier-orders/supplier-order-items/supplier-order-items.component';
+import { SuppliersComponent } from './pages/suppliers/suppliers.component';
+import { ReceivingReportsComponent } from './pages/receiving-reports/receiving-reports.component';
 import { DispatchReports } from './pages/dispatch-reports/dispatch-reports.component';
 import { MaterialsOrderComponent } from './pages/materials-order/materials-order.component';
-import { AdminProtocolsComponent } from './pages/admin-protocols/admin-protocols.component';
-import { AdminResetPasswordComponent } from './pages/admin-reset-password/admin-reset-password.component';
-import { AdminSectorsComponent } from './pages/admin-sectors/admin-sectors.component';
+import { ProtocolsComponent } from './pages/protocols/protocols.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { SectorsComponent } from './pages/sectors/sectors.component';
 import { Categories } from './pages/categories/categories.component';
 import { MeasuresComponent } from './pages/measures/measures.component';
-import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
+import { ProductsComponent } from './pages/products/products.component';
 import { BiddingExemption } from './pages/bidding-exemption/bidding-exemption.component';
 import { AuthAdminGuard } from '../services/guards/auth-admin.guard';
 import { AccountantReports } from './pages/accountant-reports/accountant-reports.component';
-import { AdminStockReportsComponent } from './pages/admin-stock-reports/admin-stock-reports.component';
-import { AdminWarehouseReportsComponent } from './pages/admin-warehouse-reports/admin-warehouse-reports.component';
-import { AdminSendEmailComponent } from './pages/admin-send-email/admin-send-email.component';
+import { StockReportsComponent } from './pages/stock-reports/stock-reports.component';
+import { WarehouseReportsComponent } from './pages/warehouse-reports/warehouse-reports.component';
+import { SendEmailComponent } from './pages/send-email/send-email.component';
 import { GeneralSupplierOrders } from './pages/general-supplier-orders/general-supplier-orders.component';
-import { AdminGeneralSupplierOrderItemsComponent } from './pages/general-supplier-orders/admin-supplier-order-items/admin-general-supplier-order-items.component';
-import { AdminProtocolItemsComponent } from './pages/admin-protocols/admin-protocols-items/admin-protocol-items.component';
+import { AdminGeneralSupplierOrderItemsComponent } from './pages/general-supplier-orders/supplier-order-items/general-supplier-order-items.component';
+import { ProtocolItemsComponent } from './pages/protocols/protocols-items/protocol-items.component';
 
 const routes: Routes = [
   {
@@ -37,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: 'atas/itens/:id',
-    component: AdminProtocolItemsComponent,
+    component: ProtocolItemsComponent,
     canActivate: [AuthAdminGuard],
     pathMatch: 'full',
   },
@@ -54,19 +53,14 @@ const routes: Routes = [
   },
   {
     path: 'estoque-por-setor',
-    component: AdminStockComponent,
+    component: StockComponent,
     canActivate: [AuthAdminGuard],
   },
   {
     path: 'estoque-por-setor/itens/:id',
-    component: AdminStockItemsComponent,
+    component: StockItemsComponent,
     canActivate: [AuthAdminGuard],
     pathMatch: 'full',
-  },
-  {
-    path: 'pedir',
-    component: AdminRequestComponent,
-    canActivate: [AuthAdminGuard],
   },
   {
     path: 'notas',
@@ -75,24 +69,24 @@ const routes: Routes = [
   },
   {
     path: 'fornecedor/pedidos/:id',
-    component: AdminSupplierOrdersComponent,
+    component: SupplierOrdersComponent,
     canActivate: [AuthAdminGuard],
     pathMatch: 'full',
   },
   {
     path: 'fornecedor/pedidos/itens/:id',
-    component: AdminSupplierOrderItemsComponent,
+    component: SupplierOrderItemsComponent,
     canActivate: [AuthAdminGuard],
     pathMatch: 'full',
   },
   {
     path: 'fornecedores',
-    component: AdminSuppliersComponent,
+    component: SuppliersComponent,
     canActivate: [AuthAdminGuard],
   },
   {
     path: 'guias-de-entrada',
-    component: AdminReceivingReportsComponent,
+    component: ReceivingReportsComponent,
     canActivate: [AuthAdminGuard],
   },
   {
@@ -118,17 +112,17 @@ const routes: Routes = [
   },
   {
     path: 'atas',
-    component: AdminProtocolsComponent,
+    component: ProtocolsComponent,
     canActivate: [AuthAdminGuard],
   },
   {
     path: 'mudar-senha-admin',
-    component: AdminResetPasswordComponent,
+    component: ResetPasswordComponent,
     canActivate: [AuthAdminGuard],
   },
   {
     path: 'setores',
-    component: AdminSectorsComponent,
+    component: SectorsComponent,
     canActivate: [AuthAdminGuard],
   },
   {
@@ -143,7 +137,7 @@ const routes: Routes = [
   },
   {
     path: 'produtos',
-    component: AdminProductsComponent,
+    component: ProductsComponent,
     canActivate: [AuthAdminGuard],
   },
   {
@@ -155,14 +149,14 @@ const routes: Routes = [
     path: 'relatorio-do-contador',
     component: AccountantReports,
   },
-  { path: 'relatorio-de-estoque', component: AdminStockReportsComponent },
+  { path: 'relatorio-de-estoque', component: StockReportsComponent },
   {
     path: 'relatorio-do-almoxarifado',
-    component: AdminWarehouseReportsComponent,
+    component: WarehouseReportsComponent,
   },
   {
     path: 'enviar-email',
-    component: AdminSendEmailComponent,
+    component: SendEmailComponent,
   },
 ];
 

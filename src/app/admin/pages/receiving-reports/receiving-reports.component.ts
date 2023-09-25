@@ -1,19 +1,17 @@
+import { StocksService } from 'src/app/services/stocks.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
-import { StocksService } from 'src/app/services/stocks.service';
-import { ProductsService } from 'src/app/services/products.service';
-import { DispatchReportsModalComponent } from './editModal/edit-dispatch-reports-modal.component';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-import * as moment from 'moment/moment';
+import { ReceivingReportsModalComponent } from './editModal/edit-receiving-reports-modal.component';
+import * as moment from 'moment';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { ProductsService } from '../../../services/products.service';
 import { PriceFormatPipe } from '../../pipes/price-format.pipe';
+import { HttpClient } from '@angular/common/http';
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-interface iDispatchReport {
+interface ReceivingReport {
   id: number;
-  public_defense: {
+  supplier: {
     id: number;
     name: string;
   };
@@ -39,13 +37,24 @@ interface Product {
   };
 }
 
+interface ReceivingReports {
+  id: number;
+  supplier: string;
+  product: string;
+  quantity: number;
+  file: string;
+  description: string;
+  created: string;
+  updated: string;
+}
+
 @Component({
-  selector: 'app-dispatch-reports',
-  templateUrl: './dispatch-reports.component.html',
-  styleUrls: ['./dispatch-reports.component.scss'],
+  selector: 'app-receiving-reports',
+  templateUrl: './receiving-reports.component.html',
+  styleUrls: ['./receiving-reports.component.scss'],
   providers: [PriceFormatPipe],
 })
-export class DispatchReports implements OnInit {
+export class ReceivingReportsComponent implements OnInit {
   currentPage = 1;
   response: any;
 
@@ -68,7 +77,7 @@ export class DispatchReports implements OnInit {
 
   getContent() {
     this.stocksService
-      .getDispatchReports(this.currentPage.toString())
+      .getReceivingReports(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
       });
@@ -91,35 +100,35 @@ export class DispatchReports implements OnInit {
   }
 
   firstLetterOnCapital(text: string) {
-    if (text.length === 0) return '';
+    if (text.length == 0) return '';
     return text[0].toUpperCase() + text.substring(1);
   }
 
   openModal(id): void {
-    const dialogRef = this.dialog.open(DispatchReportsModalComponent, {
+    const dialogRef = this.dialog.open(ReceivingReportsModalComponent, {
       data: id,
     });
   }
 
-  downloadDispatchReports(file) {
+  downloadReceivingReports(file) {
     window.open(file, '_blank');
   }
 
-  generateDispatchReports(dispatchReport: iDispatchReport) {
-    const currentDate = moment(dispatchReport.created).format('DD/MM/YYYY');
+  generateReceivingReports(receivingReport: ReceivingReport) {
+    const currentDate = moment(receivingReport.created).format('DD/MM/YYYY');
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
     this.productsService
-      .getProductById(dispatchReport.product.id)
+      .getProductById(receivingReport.product.id)
       .subscribe((product: Product) => {
         const reportData = {
-          id: dispatchReport.id,
-          publicDefense: dispatchReport.public_defense.name,
+          id: receivingReport.id,
+          supplier: receivingReport.supplier.name,
           name: product.name,
           description: product.description,
           code: product.code,
           measure: product.measure.name,
-          quantity: dispatchReport.quantity,
+          quantity: receivingReport.quantity,
           price: product.price,
         };
 
@@ -156,7 +165,7 @@ export class DispatchReports implements OnInit {
                     },
                   },
                   {
-                    text: 'Guia de Saída',
+                    text: 'Guia de Entrada',
                     style: 'header',
                     alignment: 'center',
                     margin: [0, 10],
@@ -168,7 +177,13 @@ export class DispatchReports implements OnInit {
                     margin: [20, 5],
                   },
                   {
-                    text: `Núcleo: ${reportData.publicDefense}`,
+                    text: `Tipo de documento: Nota fiscal, devolução e outros`,
+                    style: 'line',
+                    alignment: 'left',
+                    margin: [20, 5],
+                  },
+                  {
+                    text: `Fornecedor: ${reportData.supplier}`,
                     style: 'line',
                     alignment: 'left',
                     margin: [20, 5],
@@ -246,7 +261,7 @@ export class DispatchReports implements OnInit {
 
               const pdfDocGenerator = pdfMake.createPdf(docDefinition);
               pdfDocGenerator.download(
-                `DispatchReport_${dispatchReport.id}.pdf`,
+                `ReceivingReport_${receivingReport.id}.pdf`,
               );
 
               pdfDocGenerator.getBlob((blob) => {
@@ -254,11 +269,15 @@ export class DispatchReports implements OnInit {
                 formData.append(
                   'file',
                   blob,
-                  `DispatchReport_${dispatchReport.id}.pdf`,
+                  `ReceivingReport_${receivingReport.id}.pdf`,
+                );
+                formData.append(
+                  'description',
+                  receivingReport.description || '',
                 );
 
                 this.stocksService
-                  .updateDispatchReportFile(dispatchReport.id, formData)
+                  .updateReceivingReportFile(receivingReport.id, formData)
                   .subscribe(
                     (response) => {
                       window.location.reload();
@@ -267,7 +286,6 @@ export class DispatchReports implements OnInit {
                   );
               });
             };
-
             reader.readAsDataURL(imageBlob);
           });
       });
@@ -275,7 +293,7 @@ export class DispatchReports implements OnInit {
 
   displayedColumns = [
     'id',
-    'publicDefense',
+    'supplier',
     'product',
     'productDescription',
     'quantity',

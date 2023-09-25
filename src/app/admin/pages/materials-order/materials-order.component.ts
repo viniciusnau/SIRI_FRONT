@@ -4,9 +4,9 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
-  MaterialsOrderModalComponent,
-  MaterialsOrderModalData,
-} from './modal/materials-order-modal.component';
+  CreateMaterialsOrderModalComponent,
+  iMaterialsOrderModalData,
+} from './createModal/create-materials-order-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
 
@@ -21,7 +21,7 @@ export class MaterialsOrderComponent implements OnInit {
   loading: boolean = false;
   loadingMaterialOrder: number | null = null;
 
-  modalData: MaterialsOrderModalData = {
+  modalData: iMaterialsOrderModalData = {
     suppliers: [],
     categories: [],
   };
@@ -112,7 +112,7 @@ export class MaterialsOrderComponent implements OnInit {
   }
 
   openModal(): void {
-    const dialogRef = this.dialog.open(MaterialsOrderModalComponent, {
+    const dialogRef = this.dialog.open(CreateMaterialsOrderModalComponent, {
       data: this.modalData,
     });
 

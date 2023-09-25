@@ -2,9 +2,9 @@ import { StocksService } from '../../../services/stocks.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
-import { EditAdminGeneralSuppliersOrdersModalComponent } from './editModal/edit-admin-general-supplier-orders-modal';
+import { EditGeneralSuppliersOrdersModalComponent } from './editModal/edit-general-supplier-orders-modal';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateAdminGeneralSupplierOrdersModalComponent } from './createModal/create-admin-general-supplier-orders-modal-component';
+import { CreateGeneralSupplierOrdersModalComponent } from './createModal/create-general-supplier-orders-modal-component';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 import { UserService } from 'src/app/services/user.service';
 import snackbarConsts from 'src/snackbarConsts';
@@ -116,14 +116,14 @@ export class GeneralSupplierOrders implements OnInit {
 
   openEditModal(supplier_order) {
     const dialogRef = this.dialog.open(
-      EditAdminGeneralSuppliersOrdersModalComponent,
+      EditGeneralSuppliersOrdersModalComponent,
       { data: { supplier_order } },
     );
   }
 
   openCreateModal() {
     const dialogRef = this.dialog.open(
-      CreateAdminGeneralSupplierOrdersModalComponent,
+      CreateGeneralSupplierOrdersModalComponent,
       {
         data: {
           suppliers: this.suppliers,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AccountantReportsModalComponent } from './createModal/accountant-reports-modal.component';
+import { AccountantReportsModalComponent } from './createModal/create-accountant-reports-modal.component';
 import { StocksService } from 'src/app/services/stocks.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';

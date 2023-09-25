@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
   InvoiceModalComponent,
-  InvoiceModalData,
-} from './modal/invoice-modal.component';
+  CreateInvoiceModalData,
+} from './createModal/create-invoice-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
 
@@ -21,7 +21,7 @@ export class InvoicesComponent implements OnInit {
   loadingInvoiceId: number | null = null;
   protected readonly Number = Number;
 
-  modalData: InvoiceModalData = {
+  modalData: CreateInvoiceModalData = {
     suppliers: [],
     public_defenses: [],
   };
