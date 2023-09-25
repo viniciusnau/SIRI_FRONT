@@ -12,9 +12,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
+import { SidebarComponent } from './components/sidebar/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [ForgotPasswordComponent, LoginComponent],
+  declarations: [ForgotPasswordComponent, LoginComponent, SidebarComponent],
   imports: [
     CommonModule,
     CommonCustomRoutingModule,

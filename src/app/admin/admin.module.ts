@@ -23,7 +23,6 @@ import { SectorsComponent } from './pages/sectors/sectors.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { MeasuresComponent } from './pages/measures/measures.component';
 import { ProductsComponent } from './pages/products/products.component';
-import { AdminSidebarComponent } from './components/sidebar/sidebar.component';
 import { BiddingExemption } from './pages/bidding-exemption/bidding-exemption.component';
 import { CreateMaterialsConfirmOrderModalComponent } from './pages/materials-order/createModal/create-materials-order-modal.component';
 import { InvoiceModalComponent } from './pages/invoices/createModal/create-invoice-modal.component';
@@ -71,6 +70,7 @@ import { PriceFormatDirective } from './directives/price-format.directive';
 import { NegativeNotAllowedDirective } from './directives/negative-not-allowed.directive';
 import { MatCardModule } from '@angular/material/card';
 import { CommonCustomRoutingModule } from '../common/commonCustom-routing.module';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +91,7 @@ import { CommonCustomRoutingModule } from '../common/commonCustom-routing.module
     CategoriesComponent,
     MeasuresComponent,
     ProductsComponent,
-    AdminSidebarComponent,
+    SidebarComponent,
     BiddingExemption,
     CreateMaterialsConfirmOrderModalComponent,
     InvoiceModalComponent,
