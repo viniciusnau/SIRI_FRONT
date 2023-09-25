@@ -5,15 +5,15 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { OrderModalComponent } from './modal/order-modal.component';
+import { ConfirmOrderModalComponent } from './confirmModal/confirm-order-modal.component';
 import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
-  selector: 'user-pedidos',
-  templateUrl: './pedidos.component.html',
-  styleUrls: ['./pedidos.component.scss'],
+  selector: 'user-orders',
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.scss'],
 })
-export class PedidosComponent implements OnInit, AfterViewInit {
+export class OrdersComponent implements OnInit, AfterViewInit {
   currentPage = 1;
   response: any = [];
   page = 'next_orders';
@@ -113,7 +113,7 @@ export class PedidosComponent implements OnInit, AfterViewInit {
 
   openModal(orderId): void {
     const data = { order_id: orderId };
-    const dialogRef = this.dialog.open(OrderModalComponent, {
+    const dialogRef = this.dialog.open(ConfirmOrderModalComponent, {
       data: data,
     });
   }

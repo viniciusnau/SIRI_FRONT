@@ -10,11 +10,11 @@ interface Category {
 }
 
 @Component({
-  selector: 'user-estoque',
-  templateUrl: './estoque.component.html',
-  styleUrls: ['./estoque.component.scss'],
+  selector: 'user-stock',
+  templateUrl: './stock.component.html',
+  styleUrls: ['./stock.component.scss'],
 })
-export class EstoqueComponent implements OnInit {
+export class StockComponent implements OnInit {
   categories: Category[] = [];
   currentPage = 1;
   page = 'next_stock_items';

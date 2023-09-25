@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss'],
 })
-export class Categories implements OnInit {
+export class CategoriesComponent implements OnInit {
   loading: number | null = null;
   currentPage = 1;
   response: any;

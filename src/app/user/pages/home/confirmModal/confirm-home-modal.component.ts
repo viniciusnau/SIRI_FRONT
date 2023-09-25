@@ -7,17 +7,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
-  selector: 'admin-orders-modal',
-  templateUrl: 'home-modal.component.html',
-  styleUrls: ['./home-modal.component.scss'],
+  selector: 'confirm-home-modal',
+  templateUrl: 'confirm-home-modal.component.html',
+  styleUrls: ['./confirm-home-modal.component.scss'],
 })
-export class HomeModalComponent implements OnInit {
+export class ConfirmHomeModalComponent implements OnInit {
   form: FormGroup;
   chosenProducts: Product[] = [];
   client: string;
 
   constructor(
-    public dialogRef: MatDialogRef<HomeModalComponent>,
+    public dialogRef: MatDialogRef<ConfirmHomeModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public ordersService: OrdersService,
     private formBuilder: FormBuilder,

@@ -8,11 +8,11 @@ interface Entries {
 }
 
 @Component({
-  selector: 'user-entradas',
-  templateUrl: './entradas.component.html',
-  styleUrls: ['./entradas.component.scss'],
+  selector: 'user-received',
+  templateUrl: './received.component.html',
+  styleUrls: ['./received.component.scss'],
 })
-export class EntradasComponent implements OnInit {
+export class ReceivedComponent implements OnInit {
   currentPage = 1;
   response: any;
   stockItemId: string;
@@ -48,12 +48,13 @@ export class EntradasComponent implements OnInit {
       const originalDate = new Date(date);
 
       const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1).toString().padStart(2, '0');
+      const month = (originalDate.getUTCMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const year = originalDate.getUTCFullYear().toString();
 
       return `${day}/${month}/${year}`;
-    }
-    else {
+    } else {
       return '';
     }
   }

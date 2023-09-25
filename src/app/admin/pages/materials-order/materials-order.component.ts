@@ -4,7 +4,7 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
-  CreateMaterialsOrderModalComponent,
+  CreateMaterialsConfirmOrderModalComponent,
   iMaterialsOrderModalData,
 } from './createModal/create-materials-order-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -112,9 +112,12 @@ export class MaterialsOrderComponent implements OnInit {
   }
 
   openModal(): void {
-    const dialogRef = this.dialog.open(CreateMaterialsOrderModalComponent, {
-      data: this.modalData,
-    });
+    const dialogRef = this.dialog.open(
+      CreateMaterialsConfirmOrderModalComponent,
+      {
+        data: this.modalData,
+      },
+    );
 
     dialogRef.afterClosed().subscribe((result) => {});
   }

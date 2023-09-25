@@ -1,17 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateMaterialsOrderModalComponent } from './create-materials-order-modal.component';
+import { CreateMaterialsConfirmOrderModalComponent } from './create-materials-order-modal.component';
 
-describe('CreateMaterialsOrderModalComponent', () => {
-  let component: CreateMaterialsOrderModalComponent;
-  let fixture: ComponentFixture<CreateMaterialsOrderModalComponent>;
+describe('CreateMaterialsConfirmOrderModalComponent', () => {
+  let component: CreateMaterialsConfirmOrderModalComponent;
+  let fixture: ComponentFixture<CreateMaterialsConfirmOrderModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CreateMaterialsOrderModalComponent],
+      declarations: [CreateMaterialsConfirmOrderModalComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CreateMaterialsOrderModalComponent);
+    fixture = TestBed.createComponent(
+      CreateMaterialsConfirmOrderModalComponent,
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

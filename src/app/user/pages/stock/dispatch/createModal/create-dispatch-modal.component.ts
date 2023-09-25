@@ -11,20 +11,20 @@ interface Supplier {
   name: number;
 }
 
-export interface StockWithdrawalsModalData {
+export interface iDispatch {
   suppliers: Supplier[];
 }
 
 @Component({
-  selector: 'stockWithdrawals-modal',
-  templateUrl: 'stockWithdrawals-modal.component.html',
-  styleUrls: ['./stockWithdrawals-modal.component.scss'],
+  selector: 'create-dispatch-modal',
+  templateUrl: 'create-dispatch-modal.component.html',
+  styleUrls: ['./create-dispatch-modal.component.scss'],
 })
-export class StockWithdrawalsModalComponent implements OnInit {
+export class CreateDispatchModalComponent implements OnInit {
   formStockWithdrawals: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<StockWithdrawalsModalComponent>,
+    public dialogRef: MatDialogRef<CreateDispatchModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     public stocksService: StocksService,

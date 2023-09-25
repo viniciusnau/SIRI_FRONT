@@ -47,12 +47,12 @@ interface iSupplierOrderItem {
   templateUrl: 'create-materials-order-modal.component.html',
   styleUrls: ['./create-materials-order-modal.component.scss'],
 })
-export class CreateMaterialsOrderModalComponent implements OnInit {
+export class CreateMaterialsConfirmOrderModalComponent implements OnInit {
   materialsOrder: iMaterialsOrder | null = null;
   formMaterialsOrder: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<CreateMaterialsOrderModalComponent>,
+    public dialogRef: MatDialogRef<CreateMaterialsConfirmOrderModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: iMaterialsOrderModalData,
     private formBuilder: FormBuilder,
     public ordersService: OrdersService,

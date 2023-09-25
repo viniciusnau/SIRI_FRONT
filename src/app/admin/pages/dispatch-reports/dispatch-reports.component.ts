@@ -45,7 +45,7 @@ interface Product {
   styleUrls: ['./dispatch-reports.component.scss'],
   providers: [PriceFormatPipe],
 })
-export class DispatchReports implements OnInit {
+export class DispatchReportsComponent implements OnInit {
   currentPage = 1;
   response: any;
 

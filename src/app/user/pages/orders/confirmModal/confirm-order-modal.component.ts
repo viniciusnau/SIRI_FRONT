@@ -12,11 +12,11 @@ import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'invoice-modal',
-  templateUrl: 'order-modal.component.html',
-  styleUrls: ['./order-modal.component.scss'],
+  selector: 'confirm-order-modal',
+  templateUrl: 'confirm-order-modal.component.html',
+  styleUrls: ['./confirm-order-modal.component.scss'],
 })
-export class OrderModalComponent implements OnInit {
+export class ConfirmOrderModalComponent implements OnInit {
   formOrder: FormGroup;
   selectedFile: File;
   selectedConfirmFile: File;
@@ -27,7 +27,7 @@ export class OrderModalComponent implements OnInit {
   confirmFileInput: ElementRef;
 
   constructor(
-    public dialogRef: MatDialogRef<OrderModalComponent>,
+    public dialogRef: MatDialogRef<ConfirmOrderModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     public ordersService: OrdersService,

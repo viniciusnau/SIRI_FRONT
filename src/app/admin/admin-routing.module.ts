@@ -10,12 +10,12 @@ import { SupplierOrdersComponent } from './pages/supplier-orders/supplier-orders
 import { SupplierOrderItemsComponent } from './pages/supplier-orders/supplier-order-items/supplier-order-items.component';
 import { SuppliersComponent } from './pages/suppliers/suppliers.component';
 import { ReceivingReportsComponent } from './pages/receiving-reports/receiving-reports.component';
-import { DispatchReports } from './pages/dispatch-reports/dispatch-reports.component';
+import { DispatchReportsComponent } from './pages/dispatch-reports/dispatch-reports.component';
 import { MaterialsOrderComponent } from './pages/materials-order/materials-order.component';
 import { ProtocolsComponent } from './pages/protocols/protocols.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SectorsComponent } from './pages/sectors/sectors.component';
-import { Categories } from './pages/categories/categories.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
 import { MeasuresComponent } from './pages/measures/measures.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { BiddingExemption } from './pages/bidding-exemption/bidding-exemption.component';
@@ -91,7 +91,7 @@ const routes: Routes = [
   },
   {
     path: 'guias-de-saida',
-    component: DispatchReports,
+    component: DispatchReportsComponent,
     canActivate: [AuthAdminGuard],
   },
   {
@@ -127,7 +127,7 @@ const routes: Routes = [
   },
   {
     path: 'categorias',
-    component: Categories,
+    component: CategoriesComponent,
     canActivate: [AuthAdminGuard],
   },
   {

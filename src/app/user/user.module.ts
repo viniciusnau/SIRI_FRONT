@@ -6,20 +6,20 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialCommonsModule } from '../material-commons/material-commons.module';
 import { HomeComponent } from './pages/home/home.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
-import { EstoqueComponent } from './pages/estoque/estoque.component';
-import { EntradasComponent } from './pages/estoque/entradas/entradas.component';
-import { SaidasComponent } from './pages/estoque/saidas/saidas.component';
-import { PedidosComponent } from './pages/pedidos/pedidos.component';
-import { OrderItemsComponent } from './pages/pedidos/order-items/order-items.component';
+import { StockComponent } from './pages/stock/stock.component';
+import { ReceivedComponent } from './pages/stock/received/received.component';
+import { DispatchComponent } from './pages/stock/dispatch/dispatch.component';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { OrderItemsComponent } from './pages/orders/order-items/order-items.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UserSidebarComponent } from './components/user-sidebar/user-sidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StockWithdrawalsModalComponent } from './pages/estoque/saidas/modal/stockWithdrawals-modal.component';
-import { EditOrderItemModalComponent } from './pages/pedidos/order-items/editModal/edit-order-item-modal.component';
+import { CreateDispatchModalComponent } from './pages/stock/dispatch/createModal/create-dispatch-modal.component';
+import { EditOrderItemModalComponent } from './pages/orders/order-items/editModal/edit-order-item-modal.component';
 import { InsideResetPasswordComponent } from './pages/inside-reset-password/inside-reset-password.component';
 import { UserPaginationComponent } from './components/pagination/user-pagination.component';
-import { OrderModalComponent } from './pages/pedidos/modal/order-modal.component';
-import { HomeModalComponent } from './pages/home/modal/home-modal.component';
+import { ConfirmOrderModalComponent } from './pages/orders/confirmModal/confirm-order-modal.component';
+import { ConfirmHomeModalComponent } from './pages/home/confirmModal/confirm-home-modal.component';
 import { AdminModule } from '../admin/admin.module';
 import { DigitLimitDirective } from '../user/directives/digit-limit.directive';
 import { DecimalNotAllowedDirective } from '../user/directives/decimal-not-allowed.directive';
@@ -34,22 +34,22 @@ import { MatNativeDateModule } from '@angular/material/core';
   declarations: [
     HomeComponent,
     ResetPasswordComponent,
-    EstoqueComponent,
-    EntradasComponent,
-    SaidasComponent,
-    PedidosComponent,
+    StockComponent,
+    ReceivedComponent,
+    DispatchComponent,
+    OrdersComponent,
     OrderItemsComponent,
     LoginComponent,
     UserSidebarComponent,
-    StockWithdrawalsModalComponent,
+    CreateDispatchModalComponent,
     EditOrderItemModalComponent,
     InsideResetPasswordComponent,
     UserPaginationComponent,
-    OrderModalComponent,
+    ConfirmOrderModalComponent,
     DigitLimitDirective,
     NegativeNotAllowedDirective,
     DecimalNotAllowedDirective,
-    HomeModalComponent,
+    ConfirmHomeModalComponent,
   ],
   imports: [
     CommonModule,

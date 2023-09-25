@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
-import { EstoqueComponent } from './pages/estoque/estoque.component';
-import { EntradasComponent } from './pages/estoque/entradas/entradas.component';
-import { SaidasComponent } from './pages/estoque/saidas/saidas.component';
-import { PedidosComponent } from './pages/pedidos/pedidos.component';
-import { OrderItemsComponent } from './pages/pedidos/order-items/order-items.component';
+import { StockComponent } from './pages/stock/stock.component';
+import { ReceivedComponent } from './pages/stock/received/received.component';
+import { DispatchComponent } from './pages/stock/dispatch/dispatch.component';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { OrderItemsComponent } from './pages/orders/order-items/order-items.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthUserGuard } from '../services/guards/auth-user.guard';
 import { InsideResetPasswordComponent } from './pages/inside-reset-password/inside-reset-password.component';
@@ -23,22 +23,22 @@ const routes: Routes = [
   },
   {
     path: 'estoque',
-    component: EstoqueComponent,
+    component: StockComponent,
     canActivate: [AuthUserGuard],
   },
   {
     path: 'estoque/entradas/:id',
-    component: EntradasComponent,
+    component: ReceivedComponent,
     canActivate: [AuthUserGuard],
   },
   {
     path: 'estoque/saidas/:id',
-    component: SaidasComponent,
+    component: DispatchComponent,
     canActivate: [AuthUserGuard],
   },
   {
     path: 'pedidos',
-    component: PedidosComponent,
+    component: OrdersComponent,
     canActivate: [AuthUserGuard],
   },
   {

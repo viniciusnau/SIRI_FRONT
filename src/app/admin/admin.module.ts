@@ -15,17 +15,17 @@ import { SupplierOrdersComponent } from './pages/supplier-orders/supplier-orders
 import { SupplierOrderItemsComponent } from './pages/supplier-orders/supplier-order-items/supplier-order-items.component';
 import { SuppliersComponent } from './pages/suppliers/suppliers.component';
 import { ReceivingReportsComponent } from './pages/receiving-reports/receiving-reports.component';
-import { DispatchReports } from './pages/dispatch-reports/dispatch-reports.component';
+import { DispatchReportsComponent } from './pages/dispatch-reports/dispatch-reports.component';
 import { MaterialsOrderComponent } from './pages/materials-order/materials-order.component';
 import { ProtocolsComponent } from './pages/protocols/protocols.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SectorsComponent } from './pages/sectors/sectors.component';
-import { Categories } from './pages/categories/categories.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
 import { MeasuresComponent } from './pages/measures/measures.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
 import { BiddingExemption } from './pages/bidding-exemption/bidding-exemption.component';
-import { CreateMaterialsOrderModalComponent } from './pages/materials-order/createModal/create-materials-order-modal.component';
+import { CreateMaterialsConfirmOrderModalComponent } from './pages/materials-order/createModal/create-materials-order-modal.component';
 import { InvoiceModalComponent } from './pages/invoices/createModal/create-invoice-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountantReports } from './pages/accountant-reports/accountant-reports.component';
@@ -82,17 +82,17 @@ import { CommonRoutingModule } from '../common-routing.module';
     SupplierOrderItemsComponent,
     SuppliersComponent,
     ReceivingReportsComponent,
-    DispatchReports,
+    DispatchReportsComponent,
     MaterialsOrderComponent,
     ProtocolsComponent,
     ResetPasswordComponent,
     SectorsComponent,
-    Categories,
+    CategoriesComponent,
     MeasuresComponent,
     ProductsComponent,
     AdminSidebarComponent,
     BiddingExemption,
-    CreateMaterialsOrderModalComponent,
+    CreateMaterialsConfirmOrderModalComponent,
     InvoiceModalComponent,
     AccountantReports,
     StockReportsComponent,

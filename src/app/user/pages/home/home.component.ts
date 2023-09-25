@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Category, Product } from '../../../interfaces/stock/interfaces';
 import { OrdersService } from 'src/app/services/orders.service';
 import { MatDialog } from '@angular/material/dialog';
-import { HomeModalComponent } from './modal/home-modal.component';
+import { ConfirmHomeModalComponent } from './confirmModal/confirm-home-modal.component';
 
 @Component({
   selector: 'user-home',
@@ -99,7 +99,9 @@ export class HomeComponent implements OnInit {
     this.productsService.getProducts(getProductDto, pageChange).subscribe(
       (data) => {
         this.response = data;
-        this.products = this.sortAlphabetically(data.results.filter(product => product.is_available));
+        this.products = this.sortAlphabetically(
+          data.results.filter((product) => product.is_available),
+        );
         const chosenProductIds = this.chosenProducts.map(
           (chosenProduct) => chosenProduct.id,
         );
@@ -126,7 +128,7 @@ export class HomeComponent implements OnInit {
 
   openModal(data): void {
     const value = { chosenProducts: data, client: `${this.client}` };
-    const dialogRef = this.dialog.open(HomeModalComponent, {
+    const dialogRef = this.dialog.open(ConfirmHomeModalComponent, {
       data: value,
     });
   }

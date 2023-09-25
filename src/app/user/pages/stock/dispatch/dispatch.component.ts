@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
-import { StockWithdrawalsModalComponent } from './modal/stockWithdrawals-modal.component';
+import { CreateDispatchModalComponent } from './createModal/create-dispatch-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
-  selector: 'user-saidas',
-  templateUrl: './saidas.component.html',
-  styleUrls: ['./saidas.component.scss'],
+  selector: 'user-dispatch',
+  templateUrl: './dispatch.component.html',
+  styleUrls: ['./dispatch.component.scss'],
 })
-export class SaidasComponent implements OnInit {
+export class DispatchComponent implements OnInit {
   currentPage = 1;
   response: any;
   page = 'next';
@@ -93,7 +93,7 @@ export class SaidasComponent implements OnInit {
   }
 
   openModal(): void {
-    const dialogRef = this.dialog.open(StockWithdrawalsModalComponent, {
+    const dialogRef = this.dialog.open(CreateDispatchModalComponent, {
       data: { stock_item_id: this.stockItemId },
     });
   }
