@@ -2,7 +2,7 @@
 <div [formGroup]="formSupplierOrders" mat-dialog-content class="content">
   <p>Produto*</p>
   <mat-form-field appearance="fill">
-    <mat-select formControlName="product">
+    <mat-select formControlName="product" (selectionChange)="onProductSelected($event.value)">
       <mat-option
         *ngFor="let product of data.products"
         [value]="product.product.id"
@@ -19,7 +19,11 @@
       formControlName="quantity"
       appDigitLimit
       negativeNotAllowed
+      (input)="updateQuantityError()"
     />
+    <mat-error *ngIf="formSupplierOrders.get('quantity').hasError('quantityExceeded')">
+      A quantidade não pode exceder o limite da ata ({{ selectedProduct?.quantity }})
+    </mat-error>
   </mat-form-field>
 </div>
 
