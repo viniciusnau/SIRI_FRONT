@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { OrdersComponent } from './pages/orders/orders.component';
 import { OrderItemsComponent } from './pages/orders/order-items/order-items.component';
-import { StockComponent } from './pages/stock/stock.component';
-import { StockItemsComponent } from './pages/stock/stock-items/stock-items.component';
+import { StockBySectorComponent } from './pages/stock-by-cector/stock-by-sector.component';
+import { StockBySectorItemsComponent } from './pages/stock-by-cector/stock-by-sector-items/stock-by-sector-items.component';
 import { InvoicesComponent } from './pages/invoices/invoices.component';
 import { SupplierOrdersComponent } from './pages/supplier-orders/supplier-orders.component';
 import { SupplierOrderItemsComponent } from './pages/supplier-orders/supplier-order-items/supplier-order-items.component';
@@ -53,12 +53,12 @@ const routes: Routes = [
   },
   {
     path: 'estoque-por-setor',
-    component: StockComponent,
+    component: StockBySectorComponent,
     canActivate: [AuthAdminGuard],
   },
   {
     path: 'estoque-por-setor/itens/:id',
-    component: StockItemsComponent,
+    component: StockBySectorItemsComponent,
     canActivate: [AuthAdminGuard],
     pathMatch: 'full',
   },

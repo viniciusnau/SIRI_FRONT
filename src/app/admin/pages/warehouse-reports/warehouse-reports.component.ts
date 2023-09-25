@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-interface WarehouseReport {
+interface iWarehouseReport {
   productCode: string;
   productName: string;
   productMeasure: string;
@@ -27,7 +27,7 @@ interface WarehouseReport {
 })
 export class WarehouseReportsComponent implements OnInit {
   loading: boolean = false;
-  warehouseReports: WarehouseReport[] = [];
+  warehouseReports: iWarehouseReport[] = [];
   displayedColumns = [
     'productCode',
     'productName',

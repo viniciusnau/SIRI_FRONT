@@ -8,8 +8,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { OrdersComponent } from './pages/orders/orders.component';
 import { OrderItemsComponent } from './pages/orders/order-items/order-items.component';
-import { StockComponent } from './pages/stock/stock.component';
-import { StockItemsComponent } from './pages/stock/stock-items/stock-items.component';
+import { StockBySectorComponent } from './pages/stock-by-cector/stock-by-sector.component';
+import { StockBySectorItemsComponent } from './pages/stock-by-cector/stock-by-sector-items/stock-by-sector-items.component';
 import { InvoicesComponent } from './pages/invoices/invoices.component';
 import { SupplierOrdersComponent } from './pages/supplier-orders/supplier-orders.component';
 import { SupplierOrderItemsComponent } from './pages/supplier-orders/supplier-order-items/supplier-order-items.component';
@@ -23,7 +23,7 @@ import { SectorsComponent } from './pages/sectors/sectors.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { MeasuresComponent } from './pages/measures/measures.component';
 import { ProductsComponent } from './pages/products/products.component';
-import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
+import { AdminSidebarComponent } from './components/sidebar/sidebar.component';
 import { BiddingExemption } from './pages/bidding-exemption/bidding-exemption.component';
 import { CreateMaterialsConfirmOrderModalComponent } from './pages/materials-order/createModal/create-materials-order-modal.component';
 import { InvoiceModalComponent } from './pages/invoices/createModal/create-invoice-modal.component';
@@ -69,14 +69,15 @@ import { CnpjMaskDirective } from './directives/CnpjMask.directive';
 import { ContactMaskDirective } from './directives/contactMask.directive';
 import { PriceFormatDirective } from './directives/price-format.directive';
 import { NegativeNotAllowedDirective } from './directives/negative-not-allowed.directive';
-import { CommonRoutingModule } from '../common-routing.module';
+import { MatCardModule } from '@angular/material/card';
+import { CommonCustomRoutingModule } from '../common/commonCustom-routing.module';
 
 @NgModule({
   declarations: [
     OrdersComponent,
     OrderItemsComponent,
-    StockComponent,
-    StockItemsComponent,
+    StockBySectorComponent,
+    StockBySectorItemsComponent,
     InvoicesComponent,
     SupplierOrdersComponent,
     SupplierOrderItemsComponent,
@@ -144,7 +145,8 @@ import { CommonRoutingModule } from '../common-routing.module';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    CommonRoutingModule,
+    CommonCustomRoutingModule,
+    MatCardModule,
   ],
   exports: [PaginationComponent],
 })

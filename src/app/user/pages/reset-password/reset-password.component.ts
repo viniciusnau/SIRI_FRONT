@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../../../services/user.service';
 import { DialogComponent } from '../../../admin/components/modal/dialog.component';
-import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
   selector: 'app-reset-password',
@@ -26,7 +26,7 @@ export class ResetPasswordComponent {
       (response) => {
         this.loading = false;
         this.snackBar.open(
-          snackbarConsts.changePassword.success,
+          snackbarConsts.user.changePassword.success,
           snackbarConsts.close,
           {
             duration: 3000,
@@ -38,7 +38,7 @@ export class ResetPasswordComponent {
       (error) => {
         this.loading = false;
         this.snackBar.open(
-          snackbarConsts.changePassword.error,
+          snackbarConsts.user.changePassword.error,
           snackbarConsts.close,
           {
             duration: 3000,

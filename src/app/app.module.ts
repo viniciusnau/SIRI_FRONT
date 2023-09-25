@@ -8,12 +8,20 @@ import { AdminModule } from './admin/admin.module';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
+import { CommonCustomModule } from './common/commonCustom.module';
+import { CommonCustomRoutingModule } from './common/commonCustom-routing.module';
 
 registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, UserModule, AdminModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    UserModule,
+    AdminModule,
+    CommonCustomModule,
+  ],
   providers: [
     {
       provide: LOCALE_ID,

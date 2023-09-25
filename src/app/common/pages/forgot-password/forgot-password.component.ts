@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../../../services/user.service';
 import { DialogComponent } from '../../../admin/components/modal/dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-inside-reset-password',
-  templateUrl: './inside-reset-password.component.html',
-  styleUrls: ['./inside-reset-password.component.scss'],
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.scss'],
 })
-export class InsideResetPasswordComponent {
+export class ForgotPasswordComponent {
   email: string;
   loading: boolean = false;
 
@@ -26,7 +26,7 @@ export class InsideResetPasswordComponent {
       (response) => {
         this.loading = false;
         this.snackBar.open(
-          snackbarConsts.user.changePassword.success,
+          snackbarConsts.changePassword.success,
           snackbarConsts.close,
           {
             duration: 3000,
@@ -38,7 +38,7 @@ export class InsideResetPasswordComponent {
       (error) => {
         this.loading = false;
         this.snackBar.open(
-          snackbarConsts.user.changePassword.error,
+          snackbarConsts.changePassword.error,
           snackbarConsts.close,
           {
             duration: 3000,

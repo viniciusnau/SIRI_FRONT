@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'user-sidebar',
-  templateUrl: './user-sidebar.component.html',
-  styleUrls: ['./user-sidebar.component.scss'],
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss'],
 })
-export class UserSidebarComponent {
+export class SidebarComponent {
   userSectionExpanded: boolean = false;
   userName: string = '';
 

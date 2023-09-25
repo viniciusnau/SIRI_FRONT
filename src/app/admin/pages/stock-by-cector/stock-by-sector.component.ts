@@ -9,11 +9,11 @@ interface AdminStock {
 }
 
 @Component({
-  selector: 'app-stock',
-  templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.scss'],
+  selector: 'app-stock-by-sector',
+  templateUrl: './stock-by-sector.component.html',
+  styleUrls: ['./stock-by-sector.component.scss'],
 })
-export class StockComponent implements OnInit {
+export class StockBySectorComponent implements OnInit {
   stocks: AdminStock[] = [];
   currentPage = 1;
   response: any;

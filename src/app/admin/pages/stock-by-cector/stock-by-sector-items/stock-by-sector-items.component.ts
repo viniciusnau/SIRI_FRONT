@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StocksService } from 'src/app/services/stocks.service';
 
-interface iAdminStockItems {
+interface iStockBySectorItems {
   id: number;
   product: string;
   quantity: number;
 }
 
 @Component({
-  selector: 'app-stock-items',
-  templateUrl: './stock-items.component.html',
-  styleUrls: ['./stock-items.component.scss'],
+  selector: 'app-stock-by-sector-items',
+  templateUrl: './stock-by-sector-items.component.html',
+  styleUrls: ['./stock-by-sector-items.component.scss'],
 })
-export class StockItemsComponent {
-  stockItems: iAdminStockItems[] = [];
+export class StockBySectorItemsComponent {
+  stockItems: iStockBySectorItems[] = [];
   stockId = '';
   currentPage = 1;
   response: any;
