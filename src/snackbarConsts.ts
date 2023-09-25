@@ -15,7 +15,7 @@ const snackbarConsts = {
           error: 'Erro ao alterar item.',
         },
         exclude: {
-
+          success: 'Item excluído com sucesso!',
           error: 'Erro ao excluir item.',
         },
       },
