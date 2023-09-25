@@ -6,8 +6,8 @@ const snackbarConsts = {
     },
     orders: {
       exclude: {
-        success: 'Pedido retirado com sucesso!',
-        error: 'Erro ao retirar pedido.',
+        success: 'Pedido excluído com sucesso!',
+        error: 'Erro ao excluir pedido.',
       },
       itens: {
         edit: {
@@ -15,8 +15,8 @@ const snackbarConsts = {
           error: 'Erro ao alterar item.',
         },
         exclude: {
-          success: 'Item retirado com sucesso!',
-          error: 'Erro ao retirar item.',
+          success: 'Item excluído com sucesso!',
+          error: 'Erro ao excluir item.',
         },
       },
       confirmDelivery: {
@@ -31,8 +31,8 @@ const snackbarConsts = {
           error: 'Erro ao criar item de saída.',
         },
         exclude: {
-          success: 'Item de saída retirado com sucesso!',
-          error: 'Erro ao retirar item de saída.',
+          success: 'Item de saída excluído com sucesso!',
+          error: 'Erro ao excluir item de saída.',
         },
       },
     },
@@ -49,7 +49,7 @@ const snackbarConsts = {
           error: 'Erro ao editar item.',
         },
         exclude: {
-          success: 'Item retirado com sucesso!',
+          success: 'Item excluído com sucesso!',
           error: 'Erro ao editar item.',
         },
       },
@@ -66,8 +66,8 @@ const snackbarConsts = {
         error: 'Erro ao criar nota.',
       },
       exclude: {
-        success: 'Nota retirada com sucesso!',
-        error: 'Erro ao retirar nota.',
+        success: 'Nota excluída com sucesso!',
+        error: 'Erro ao excluir nota.',
       },
     },
     receivingReports: {
@@ -92,8 +92,8 @@ const snackbarConsts = {
         error: 'Erro ao editar categoria.',
       },
       exclude: {
-        success: 'Categoria retirada com sucesso!',
-        error: 'Erro ao retirar categoria.',
+        success: 'Categoria excluída com sucesso!',
+        error: 'Erro ao excluir categoria.',
       },
     },
     measures: {
@@ -106,8 +106,8 @@ const snackbarConsts = {
         error: 'Erro ao editar medida',
       },
       exclude: {
-        success: 'Medida retirada com sucesso!',
-        error: 'Erro ao retirar medida.',
+        success: 'Medida excluída com sucesso!',
+        error: 'Erro ao excluir medida.',
       },
     },
     products: {
@@ -120,8 +120,8 @@ const snackbarConsts = {
         error: 'Erro ao editar produto.',
       },
       exclude: {
-        success: 'Produto retirado com sucesso!',
-        error: 'Erro ao retirar produto.',
+        success: 'Produto excluído com sucesso!',
+        error: 'Erro ao excluir produto.',
       },
     },
     suppliers: {
@@ -134,8 +134,8 @@ const snackbarConsts = {
         error: 'Erro ao editar fornecedor.',
       },
       exclude: {
-        success: 'Fornecedor retirado com sucesso!',
-        error: 'Erro ao retirar fornecedor.',
+        success: 'Fornecedor excluído com sucesso!',
+        error: 'Erro ao excluir fornecedor.',
       },
     },
     suppliersOrders: {
@@ -148,8 +148,8 @@ const snackbarConsts = {
         error: 'Erro ao editar pedido do fornecedor.',
       },
       exclude: {
-        success: 'Pedido do fornecedor retirado com sucesso!',
-        error: 'Erro ao retirar item do fornecedor.',
+        success: 'Pedido do fornecedor excluído com sucesso!',
+        error: 'Erro ao excluir item do fornecedor.',
       },
       itens: {
         create: {
@@ -157,8 +157,8 @@ const snackbarConsts = {
           error: 'Erro ao criar item do pedido do fornecedor',
         },
         exclude: {
-          success: 'Item do pedido do fornecedor retirado com sucesso!',
-          error: 'Erro ao retirar item do pedido do fornecedor.',
+          success: 'Item do pedido do fornecedor excluído com sucesso!',
+          error: 'Erro ao excluir item do pedido do fornecedor.',
         },
       },
     },
@@ -172,8 +172,8 @@ const snackbarConsts = {
         error: 'Erro ao editar ata.',
       },
       exclude: {
-        success: 'Ata retirada com sucesso!',
-        error: 'Erro ao retirar ata.',
+        success: 'Ata excluída com sucesso!',
+        error: 'Erro ao excluir ata.',
       },
       itens: {
         create: {
@@ -181,8 +181,8 @@ const snackbarConsts = {
           error: 'Erro ao criar item da ata.',
         },
         exclude: {
-          success: 'Item da ata retirada com sucesso!',
-          error: 'Erro ao retirar item da ata.',
+          success: 'Item da ata excluída com sucesso!',
+          error: 'Erro ao excluir item da ata.',
         },
       },
     },
@@ -192,8 +192,8 @@ const snackbarConsts = {
         error: 'Erro ao criar pedido de AF.',
       },
       exclude: {
-        success: 'Pedido de AF retirado com sucesso!',
-        error: 'Erro ao retirar pedido de AF.',
+        success: 'Pedido de AF excluído com sucesso!',
+        error: 'Erro ao excluir pedido de AF.',
       },
     },
     biddingExemption: {
@@ -202,8 +202,8 @@ const snackbarConsts = {
         error: 'Erro ao criar dispensa de licitação',
       },
       exclude: {
-        success: 'Dispensa de licitação retirada com sucesso!',
-        error: 'Erro ao retirar dispensa de licitação.',
+        success: 'Dispensa de licitação excluída com sucesso!',
+        error: 'Erro ao excluir dispensa de licitação.',
       },
     },
     accountantReports: {
@@ -212,8 +212,8 @@ const snackbarConsts = {
         error: 'Erro ao criar relatório do contador.',
       },
       exclude: {
-        success: 'Relatório do contador retirada com sucesso!',
-        error: 'Erro ao retirar relatório do contador.',
+        success: 'Relatório do contador excluído com sucesso!',
+        error: 'Erro ao excluir relatório do contador.',
       },
     },
     stockReports: {
