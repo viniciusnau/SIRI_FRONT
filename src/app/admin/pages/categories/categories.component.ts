@@ -8,11 +8,11 @@ import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-admin-categories',
-  templateUrl: './admin-categories.component.html',
-  styleUrls: ['./admin-categories.component.scss'],
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.scss'],
 })
-export class AdminCategoriesComponent implements OnInit {
+export class Categories implements OnInit {
   loading: number | null = null;
   currentPage = 1;
   response: any;

@@ -10,11 +10,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
-  selector: 'app-admin-invoices',
-  templateUrl: './admin-invoices.component.html',
-  styleUrls: ['./admin-invoices.component.scss'],
+  selector: 'app-invoices',
+  templateUrl: './invoices.component.html',
+  styleUrls: ['./invoices.component.scss'],
 })
-export class AdminInvoicesComponent implements OnInit {
+export class InvoicesComponent implements OnInit {
   currentPage = 1;
   response: any;
   loading: boolean = false;

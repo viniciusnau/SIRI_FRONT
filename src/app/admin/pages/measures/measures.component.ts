@@ -7,17 +7,17 @@ import { MatTableDataSource } from '@angular/material/table';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-interface AdminMeasures {
+interface iAdminMeasures {
   id: number;
   name: string;
 }
 
 @Component({
-  selector: 'app-admin-measures',
-  templateUrl: './admin-measures.component.html',
-  styleUrls: ['./admin-measures.component.scss'],
+  selector: 'app-measures',
+  templateUrl: './measures.component.html',
+  styleUrls: ['./measures.component.scss'],
 })
-export class AdminMeasuresComponent implements OnInit {
+export class MeasuresComponent implements OnInit {
   loading: number | null = null;
   currentPage = 1;
   response: any;

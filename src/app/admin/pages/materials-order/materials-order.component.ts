@@ -11,11 +11,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
-  selector: 'app-admin-materials-order',
-  templateUrl: './admin-materials-order.component.html',
-  styleUrls: ['./admin-materials-order.component.scss'],
+  selector: 'app-materials-order',
+  templateUrl: './materials-order.component.html',
+  styleUrls: ['./materials-order.component.scss'],
 })
-export class AdminMaterialsOrderComponent implements OnInit {
+export class MaterialsOrderComponent implements OnInit {
   currentPage = 1;
   response: any;
   loading: boolean = false;

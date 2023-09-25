@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-interface SupplierOrders {
+interface iSupplierOrders {
   id: number;
   received: boolean;
   delivery_date: string;
@@ -23,14 +23,14 @@ interface SupplierOrders {
 }
 
 @Component({
-  selector: 'app-admin-supplier-orders',
-  templateUrl: './admin-general-supplier-orders.component.html',
-  styleUrls: ['./admin-general-supplier-orders.component.scss'],
+  selector: 'app-supplier-orders',
+  templateUrl: './general-supplier-orders.component.html',
+  styleUrls: ['./general-supplier-orders.component.scss'],
 })
-export class AdminGeneralSupplierOrdersComponent implements OnInit {
+export class GeneralSupplierOrders implements OnInit {
   loading: boolean = false;
   loadingOrderId: number | null = null;
-  supplierOrders: SupplierOrders[] = [];
+  supplierOrders: iSupplierOrders[] = [];
   suppliers = [];
   protocols = [];
   public_defenses = [];

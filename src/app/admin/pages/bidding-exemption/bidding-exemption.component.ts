@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BiddingExemptionModalComponent } from './modal/bidding-exemption-modal.component';
+import { CreateBiddingExemptionModalComponent } from './createModal/create-bidding-exemption-modal.component';
 import { StocksService } from 'src/app/services/stocks.service';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,7 +10,7 @@ interface Stock {
   sector: string;
 }
 
-interface BiddingExemption {
+interface iBiddingExemption {
   id: number;
   quantity: number;
   product: string;
@@ -19,11 +19,11 @@ interface BiddingExemption {
 }
 
 @Component({
-  selector: 'app-admin-bidding-exemption',
-  templateUrl: './admin-bidding-exemption.component.html',
-  styleUrls: ['./admin-bidding-exemption.component.scss'],
+  selector: 'app-bidding-exemption',
+  templateUrl: './bidding-exemption.component.html',
+  styleUrls: ['./bidding-exemption.component.scss'],
 })
-export class AdminBiddingExemptionComponent {
+export class BiddingExemption {
   loading: boolean = false;
   loadingBiddingExemptionId: number | null = null;
   currentPage = 1;
@@ -89,7 +89,7 @@ export class AdminBiddingExemptionComponent {
   }
 
   openModal(): void {
-    const dialogRef = this.dialog.open(BiddingExemptionModalComponent, {
+    const dialogRef = this.dialog.open(CreateBiddingExemptionModalComponent, {
       data: {
         products: this.products,
         stocks: this.stocks,

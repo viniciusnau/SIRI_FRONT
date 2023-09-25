@@ -13,11 +13,11 @@ import {
 import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
-  selector: 'admin-orders-modal',
-  templateUrl: 'admin-orders-modal.component.html',
-  styleUrls: ['./admin-orders-modal.component.scss'],
+  selector: 'invoice-control-orders-modal',
+  templateUrl: 'invoice-control-orders-modal.component.html',
+  styleUrls: ['./invoice-control-orders-modal.component.scss'],
 })
-export class AdminOrdersModalComponent implements OnInit {
+export class InvoiceControlOrdersModalComponent implements OnInit {
   formOrder: FormGroup;
   fileData: SafeResourceUrl;
   confirmFileData: SafeResourceUrl;
@@ -30,7 +30,7 @@ export class AdminOrdersModalComponent implements OnInit {
   loading: boolean = false;
 
   constructor(
-    public dialogRef: MatDialogRef<AdminOrdersModalComponent>,
+    public dialogRef: MatDialogRef<InvoiceControlOrdersModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public ordersService: OrdersService,
     private formBuilder: FormBuilder,

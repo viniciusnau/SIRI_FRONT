@@ -9,11 +9,11 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteOrderItemModalComponent } from './modal/deleteOrderItem-modal.component.component';
+import { DeleteOrderItemModalComponent } from './deleteModal/delete-order-item-modal.component.component';
 import { BehaviorSubject } from 'rxjs';
 import snackbarConsts from 'src/snackbarConsts';
 
-interface AdminOrderItems {
+interface iAdminOrderItems {
   id: number;
   product: {
     id: number;
@@ -40,11 +40,11 @@ interface Supplier {
 }
 
 @Component({
-  selector: 'app-admin-order-items',
-  templateUrl: './admin-order-items.component.html',
-  styleUrls: ['./admin-order-items.component.scss'],
+  selector: 'app-order-items',
+  templateUrl: './order-items.component.html',
+  styleUrls: ['./order-items.component.scss'],
 })
-export class AdminOrderItemsComponent implements OnInit {
+export class OrderItemsComponent implements OnInit {
   currentPage = 1;
   response: any;
   orderId = '';
@@ -94,7 +94,7 @@ export class AdminOrderItemsComponent implements OnInit {
     return Number.isInteger(value);
   }
 
-  validateIntegerValue(orderItem: AdminOrderItems, fieldName: string): void {
+  validateIntegerValue(orderItem: iAdminOrderItems, fieldName: string): void {
     const isValid = this.isIntegerValue(orderItem[fieldName]);
 
     if (fieldName === 'quantity') {
@@ -126,7 +126,7 @@ export class AdminOrderItemsComponent implements OnInit {
     });
   }
 
-  saveItem(orderItem: AdminOrderItems) {
+  saveItem(orderItem: iAdminOrderItems) {
     let payload = {};
     if (orderItem.supplier) {
       if (
@@ -175,7 +175,7 @@ export class AdminOrderItemsComponent implements OnInit {
     );
   }
 
-  onSupplierSelectionChange(orderItem: AdminOrderItems, supplierId: number) {
+  onSupplierSelectionChange(orderItem: iAdminOrderItems, supplierId: number) {
     orderItem.supplier = { id: supplierId, name: '' };
   }
 

@@ -6,9 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
-  selector: 'deleteOrderItem-modal',
-  templateUrl: 'deleteOrderItem-modal.component.html',
-  styleUrls: ['./deleteOrderItem-modal.component.scss'],
+  selector: 'delete-order-item-modal',
+  templateUrl: 'delete-order-item-modal.component.html',
+  styleUrls: ['./delete-order-item-modal.component.scss'],
 })
 export class DeleteOrderItemModalComponent implements OnInit {
   formDeleteOrderItem: FormGroup;

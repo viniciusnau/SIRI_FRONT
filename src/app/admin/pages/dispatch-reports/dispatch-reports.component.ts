@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { StocksService } from 'src/app/services/stocks.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { DispatchReportsModalComponent } from './modal/dispatch-reports-modal.component';
+import { DispatchReportsModalComponent } from './editModal/dispatch-reports-modal.component';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as moment from 'moment/moment';
@@ -11,7 +11,7 @@ import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-interface DispatchReport {
+interface iDispatchReport {
   id: number;
   public_defense: {
     id: number;
@@ -40,12 +40,12 @@ interface Product {
 }
 
 @Component({
-  selector: 'app-admin-dispatch-reports',
-  templateUrl: './admin-dispatch-reports.component.html',
-  styleUrls: ['./admin-dispatch-reports.component.scss'],
+  selector: 'app-dispatch-reports',
+  templateUrl: './dispatch-reports.component.html',
+  styleUrls: ['./dispatch-reports.component.scss'],
   providers: [PriceFormatPipe],
 })
-export class AdminDispatchReportsComponent implements OnInit {
+export class DispatchReports implements OnInit {
   currentPage = 1;
   response: any;
 
@@ -105,7 +105,7 @@ export class AdminDispatchReportsComponent implements OnInit {
     window.open(file, '_blank');
   }
 
-  generateDispatchReports(dispatchReport: DispatchReport) {
+  generateDispatchReports(dispatchReport: iDispatchReport) {
     const currentDate = moment(dispatchReport.created).format('DD/MM/YYYY');
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -152,9 +152,7 @@ export class AdminDispatchReportsComponent implements OnInit {
                     layout: 'noBorders',
                     table: {
                       widths: ['*', 'auto'],
-                      body: [
-                        [],
-                      ],
+                      body: [[]],
                     },
                   },
                   {
@@ -247,7 +245,9 @@ export class AdminDispatchReportsComponent implements OnInit {
               };
 
               const pdfDocGenerator = pdfMake.createPdf(docDefinition);
-              pdfDocGenerator.download(`DispatchReport_${dispatchReport.id}.pdf`);
+              pdfDocGenerator.download(
+                `DispatchReport_${dispatchReport.id}.pdf`,
+              );
 
               pdfDocGenerator.getBlob((blob) => {
                 const formData = new FormData();

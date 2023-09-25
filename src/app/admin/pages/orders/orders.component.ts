@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AdminOrdersModalComponent } from './modal/admin-orders-modal.component';
+import { InvoiceControlOrdersModalComponent } from './invoiceControlmodal/invoice-control-orders-modal.component';
 
 interface AdminOrder {
   id: number;
@@ -15,11 +15,11 @@ interface AdminOrder {
 }
 
 @Component({
-  selector: 'app-admin-orders',
-  templateUrl: './admin-orders.component.html',
-  styleUrls: ['./admin-orders.component.scss'],
+  selector: 'app-orders',
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.scss'],
 })
-export class AdminOrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit {
   currentPage = 1;
   response: any;
   loading = false;
@@ -51,7 +51,7 @@ export class AdminOrdersComponent implements OnInit {
 
   openModal(file, confirm_file): void {
     const data = { file: file, confirm_file: confirm_file };
-    const dialogRef = this.dialog.open(AdminOrdersModalComponent, {
+    const dialogRef = this.dialog.open(InvoiceControlOrdersModalComponent, {
       data: data,
     });
   }

@@ -6,15 +6,15 @@ import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'bidding-exemption-modal',
-  templateUrl: 'bidding-exemption-modal.component.html',
-  styleUrls: ['./bidding-exemption-modal.component.scss'],
+  selector: 'create-bidding-exemption-modal',
+  templateUrl: 'create-bidding-exemption-modal.component.html',
+  styleUrls: ['./create-bidding-exemption-modal.component.scss'],
 })
-export class BiddingExemptionModalComponent implements OnInit {
+export class CreateBiddingExemptionModalComponent implements OnInit {
   formBiddingExemption: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<BiddingExemptionModalComponent>,
+    public dialogRef: MatDialogRef<CreateBiddingExemptionModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
