@@ -57,6 +57,7 @@ interface ReceivingReports {
 export class ReceivingReportsComponent implements OnInit {
   currentPage = 1;
   response: any;
+  loading = false;
 
   constructor(
     private stocksService: StocksService,
@@ -67,6 +68,7 @@ export class ReceivingReportsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.getContent();
   }
 
@@ -80,6 +82,7 @@ export class ReceivingReportsComponent implements OnInit {
       .getReceivingReports(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
+        this.loading = false;
       });
   }
 

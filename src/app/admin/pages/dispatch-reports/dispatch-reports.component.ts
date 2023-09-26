@@ -48,6 +48,7 @@ interface Product {
 export class DispatchReportsComponent implements OnInit {
   currentPage = 1;
   response: any;
+  loading = false;
 
   constructor(
     private stocksService: StocksService,
@@ -58,6 +59,7 @@ export class DispatchReportsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.getContent();
   }
 
@@ -71,6 +73,7 @@ export class DispatchReportsComponent implements OnInit {
       .getDispatchReports(this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
+        this.loading = false;
       });
   }
 
