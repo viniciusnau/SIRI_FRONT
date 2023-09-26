@@ -69,8 +69,7 @@ import { ContactMaskDirective } from './directives/contactMask.directive';
 import { PriceFormatDirective } from './directives/price-format.directive';
 import { NegativeNotAllowedDirective } from './directives/negative-not-allowed.directive';
 import { MatCardModule } from '@angular/material/card';
-import { CommonCustomRoutingModule } from '../common/commonCustom-routing.module';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { CommonCustomModule } from '../common/commonCustom.module';
 
 @NgModule({
   declarations: [
@@ -91,7 +90,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     CategoriesComponent,
     MeasuresComponent,
     ProductsComponent,
-    SidebarComponent,
     BiddingExemption,
     CreateMaterialsConfirmOrderModalComponent,
     InvoiceModalComponent,
@@ -145,8 +143,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    CommonCustomRoutingModule,
     MatCardModule,
+    CommonCustomModule,
   ],
   exports: [PaginationComponent],
 })

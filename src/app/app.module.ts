@@ -9,7 +9,6 @@ import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 import { CommonCustomModule } from './common/commonCustom.module';
-import { CommonCustomRoutingModule } from './common/commonCustom-routing.module';
 
 registerLocaleData(ptBr);
 

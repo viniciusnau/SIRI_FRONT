@@ -10,23 +10,15 @@ import { Router } from '@angular/router';
 export class SidebarComponent {
   userSectionExpanded: boolean = false;
   reportsSectionExpanded: boolean = false;
-  userName: string = '';
-  is_admin: boolean;
+  isAdmin: boolean;
 
   constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {
-    this.isAdmin();
-    this.userName = sessionStorage.getItem('userName')
-      ? sessionStorage.getItem('userName')
-      : localStorage.getItem('userName');
-  }
-
-  isAdmin() {
-    const localToken = localStorage.getItem('is_admin');
-    const sessionToken = sessionStorage.getItem('is_admin');
-    this.is_admin = !!localToken || !!sessionToken;
-    console.log('isAdmin: ', !!localToken || !!sessionToken);
+    const localAdmin = localStorage.getItem('is_admin');
+    const sessionAdmin = sessionStorage.getItem('is_admin');
+    this.isAdmin = JSON.parse(localAdmin || sessionAdmin);
+    console.log('isAdmin: ', this.isAdmin);
   }
 
   logout() {

@@ -12,10 +12,18 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
-import { SidebarComponent } from './components/sidebar/sidebar/sidebar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { SidebarComponent as UserSidebarComponent } from './components/sidebar/user/sidebar.component';
+import { SidebarComponent as AdminSidebarComponent } from './components/sidebar/admin/sidebar.component';
 
 @NgModule({
-  declarations: [ForgotPasswordComponent, LoginComponent, SidebarComponent],
+  declarations: [
+    ForgotPasswordComponent,
+    LoginComponent,
+    SidebarComponent,
+    UserSidebarComponent,
+    AdminSidebarComponent,
+  ],
   imports: [
     CommonModule,
     CommonCustomRoutingModule,
@@ -24,12 +32,13 @@ import { SidebarComponent } from './components/sidebar/sidebar/sidebar.component
     MaterialCommonsModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminModule,
+    // AdminModule,
     MatIconModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
   ],
   providers: [],
+  exports: [SidebarComponent],
 })
 export class CommonCustomModule {}
