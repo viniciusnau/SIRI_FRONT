@@ -1,5 +1,5 @@
-<common-sidebar>
-  <mat-card admin>
+<admin-sidebar>
+  <mat-card *ngIf="!loading" admin>
     <mat-card-content>
       <mat-toolbar>
         <span>Guias de Entrada</span>
@@ -121,3 +121,4 @@
     </mat-card-content>
   </mat-card>
 </common-sidebar>
+<div class="custom-spinner" *ngIf="loading"></div>
