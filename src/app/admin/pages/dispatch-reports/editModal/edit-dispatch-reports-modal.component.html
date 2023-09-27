@@ -1,19 +1,21 @@
-<h1 mat-dialog-title>Editar guia de saída</h1>
-<div [formGroup]="formDescription" mat-dialog-content class="content">
-  <p>Descrição da guia</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="text"
-      matInput
-      formControlName="description"
-      (onChange)="getChangedProperties()"
-    />
-  </mat-form-field>
-  <div mat-dialog-actions class="actions">
-    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-    <button mat-button class="proceed" (click)="onClick()" cdkFocusInitial>
-      <!-- [disabled]="!hasChanges" -->
-      Salvar
-    </button>
+<div admin>
+  <h1 mat-dialog-title>Editar guia de saída</h1>
+  <div [formGroup]="formDescription" mat-dialog-content class="content">
+    <p>Descrição da guia</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="text"
+        matInput
+        formControlName="description"
+        (onChange)="getChangedProperties()"
+      />
+    </mat-form-field>
+    <div mat-dialog-actions class="actions">
+      <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+      <button mat-button class="proceed" (click)="onClick()" cdkFocusInitial>
+        <!-- [disabled]="!hasChanges" -->
+        Salvar
+      </button>
+    </div>
   </div>
 </div>

@@ -1,24 +1,26 @@
-<h1 mat-dialog-title>Editar medida</h1>
-<div [formGroup]="formMeasure" mat-dialog-content class="content">
-  <p>Nome</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="text"
-      matInput
-      formControlName="name"
-      (blur)="getChangedProperties()"
-    />
-  </mat-form-field>
-</div>
-<div mat-dialog-actions class="actions">
-  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button
-    mat-button
-    class="proceed"
-    (click)="onClick()"
-    [disabled]="!hasChanges"
-    cdkFocusInitial
-  >
-    Salvar
-  </button>
+<div admin>
+  <h1 mat-dialog-title>Editar medida</h1>
+  <div [formGroup]="formMeasure" mat-dialog-content class="content">
+    <p>Nome</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="text"
+        matInput
+        formControlName="name"
+        (blur)="getChangedProperties()"
+      />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      class="proceed"
+      (click)="onClick()"
+      [disabled]="!hasChanges"
+      cdkFocusInitial
+    >
+      Salvar
+    </button>
+  </div>
 </div>

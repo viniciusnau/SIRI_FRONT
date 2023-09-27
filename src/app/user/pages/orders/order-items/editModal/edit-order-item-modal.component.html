@@ -1,39 +1,41 @@
-<h1 mat-dialog-title>Editar item do pedido</h1>
-<div [formGroup]="formOrderItem" mat-dialog-content class="content">
-  <p *ngIf="!addedQuantity">Quantidade</p>
-  <mat-form-field *ngIf="!addedQuantity" appearance="fill">
-    <input
-      type="number"
-      matInput
-      formControlName="quantity"
-      appDigitLimit
-      negativeNotAllowed
-    />
-  </mat-form-field>
-  <p>Quantidade adicionada</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="number"
-      matInput
-      formControlName="added_quantity"
-      appDigitLimit
-      negativeNotAllowed
-    />
-  </mat-form-field>
-</div>
-<div mat-dialog-actions class="actions">
-  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button
-    mat-button
-    class="proceed"
-    (click)="onClick()"
-    cdkFocusInitial
-    [disabled]="
-      this.formOrderItem.invalid ||
-      this.formOrderItem.get('added_quantity')?.value === 0 ||
-      this.formOrderItem.get('quantity')?.value === 0
-    "
-  >
-    Salvar
-  </button>
+<div user>
+  <h1 mat-dialog-title>Editar item do pedido</h1>
+  <div [formGroup]="formOrderItem" mat-dialog-content class="content">
+    <p *ngIf="!addedQuantity">Quantidade</p>
+    <mat-form-field *ngIf="!addedQuantity" appearance="fill">
+      <input
+        type="number"
+        matInput
+        formControlName="quantity"
+        appDigitLimit
+        negativeNotAllowed
+      />
+    </mat-form-field>
+    <p>Quantidade adicionada</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="number"
+        matInput
+        formControlName="added_quantity"
+        appDigitLimit
+        negativeNotAllowed
+      />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      class="proceed"
+      (click)="onClick()"
+      cdkFocusInitial
+      [disabled]="
+        this.formOrderItem.invalid ||
+        this.formOrderItem.get('added_quantity')?.value === 0 ||
+        this.formOrderItem.get('quantity')?.value === 0
+      "
+    >
+      Salvar
+    </button>
+  </div>
 </div>

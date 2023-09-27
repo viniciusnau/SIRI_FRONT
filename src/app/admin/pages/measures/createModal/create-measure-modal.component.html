@@ -1,19 +1,21 @@
-<h1 mat-dialog-title>Criar medida</h1>
-<div [formGroup]="formMeasure" mat-dialog-content class="content">
-  <p>Nome*</p>
-  <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="name" />
-  </mat-form-field>
-</div>
-<div mat-dialog-actions class="actions">
-  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button
-    mat-button
-    class="proceed"
-    (click)="onClick()"
-    cdkFocusInitial
-    [disabled]="this.formMeasure.invalid"
-  >
-    Criar
-  </button>
+<div admin>
+  <h1 mat-dialog-title>Criar medida</h1>
+  <div [formGroup]="formMeasure" mat-dialog-content class="content">
+    <p>Nome*</p>
+    <mat-form-field appearance="fill">
+      <input type="text" matInput formControlName="name" />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      class="proceed"
+      (click)="onClick()"
+      cdkFocusInitial
+      [disabled]="this.formMeasure.invalid"
+    >
+      Criar
+    </button>
+  </div>
 </div>

@@ -1,48 +1,50 @@
-<h1 mat-dialog-title>Editar produto</h1>
-<div [formGroup]="formProduct" mat-dialog-content class="content">
-  <p>Nome</p>
-  <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="name" />
-  </mat-form-field>
-  <p>Descrição</p>
-  <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="description" />
-  </mat-form-field>
-  <p>Código</p>
-  <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="code" />
-  </mat-form-field>
-  <p>Categoria</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="category">
-      <mat-option
-        *ngFor="let category of data.categories"
-        [value]="category.id"
-        >{{ firstLetterOnCapital(category.name) }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
-  <p>Preço</p>
-  <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="price" appPriceFormat />
-  </mat-form-field>
-  <p>Disponível</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="is_available">
-      <mat-option [value]="true">Sim</mat-option>
-      <mat-option [value]="false">Não</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions class="actions">
-  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button
-    mat-button
-    class="proceed"
-    (click)="onClick()"
-    [disabled]="!hasChanges"
-    cdkFocusInitial
-  >
-    Salvar
-  </button>
+<div admin>
+  <h1 mat-dialog-title>Editar produto</h1>
+  <div [formGroup]="formProduct" mat-dialog-content class="content">
+    <p>Nome</p>
+    <mat-form-field appearance="fill">
+      <input type="text" matInput formControlName="name" />
+    </mat-form-field>
+    <p>Descrição</p>
+    <mat-form-field appearance="fill">
+      <input type="text" matInput formControlName="description" />
+    </mat-form-field>
+    <p>Código</p>
+    <mat-form-field appearance="fill">
+      <input type="text" matInput formControlName="code" />
+    </mat-form-field>
+    <p>Categoria</p>
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="category">
+        <mat-option
+          *ngFor="let category of data.categories"
+          [value]="category.id"
+          >{{ firstLetterOnCapital(category.name) }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <p>Preço</p>
+    <mat-form-field appearance="fill">
+      <input type="text" matInput formControlName="price" appPriceFormat />
+    </mat-form-field>
+    <p>Disponível</p>
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="is_available">
+        <mat-option [value]="true">Sim</mat-option>
+        <mat-option [value]="false">Não</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      class="proceed"
+      (click)="onClick()"
+      [disabled]="!hasChanges"
+      cdkFocusInitial
+    >
+      Salvar
+    </button>
+  </div>
 </div>

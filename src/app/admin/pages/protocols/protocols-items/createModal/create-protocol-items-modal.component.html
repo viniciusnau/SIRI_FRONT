@@ -1,38 +1,40 @@
-<h1 mat-dialog-title>Criar item da ata</h1>
-<div [formGroup]="formCreateProtocolItems" mat-dialog-content class="content">
-  <p>Produto*</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="product">
-      <mat-option *ngFor="let product of data.products" [value]="product.id">
-        {{ product.description }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<div admin>
+  <h1 mat-dialog-title>Criar item da ata</h1>
+  <div [formGroup]="formCreateProtocolItems" mat-dialog-content class="content">
+    <p>Produto*</p>
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="product">
+        <mat-option *ngFor="let product of data.products" [value]="product.id">
+          {{ product.description }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <p>Quantidade*</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="number"
-      matInput
-      formControlName="quantity"
-      appDigitLimit
-      negativeNotAllowed
-    />
-  </mat-form-field>
+    <p>Quantidade*</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="number"
+        matInput
+        formControlName="quantity"
+        appDigitLimit
+        negativeNotAllowed
+      />
+    </mat-form-field>
 
-  <div mat-dialog-actions class="actions">
-    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-    <button
-      mat-button
-      class="proceed"
-      (click)="onClick()"
-      cdkFocusInitial
-      [disabled]="
-        this.formCreateProtocolItems.invalid ||
-        this.formCreateProtocolItems.get('quantity')?.value === 0
-      "
-    >
-      Criar
-    </button>
+    <div mat-dialog-actions class="actions">
+      <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+      <button
+        mat-button
+        class="proceed"
+        (click)="onClick()"
+        cdkFocusInitial
+        [disabled]="
+          this.formCreateProtocolItems.invalid ||
+          this.formCreateProtocolItems.get('quantity')?.value === 0
+        "
+      >
+        Criar
+      </button>
+    </div>
   </div>
 </div>

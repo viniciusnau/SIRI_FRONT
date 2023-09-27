@@ -1,13 +1,19 @@
-<h1 mat-dialog-title>Excluir</h1>
-<div [formGroup]="formDeleteOrderItem" mat-dialog-content class="content">
-  <p>Justificativa</p>
-  <mat-form-field appearance="fill">
-    <input type="string" matInput formControlName="description" />
-  </mat-form-field>
+<div admin>
+  <h1 mat-dialog-title>Excluir</h1>
+  <div [formGroup]="formDeleteOrderItem" mat-dialog-content class="content">
+    <p>Justificativa</p>
+    <mat-form-field appearance="fill">
+      <input type="string" matInput formControlName="description" />
+    </mat-form-field>
 
-  <div mat-dialog-actions class="actions">
-    <button *ngIf="!loading" mat-button (click)="onNoClick()">Cancelar</button>
-    <button *ngIf="!loading" mat-button (click)="onClick()" cdkFocusInitial>Confirmar</button>
-    <div class="custom-spinner" *ngIf="loading"></div>
+    <div mat-dialog-actions class="actions">
+      <button *ngIf="!loading" mat-button (click)="onNoClick()">
+        Cancelar
+      </button>
+      <button *ngIf="!loading" mat-button (click)="onClick()" cdkFocusInitial>
+        Confirmar
+      </button>
+      <div class="custom-spinner" *ngIf="loading"></div>
+    </div>
   </div>
 </div>
