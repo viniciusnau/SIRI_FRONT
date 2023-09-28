@@ -6,15 +6,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrdersService } from 'src/app/services/orders.service';
 import { StocksService } from 'src/app/services/stocks.service';
 
-interface Supplier {
-  id: number;
-  name: number;
-}
-
-export interface iDispatch {
-  suppliers: Supplier[];
-}
-
 @Component({
   selector: 'create-dispatch-modal',
   templateUrl: 'create-dispatch-modal.component.html',
