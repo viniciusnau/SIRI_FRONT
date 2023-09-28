@@ -82,11 +82,12 @@ export class OrderItemsComponent implements OnInit {
     return text[0].toUpperCase() + text.substring(1);
   }
 
-  openEditModal(orderItemId: string, addedQuantity: string) {
+  openEditModal(orderItemId: string, addedQuantity: string, quantity: string) {
     const dialogRef = this.dialog.open(EditOrderItemModalComponent, {
       data: {
         order_item_id: orderItemId,
         added_quantity: addedQuantity,
+        quantity: quantity,
         snackBar: this.snackBar,
       },
     });

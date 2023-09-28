@@ -63,7 +63,7 @@
                 aria-label="Edit order item"
                 [disabled]="orderItems.quantity === orderItems.added_quantity"
                 (click)="
-                  openEditModal(orderItems.id, orderItems.added_quantity)
+                  openEditModal(orderItems.id, orderItems.added_quantity, orderItems.quantity)
                 "
               >
                 <mat-icon>edit</mat-icon>
