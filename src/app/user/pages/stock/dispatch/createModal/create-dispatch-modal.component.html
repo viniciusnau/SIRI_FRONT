@@ -10,6 +10,11 @@
         appDigitLimit
         negativeNotAllowed
       />
+      <mat-error *ngIf="formStockWithdrawals.get('withdraw_quantity').hasError('maxQuantityExceeded')">
+        Você não tem tanto itens em estoque! ({{
+        maxQuantity
+        }})
+      </mat-error>
     </mat-form-field>
     <p>Descrição*</p>
     <mat-form-field appearance="fill">
@@ -21,6 +26,7 @@
     <button
       [disabled]="
         !formStockWithdrawals.valid ||
+        formStockWithdrawals.hasError('maxQuantityExceeded') ||
         this.formStockWithdrawals.get('withdraw_quantity')?.value === 0
       "
       class="proceed"

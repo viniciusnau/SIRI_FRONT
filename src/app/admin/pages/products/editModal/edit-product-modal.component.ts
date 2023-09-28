@@ -115,6 +115,6 @@ export class EditProductModalComponent implements OnInit {
 
     setTimeout(() => {
       window.location.reload();
-    }, 2000);
+    }, 1000);
   }
 }

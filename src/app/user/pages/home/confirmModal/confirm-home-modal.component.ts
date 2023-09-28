@@ -106,6 +106,6 @@ export class ConfirmHomeModalComponent implements OnInit {
     this.createOrder(this.chosenProducts);
     setTimeout(() => {
       window.location.reload();
-    }, 2000);
+    }, 1000);
   }
 }

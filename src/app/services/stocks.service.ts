@@ -51,6 +51,18 @@ export class StocksService {
       : this.httpClient.get<any>(`${this.apiUrl}/stock-items`, options);
   }
 
+  public getStockItem(stock_item = ''): Observable<any> {
+    const options = {
+      headers: this.httpOptions.headers
+    };
+    return stock_item
+      ? this.httpClient.get<any>(
+        `${this.apiUrl}/stock-items/${stock_item}`,
+        options,
+      )
+      : this.httpClient.get<any>(`${this.apiUrl}/stock-items/${stock_item}`, options);
+  }
+
   public getSectors(pageChange = ''): Observable<any> {
     return pageChange
       ? this.httpClient.get<any>(
@@ -183,23 +195,9 @@ export class StocksService {
     );
   }
 
-  public getProtocols(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/protocols`,
-      this.httpOptions,
-    );
-  }
-
   public getAllProtocols(): Observable<any> {
     return this.httpClient.get<any>(
       `${this.apiUrl}/protocols/all/`,
-      this.httpOptions,
-    );
-  }
-
-  public getPublicDefenses(): Observable<any> {
-    return this.httpClient.get<any>(
-      `${this.apiUrl}/public-defenses`,
       this.httpOptions,
     );
   }
