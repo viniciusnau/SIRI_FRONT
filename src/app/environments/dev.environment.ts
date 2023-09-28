@@ -1,4 +1,4 @@
 export const devEnvironment = {
   production: false,
-  apiUrl: 'http://52.67.57.23:8000'
+  apiUrl: 'http://webserver.sc.def.br:8000'
 };

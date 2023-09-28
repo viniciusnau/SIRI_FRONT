@@ -98,6 +98,7 @@ export class OrderItemsComponent implements OnInit {
     'measure',
     'quantity',
     'added_quantity',
+    'quantity_to_be_added',
     'edit_order_item',
     'delete_order_item',
   ];
