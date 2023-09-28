@@ -1,47 +1,49 @@
-<h1 mat-dialog-title>Criar pedido do fornecedor</h1>
-<div [formGroup]="formSupplierOrders" mat-dialog-content class="content">
-  <p>Fornecedor*</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="supplier">
-      <mat-option
-        *ngFor="let supplier of data.suppliers"
-        [value]="supplier.id"
-        >{{ firstLetterOnCapital(supplier.name) }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
+<div admin>
+  <h1 mat-dialog-title>Criar pedido do fornecedor</h1>
+  <div [formGroup]="formSupplierOrders" mat-dialog-content class="content">
+    <p>Fornecedor*</p>
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="supplier">
+        <mat-option
+          *ngFor="let supplier of data.suppliers"
+          [value]="supplier.id"
+          >{{ firstLetterOnCapital(supplier.name) }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
 
-  <p>Ata*</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="protocol">
-      <mat-option
-        *ngFor="let protocol of data.protocols"
-        [value]="protocol.id"
-        >{{ protocol.code }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
+    <p>Ata*</p>
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="protocol">
+        <mat-option
+          *ngFor="let protocol of data.protocols"
+          [value]="protocol.id"
+          >{{ protocol.code }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
 
-  <p>Defensoria*</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="public_defense">
-      <mat-option
-        *ngFor="let public_defense of data.public_defenses"
-        [value]="public_defense.id"
-        >{{ firstLetterOnCapital(public_defense.name) }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions class="actions">
-  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button
-    mat-button
-    class="proceed"
-    (click)="onClick()"
-    cdkFocusInitial
-    [disabled]="this.formSupplierOrders.invalid"
-  >
-    Criar
-  </button>
+    <p>Defensoria*</p>
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="public_defense">
+        <mat-option
+          *ngFor="let public_defense of data.public_defenses"
+          [value]="public_defense.id"
+          >{{ firstLetterOnCapital(public_defense.name) }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      class="proceed"
+      (click)="onClick()"
+      cdkFocusInitial
+      [disabled]="this.formSupplierOrders.invalid"
+    >
+      Criar
+    </button>
+  </div>
 </div>

@@ -1,49 +1,59 @@
-<h1 mat-dialog-title>Criar nota</h1>
-<div [formGroup]="formInvoice" mat-dialog-content class="content">
-  <p>Código*</p>
-  <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="code" />
-  </mat-form-field>
-  <p>Fornecedor*</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="supplier">
-      <mat-option *ngFor="let supplier of data.suppliers" [value]="supplier.id">
-        {{ supplier.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <p>Núcleo*</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="public_defense">
-      <mat-option
-        *ngFor="let public_defense of data.public_defenses"
-        [value]="public_defense.id"
-      >
-        {{ public_defense.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <p>Valor Total*</p>
-  <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="total_value" appPriceFormat />
-  </mat-form-field>
-  <div class="custom-file-input">
-    <label for="fileInput" class="file-label">Escolher arquivo</label>
-    <input type="file" id="fileInput" #fileInput (change)="onFileChange()" />
+<div admin>
+  <h1 mat-dialog-title>Criar nota</h1>
+  <div [formGroup]="formInvoice" mat-dialog-content class="content">
+    <p>Código*</p>
+    <mat-form-field appearance="fill">
+      <input type="text" matInput formControlName="code" />
+    </mat-form-field>
+    <p>Fornecedor*</p>
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="supplier">
+        <mat-option
+          *ngFor="let supplier of data.suppliers"
+          [value]="supplier.id"
+        >
+          {{ supplier.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p>Núcleo*</p>
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="public_defense">
+        <mat-option
+          *ngFor="let public_defense of data.public_defenses"
+          [value]="public_defense.id"
+        >
+          {{ public_defense.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p>Valor Total*</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="text"
+        matInput
+        formControlName="total_value"
+        appPriceFormat
+      />
+    </mat-form-field>
+    <div class="custom-file-input">
+      <label for="fileInput" class="file-label">Escolher arquivo</label>
+      <input type="file" id="fileInput" #fileInput (change)="onFileChange()" />
+    </div>
+    <div *ngIf="selectedFile" class="file-info">
+      Arquivo selecionado: {{ selectedFile.name }}
+    </div>
   </div>
-  <div *ngIf="selectedFile" class="file-info">
-    Arquivo selecionado: {{ selectedFile.name }}
+  <div mat-dialog-actions class="actions">
+    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      class="proceed"
+      (click)="onClick()"
+      cdkFocusInitial
+      [disabled]="this.formInvoice.invalid || !this.selectedFile"
+    >
+      Criar
+    </button>
   </div>
-</div>
-<div mat-dialog-actions class="actions">
-  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button
-    mat-button
-    class="proceed"
-    (click)="onClick()"
-    cdkFocusInitial
-    [disabled]="this.formInvoice.invalid || !this.selectedFile"
-  >
-    Criar
-  </button>
 </div>

@@ -1,0 +1,14 @@
+<ng-container *ngIf="isAdmin; then adminSidebar; else userSidebar">
+</ng-container>
+
+<ng-template #adminSidebar>
+  <admin-sidebar>
+    <ng-content select="[admin]"></ng-content>
+  </admin-sidebar>
+</ng-template>
+
+<ng-template #userSidebar>
+  <user-sidebar>
+    <ng-content select="[user]"></ng-content>
+  </user-sidebar>
+</ng-template>

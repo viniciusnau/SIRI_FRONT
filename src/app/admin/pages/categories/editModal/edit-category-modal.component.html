@@ -1,24 +1,26 @@
-<h1 mat-dialog-title>Editar categoria</h1>
-<div [formGroup]="formCategory" mat-dialog-content class="content">
-  <p>Natureza de Despesa</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="text"
-      matInput
-      formControlName="code"
-      (blur)="getChangedProperties()"
-    />
-  </mat-form-field>
-</div>
-<div mat-dialog-actions class="actions">
-  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button
-    mat-button
-    class="proceed"
-    (click)="onClick()"
-    [disabled]="!hasChanges"
-    cdkFocusInitial
-  >
-    Salvar
-  </button>
+<div admin>
+  <h1 mat-dialog-title>Editar categoria</h1>
+  <div [formGroup]="formCategory" mat-dialog-content class="content">
+    <p>Natureza de Despesa</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="text"
+        matInput
+        formControlName="code"
+        (blur)="getChangedProperties()"
+      />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      class="proceed"
+      (click)="onClick()"
+      [disabled]="!hasChanges"
+      cdkFocusInitial
+    >
+      Salvar
+    </button>
+  </div>
 </div>

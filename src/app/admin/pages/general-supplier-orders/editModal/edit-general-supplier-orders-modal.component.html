@@ -1,37 +1,39 @@
-<h1 mat-dialog-title>Editar pedido do Fornecedor</h1>
-<div [formGroup]="formSupplierOrder" mat-dialog-content class="content">
-  <p>Prazo de Entrega</p>
-  <mat-form-field appearance="fill">
-    <input
-      matInput
-      [matDatepicker]="startDatePicker"
-      placeholder="Prazo de Entrega"
-      formControlName="delivery_date"
-      (blur)="getChangedProperties()"
-    />
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="startDatePicker"
-    ></mat-datepicker-toggle>
-    <mat-datepicker #startDatePicker></mat-datepicker>
-  </mat-form-field>
-  <p>Recebido</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="received" (blur)="getChangedProperties()">
-      <mat-option [value]="true">Sim</mat-option>
-      <mat-option [value]="false">Não</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions class="actions">
-  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button
-    mat-button
-    class="proceed"
-    (click)="onClick()"
-    [disabled]="!hasChanges || this.formSupplierOrder.invalid"
-    cdkFocusInitial
-  >
-    Salvar
-  </button>
+<div admin>
+  <h1 mat-dialog-title>Editar pedido do Fornecedor</h1>
+  <div [formGroup]="formSupplierOrder" mat-dialog-content class="content">
+    <p>Prazo de Entrega</p>
+    <mat-form-field appearance="fill">
+      <input
+        matInput
+        [matDatepicker]="startDatePicker"
+        placeholder="Prazo de Entrega"
+        formControlName="delivery_date"
+        (blur)="getChangedProperties()"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="startDatePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+    <p>Recebido</p>
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="received" (blur)="getChangedProperties()">
+        <mat-option [value]="true">Sim</mat-option>
+        <mat-option [value]="false">Não</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      class="proceed"
+      (click)="onClick()"
+      [disabled]="!hasChanges || this.formSupplierOrder.invalid"
+      cdkFocusInitial
+    >
+      Salvar
+    </button>
+  </div>
 </div>

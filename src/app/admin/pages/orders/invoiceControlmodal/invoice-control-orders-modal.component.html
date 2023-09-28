@@ -1,76 +1,91 @@
-<h1 mat-dialog-title>Adicionar ao Controle de Notas?</h1>
-<div [formGroup]="formOrder" mat-dialog-content class="content">
-  <div class="form-row">
-    <mat-form-field class="form-field">
-      <input matInput formControlName="code" placeholder="Código*" required />
-    </mat-form-field>
-    <mat-form-field class="form-field">
-      <mat-select formControlName="supplier" placeholder="Fornecedor*" required>
-        <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">{{
-          supplier.name
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="form-field">
-      <mat-select
-        formControlName="public_defense"
-        placeholder="Núcleo*"
-        required
-      >
-        <mat-option
-          *ngFor="let publicDefense of public_defenses"
-          [value]="publicDefense.id"
-          >{{ publicDefense.name }}</mat-option
+<div admin>
+  <h1 mat-dialog-title>Adicionar ao Controle de Notas?</h1>
+  <div [formGroup]="formOrder" mat-dialog-content class="content">
+    <div class="form-row">
+      <mat-form-field class="form-field">
+        <input matInput formControlName="code" placeholder="Código*" required />
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-select
+          formControlName="supplier"
+          placeholder="Fornecedor*"
+          required
         >
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="form-field">
-      <input
-        matInput
-        formControlName="total_value"
-        placeholder="Valor*"
-        required
-        appPriceFormat
-      />
-    </mat-form-field>
+          <mat-option
+            *ngFor="let supplier of suppliers"
+            [value]="supplier.id"
+            >{{ supplier.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-select
+          formControlName="public_defense"
+          placeholder="Núcleo*"
+          required
+        >
+          <mat-option
+            *ngFor="let publicDefense of public_defenses"
+            [value]="publicDefense.id"
+            >{{ publicDefense.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input
+          matInput
+          formControlName="total_value"
+          placeholder="Valor*"
+          required
+          appPriceFormat
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="pdf-container">
+      <object
+        [data]="fileData"
+        type="application/pdf"
+        width="50%"
+        height="500px"
+      >
+        <p>
+          Seu navegador não suporta PDFs.
+          <a [href]="fileData" target="_blank">Clique aqui para baixar.</a>
+        </p>
+      </object>
+      <object
+        [data]="confirmFileData"
+        type="application/pdf"
+        width="50%"
+        height="500px"
+      >
+        <p>
+          Seu navegador não suporta PDFs.
+          <a [href]="confirmFileData" target="_blank"
+            >Clique aqui para baixar.</a
+          >
+        </p>
+      </object>
+    </div>
   </div>
 
-  <div class="pdf-container">
-    <object [data]="fileData" type="application/pdf" width="50%" height="500px">
-      <p>
-        Seu navegador não suporta PDFs.
-        <a [href]="fileData" target="_blank">Clique aqui para baixar.</a>
-      </p>
-    </object>
-    <object
-      [data]="confirmFileData"
-      type="application/pdf"
-      width="50%"
-      height="500px"
+  <div mat-dialog-actions class="actions">
+    <button *ngIf="!loading" mat-button class="cancel" (click)="onNoClick()">
+      Não
+    </button>
+    <button
+      *ngIf="!loading"
+      mat-button
+      class="proceed"
+      (click)="onClick()"
+      cdkFocusInitial
+      [disabled]="
+        !formOrder.valid || this.formOrder.get('total_value')?.value === 'R$ '
+      "
     >
-      <p>
-        Seu navegador não suporta PDFs.
-        <a [href]="confirmFileData" target="_blank">Clique aqui para baixar.</a>
-      </p>
-    </object>
+      Sim
+    </button>
+    <div class="custom-spinner" *ngIf="loading"></div>
   </div>
-</div>
-
-<div mat-dialog-actions class="actions">
-  <button *ngIf="!loading" mat-button class="cancel" (click)="onNoClick()">
-    Não
-  </button>
-  <button
-    *ngIf="!loading"
-    mat-button
-    class="proceed"
-    (click)="onClick()"
-    cdkFocusInitial
-    [disabled]="
-      !formOrder.valid || this.formOrder.get('total_value')?.value === 'R$ '
-    "
-  >
-    Sim
-  </button>
-  <div class="custom-spinner" *ngIf="loading"></div>
 </div>

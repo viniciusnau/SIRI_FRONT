@@ -1,32 +1,34 @@
-<h1 mat-dialog-title>Criar saída</h1>
-<div [formGroup]="formStockWithdrawals" mat-dialog-content class="content">
-  <p>Quantidade*</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="number"
-      matInput
-      formControlName="withdraw_quantity"
-      appDigitLimit
-      negativeNotAllowed
-    />
-  </mat-form-field>
-  <p>Descrição*</p>
-  <mat-form-field appearance="fill">
-    <input type="text" matInput formControlName="description" />
-  </mat-form-field>
-</div>
-<div mat-dialog-actions class="actions">
-  <button class="cancel" mat-button (click)="onNoClick()">Cancelar</button>
-  <button
-    [disabled]="
-      !formStockWithdrawals.valid ||
-      this.formStockWithdrawals.get('withdraw_quantity')?.value === 0
-    "
-    class="proceed"
-    mat-button
-    (click)="onClick()"
-    cdkFocusInitial
-  >
-    Criar
-  </button>
+<div user>
+  <h1 mat-dialog-title>Criar saída</h1>
+  <div [formGroup]="formStockWithdrawals" mat-dialog-content class="content">
+    <p>Quantidade*</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="number"
+        matInput
+        formControlName="withdraw_quantity"
+        appDigitLimit
+        negativeNotAllowed
+      />
+    </mat-form-field>
+    <p>Descrição*</p>
+    <mat-form-field appearance="fill">
+      <input type="text" matInput formControlName="description" />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button class="cancel" mat-button (click)="onNoClick()">Cancelar</button>
+    <button
+      [disabled]="
+        !formStockWithdrawals.valid ||
+        this.formStockWithdrawals.get('withdraw_quantity')?.value === 0
+      "
+      class="proceed"
+      mat-button
+      (click)="onClick()"
+      cdkFocusInitial
+    >
+      Criar
+    </button>
+  </div>
 </div>

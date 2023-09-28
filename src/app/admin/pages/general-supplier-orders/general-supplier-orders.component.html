@@ -1,5 +1,5 @@
-<admin-sidebar>
-  <mat-card *ngIf="!loading">
+<common-sidebar>
+  <mat-card *ngIf="!loading" admin>
     <mat-card-content>
       <mat-toolbar>
         <span>Pedidos do Fornecedor</span>
@@ -131,5 +131,5 @@
       </table>
     </mat-card-content>
   </mat-card>
-</admin-sidebar>
+</common-sidebar>
 <div class="initial-custom-spinner" *ngIf="loading"></div>

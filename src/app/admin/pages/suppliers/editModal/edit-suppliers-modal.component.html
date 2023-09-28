@@ -1,109 +1,111 @@
-<h1 mat-dialog-title>Editar fornecedor</h1>
-<div [formGroup]="formSuppliers" mat-dialog-content class="content">
-  <p>Nome</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="text"
-      matInput
-      formControlName="name"
-      (blur)="getChangedProperties()"
-    />
-  </mat-form-field>
-  <p>Responsável</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="text"
-      matInput
-      formControlName="agent"
-      (blur)="getChangedProperties()"
-    />
-  </mat-form-field>
-  <p>Endereço</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="text"
-      matInput
-      formControlName="address"
-      (blur)="getChangedProperties()"
-    />
-  </mat-form-field>
-  <p>Email</p>
-  <mat-form-field appearance="fill">
-    <input
-      put
-      type="text"
-      matInput
-      formControlName="email"
-      (blur)="checkEmailValidity(); getChangedProperties()"
-      [class.invalid]="isInvalidEmail"
-    />
-    <mat-error *ngIf="isInvalidEmail">Email inválido</mat-error>
-  </mat-form-field>
-  <p>Contato</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="text"
-      matInput
-      formControlName="phone"
-      contactMask
-      (blur)="getChangedProperties()"
-    />
-  </mat-form-field>
-  <p>CNPJ</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="text"
-      matInput
-      formControlName="ein"
-      cnpjMask
-      maxlength="18"
-      (blur)="getChangedProperties()"
-    />
-  </mat-form-field>
-  <p>CPF</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="text"
-      matInput
-      formControlName="ssn"
-      cpfMask
-      (blur)="getChangedProperties()"
-    />
-  </mat-form-field>
-  <p>RG</p>
-  <mat-form-field appearance="fill">
-    <input
-      type="text"
-      matInput
-      formControlName="nic"
-      maxlength="20"
-      (blur)="getChangedProperties()"
-    />
-  </mat-form-field>
-  <p>Categoria</p>
-  <mat-form-field appearance="fill">
-    <mat-select
-      [(ngModel)]="selectedCategories"
-      formControlName="category"
-      multiple
-    >
-      <mat-option
-        *ngFor="let category of data.categories"
-        [value]="category.id"
-        >{{ firstLetterOnCapital(category.name) }}</mat-option
+<div admin>
+  <h1 mat-dialog-title>Editar fornecedor</h1>
+  <div [formGroup]="formSuppliers" mat-dialog-content class="content">
+    <p>Nome</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="text"
+        matInput
+        formControlName="name"
+        (blur)="getChangedProperties()"
+      />
+    </mat-form-field>
+    <p>Responsável</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="text"
+        matInput
+        formControlName="agent"
+        (blur)="getChangedProperties()"
+      />
+    </mat-form-field>
+    <p>Endereço</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="text"
+        matInput
+        formControlName="address"
+        (blur)="getChangedProperties()"
+      />
+    </mat-form-field>
+    <p>Email</p>
+    <mat-form-field appearance="fill">
+      <input
+        put
+        type="text"
+        matInput
+        formControlName="email"
+        (blur)="checkEmailValidity(); getChangedProperties()"
+        [class.invalid]="isInvalidEmail"
+      />
+      <mat-error *ngIf="isInvalidEmail">Email inválido</mat-error>
+    </mat-form-field>
+    <p>Contato</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="text"
+        matInput
+        formControlName="phone"
+        contactMask
+        (blur)="getChangedProperties()"
+      />
+    </mat-form-field>
+    <p>CNPJ</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="text"
+        matInput
+        formControlName="ein"
+        cnpjMask
+        maxlength="18"
+        (blur)="getChangedProperties()"
+      />
+    </mat-form-field>
+    <p>CPF</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="text"
+        matInput
+        formControlName="ssn"
+        cpfMask
+        (blur)="getChangedProperties()"
+      />
+    </mat-form-field>
+    <p>RG</p>
+    <mat-form-field appearance="fill">
+      <input
+        type="text"
+        matInput
+        formControlName="nic"
+        maxlength="20"
+        (blur)="getChangedProperties()"
+      />
+    </mat-form-field>
+    <p>Categoria</p>
+    <mat-form-field appearance="fill">
+      <mat-select
+        [(ngModel)]="selectedCategories"
+        formControlName="category"
+        multiple
       >
-    </mat-select>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions class="actions">
-  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button
-    mat-button
-    class="proceed"
-    (click)="onClick()"
-    [disabled]="!hasChanges"
-    cdkFocusInitial
-  >
-    Salvar
-  </button>
+        <mat-option
+          *ngFor="let category of data.categories"
+          [value]="category.id"
+          >{{ firstLetterOnCapital(category.name) }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      class="proceed"
+      (click)="onClick()"
+      [disabled]="!hasChanges"
+      cdkFocusInitial
+    >
+      Salvar
+    </button>
+  </div>
 </div>

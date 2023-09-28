@@ -1,62 +1,64 @@
-<h1 mat-dialog-title>Criar pedido de AF</h1>
-<div mat-dialog-content class="content" [formGroup]="formMaterialsOrder">
-  <p>Fornecedor*</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="supplier_id">
-      <mat-option
-        *ngFor="let supplier of data.suppliers"
-        [value]="supplier.id"
-        >{{ supplier.name }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
-  <p>Categoria*</p>
-  <mat-form-field appearance="fill">
-    <mat-select formControlName="category_id">
-      <mat-option
-        *ngFor="let category of data.categories"
-        [value]="category.id"
-        >{{ firstLetterOnCapital(category.name) }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
-  <p>Data Inicial*</p>
-  <mat-form-field appearance="fill">
-    <input
-      matInput
-      [matDatepicker]="initialDatePicker"
-      formControlName="initial_date"
-    />
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="initialDatePicker"
-    ></mat-datepicker-toggle>
-    <mat-datepicker #initialDatePicker></mat-datepicker>
-  </mat-form-field>
-  <p>Data Final*</p>
-  <mat-form-field appearance="fill">
-    <input
-      matInput
-      [matDatepicker]="finalDatePicker"
-      formControlName="final_date"
-    />
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="finalDatePicker"
-    ></mat-datepicker-toggle>
-    <mat-datepicker #finalDatePicker></mat-datepicker>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions class="actions">
-  <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
-  <button
-    mat-button
-    class="proceed"
-    [mat-dialog-close]=""
-    cdkFocusInitial
-    (click)="onClick()"
-    [disabled]="this.formMaterialsOrder.invalid"
-  >
-    Ok
-  </button>
+<div admin>
+  <h1 mat-dialog-title>Criar pedido de AF</h1>
+  <div mat-dialog-content class="content" [formGroup]="formMaterialsOrder">
+    <p>Fornecedor*</p>
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="supplier_id">
+        <mat-option
+          *ngFor="let supplier of data.suppliers"
+          [value]="supplier.id"
+          >{{ supplier.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <p>Categoria*</p>
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="category_id">
+        <mat-option
+          *ngFor="let category of data.categories"
+          [value]="category.id"
+          >{{ firstLetterOnCapital(category.name) }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <p>Data Inicial*</p>
+    <mat-form-field appearance="fill">
+      <input
+        matInput
+        [matDatepicker]="initialDatePicker"
+        formControlName="initial_date"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="initialDatePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #initialDatePicker></mat-datepicker>
+    </mat-form-field>
+    <p>Data Final*</p>
+    <mat-form-field appearance="fill">
+      <input
+        matInput
+        [matDatepicker]="finalDatePicker"
+        formControlName="final_date"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="finalDatePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #finalDatePicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-button class="cancel" (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      class="proceed"
+      [mat-dialog-close]=""
+      cdkFocusInitial
+      (click)="onClick()"
+      [disabled]="this.formMaterialsOrder.invalid"
+    >
+      Ok
+    </button>
+  </div>
 </div>
