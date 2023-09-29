@@ -5,6 +5,7 @@ import { CreateDispatchModalComponent } from './createModal/create-dispatch-moda
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
+import { StocksService } from '../../../../services/stocks.service';
 
 @Component({
   selector: 'user-dispatch',
@@ -17,9 +18,11 @@ export class DispatchComponent implements OnInit {
   page = 'next';
   loading: number | null = null;
   stockItemId: string;
+  maxQuantity: any;
 
   constructor(
     private ordersService: OrdersService,
+    private stockService: StocksService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -42,8 +45,11 @@ export class DispatchComponent implements OnInit {
       .getStockWithdrawals(orderId, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
-        this.loading = null;
       });
+    this.stockService.getStockItem(this.stockItemId).subscribe((result) => {
+      this.maxQuantity = result.quantity;
+      this.loading = null;
+    });
   }
 
   deleteWithdraw(withdraw_id: string) {
@@ -94,7 +100,7 @@ export class DispatchComponent implements OnInit {
 
   openModal(): void {
     const dialogRef = this.dialog.open(CreateDispatchModalComponent, {
-      data: { stock_item_id: this.stockItemId },
+      data: { stock_item_id: this.stockItemId, maxQuantity: this.maxQuantity },
     });
   }
 

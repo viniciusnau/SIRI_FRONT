@@ -1,19 +1,10 @@
-import { OrdersService } from 'src/app/services/orders.service';
-import { StocksService } from 'src/app/services/stocks.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-interface Supplier {
-  id: number;
-  name: number;
-}
-
-export interface iDispatch {
-  suppliers: Supplier[];
-}
+import { OrdersService } from 'src/app/services/orders.service';
+import { StocksService } from 'src/app/services/stocks.service';
 
 @Component({
   selector: 'create-dispatch-modal',
@@ -22,6 +13,7 @@ export interface iDispatch {
 })
 export class CreateDispatchModalComponent implements OnInit {
   formStockWithdrawals: FormGroup;
+  maxQuantity: any;
 
   constructor(
     public dialogRef: MatDialogRef<CreateDispatchModalComponent>,
@@ -34,11 +26,18 @@ export class CreateDispatchModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.maxQuantity = this.data.maxQuantity;
   }
 
   createForm() {
     this.formStockWithdrawals = this.formBuilder.group({
-      withdraw_quantity: ['', [Validators.required]],
+      withdraw_quantity: [
+        '',
+        [
+          Validators.required,
+          this.maxQuantityValidator.bind(this),
+        ],
+      ],
       description: ['', [Validators.required]],
     });
   }
@@ -52,34 +51,35 @@ export class CreateDispatchModalComponent implements OnInit {
 
     createStockWithdrawalData.stock_item = this.data.stock_item_id;
 
-    this.ordersService
-      .createStockWithdrawal(createStockWithdrawalData)
-      .subscribe(
-        (response) => {
-          this.snackBar.open(
-            snackbarConsts.user.stock.output.create.success,
-            snackbarConsts.close,
-            {
-              duration: 3000,
-              horizontalPosition: 'end',
-              verticalPosition: 'top',
-            },
-          );
-        },
-        (error) => {
-          this.snackBar.open(
-            snackbarConsts.user.stock.output.create.error,
-            snackbarConsts.close,
-            {
-              duration: 3000,
-              horizontalPosition: 'end',
-              verticalPosition: 'top',
-            },
-          );
-        },
-      );
+    this.ordersService.createStockWithdrawal(createStockWithdrawalData).subscribe(
+      (response) => {
+        this.snackBar.open(snackbarConsts.user.stock.output.create.success, snackbarConsts.close, {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+        });
+      },
+      (error) => {
+        this.snackBar.open(snackbarConsts.user.stock.output.create.error, snackbarConsts.close, {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+        });
+      },
+    );
     setTimeout(() => {
       window.location.reload();
-    }, 2000);
+    }, 1000);
+  }
+
+  maxQuantityValidator(control: FormControl): { [key: string]: any } | null {
+    const inputQuantity = control.value;
+    const maxQuantity = this.maxQuantity;
+
+    if (inputQuantity > maxQuantity) {
+      return { maxQuantityExceeded: true };
+    }
+
+    return null;
   }
 }

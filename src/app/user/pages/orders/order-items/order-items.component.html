@@ -39,9 +39,16 @@
         </ng-container>
 
         <ng-container matColumnDef="added_quantity">
-          <th mat-header-cell *matHeaderCellDef>Quantidade Adicionada</th>
+          <th mat-header-cell *matHeaderCellDef>Quantidade Entregue</th>
           <td mat-cell *matCellDef="let orderItems">
             {{ orderItems.added_quantity }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity_to_be_added">
+          <th mat-header-cell *matHeaderCellDef>Quantidade A Ser Entregue</th>
+          <td mat-cell *matCellDef="let orderItems">
+            {{ orderItems.quantity - orderItems.added_quantity }}
           </td>
         </ng-container>
 
@@ -56,7 +63,7 @@
                 aria-label="Edit order item"
                 [disabled]="orderItems.quantity === orderItems.added_quantity"
                 (click)="
-                  openEditModal(orderItems.id, orderItems.added_quantity)
+                  openEditModal(orderItems.id, orderItems.added_quantity, orderItems.quantity)
                 "
               >
                 <mat-icon>edit</mat-icon>

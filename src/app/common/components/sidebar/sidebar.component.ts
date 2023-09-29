@@ -18,7 +18,6 @@ export class SidebarComponent {
     const localAdmin = localStorage.getItem('is_admin');
     const sessionAdmin = sessionStorage.getItem('is_admin');
     this.isAdmin = JSON.parse(localAdmin || sessionAdmin);
-    console.log('isAdmin: ', this.isAdmin);
   }
 
   logout() {

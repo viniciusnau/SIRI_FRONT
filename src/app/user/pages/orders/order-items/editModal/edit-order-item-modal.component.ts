@@ -1,6 +1,6 @@
 import { OrdersService } from '../../../../../services/orders.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import snackbarConsts from 'src/snackbarConsts';
 
@@ -12,6 +12,7 @@ import snackbarConsts from 'src/snackbarConsts';
 export class EditOrderItemModalComponent implements OnInit {
   formOrderItem: FormGroup;
   addedQuantity: number;
+  quantity: number;
 
   constructor(
     public dialogRef: MatDialogRef<EditOrderItemModalComponent>,
@@ -22,19 +23,25 @@ export class EditOrderItemModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.addedQuantity = this.data.added_quantity;
+    this.quantity = this.data.quantity;
     this.createForm();
+    this.fetchDataAndPopulateForm();
   }
 
   createForm() {
     this.formOrderItem = this.formBuilder.group({
       added_quantity: ['', Validators.required],
       quantity: [''],
+    }, {
+      validators: [addedQuantityValidator()]
     });
   }
 
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
+  fetchDataAndPopulateForm() {
+    this.formOrderItem.patchValue({
+      quantity: this.quantity,
+      added_quantity: this.addedQuantity,
+    });
   }
 
   onNoClick(): void {
@@ -86,6 +93,20 @@ export class EditOrderItemModalComponent implements OnInit {
       });
     setTimeout(() => {
       window.location.reload();
-    }, 2000);
+    }, 1000);
   }
+}
+
+function addedQuantityValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const quantity = control.get('quantity');
+    const addedQuantity = control.get('added_quantity');
+
+    if (quantity && addedQuantity && addedQuantity.value > quantity.value) {
+      control.get('added_quantity').setErrors({ addedQuantityHigher: true });
+      return { addedQuantityHigher: true };
+    }
+
+    return null;
+  };
 }

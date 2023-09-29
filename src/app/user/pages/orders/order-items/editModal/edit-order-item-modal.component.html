@@ -11,7 +11,7 @@
         negativeNotAllowed
       />
     </mat-form-field>
-    <p>Quantidade adicionada</p>
+    <p>Quantidade Entregue</p>
     <mat-form-field appearance="fill">
       <input
         type="number"
@@ -20,6 +20,9 @@
         appDigitLimit
         negativeNotAllowed
       />
+      <mat-error *ngIf="formOrderItem.hasError('addedQuantityHigher')">
+        A quantidade entregue não pode ser maior do que a quantidade pedida ({{ data.quantity }})
+      </mat-error>
     </mat-form-field>
   </div>
   <div mat-dialog-actions class="actions">
@@ -30,9 +33,9 @@
       (click)="onClick()"
       cdkFocusInitial
       [disabled]="
-        this.formOrderItem.invalid ||
-        this.formOrderItem.get('added_quantity')?.value === 0 ||
-        this.formOrderItem.get('quantity')?.value === 0
+        formOrderItem.invalid ||
+        formOrderItem.get('quantity')?.value === 0 ||
+        formOrderItem.hasError('addedQuantityHigher')
       "
     >
       Salvar
