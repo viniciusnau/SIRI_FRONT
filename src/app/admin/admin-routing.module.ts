@@ -7,7 +7,6 @@ import { StockBySectorComponent } from './pages/stock-by-cector/stock-by-sector.
 import { StockBySectorItemsComponent } from './pages/stock-by-cector/stock-by-sector-items/stock-by-sector-items.component';
 import { InvoicesComponent } from './pages/invoices/invoices.component';
 import { SupplierOrdersComponent } from './pages/supplier-orders/supplier-orders.component';
-import { SupplierOrderItemsComponent } from './pages/supplier-orders/supplier-order-items/supplier-order-items.component';
 import { SuppliersComponent } from './pages/suppliers/suppliers.component';
 import { ReceivingReportsComponent } from './pages/receiving-reports/receiving-reports.component';
 import { DispatchReportsComponent } from './pages/dispatch-reports/dispatch-reports.component';
@@ -70,12 +69,6 @@ const routes: Routes = [
   {
     path: 'fornecedor/pedidos/:id',
     component: SupplierOrdersComponent,
-    canActivate: [AuthAdminGuard],
-    pathMatch: 'full',
-  },
-  {
-    path: 'fornecedor/pedidos/itens/:id',
-    component: SupplierOrderItemsComponent,
     canActivate: [AuthAdminGuard],
     pathMatch: 'full',
   },

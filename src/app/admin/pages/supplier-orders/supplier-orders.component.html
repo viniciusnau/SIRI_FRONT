@@ -52,7 +52,7 @@
         <tr
           mat-row
           *matRowDef="let row; columns: displayedColumns"
-          (click)="navToSupplierOrderItems(row.id)"
+          (click)="navToSupplierOrderItems(row.id, row.protocol.id)"
         ></tr>
       </table>
     </mat-card-content>

@@ -43,8 +43,8 @@ export class SupplierOrdersComponent implements OnInit {
       });
   }
 
-  navToSupplierOrderItems(supplier_order_id: number) {
-    this.router.navigate([`fornecedor/pedidos/itens/${supplier_order_id}`]);
+  navToSupplierOrderItems(id: number, protocol: any) {
+    this.router.navigate([`pedidos-fornecedor/itens/${id}`, { protocol }]);
   }
 
   formatDate(date: string) {

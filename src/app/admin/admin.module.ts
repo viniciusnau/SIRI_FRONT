@@ -12,7 +12,6 @@ import { StockBySectorComponent } from './pages/stock-by-cector/stock-by-sector.
 import { StockBySectorItemsComponent } from './pages/stock-by-cector/stock-by-sector-items/stock-by-sector-items.component';
 import { InvoicesComponent } from './pages/invoices/invoices.component';
 import { SupplierOrdersComponent } from './pages/supplier-orders/supplier-orders.component';
-import { SupplierOrderItemsComponent } from './pages/supplier-orders/supplier-order-items/supplier-order-items.component';
 import { SuppliersComponent } from './pages/suppliers/suppliers.component';
 import { ReceivingReportsComponent } from './pages/receiving-reports/receiving-reports.component';
 import { DispatchReportsComponent } from './pages/dispatch-reports/dispatch-reports.component';
@@ -79,7 +78,6 @@ import { CommonCustomModule } from '../common/commonCustom.module';
     StockBySectorItemsComponent,
     InvoicesComponent,
     SupplierOrdersComponent,
-    SupplierOrderItemsComponent,
     SuppliersComponent,
     ReceivingReportsComponent,
     DispatchReportsComponent,
