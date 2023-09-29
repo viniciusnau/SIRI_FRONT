@@ -5,16 +5,29 @@ mat-sidenav {
   background-color: $secondary-color;
 }
 
+.mat-mdc-nav-list {
+  padding: 0;
+}
+
+div > mat-nav-list > .mdc-list-item {
+  width: 100%;
+  padding: 0 0 0 2rem;
+}
+
 span {
   color: white;
 }
 
+span[class='account'] {
+  font-size: 1rem;
+}
+
 .logoSide {
-  width: 281.33222222222221111111111111px;
+  width: 281.33px;
 }
 
 .divider {
-  margin: 0.2rem 0 0 0;
+  margin: 0.2rem 0 0.75rem 0;
 }
 
 .account {
@@ -25,16 +38,39 @@ span {
 }
 
 .icon {
-  margin: 0 0.5rem 0 0.5rem;
+  margin: 0.75rem;
 }
 
-.account-button {
+.account-button,
+.linkButton {
   background: none;
   border: none;
   cursor: pointer;
   color: white;
   display: flex;
   align-items: center;
+  width: 80%;
+  transition: transform 0.5s ease;
+}
+
+.account-button:hover {
+  background-color: $primary-button-hover-green-bg;
+  border-radius: 1.5rem;
+  transform: translateX(10%);
+}
+
+.linkButton {
+  max-width: 85%;
+}
+
+.linkButton:hover {
+  background-color: $primary-button-hover-green-bg;
+  border-radius: 1.25rem;
+  transform: translateX(7.5%);
+}
+
+.transform-active {
+  transform: translateX(10%);
 }
 
 .account-icon {
@@ -47,10 +83,53 @@ span {
 }
 
 .arrow-icon {
-  margin-left: auto;
+  margin-left: 1rem;
 }
 
 .user-section {
+  background-color: $secondary-color;
+  box-sizing: border-box;
+}
+
+.user-arrow-icon {
+  margin-left: 0.5rem;
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.user-section {
+  background-color: $secondary-color;
+  box-sizing: border-box;
+  animation: slide-down 0.5s ease forwards;
+}
+
+.reports-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.reports-text {
+  color: white;
+  display: flex;
+  align-items: center;
+  margin-left: 0.6rem;
+  font-size: 1.1rem;
+}
+
+.reports-section {
   background-color: $secondary-color;
   padding: 1rem;
   width: 100%;

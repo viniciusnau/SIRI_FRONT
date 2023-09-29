@@ -9,19 +9,12 @@
         />
       </a>
       <mat-divider class="divider"></mat-divider>
-      <mat-nav-list>
-        <mat-list-item routerLink="/">
-          <span matListItemTitle>Criar Pedido</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/pedidos">
-          <span matListItemTitle>Pedidos</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/estoque">
-          <span matListItemTitle>Estoque</span>
-        </mat-list-item>
-      </mat-nav-list>
 
-      <button (click)="toggleUserSection()" class="account-button">
+      <button
+        (click)="toggleSection('account')"
+        class="account-button"
+        [class.transform-active]="sections.account"
+      >
         <div class="account-icon">
           <mat-icon class="icon">account_circle</mat-icon>
         </div>
@@ -29,22 +22,34 @@
           <span *ngIf="userName" class="account">{{ userName }}</span>
         </div>
         <div class="arrow-icon">
-          <mat-icon *ngIf="!userSectionExpanded">expand_more</mat-icon>
-          <mat-icon *ngIf="userSectionExpanded">expand_less</mat-icon>
+          <mat-icon>{{
+            sections.account ? 'expand_less' : 'expand_more'
+          }}</mat-icon>
         </div>
       </button>
-
-      <div *ngIf="userSectionExpanded" class="user-section">
-        <mat-divider class="divider"></mat-divider>
+      <div *ngIf="sections.account" class="user-section">
         <mat-nav-list>
-          <mat-list-item (click)="resetPassword()">
-            <span matListItemTitle>Alterar Senha</span>
+          <mat-list-item (click)="resetPassword()" class="linkButton">
+            <span>Alterar Senha</span>
           </mat-list-item>
-          <mat-list-item (click)="logout()">
-            <span matListItemTitle>Sair</span>
+          <mat-list-item (click)="logout()" class="linkButton">
+            <span>Sair</span>
           </mat-list-item>
         </mat-nav-list>
+        <mat-divider class="divider"></mat-divider>
       </div>
+
+      <mat-nav-list>
+        <mat-list-item routerLink="/" class="linkButton">
+          <span>Criar Pedido</span>
+        </mat-list-item>
+        <mat-list-item routerLink="/pedidos" class="linkButton">
+          <span>Pedidos</span>
+        </mat-list-item>
+        <mat-list-item routerLink="/estoque" class="linkButton">
+          <span>Estoque</span>
+        </mat-list-item>
+      </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content> <ng-content></ng-content> </mat-sidenav-content>
   </mat-sidenav-container>

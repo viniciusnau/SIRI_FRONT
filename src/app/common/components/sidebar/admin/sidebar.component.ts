@@ -8,8 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  userSectionExpanded: boolean = false;
-  reportsSectionExpanded: boolean = false;
+  sections = {
+    account: false,
+    reports: false,
+    order: false,
+    inventory: false,
+    administration: false,
+    product: false,
+    supplier: false,
+  };
   userName: string = '';
 
   constructor(private loginService: LoginService, private router: Router) {}
@@ -28,11 +35,7 @@ export class SidebarComponent {
     this.router.navigate(['/mudar-senha-admin']).then((r) => {});
   }
 
-  toggleUserSection() {
-    this.userSectionExpanded = !this.userSectionExpanded;
-  }
-
-  toggleReportsSection() {
-    this.reportsSectionExpanded = !this.reportsSectionExpanded;
+  toggleSection(section: string) {
+    this.sections[section] = !this.sections[section];
   }
 }

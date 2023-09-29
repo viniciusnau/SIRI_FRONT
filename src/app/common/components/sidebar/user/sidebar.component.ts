@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  userSectionExpanded: boolean = false;
+  sections = {
+    account: false,
+  };
   userName: string = '';
 
   constructor(private loginService: LoginService, private router: Router) {}
@@ -27,7 +29,7 @@ export class SidebarComponent {
     this.router.navigate(['mudar-senha-user/']).then((r) => {});
   }
 
-  toggleUserSection() {
-    this.userSectionExpanded = !this.userSectionExpanded;
+  toggleSection(section: string) {
+    this.sections[section] = !this.sections[section];
   }
 }

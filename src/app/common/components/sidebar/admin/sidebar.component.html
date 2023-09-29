@@ -9,77 +9,12 @@
         />
       </a>
       <mat-divider class="divider"></mat-divider>
-      <mat-nav-list>
-        <mat-list-item routerLink="/gerenciar-pedidos">
-          <span matListItemTitle>Pedidos</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/estoque-por-setor">
-          <span matListItemTitle>Estoque</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/setores">
-          <span matListItemTitle>Setores</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/notas">
-          <span matListItemTitle>Controle de notas</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/guias-de-entrada">
-          <span matListItemTitle>Guias de entrada</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/guias-de-saida">
-          <span matListItemTitle>Guias de saída</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/categorias">
-          <span matListItemTitle>Categorias</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/medidas">
-          <span matListItemTitle>Medidas</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/produtos">
-          <span matListItemTitle>Produtos</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/fornecedores">
-          <span matListItemTitle>Fornecedores</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/pedidos-fornecedor">
-          <span matListItemTitle>Pedidos do Fornecedor</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/atas">
-          <span matListItemTitle>Atas</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/pedido-de-AF">
-          <span matListItemTitle>Pedidos de AF</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/dispensa-de-licitacao">
-          <span matListItemTitle>Dispensa de Licitação</span>
-        </mat-list-item>
-      </mat-nav-list>
 
-      <button (click)="toggleReportsSection()" class="reports-button">
-        <div class="reports-text">
-          <span class="reports">Relatórios</span>
-        </div>
-        <div class="arrow-icon">
-          <mat-icon *ngIf="!reportsSectionExpanded">expand_more</mat-icon>
-          <mat-icon *ngIf="reportsSectionExpanded">expand_less</mat-icon>
-        </div>
-      </button>
-
-      <div *ngIf="reportsSectionExpanded" class="reports-section">
-        <mat-divider class="divider"></mat-divider>
-        <mat-nav-list>
-          <mat-list-item routerLink="/relatorio-do-contador">
-            <span matListItemTitle>Relatório do Contador</span>
-          </mat-list-item>
-          <mat-list-item routerLink="/relatorio-de-estoque">
-            <span matListItemTitle>Relatório de Estoque</span>
-          </mat-list-item>
-          <mat-list-item routerLink="/relatorio-do-almoxarifado">
-            <span matListItemTitle>Inventário do Almoxarifado</span>
-          </mat-list-item>
-        </mat-nav-list>
-      </div>
-
-      <button (click)="toggleUserSection()" class="account-button">
+      <button
+        (click)="toggleSection('account')"
+        class="account-button"
+        [class.transform-active]="sections.account"
+      >
         <div class="account-icon">
           <mat-icon class="icon">account_circle</mat-icon>
         </div>
@@ -87,24 +22,223 @@
           <span *ngIf="userName" class="account">{{ userName }}</span>
         </div>
         <div class="user-arrow-icon">
-          <mat-icon *ngIf="!userSectionExpanded">expand_more</mat-icon>
-          <mat-icon *ngIf="userSectionExpanded">expand_less</mat-icon>
+          <mat-icon>{{
+            sections.account ? 'expand_less' : 'expand_more'
+          }}</mat-icon>
         </div>
       </button>
 
-      <div *ngIf="userSectionExpanded" class="user-section">
-        <mat-divider class="divider"></mat-divider>
+      <div *ngIf="sections.account" class="user-section">
         <mat-nav-list>
-          <mat-list-item routerLink="/enviar-email">
-            <span matListItemTitle>Enviar Email</span>
+          <mat-list-item (click)="resetPassword()" class="linkButton">
+            <span>Alterar Senha</span>
           </mat-list-item>
-          <mat-list-item (click)="resetPassword()">
-            <span matListItemTitle>Alterar Senha</span>
-          </mat-list-item>
-          <mat-list-item (click)="logout()">
-            <span matListItemTitle>Sair</span>
+          <mat-list-item (click)="logout()" class="linkButton">
+            <span>Sair</span>
           </mat-list-item>
         </mat-nav-list>
+        <mat-divider class="divider"></mat-divider>
+      </div>
+
+      <button
+        (click)="toggleSection('product')"
+        class="account-button"
+        [class.transform-active]="sections.product"
+      >
+        <div class="account-icon">
+          <mat-icon class="icon">dns</mat-icon>
+        </div>
+        <div class="account-text">
+          <span class="account">Produtos</span>
+        </div>
+        <div class="user-arrow-icon">
+          <mat-icon>{{
+            sections.product ? 'expand_less' : 'expand_more'
+          }}</mat-icon>
+        </div>
+      </button>
+
+      <div *ngIf="sections.product" class="user-section">
+        <mat-nav-list>
+          <mat-list-item class="linkButton" routerLink="/categorias">
+            <span>Categorias</span>
+          </mat-list-item>
+          <mat-list-item class="linkButton" routerLink="/medidas">
+            <span>Medidas</span>
+          </mat-list-item>
+          <mat-list-item class="linkButton" routerLink="/produtos">
+            <span>Produtos</span>
+          </mat-list-item>
+        </mat-nav-list>
+        <mat-divider class="divider"></mat-divider>
+      </div>
+
+      <button
+        (click)="toggleSection('inventory')"
+        class="account-button"
+        [class.transform-active]="sections.inventory"
+      >
+        <div class="account-icon">
+          <mat-icon class="icon">dashboard</mat-icon>
+        </div>
+        <div class="account-text">
+          <span class="account">Inventário</span>
+        </div>
+        <div class="user-arrow-icon">
+          <mat-icon>{{
+            sections.inventory ? 'expand_less' : 'expand_more'
+          }}</mat-icon>
+        </div>
+      </button>
+
+      <div *ngIf="sections.inventory" class="user-section">
+        <mat-nav-list>
+          <mat-list-item class="linkButton" routerLink="/estoque-por-setor">
+            <span>Estoque</span>
+          </mat-list-item>
+          <mat-list-item class="linkButton" routerLink="/guias-de-entrada">
+            <span>Guias de entrada</span>
+          </mat-list-item>
+          <mat-list-item class="linkButton" routerLink="/guias-de-saida">
+            <span>Guias de saída</span>
+          </mat-list-item>
+        </mat-nav-list>
+        <mat-divider class="divider"></mat-divider>
+      </div>
+
+      <button
+        (click)="toggleSection('order')"
+        class="account-button"
+        [class.transform-active]="sections.order"
+      >
+        <div class="account-icon">
+          <mat-icon class="icon">list</mat-icon>
+        </div>
+        <div class="account-text">
+          <span class="account">Pedidos</span>
+        </div>
+        <div class="user-arrow-icon">
+          <mat-icon>{{
+            sections.order ? 'expand_less' : 'expand_more'
+          }}</mat-icon>
+        </div>
+      </button>
+
+      <div *ngIf="sections.order" class="user-section">
+        <mat-nav-list>
+          <mat-list-item class="linkButton" routerLink="/gerenciar-pedidos">
+            <span>Pedidos</span>
+          </mat-list-item>
+          <mat-list-item class="linkButton" routerLink="/pedidos-fornecedor">
+            <span>Pedidos do Fornecedor</span>
+          </mat-list-item>
+          <mat-list-item class="linkButton" routerLink="/pedido-de-AF">
+            <span>Pedidos de AF</span>
+          </mat-list-item>
+        </mat-nav-list>
+        <mat-divider class="divider"></mat-divider>
+      </div>
+
+      <button
+        (click)="toggleSection('administration')"
+        class="account-button"
+        [class.transform-active]="sections.administration"
+      >
+        <div class="account-icon">
+          <mat-icon class="icon">manage_accounts</mat-icon>
+        </div>
+        <div class="account-text">
+          <span class="account">Administração</span>
+        </div>
+        <div class="user-arrow-icon">
+          <mat-icon>{{
+            sections.administration ? 'expand_less' : 'expand_more'
+          }}</mat-icon>
+        </div>
+      </button>
+
+      <div *ngIf="sections.administration" class="user-section">
+        <mat-nav-list>
+          <mat-list-item class="linkButton" routerLink="/setores">
+            <span>Setores</span>
+          </mat-list-item>
+          <mat-list-item class="linkButton" routerLink="/notas">
+            <span>Controle de notas</span>
+          </mat-list-item>
+          <mat-list-item class="linkButton" routerLink="/atas">
+            <span>Atas</span>
+          </mat-list-item>
+          <mat-list-item class="linkButton" routerLink="/dispensa-de-licitacao">
+            <span>Dispensa de Licitação</span>
+          </mat-list-item>
+          <mat-list-item class="linkButton" routerLink="/enviar-email">
+            <span>Enviar Email</span>
+          </mat-list-item>
+        </mat-nav-list>
+        <mat-divider class="divider"></mat-divider>
+      </div>
+
+      <button
+        (click)="toggleSection('supplier')"
+        class="account-button"
+        [class.transform-active]="sections.supplier"
+      >
+        <div class="account-icon">
+          <mat-icon class="icon">co_present</mat-icon>
+        </div>
+        <div class="account-text">
+          <span class="account">Fornecedor</span>
+        </div>
+        <div class="user-arrow-icon">
+          <mat-icon>{{
+            sections.supplier ? 'expand_less' : 'expand_more'
+          }}</mat-icon>
+        </div>
+      </button>
+
+      <div *ngIf="sections.supplier" class="user-section">
+        <mat-nav-list>
+          <mat-list-item class="linkButton" routerLink="/fornecedores">
+            <span>Fornecedores</span>
+          </mat-list-item>
+        </mat-nav-list>
+        <mat-divider class="divider"></mat-divider>
+      </div>
+
+      <button
+        (click)="toggleSection('reports')"
+        class="account-button"
+        [class.transform-active]="sections.reports"
+      >
+        <div class="account-icon">
+          <mat-icon class="icon">description</mat-icon>
+        </div>
+        <div class="account-text">
+          <span class="account">Relatórios</span>
+        </div>
+        <div class="user-arrow-icon">
+          <mat-icon>{{
+            sections.reports ? 'expand_less' : 'expand_more'
+          }}</mat-icon>
+        </div>
+      </button>
+
+      <div *ngIf="sections.reports" class="user-section">
+        <mat-nav-list>
+          <mat-list-item class="linkButton" routerLink="/relatorio-do-contador">
+            <span>Relatório do Contador</span>
+          </mat-list-item>
+          <mat-list-item class="linkButton" routerLink="/relatorio-de-estoque">
+            <span>Relatório de Estoque</span>
+          </mat-list-item>
+          <mat-list-item
+            class="linkButton"
+            routerLink="/relatorio-do-almoxarifado"
+          >
+            <span>Inventário do Almoxarifado</span>
+          </mat-list-item>
+        </mat-nav-list>
+        <mat-divider class="divider"></mat-divider>
       </div>
     </mat-sidenav>
     <mat-sidenav-content> <ng-content></ng-content> </mat-sidenav-content>
