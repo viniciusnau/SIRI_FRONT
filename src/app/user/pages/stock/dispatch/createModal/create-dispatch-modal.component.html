@@ -11,7 +11,7 @@
         negativeNotAllowed
       />
       <mat-error *ngIf="formStockWithdrawals.get('withdraw_quantity').hasError('maxQuantityExceeded')">
-        Você não tem tanto itens em estoque! ({{
+        Você não tem tantos itens em estoque! ({{
         maxQuantity
         }})
       </mat-error>
