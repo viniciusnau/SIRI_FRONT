@@ -17,7 +17,9 @@ export class SidebarComponent {
     product: false,
     supplier: false,
   };
+
   userName: string = '';
+  pathname: string = window.location.pathname;
 
   constructor(private loginService: LoginService, private router: Router) {}
 
@@ -31,11 +33,11 @@ export class SidebarComponent {
     this.loginService.logout();
   }
 
-  resetPassword() {
-    this.router.navigate(['/mudar-senha-admin']).then((r) => {});
-  }
-
   toggleSection(section: string) {
     this.sections[section] = !this.sections[section];
+  }
+
+  handlePathname(item: string) {
+    return this.pathname.match(item);
   }
 }

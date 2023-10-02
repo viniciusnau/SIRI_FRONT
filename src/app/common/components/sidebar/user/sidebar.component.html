@@ -29,7 +29,11 @@
       </button>
       <div *ngIf="sections.account" class="user-section">
         <mat-nav-list>
-          <mat-list-item (click)="resetPassword()" class="linkButton">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/mudar-senha-user')"
+            routerLink="/mudar-senha-user"
+          >
             <span>Alterar Senha</span>
           </mat-list-item>
           <mat-list-item (click)="logout()" class="linkButton">
@@ -40,13 +44,25 @@
       </div>
 
       <mat-nav-list>
-        <mat-list-item routerLink="/" class="linkButton">
+        <mat-list-item
+          class="linkButton"
+          [class.selected]="handlePathname('/')"
+          routerLink="/"
+        >
           <span>Criar Pedido</span>
         </mat-list-item>
-        <mat-list-item routerLink="/pedidos" class="linkButton">
+        <mat-list-item
+          class="linkButton"
+          [class.selected]="handlePathname('/pedidos')"
+          routerLink="/pedidos"
+        >
           <span>Pedidos</span>
         </mat-list-item>
-        <mat-list-item routerLink="/estoque" class="linkButton">
+        <mat-list-item
+          class="linkButton"
+          [class.selected]="handlePathname('/estoque')"
+          routerLink="/estoque"
+        >
           <span>Estoque</span>
         </mat-list-item>
       </mat-nav-list>

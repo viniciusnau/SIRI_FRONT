@@ -30,7 +30,11 @@
 
       <div *ngIf="sections.account" class="user-section">
         <mat-nav-list>
-          <mat-list-item (click)="resetPassword()" class="linkButton">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/mudar-senha-admin')"
+            routerLink="/mudar-senha-admin"
+          >
             <span>Alterar Senha</span>
           </mat-list-item>
           <mat-list-item (click)="logout()" class="linkButton">
@@ -60,13 +64,25 @@
 
       <div *ngIf="sections.product" class="user-section">
         <mat-nav-list>
-          <mat-list-item class="linkButton" routerLink="/categorias">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/categorias')"
+            routerLink="/categorias"
+          >
             <span>Categorias</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/medidas">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/medidas')"
+            routerLink="/medidas"
+          >
             <span>Medidas</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/produtos">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/produtos')"
+            routerLink="/produtos"
+          >
             <span>Produtos</span>
           </mat-list-item>
         </mat-nav-list>
@@ -93,13 +109,25 @@
 
       <div *ngIf="sections.inventory" class="user-section">
         <mat-nav-list>
-          <mat-list-item class="linkButton" routerLink="/estoque-por-setor">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/estoque-por-setor')"
+            routerLink="/estoque-por-setor"
+          >
             <span>Estoque</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/guias-de-entrada">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/guias-de-entrada')"
+            routerLink="/guias-de-entrada"
+          >
             <span>Guias de entrada</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/guias-de-saida">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/guias-de-saida')"
+            routerLink="/guias-de-saida"
+          >
             <span>Guias de saída</span>
           </mat-list-item>
         </mat-nav-list>
@@ -126,13 +154,25 @@
 
       <div *ngIf="sections.order" class="user-section">
         <mat-nav-list>
-          <mat-list-item class="linkButton" routerLink="/gerenciar-pedidos">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/gerenciar-pedidos')"
+            routerLink="/gerenciar-pedidos"
+          >
             <span>Pedidos</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/pedidos-fornecedor">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/pedidos-fornecedor')"
+            routerLink="/pedidos-fornecedor"
+          >
             <span>Pedidos do Fornecedor</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/pedido-de-AF">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/pedido-de-AF')"
+            routerLink="/pedido-de-AF"
+          >
             <span>Pedidos de AF</span>
           </mat-list-item>
         </mat-nav-list>
@@ -159,19 +199,39 @@
 
       <div *ngIf="sections.administration" class="user-section">
         <mat-nav-list>
-          <mat-list-item class="linkButton" routerLink="/setores">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/setores')"
+            routerLink="/setores"
+          >
             <span>Setores</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/notas">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/notas')"
+            routerLink="/notas"
+          >
             <span>Controle de notas</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/atas">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/atas')"
+            routerLink="/atas"
+          >
             <span>Atas</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/dispensa-de-licitacao">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/dispensa-de-licitacao')"
+            routerLink="/dispensa-de-licitacao"
+          >
             <span>Dispensa de Licitação</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/enviar-email">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/enviar-email')"
+            routerLink="/enviar-email"
+          >
             <span>Enviar Email</span>
           </mat-list-item>
         </mat-nav-list>
@@ -198,7 +258,11 @@
 
       <div *ngIf="sections.supplier" class="user-section">
         <mat-nav-list>
-          <mat-list-item class="linkButton" routerLink="/fornecedores">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/fornecedores')"
+            routerLink="/fornecedores"
+          >
             <span>Fornecedores</span>
           </mat-list-item>
         </mat-nav-list>
@@ -225,14 +289,23 @@
 
       <div *ngIf="sections.reports" class="user-section">
         <mat-nav-list>
-          <mat-list-item class="linkButton" routerLink="/relatorio-do-contador">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/relatorio-do-contador')"
+            routerLink="/relatorio-do-contador"
+          >
             <span>Relatório do Contador</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/relatorio-de-estoque">
+          <mat-list-item
+            class="linkButton"
+            [class.selected]="handlePathname('/relatorio-de-estoque')"
+            routerLink="/relatorio-de-estoque"
+          >
             <span>Relatório de Estoque</span>
           </mat-list-item>
           <mat-list-item
             class="linkButton"
+            [class.selected]="handlePathname('/relatorio-do-almoxarifado')"
             routerLink="/relatorio-do-almoxarifado"
           >
             <span>Inventário do Almoxarifado</span>
