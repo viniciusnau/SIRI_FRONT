@@ -13,7 +13,6 @@ import { OrderItemsComponent } from './pages/orders/order-items/order-items.comp
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateDispatchModalComponent } from './pages/stock/dispatch/createModal/create-dispatch-modal.component';
 import { EditOrderItemModalComponent } from './pages/orders/order-items/editModal/edit-order-item-modal.component';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { UserPaginationComponent } from './components/pagination/user-pagination.component';
 import { ConfirmOrderModalComponent } from './pages/orders/confirmModal/confirm-order-modal.component';
 import { ConfirmHomeModalComponent } from './pages/home/confirmModal/confirm-home-modal.component';
@@ -36,7 +35,6 @@ import { CommonCustomModule } from '../common/commonCustom.module';
     OrderItemsComponent,
     CreateDispatchModalComponent,
     EditOrderItemModalComponent,
-    ResetPasswordComponent,
     UserPaginationComponent,
     ConfirmOrderModalComponent,
     DigitLimitDirective,
@@ -52,7 +50,6 @@ import { CommonCustomModule } from '../common/commonCustom.module';
     MaterialCommonsModule,
     FormsModule,
     ReactiveFormsModule,
-    // AdminModule,
     MatIconModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,

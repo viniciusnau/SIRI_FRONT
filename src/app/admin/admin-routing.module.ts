@@ -12,7 +12,6 @@ import { ReceivingReportsComponent } from './pages/receiving-reports/receiving-r
 import { DispatchReportsComponent } from './pages/dispatch-reports/dispatch-reports.component';
 import { MaterialsOrderComponent } from './pages/materials-order/materials-order.component';
 import { ProtocolsComponent } from './pages/protocols/protocols.component';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SectorsComponent } from './pages/sectors/sectors.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { MeasuresComponent } from './pages/measures/measures.component';
@@ -106,11 +105,6 @@ const routes: Routes = [
   {
     path: 'atas',
     component: ProtocolsComponent,
-    canActivate: [AuthAdminGuard],
-  },
-  {
-    path: 'mudar-senha-admin',
-    component: ResetPasswordComponent,
     canActivate: [AuthAdminGuard],
   },
   {

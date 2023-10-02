@@ -17,7 +17,6 @@ import { ReceivingReportsComponent } from './pages/receiving-reports/receiving-r
 import { DispatchReportsComponent } from './pages/dispatch-reports/dispatch-reports.component';
 import { MaterialsOrderComponent } from './pages/materials-order/materials-order.component';
 import { ProtocolsComponent } from './pages/protocols/protocols.component';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SectorsComponent } from './pages/sectors/sectors.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { MeasuresComponent } from './pages/measures/measures.component';
@@ -83,7 +82,6 @@ import { CommonCustomModule } from '../common/commonCustom.module';
     DispatchReportsComponent,
     MaterialsOrderComponent,
     ProtocolsComponent,
-    ResetPasswordComponent,
     SectorsComponent,
     CategoriesComponent,
     MeasuresComponent,

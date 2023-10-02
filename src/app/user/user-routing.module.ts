@@ -8,7 +8,6 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { OrderItemsComponent } from './pages/orders/order-items/order-items.component';
 import { LoginComponent } from '../common/pages/login/login.component';
 import { AuthUserGuard } from '../services/guards/auth-user.guard';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -45,11 +44,6 @@ const routes: Routes = [
     component: OrderItemsComponent,
     canActivate: [AuthUserGuard],
     pathMatch: 'full',
-  },
-  {
-    path: 'mudar-senha-user',
-    component: ResetPasswordComponent,
-    canActivate: [AuthUserGuard],
   },
 ];
 
