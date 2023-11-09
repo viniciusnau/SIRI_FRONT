@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { LoginComponent } from './pages/login/login.component';
+import { CallbackComponent } from './pages/callback/callback.component';
 
 const routes: Routes = [
   {
@@ -10,8 +11,12 @@ const routes: Routes = [
   },
 
   {
-    path: 'esqueceu-senha',
+    path: 'esqueci-a-senha',
     component: ForgotPasswordComponent,
+  },
+  {
+    path: 'callback/:apiToken',
+    component: CallbackComponent,
   },
 ];
 

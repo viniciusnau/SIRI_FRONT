@@ -4,6 +4,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from '../../../environments/env.environment';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +37,10 @@ export class LoginComponent implements OnInit {
 
   togglePasswordVisibility() {
     this.inputType = this.inputType === 'password' ? 'text' : 'password';
+  }
+
+  redirect() {
+    window.location.href = `${environment.apiUrl}/google-redirect/`;
   }
 
   resetPassword(event: Event) {

@@ -9,16 +9,21 @@ export class OrdersService {
   httpOptions: { headers: HttpHeaders };
 
   constructor(private httpClient: HttpClient) {
-    const storedAuth =
-      localStorage.getItem('auth') || sessionStorage.getItem('auth');
-    const [username, password] = storedAuth
-      ? storedAuth.split(':')
-      : [null, null];
+    const storedAuth = localStorage.getItem('auth') || sessionStorage.getItem('auth');
+    let headers = new HttpHeaders();
+
+    if (storedAuth) {
+      const [username, password] = storedAuth.split(':');
+      headers = headers.set('Authorization', 'Basic ' + btoa(`${username}:${password}`));
+    } else {
+      const apiToken = sessionStorage.getItem('apiToken');
+      if (apiToken) {
+        headers = headers.set('Authorization', 'Token ' + apiToken);
+      }
+    }
 
     this.httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Basic ' + btoa(`${username}:${password}`),
-      }),
+      headers: headers,
     };
   }
 

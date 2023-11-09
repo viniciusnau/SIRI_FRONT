@@ -72,14 +72,12 @@ export class LoginService {
     this.router.navigate(['/login']);
   }
 
-  get getUrl(): string {
-    return this.router.url;
-  }
-
   isLogged(): boolean {
     const localToken = localStorage.getItem('token');
     const sessionToken = sessionStorage.getItem('token');
-    const token = localToken || sessionToken;
+    const localApiToken = localStorage.getItem('apiToken');
+    const sessionApiToken = sessionStorage.getItem('apiToken');
+    const token = localToken || sessionToken || localApiToken || sessionApiToken;
     return !!token;
   }
 }

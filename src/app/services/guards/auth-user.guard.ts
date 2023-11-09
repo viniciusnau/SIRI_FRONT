@@ -11,8 +11,8 @@ export class AuthUserGuard implements CanActivate {
   canActivate() {
     const local = JSON.parse(localStorage.getItem('is_admin'));
     const session = JSON.parse(sessionStorage.getItem('is_admin'));
-    const isUser = local || session;
-    if (this.loginService.isLogged() && !isUser) {
+    const isAdmin = local || session;
+    if (this.loginService.isLogged() && !isAdmin) {
       return true;
     }
 

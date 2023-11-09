@@ -15,6 +15,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SidebarComponent as UserSidebarComponent } from './components/sidebar/user/sidebar.component';
 import { SidebarComponent as AdminSidebarComponent } from './components/sidebar/admin/sidebar.component';
+import { CallbackComponent } from './pages/callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SidebarComponent as AdminSidebarComponent } from './components/sidebar/
     SidebarComponent,
     UserSidebarComponent,
     AdminSidebarComponent,
+    CallbackComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,6 @@ import { SidebarComponent as AdminSidebarComponent } from './components/sidebar/
     MaterialCommonsModule,
     FormsModule,
     ReactiveFormsModule,
-    // AdminModule,
     MatIconModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,

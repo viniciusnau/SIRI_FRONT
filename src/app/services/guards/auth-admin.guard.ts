@@ -9,7 +9,8 @@ export class AuthAdminGuard implements CanActivate {
   canActivate() {
     const local = JSON.parse(localStorage.getItem('is_admin'));
     const session = JSON.parse(sessionStorage.getItem('is_admin'));
-    const isAdmin = local || session;
+    const apiToken = JSON.parse(sessionStorage.getItem('apiToken'));
+    const isAdmin = local || session || apiToken;
     if (this.loginService.isLogged() && isAdmin) {
       return true;
     }
