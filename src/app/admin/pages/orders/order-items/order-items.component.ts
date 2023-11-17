@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
-import { SuppliersService } from 'src/app/services/suppliers.service';
+import { StocksService } from 'src/app/services/stocks.service';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -12,6 +12,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteOrderItemModalComponent } from './deleteModal/delete-order-item-modal.component.component';
 import { BehaviorSubject } from 'rxjs';
 import snackbarConsts from 'src/snackbarConsts';
+
+interface Protocol {
+  id: number;
+  code: string;
+}
 
 interface iAdminOrderItems {
   id: number;
@@ -27,16 +32,8 @@ interface iAdminOrderItems {
   added_quantity: number;
   order: number;
   measure: number;
-  supplier?: {
-    id: number;
-    name: string;
-  };
+  protocol?: Protocol;
   supplier_quantity: number;
-}
-
-interface Supplier {
-  id: number;
-  name: string;
 }
 
 @Component({
@@ -48,7 +45,7 @@ export class OrderItemsComponent implements OnInit {
   currentPage = 1;
   response: any;
   orderId = '';
-  suppliers: Supplier[] = [];
+  protocols: Protocol[] = [];
   supplierQuantityControls: { [key: number]: FormControl } = {};
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -64,7 +61,7 @@ export class OrderItemsComponent implements OnInit {
 
   constructor(
     private ordersService: OrdersService,
-    private suppliersService: SuppliersService,
+    private stocksService: StocksService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
@@ -75,7 +72,7 @@ export class OrderItemsComponent implements OnInit {
       this.orderId = params['id'];
     });
     this.getContent(this.orderId);
-    this.getAllSuppliers();
+    this.getAllProtocols();
     this.supplierQuantityValidity$.subscribe((isValid) => {
       this.supplierQuantityIsValid = isValid;
     });
@@ -88,20 +85,6 @@ export class OrderItemsComponent implements OnInit {
   onPageChange(page: number) {
     this.currentPage = page;
     this.getContent(this.orderId);
-  }
-
-  isIntegerValue(value: number): boolean {
-    return Number.isInteger(value);
-  }
-
-  validateIntegerValue(orderItem: iAdminOrderItems, fieldName: string): void {
-    const isValid = this.isIntegerValue(orderItem[fieldName]);
-
-    if (fieldName === 'quantity') {
-      this.quantityValiditySubject.next(isValid);
-    } else if (fieldName === 'supplier_quantity') {
-      this.supplierQuantityValiditySubject.next(isValid);
-    }
   }
 
   firstLetterOnCapital(text: string) {
@@ -120,23 +103,23 @@ export class OrderItemsComponent implements OnInit {
       });
   }
 
-  getAllSuppliers() {
-    this.suppliersService.getAllSuppliers().subscribe((data) => {
-      this.suppliers = data;
+  getAllProtocols() {
+    this.stocksService.getAllProtocols().subscribe((data) => {
+      this.protocols = data;
     });
   }
 
   saveItem(orderItem: iAdminOrderItems) {
     let payload = {};
-    if (orderItem.supplier) {
+    if (orderItem.protocol) {
       if (
-        typeof orderItem.supplier === 'object' &&
-        !Array.isArray(orderItem.supplier)
+        typeof orderItem.protocol === 'object' &&
+        !Array.isArray(orderItem.protocol)
       ) {
-        const id = orderItem.supplier.id;
+        const id = orderItem.protocol.id;
         payload = {
           ...payload,
-          supplier: id,
+          protocol: id,
           supplier_quantity: orderItem.supplier_quantity,
           quantity: orderItem.quantity,
         };
@@ -175,8 +158,10 @@ export class OrderItemsComponent implements OnInit {
     );
   }
 
-  onSupplierSelectionChange(orderItem: iAdminOrderItems, supplierId: number) {
-    orderItem.supplier = { id: supplierId, name: '' };
+  onProtocolSelectionChange(orderItem: iAdminOrderItems, protocolId: number) {
+    orderItem.protocol = {
+      code: '',
+      id: protocolId };
   }
 
   deleteItem(id: string): void {
@@ -192,7 +177,7 @@ export class OrderItemsComponent implements OnInit {
     'quantity',
     'added_quantity',
     'measure',
-    'supplier',
+    'protocol',
     'supplier_quantity',
     'actions',
     'deleteOrderItem',

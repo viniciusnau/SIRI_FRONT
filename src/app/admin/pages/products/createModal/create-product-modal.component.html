@@ -58,10 +58,7 @@
       class="proceed"
       (click)="onClick()"
       cdkFocusInitial
-      [disabled]="
-        this.formProduct.invalid ||
-        this.handlePriceFormat(this.formProduct.getRawValue().price) === ''
-      "
+      [disabled]="this.formProduct.invalid"
     >
       Criar
     </button>

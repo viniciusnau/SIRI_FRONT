@@ -177,11 +177,11 @@ const snackbarConsts = {
       },
       itens: {
         create: {
-          success: 'Item da ata criada com sucesso!',
+          success: 'Item da ata criado com sucesso!',
           error: 'Erro ao criar item da ata.',
         },
         exclude: {
-          success: 'Item da ata excluída com sucesso!',
+          success: 'Item da ata excluído com sucesso!',
           error: 'Erro ao excluir item da ata.',
         },
       },
@@ -227,13 +227,13 @@ const snackbarConsts = {
       error: 'Erro ao enviar email.',
     },
     changePassword: {
-      success: 'Senha alterada com sucesso!',
-      error: 'Erro ao alterar senha.',
+      success: 'Acesse o email para continuar com a troca da senha!',
+      error: 'Erro!',
     },
   },
   changePassword: {
     success: 'Acesse o email para continuar com a troca da senha!',
-    error: 'Erro ao efetuar login.',
+    error: 'Erro!',
   },
   login: {
     error: 'Erro ao efetuar login.',

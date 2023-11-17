@@ -35,10 +35,15 @@ export class CreateProtocolItemsModalComponent implements OnInit {
     return text[0].toUpperCase() + text.substring(1);
   }
 
+  handlePriceFormat(field: string) {
+    return field?.replace('R$ ', '').replace(/[.]/g, '').replace(/[,]/g, '.');
+  }
+
   createForm() {
     this.formCreateProtocolItems = this.formBuilder.group({
       product: ['', [Validators.required]],
       quantity: ['', [Validators.required]],
+      price: ['', [Validators.required]],
     });
   }
 
@@ -57,6 +62,7 @@ export class CreateProtocolItemsModalComponent implements OnInit {
     modifiedItem.original_quantity = Number(
       createProtocolItemData.quantity.toString().slice(0, 6),
     );
+    modifiedItem.price = this.handlePriceFormat(modifiedItem.price);
     this.stocksService.createProtocolItem(modifiedItem).subscribe(
       (response) => {
         this.snackBar.open(

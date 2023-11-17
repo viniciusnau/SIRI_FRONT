@@ -40,14 +40,4 @@ export class SuppliersService {
     const url = `${this.apiUrl}/all`;
     return this.httpClient.get<any>(url, this.httpOptions);
   }
-
-  public getSupplierById(supplierId: number): Observable<any> {
-    const url = `${this.apiUrl}/${supplierId}`;
-    return this.httpClient.get<any>(url, this.httpOptions);
-  }
-
-  public updateSupplier(supplierId: number, updateData: any): Observable<any> {
-    const url = `${this.apiUrl}/${supplierId}`;
-    return this.httpClient.patch<any>(url, updateData, this.httpOptions);
-  }
 }

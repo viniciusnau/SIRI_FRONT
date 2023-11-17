@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateProtocolItemsModalComponent } from './createModal/create-protocol-ptems-modal.component';
+import { CreateProtocolItemsModalComponent } from './createModal/create-protocol-items-modal.component';
 import { StocksService } from '../../../../services/stocks.service';
 import { ActivatedRoute } from '@angular/router';
 import snackbarConsts from 'src/snackbarConsts';
@@ -51,10 +51,10 @@ export class ProtocolItemsComponent implements OnInit {
   removeItems() {
     if (this.response?.results?.length) {
       const responseProductIds = this.response.results.map(
-        (result) => result.product.id,
+        (result) => result.product.name,
       );
       this.modalData.products = this.modalData.products.filter(
-        (product) => !responseProductIds.includes(product.id),
+        (product) => !responseProductIds.includes(product.name),
       );
     }
   }
@@ -127,6 +127,7 @@ export class ProtocolItemsComponent implements OnInit {
           this.getContent();
         },
         (error) => {
+          this.loading = null;
           this.snackBar.open(
             snackbarConsts.admin.protocols.itens.exclude.error,
             snackbarConsts.close,

@@ -31,12 +31,17 @@ export class CreateBiddingExemptionModalComponent implements OnInit {
       quantity: ['', [Validators.required]],
       stock: ['', [Validators.required]],
       invoice: ['', [Validators.required]],
+      price: ['']
     });
   }
 
   firstLetterOnCapital(text: string) {
     if (text.length == 0) return '';
     return text[0].toUpperCase() + text.substring(1);
+  }
+
+  handlePriceFormat(field: string) {
+    return field?.replace('R$ ', '').replace(/[.]/g, '').replace(/[,]/g, '.');
   }
 
   onNoClick(): void {
@@ -51,6 +56,8 @@ export class CreateBiddingExemptionModalComponent implements OnInit {
     modifiedItem.quantity = Number(
       createBiddingExemptionData.quantity.toString().slice(0, 6),
     );
+
+    modifiedItem.price = this.handlePriceFormat(modifiedItem.price)
 
     this.stocksService.createBiddingExemption(modifiedItem).subscribe(
       (response) => {

@@ -52,7 +52,7 @@ import { AdminGeneralSupplierOrderItemsComponent } from './pages/general-supplie
 import { CreateGeneralSupplierOrdersItemsModalComponent } from './pages/general-supplier-orders/supplier-order-items/createModal/create-general-supplier-orders-items-modal-component';
 import { EditProtocolsModalComponent } from './pages/protocols/editModal/edit-protocols-modal.component';
 import { ProtocolItemsComponent } from './pages/protocols/protocols-items/protocol-items.component';
-import { CreateProtocolItemsModalComponent } from './pages/protocols/protocols-items/createModal/create-protocol-ptems-modal.component';
+import { CreateProtocolItemsModalComponent } from './pages/protocols/protocols-items/createModal/create-protocol-items-modal.component';
 import { DeleteOrderItemModalComponent } from './pages/orders/order-items/deleteModal/delete-order-item-modal.component.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
