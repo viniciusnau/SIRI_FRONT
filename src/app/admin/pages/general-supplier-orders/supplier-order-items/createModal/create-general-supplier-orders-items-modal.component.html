@@ -10,7 +10,7 @@
         <mat-option
           *ngFor="let product of data.products"
           [value]="product.product.id"
-          >{{ firstLetterOnCapital(product.product.description) }}</mat-option
+          >{{ firstLetterOnCapital(product.product.name + ' ' + product.product.description + ' ' + product.product.measure.name) }}</mat-option
         >
       </mat-select>
     </mat-form-field>

@@ -62,7 +62,7 @@
                   *ngFor="let product of products"
                   [value]="product.id"
                 >
-                  {{ product.description }}
+                  {{ product.name + ' ' + product.description + ' ' + product.measure.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
