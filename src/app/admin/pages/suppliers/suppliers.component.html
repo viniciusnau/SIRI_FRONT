@@ -61,20 +61,6 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="cpf">
-          <th mat-header-cell *matHeaderCellDef>CPF</th>
-          <td mat-cell *matCellDef="let suppliers">
-            {{ suppliers.ssn }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="rg">
-          <th mat-header-cell *matHeaderCellDef>RG</th>
-          <td mat-cell *matCellDef="let suppliers">
-            {{ suppliers.nic }}
-          </td>
-        </ng-container>
-
         <ng-container matColumnDef="ordersSuppliers">
           <th mat-header-cell *matHeaderCellDef>Pedidos</th>
           <td mat-cell *matCellDef="let adminSuppliers">

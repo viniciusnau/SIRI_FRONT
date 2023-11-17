@@ -36,8 +36,6 @@ export class SuppliersModalComponent implements OnInit {
       email: [this.notEmpty(this.data.suppliers.email), Validators.email],
       phone: this.notEmpty(this.data.suppliers.phone),
       ein: this.notEmpty(this.data.suppliers.ein),
-      ssn: this.notEmpty(this.data.suppliers.ssn),
-      nic: this.notEmpty(this.data.suppliers.nic),
       category: this.notEmpty(this.data.suppliers.category.id),
     });
 

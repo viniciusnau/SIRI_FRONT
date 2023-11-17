@@ -126,8 +126,6 @@ export class SuppliersComponent implements OnInit {
     'email',
     'contact',
     'cnpj',
-    'cpf',
-    'rg',
     'ordersSuppliers',
     'editSuppliers',
     'deleteSuppliers',

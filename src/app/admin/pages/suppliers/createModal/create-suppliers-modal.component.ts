@@ -44,8 +44,6 @@ export class CreateSuppliersModalComponent implements OnInit {
       email: ['', [Validators.email]],
       phone: ['', [Validators.required]],
       ein: ['', [Validators.required]],
-      ssn: ['', [Validators.required]],
-      nic: ['', [Validators.required]],
       category: ['', [Validators.required]],
     });
   }
@@ -65,7 +63,7 @@ export class CreateSuppliersModalComponent implements OnInit {
   }
 
   onClick(): void {
-    var data = this.formCreateSuppliers.getRawValue();
+    const data = this.formCreateSuppliers.getRawValue();
 
     data.category = this.selectedCategories;
     this.stocksService.createSupplier(data).subscribe(
