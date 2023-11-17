@@ -111,6 +111,20 @@ export class OrderItemsComponent implements OnInit {
 
   saveItem(orderItem: iAdminOrderItems) {
     let payload = {};
+
+    if (orderItem.supplier_quantity > orderItem.quantity) {
+      return this.snackBar.open(
+        snackbarConsts.admin.manageOrders.itens.edit.error,
+        snackbarConsts.close,
+        {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        },
+      );
+    }
+
     if (orderItem.protocol) {
       if (
         typeof orderItem.protocol === 'object' &&
@@ -156,6 +170,7 @@ export class OrderItemsComponent implements OnInit {
         );
       },
     );
+    return true
   }
 
   onProtocolSelectionChange(orderItem: iAdminOrderItems, protocolId: number) {
