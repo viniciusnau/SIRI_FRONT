@@ -102,6 +102,7 @@ export class HomeComponent implements OnInit {
   }
 
   updateProducts(returnToFirstPage = false): void {
+    this.isFiltered = false
     if (returnToFirstPage) {
       this.currentPage = 1;
     }
