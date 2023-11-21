@@ -3,7 +3,7 @@
     <div class="filter-and-button">
       <div class="filter-container">
         <mat-form-field appearance="fill">
-          <mat-label>Categorias</mat-label>
+          <mat-label>Categoria</mat-label>
           <mat-select
             [(ngModel)]="selectedCategoryId"
             name="categorySelect"
@@ -17,6 +17,11 @@
               {{ firstLetterOnCapital(category.name) }}
             </mat-option>
           </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="search-bar">
+          <mat-label>Pesquisar</mat-label>
+          <input matInput (keyup.enter)="applyFilter($event.target.value, '1', true)" />
         </mat-form-field>
       </div>
     </div>

@@ -59,4 +59,9 @@ export class ProductsService {
     const url = `${this.apiUrl}/${productId}`;
     return this.httpClient.get<any>(url, this.httpOptions);
   }
+
+  public searchProducts(product: string, pageChange = '',): Observable<any> {
+    const url = `${this.apiUrl}/search/${pageChange ? `?page=${pageChange}` : ''}&product=${product}`;
+    return this.httpClient.get<any>(url, this.httpOptions);
+  }
 }

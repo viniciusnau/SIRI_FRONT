@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
   client: number;
   chosenProducts: any[] = [];
   loading = false;
+  isFiltered = false;
+  filterValue: string;
   currentPage = 1;
   response: any;
 
@@ -41,9 +43,48 @@ export class HomeComponent implements OnInit {
     return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
+  applyFilter(filterValue: string, page: string, isFirstPage: boolean) {
+    this.isFiltered = true;
+    this.filterValue = filterValue;
+    if (isFirstPage) {
+      this.currentPage = 1;
+    }
+    this.productsService.searchProducts(filterValue, page).subscribe(
+      (data) => {
+        this.response = data;
+        this.products = this.sortAlphabetically(
+          data.results.filter((product) => product.is_available),
+        );
+        const chosenProductIds = this.chosenProducts.map(
+          (chosenProduct) => chosenProduct.id,
+        );
+        this.products.forEach((product) => {
+          if (chosenProductIds.includes(product.id)) {
+            const chosenProduct = this.chosenProducts.find(
+              (chosenProduct) => chosenProduct.id === product.id,
+            );
+            product.quantity = `${chosenProduct.quantity}`;
+          } else {
+            product.quantity = '0';
+          }
+        });
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error searching products:', error);
+        this.loading = false;
+      }
+    );
+  }
+
+
   onPageChange(page: number) {
     this.currentPage = page;
-    this.updateProducts();
+    if (this.isFiltered) {
+      this.applyFilter(this.filterValue, page.toString(), false);
+    } else {
+      this.updateProducts();
+    }
   }
 
   getUserData(): void {

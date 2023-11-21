@@ -1,6 +1,12 @@
 <common-sidebar>
   <mat-card *ngIf="!loading" admin>
     <mat-card-content>
+
+      <mat-form-field appearance="outline" class="search-bar">
+        <mat-label>Pesquisar</mat-label>
+        <input matInput (keyup)="applyFilter($event.target.value)" />
+      </mat-form-field>
+
       <mat-toolbar>
         <span>Produtos</span>
         <span class="spacer"></span>
@@ -121,11 +127,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
-      <app-pagination
-        [currentPage]="currentPage"
-        [response]="response"
-        (pageChange)="onPageChange($event)"
-      ></app-pagination>
     </mat-card-content>
   </mat-card>
 </common-sidebar>

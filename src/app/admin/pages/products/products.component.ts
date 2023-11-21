@@ -15,7 +15,6 @@ import snackbarConsts from 'src/snackbarConsts';
 export class ProductsComponent implements OnInit {
   loading: boolean = false;
   loadingProductId: number | null = null;
-  currentPage = 1;
   response: any;
   categories = [];
   measures = [];
@@ -33,9 +32,10 @@ export class ProductsComponent implements OnInit {
     this.getAllMeasures();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.response.filter = filterValue;
   }
 
   sortAlphabetically(list) {
@@ -43,20 +43,18 @@ export class ProductsComponent implements OnInit {
   }
 
   sortContentTableAlphabetically(list) {
-    const sortedResults = list.results.sort((a, b) =>
+    const sortedResults = list.sort((a, b) =>
       a?.name?.localeCompare(b?.name),
     );
-    return { ...list, results: sortedResults };
+    return sortedResults;
   }
 
   getContent() {
     this.stocksService
-      .getProducts(this.currentPage.toString())
+      .getAllProducts()
       .subscribe((data) => {
         const sortedData = this.sortContentTableAlphabetically(data);
-        this.response = new MatTableDataSource(sortedData.results);
-        this.response.next = data?.next;
-        this.response.count = data?.count;
+        this.response = new MatTableDataSource(sortedData);
         this.loadingProductId = null;
         this.loading = false;
       });
