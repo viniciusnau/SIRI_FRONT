@@ -1,70 +1,77 @@
-<div class="loginContainer">
-  <img
-    src="../../../../assets/logo_defensoria_sc_preferencial_colorido.png"
-    alt="logo_defensoria_sc_colorido.png"
-    class="logoLogin"
-  />
-  <form class="cardLogin" [formGroup]="formLogin" novalidate>
-    <h1>SIRI</h1>
-    <h2>Sistema Integrado de Requisições Internas</h2>
-    <div class="textField">
-      <input
-        type="text"
-        name="username"
-        id="ilogin"
-        placeholder="Usuário"
-        required
-        matInput
-        formControlName="username"
+<div class="container">
+  <div class="loginContainer">
+    <div class="logoContainer">
+      <img
+        src="../../../../assets/logo_defensoria_sc_preferencial_colorido.png"
+        alt="logo_defensoria_sc_colorido.png"
+        class="logo"
       />
     </div>
-    <div class="textField">
-      <div class="input-container">
+    <form class="cardLogin" [formGroup]="formLogin" novalidate>
+      <h1>SIRI</h1>
+      <h2>Sistema Integrado de Requisições Internas</h2>
+      <div class="textField">
         <input
-          type="{{ inputType }}"
-          name="password"
-          id="ipassword"
-          placeholder="Senha"
+          type="text"
+          name="username"
+          id="ilogin"
+          placeholder="Usuário"
           required
           matInput
-          formControlName="password"
+          formControlName="username"
         />
-        <button
-          type="button"
-          class="password-toggle-button"
-          (click)="togglePasswordVisibility()"
-        >
-          <i>
-            {{ inputType === 'password' ? 'Ver' : 'Esconder' }}
-          </i>
-        </button>
       </div>
-    </div>
-
-    <div class="otherServices">
-      <div class="rememberService">
-        <input
-          type="checkbox"
-          name="remember"
-          id="iremember"
-          formControlName="remember"
-        />
-        <label for="iremember">Lembrar</label>
-      </div>
-      <div class="googleService">
-        <button (click)="redirect()">Continuar com Google</button>
+      <div class="textField">
+        <div class="input-container">
+          <input
+            type="{{ inputType }}"
+            style="margin: 2rem 0 0"
+            name="password"
+            id="ipassword"
+            placeholder="Senha"
+            required
+            matInput
+            formControlName="password"
+          />
+          <button
+            type="button"
+            class="password-toggle-button"
+            (click)="togglePasswordVisibility()"
+          >
+            <i>
+              {{ inputType === 'password' ? 'Ver' : 'Esconder' }}
+            </i>
+          </button>
+        </div>
       </div>
       <a href="#" class="forgetPass" (click)="resetPassword($event)"
-        >Esqueci a senha</a
+        >Esqueci a senha?</a
       >
-    </div>
-    <button
-      [disabled]="loading || formLogin.invalid"
-      class="btnLogin"
-      (click)="login()"
-    >
-      <span class="btnLoginText" *ngIf="!loading">LOGIN</span>
-      <div class="custom-spinner" *ngIf="loading"></div>
-    </button>
-  </form>
+
+      <div class="lineContainer">
+        <hr class="line" />
+        <div class="text">ou</div>
+        <hr class="line" />
+      </div>
+      <div>
+        <button (click)="redirect()" class="button googleService">
+          <img
+            width="30rem"
+            alt="Ícone do Google"
+            src="../../../../assets/google-icon.png"
+            class="googleIcon"
+          />
+          Continuar com Google
+        </button>
+      </div>
+      <button
+        [disabled]="loading || formLogin.invalid"
+        class="btnLogin"
+        (click)="login()"
+      >
+        <span class="btnLoginText" *ngIf="!loading">Entrar</span>
+        <div class="custom-spinner" *ngIf="loading"></div>
+      </button>
+    </form>
+  </div>
 </div>
