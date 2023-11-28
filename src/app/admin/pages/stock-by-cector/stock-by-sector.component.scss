@@ -1,3 +1,5 @@
+@import '../../../../colors.scss';
+
 .mat-mdc-row .mat-mdc-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
@@ -6,4 +8,11 @@
 
 .mat-mdc-row:hover .mat-mdc-cell {
   border-color: currentColor;
+}
+
+.button-container {
+  .btn {
+    background-color: $primary-color;
+    color: $primary-text-color;
+  }
 }

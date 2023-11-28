@@ -51,5 +51,5 @@ export class StockBySectorComponent implements OnInit {
     this.router.navigate([`/estoque-por-setor/itens/${stock_id}`]);
   }
 
-  displayedColumns = ['id', 'sector'];
+  displayedColumns = ['id', 'sector', 'itens'];
 }
