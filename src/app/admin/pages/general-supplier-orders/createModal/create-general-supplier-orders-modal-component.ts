@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
@@ -19,6 +20,7 @@ export class CreateGeneralSupplierOrdersModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public ordersService: OrdersService,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {

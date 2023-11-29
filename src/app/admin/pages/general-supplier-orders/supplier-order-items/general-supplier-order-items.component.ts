@@ -6,6 +6,7 @@ import { CreateGeneralSupplierOrdersItemsModalComponent } from './createModal/cr
 import { MatDialog } from '@angular/material/dialog';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'app-supplier-order-items',
@@ -34,6 +35,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

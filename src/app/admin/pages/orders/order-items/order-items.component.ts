@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteOrderItemModalComponent } from './deleteModal/delete-order-item-modal.component.component';
 import { BehaviorSubject } from 'rxjs';
 import snackbarConsts from 'src/snackbarConsts';
+import { Helper } from 'src/helper';
 
 interface Protocol {
   id: number;
@@ -65,6 +66,7 @@ export class OrderItemsComponent implements OnInit {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -170,13 +172,14 @@ export class OrderItemsComponent implements OnInit {
         );
       },
     );
-    return true
+    return true;
   }
 
   onProtocolSelectionChange(orderItem: iAdminOrderItems, protocolId: number) {
     orderItem.protocol = {
       code: '',
-      id: protocolId };
+      id: protocolId,
+    };
   }
 
   deleteItem(id: string): void {

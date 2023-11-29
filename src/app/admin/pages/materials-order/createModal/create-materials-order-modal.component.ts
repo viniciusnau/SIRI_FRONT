@@ -8,6 +8,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { HttpClient } from '@angular/common/http';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 interface iSupplier {
   id: number;
@@ -58,6 +59,7 @@ export class CreateMaterialsConfirmOrderModalComponent implements OnInit {
     public ordersService: OrdersService,
     private http: HttpClient,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {

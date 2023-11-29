@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
+import { Helper } from 'src/helper';
 
 interface Supplier {
   id: number;
@@ -30,6 +31,7 @@ export class CreateSuppliersModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {

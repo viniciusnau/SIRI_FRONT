@@ -8,6 +8,7 @@ import { Category, Product } from '../../../interfaces/stock/interfaces';
 import { OrdersService } from 'src/app/services/orders.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmHomeModalComponent } from './confirmModal/confirm-home-modal.component';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'user-home',
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit {
     public productsService: ProductsService,
     public ordersService: OrdersService,
     public dialog: MatDialog,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -73,10 +75,9 @@ export class HomeComponent implements OnInit {
       (error) => {
         console.error('Error searching products:', error);
         this.loading = false;
-      }
+      },
     );
   }
-
 
   onPageChange(page: number) {
     this.currentPage = page;
@@ -102,7 +103,7 @@ export class HomeComponent implements OnInit {
   }
 
   updateProducts(returnToFirstPage = false): void {
-    this.isFiltered = false
+    this.isFiltered = false;
     if (returnToFirstPage) {
       this.currentPage = 1;
     }

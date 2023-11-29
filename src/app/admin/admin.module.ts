@@ -69,6 +69,7 @@ import { PriceFormatDirective } from './directives/price-format.directive';
 import { NegativeNotAllowedDirective } from './directives/negative-not-allowed.directive';
 import { MatCardModule } from '@angular/material/card';
 import { CommonCustomModule } from '../common/commonCustom.module';
+import { Helper } from 'src/helper';
 
 @NgModule({
   declarations: [
@@ -145,5 +146,6 @@ import { CommonCustomModule } from '../common/commonCustom.module';
     CommonCustomModule,
   ],
   exports: [PaginationComponent],
+  providers: [Helper],
 })
 export class AdminModule {}

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'create-bidding-exemption-modal',
@@ -19,6 +20,7 @@ export class CreateBiddingExemptionModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +33,7 @@ export class CreateBiddingExemptionModalComponent implements OnInit {
       quantity: ['', [Validators.required]],
       stock: ['', [Validators.required]],
       invoice: ['', [Validators.required]],
-      price: ['']
+      price: [''],
     });
   }
 
@@ -57,7 +59,7 @@ export class CreateBiddingExemptionModalComponent implements OnInit {
       createBiddingExemptionData.quantity.toString().slice(0, 6),
     );
 
-    modifiedItem.price = this.handlePriceFormat(modifiedItem.price)
+    modifiedItem.price = this.handlePriceFormat(modifiedItem.price);
 
     this.stocksService.createBiddingExemption(modifiedItem).subscribe(
       (response) => {

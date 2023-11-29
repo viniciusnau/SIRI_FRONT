@@ -48,7 +48,7 @@
         <mat-option
           *ngFor="let category of data.categories"
           [value]="category.id"
-          >{{ firstLetterOnCapital(category.name) }}</mat-option
+          >{{ this.Helper.firstLetterOnCapital(category.name) }}</mat-option
         >
       </mat-select>
     </mat-form-field>

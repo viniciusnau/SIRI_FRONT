@@ -7,7 +7,7 @@
         <mat-option
           *ngFor="let supplier of data.suppliers"
           [value]="supplier.id"
-          >{{ firstLetterOnCapital(supplier.name) }}</mat-option
+          >{{ this.Helper.firstLetterOnCapital(supplier.name) }}</mat-option
         >
       </mat-select>
     </mat-form-field>
@@ -29,7 +29,9 @@
         <mat-option
           *ngFor="let public_defense of data.public_defenses"
           [value]="public_defense.id"
-          >{{ firstLetterOnCapital(public_defense.name) }}</mat-option
+          >{{
+            this.Helper.firstLetterOnCapital(public_defense.name)
+          }}</mat-option
         >
       </mat-select>
     </mat-form-field>

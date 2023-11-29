@@ -2,6 +2,7 @@ import { StocksService } from '../../../services/stocks.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Helper } from 'src/helper';
 
 interface AdminStock {
   id: number;
@@ -18,16 +19,20 @@ export class StockBySectorComponent implements OnInit {
   currentPage = 1;
   response: any;
 
-  constructor(private stocksService: StocksService, private router: Router) {}
+  constructor(
+    private stocksService: StocksService,
+    private router: Router,
+    public Helper: Helper,
+  ) {}
 
   ngOnInit(): void {
     this.getContent();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
+  // onPageChange(page: number) {
+  //   this.currentPage = page;
+  //   this.getContent();
+  // }
 
   sortContentTableAlphabetically(list) {
     const sortedResults = list.results?.sort((a, b) =>

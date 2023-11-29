@@ -7,18 +7,21 @@
         <mat-option
           *ngFor="let product of data.products"
           [value]="product.id"
-          >{{ firstLetterOnCapital(product.name + ' ' + product.description + ' ' + product.measure.name) }}</mat-option
+          >{{
+            this.Helper.firstLetterOnCapital(
+              product.name +
+                ' ' +
+                product.description +
+                ' ' +
+                product.measure.name
+            )
+          }}</mat-option
         >
       </mat-select>
     </mat-form-field>
     <p>Preço</p>
     <mat-form-field appearance="fill">
-      <input
-        type="text"
-        matInput
-        formControlName="price"
-        appPriceFormat
-      />
+      <input type="text" matInput formControlName="price" appPriceFormat />
     </mat-form-field>
     <p>Quantidade*</p>
     <mat-form-field appearance="fill">

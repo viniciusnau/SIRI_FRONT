@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { Helper } from 'src/helper';
 
 interface Category {
   id: number;
@@ -29,7 +30,11 @@ export class StockComponent implements OnInit {
     'withdrawals',
   ];
 
-  constructor(public userService: UserService, private router: Router) {}
+  constructor(
+    public userService: UserService,
+    private router: Router,
+    public Helper: Helper,
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;

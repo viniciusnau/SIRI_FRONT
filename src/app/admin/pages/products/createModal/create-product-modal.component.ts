@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'create-product-modal',
@@ -19,6 +20,7 @@ export class CreateProductModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {

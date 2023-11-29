@@ -12,6 +12,7 @@ import {
 } from './editModal/edit-protocols-modal.component';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'app-protocols',
@@ -36,6 +37,7 @@ export class ProtocolsComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -90,22 +92,6 @@ export class ProtocolsComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateProtocolsModalComponent, {
       data: this.modalData,
     });
-  }
-
-  formatDate(date: string) {
-    if (date) {
-      const originalDate = new Date(date);
-
-      const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1)
-        .toString()
-        .padStart(2, '0');
-      const year = originalDate.getUTCFullYear().toString();
-
-      return `${day}/${month}/${year}`;
-    } else {
-      return '';
-    }
   }
 
   firstLetterOnCapital(text: string) {

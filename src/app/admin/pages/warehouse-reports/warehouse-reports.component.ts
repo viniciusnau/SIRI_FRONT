@@ -7,6 +7,7 @@ import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 import { HttpClient } from '@angular/common/http';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -42,6 +43,7 @@ export class WarehouseReportsComponent implements OnInit {
     private priceFormatPipe: PriceFormatPipe,
     private http: HttpClient,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit() {

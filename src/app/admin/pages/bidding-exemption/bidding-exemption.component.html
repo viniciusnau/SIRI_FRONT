@@ -33,7 +33,9 @@
         <ng-container matColumnDef="product">
           <th mat-header-cell *matHeaderCellDef>Produto</th>
           <td mat-cell *matCellDef="let biddingExemption">
-            {{ firstLetterOnCapital(biddingExemption.product.name) }}
+            {{
+              this.Helper.firstLetterOnCapital(biddingExemption.product.name)
+            }}
           </td>
         </ng-container>
 

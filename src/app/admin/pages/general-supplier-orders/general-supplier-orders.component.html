@@ -43,7 +43,7 @@
         <ng-container matColumnDef="delivery_date">
           <th mat-header-cell *matHeaderCellDef>Prazo de Entrega</th>
           <td mat-cell *matCellDef="let supplierOrders">
-            {{ formatDate(supplierOrders.delivery_date) }}
+            {{ this.Helper.formatDate(supplierOrders.delivery_date) }}
           </td>
         </ng-container>
 
@@ -57,14 +57,14 @@
         <ng-container matColumnDef="created">
           <th mat-header-cell *matHeaderCellDef>Criado</th>
           <td mat-cell *matCellDef="let supplierOrders">
-            {{ formatDate(supplierOrders.created) }}
+            {{ this.Helper.formatDate(supplierOrders.created) }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="updated">
           <th mat-header-cell *matHeaderCellDef>Atualizado</th>
           <td mat-cell *matCellDef="let supplierOrders">
-            {{ formatDate(supplierOrders.updated) }}
+            {{ this.Helper.formatDate(supplierOrders.updated) }}
           </td>
         </ng-container>
 

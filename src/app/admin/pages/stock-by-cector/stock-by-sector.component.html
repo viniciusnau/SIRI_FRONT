@@ -21,7 +21,7 @@
           <td
             mat-cell
             *matCellDef="let stocks"
-            (click)="navigateToStockItems(stocks.id)"
+            (click)="Helper.navigateTo('/estoque-por-setor/itens/', stocks.id)"
           >
             <div class="button-container">
               <button
@@ -42,7 +42,7 @@
       <app-pagination
         [currentPage]="currentPage"
         [response]="response"
-        (pageChange)="onPageChange($event)"
+        (pageChange)="Helper.onPageChange(currentPage, $event, getContent, '')"
       ></app-pagination>
     </mat-card-content>
   </mat-card>

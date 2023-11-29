@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 import snackbarConsts from 'src/snackbarConsts';
 
 @Component({
@@ -20,6 +21,7 @@ export class CreateGeneralSupplierOrdersItemsModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public ordersService: OrdersService,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -36,14 +38,18 @@ export class CreateGeneralSupplierOrdersItemsModalComponent implements OnInit {
     const productQuantity = this.selectedProduct?.quantity || 0;
 
     if (enteredQuantity > productQuantity) {
-      this.formSupplierOrders.get('quantity').setErrors({ 'quantityExceeded': true });
+      this.formSupplierOrders
+        .get('quantity')
+        .setErrors({ quantityExceeded: true });
     } else {
       this.formSupplierOrders.get('quantity').setErrors(null);
     }
   }
 
   onProductSelected(productId: number) {
-    this.selectedProduct = this.data.products.find(product => product.product.id === productId);
+    this.selectedProduct = this.data.products.find(
+      (product) => product.product.id === productId,
+    );
     this.updateQuantityError();
   }
 

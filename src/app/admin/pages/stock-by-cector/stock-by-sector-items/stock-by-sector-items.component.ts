@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StocksService } from 'src/app/services/stocks.service';
+import { Helper } from 'src/helper';
 
 interface iStockBySectorItems {
   id: number;
@@ -22,6 +23,7 @@ export class StockBySectorItemsComponent {
   constructor(
     public stocksService: StocksService,
     private route: ActivatedRoute,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
