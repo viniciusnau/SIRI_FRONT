@@ -28,11 +28,6 @@ export class CreateGeneralSupplierOrdersItemsModalComponent implements OnInit {
     this.createForm();
   }
 
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
-  }
-
   updateQuantityError() {
     const enteredQuantity = this.formSupplierOrders.get('quantity').value || 0;
     const productQuantity = this.selectedProduct?.quantity || 0;

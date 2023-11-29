@@ -79,11 +79,6 @@ export class WarehouseReportsComponent implements OnInit {
     );
   }
 
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
-  }
-
   generatePDF() {
     const currentDate = moment().format('DD/MM/YYYY HH:mm:ss');
     const imagePath = 'assets/logo_defensoria_sc_preferencial_colorido.png';
@@ -129,7 +124,7 @@ export class WarehouseReportsComponent implements OnInit {
                     ],
                     ...this.warehouseReports.map((report) => [
                       report.productCode,
-                      this.firstLetterOnCapital(report.productName),
+                      this.Helper.firstLetterOnCapital(report.productName),
                       report.productMeasure,
                       report.quantity,
                       this.priceFormatPipe.transform(Number(report.price)),

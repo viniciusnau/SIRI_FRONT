@@ -101,7 +101,14 @@
       <app-user-pagination
         [currentPage]="currentPage"
         [response]="response"
-        (pageChange)="onPageChange($event)"
+        (pageChange)="
+          this.Helper.onPageChange(
+            this.currentPage,
+            $event,
+            this.getContent,
+            this.orderId
+          )
+        "
         [page]="page"
       ></app-user-pagination>
     </mat-card-content>

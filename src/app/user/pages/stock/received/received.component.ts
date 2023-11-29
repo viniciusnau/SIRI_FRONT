@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
+import { Helper } from 'src/helper';
 
 interface Entries {
   quantity: number;
@@ -21,6 +22,7 @@ export class ReceivedComponent implements OnInit {
   constructor(
     private ordersService: OrdersService,
     private route: ActivatedRoute,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {

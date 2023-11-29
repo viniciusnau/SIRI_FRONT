@@ -41,10 +41,6 @@ export class HomeComponent implements OnInit {
     this.getUserData();
   }
 
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
-  }
-
   applyFilter(filterValue: string, page: string, isFirstPage: boolean) {
     this.isFiltered = true;
     this.filterValue = filterValue;
@@ -54,7 +50,7 @@ export class HomeComponent implements OnInit {
     this.productsService.searchProducts(filterValue, page).subscribe(
       (data) => {
         this.response = data;
-        this.products = this.sortAlphabetically(
+        this.products = this.Helper.sortAlphabetically(
           data.results.filter((product) => product.is_available),
         );
         const chosenProductIds = this.chosenProducts.map(
@@ -142,7 +138,7 @@ export class HomeComponent implements OnInit {
     this.productsService.getProducts(getProductDto, pageChange).subscribe(
       (data) => {
         this.response = data;
-        this.products = this.sortAlphabetically(
+        this.products = this.Helper.sortAlphabetically(
           data.results.filter((product) => product.is_available),
         );
         const chosenProductIds = this.chosenProducts.map(
@@ -162,11 +158,6 @@ export class HomeComponent implements OnInit {
       },
       (error) => {},
     );
-  }
-
-  firstLetterOnCapital(text: string): string {
-    if (text.length === 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   openModal(data): void {

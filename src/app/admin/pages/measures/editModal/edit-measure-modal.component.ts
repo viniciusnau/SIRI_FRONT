@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'edit-measure-modal',
@@ -20,6 +21,7 @@ export class EditMeasureModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -28,12 +30,11 @@ export class EditMeasureModalComponent implements OnInit {
 
   createForm() {
     this.formMeasure = this.formBuilder.group({
-      name: [this.notEmpty(this.data.measure.name), [Validators.required]],
+      name: [
+        this.Helper.notEmpty(this.data.measure.name),
+        [Validators.required],
+      ],
     });
-  }
-
-  notEmpty(content: any) {
-    return content ? content : '';
   }
 
   getChangedProperties(): any {

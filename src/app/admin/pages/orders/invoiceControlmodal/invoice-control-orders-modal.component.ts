@@ -11,6 +11,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'invoice-control-orders-modal',
@@ -38,6 +39,7 @@ export class InvoiceControlOrdersModalComponent implements OnInit {
     private stocksService: StocksService,
     private suppliersService: SuppliersService,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -60,19 +62,15 @@ export class InvoiceControlOrdersModalComponent implements OnInit {
     return field.replace('R$', '').replace(/[.]/g, '').replace(/[,]/g, '.');
   }
 
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
-  }
-
   getSuppliers() {
     this.suppliersService.getAllSuppliers().subscribe((data) => {
-      this.suppliers = this.sortAlphabetically(data);
+      this.suppliers = this.Helper.sortAlphabetically(data);
     });
   }
 
   getPublicDefenses() {
     this.stocksService.getAllPublicDefenses().subscribe((data) => {
-      this.public_defenses = this.sortAlphabetically(data);
+      this.public_defenses = this.Helper.sortAlphabetically(data);
     });
   }
 

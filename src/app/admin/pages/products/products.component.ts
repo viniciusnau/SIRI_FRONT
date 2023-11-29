@@ -40,10 +40,6 @@ export class ProductsComponent implements OnInit {
     this.response.filter = filterValue;
   }
 
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
-  }
-
   sortContentTableAlphabetically(list) {
     const sortedResults = list.sort((a, b) => a?.name?.localeCompare(b?.name));
     return sortedResults;
@@ -60,19 +56,14 @@ export class ProductsComponent implements OnInit {
 
   getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.categories = this.sortAlphabetically(data);
+      this.categories = this.Helper.sortAlphabetically(data);
     });
   }
 
   getAllMeasures() {
     this.stocksService.getAllMeasures().subscribe((data) => {
-      this.measures = this.sortAlphabetically(data);
+      this.measures = this.Helper.sortAlphabetically(data);
     });
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   deleteItem(id: string) {

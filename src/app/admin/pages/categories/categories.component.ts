@@ -29,11 +29,6 @@ export class CategoriesComponent implements OnInit {
     this.getContent();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
   sortContentTableAlphabetically(list) {
     const sortedResults = list.results.sort((a, b) =>
       a?.name?.localeCompare(b?.name),
@@ -52,11 +47,6 @@ export class CategoriesComponent implements OnInit {
         this.loading = null;
       });
   }
-
-  // firstLetterOnCapital(text: string) {
-  //   if (text.length == 0) return '';
-  //   return text[0].toUpperCase() + text.substring(1);
-  // }
 
   deleteItem(id: string) {
     this.loading = Number(id);

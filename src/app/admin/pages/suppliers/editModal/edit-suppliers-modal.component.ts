@@ -32,22 +32,21 @@ export class SuppliersModalComponent implements OnInit {
 
   createForm() {
     this.formSuppliers = this.formBuilder.group({
-      name: this.notEmpty(this.data.suppliers.name),
-      agent: this.notEmpty(this.data.suppliers.agent),
-      address: this.notEmpty(this.data.suppliers.address),
-      email: [this.notEmpty(this.data.suppliers.email), Validators.email],
-      phone: this.notEmpty(this.data.suppliers.phone),
-      ein: this.notEmpty(this.data.suppliers.ein),
-      category: this.notEmpty(this.data.suppliers.category.id),
+      name: this.Helper.notEmpty(this.data.suppliers.name),
+      agent: this.Helper.notEmpty(this.data.suppliers.agent),
+      address: this.Helper.notEmpty(this.data.suppliers.address),
+      email: [
+        this.Helper.notEmpty(this.data.suppliers.email),
+        Validators.email,
+      ],
+      phone: this.Helper.notEmpty(this.data.suppliers.phone),
+      ein: this.Helper.notEmpty(this.data.suppliers.ein),
+      category: this.Helper.notEmpty(this.data.suppliers.category.id),
     });
 
     this.formSuppliers.valueChanges.subscribe(() => {
       this.getChangedProperties();
     });
-  }
-
-  notEmpty(content: any) {
-    return content ? content : '';
   }
 
   getChangedProperties(): any {
@@ -72,11 +71,6 @@ export class SuppliersModalComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   onClick(): void {

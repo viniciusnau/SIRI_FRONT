@@ -9,6 +9,7 @@ import {
 } from './createModal/create-materials-order-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'app-materials-order',
@@ -32,6 +33,7 @@ export class MaterialsOrderComponent implements OnInit {
     private suppliersService: SuppliersService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -44,10 +46,6 @@ export class MaterialsOrderComponent implements OnInit {
   onPageChange(page: number) {
     this.currentPage = page;
     this.getContent();
-  }
-
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
   getContent(disableLoading = false) {
@@ -69,13 +67,13 @@ export class MaterialsOrderComponent implements OnInit {
 
   getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.modalData.categories = this.sortAlphabetically(data);
+      this.modalData.categories = this.Helper.sortAlphabetically(data);
     });
   }
 
   getSuppliers() {
     this.suppliersService.getAllSuppliers().subscribe((data) => {
-      this.modalData.suppliers = this.sortAlphabetically(data);
+      this.modalData.suppliers = this.Helper.sortAlphabetically(data);
     });
   }
 

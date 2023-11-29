@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'edit-receiving-reports-modal',
@@ -25,6 +26,7 @@ export class ReceivingReportsModalComponent implements OnInit {
     },
     public stocksService: StocksService,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -34,14 +36,10 @@ export class ReceivingReportsModalComponent implements OnInit {
   createForm() {
     this.formDescription = this.formBuilder.group({
       description: [
-        this.notEmpty(this.data?.description),
+        this.Helper.notEmpty(this.data?.description),
         [Validators.required],
       ],
     });
-  }
-
-  notEmpty(content: any) {
-    return content ? content : '';
   }
 
   getChangedProperties(): any {

@@ -53,10 +53,6 @@ export class BiddingExemption {
     this.getContent();
   }
 
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
-  }
-
   getContent() {
     this.stocksService
       .getBiddingExemption(this.currentPage.toString())
@@ -74,19 +70,19 @@ export class BiddingExemption {
 
   getProducts() {
     this.stocksService?.getAllProducts().subscribe((data) => {
-      this.products = this.sortAlphabetically(data);
+      this.products = this.Helper.sortAlphabetically(data);
     });
   }
 
   getStocks() {
     this.stocksService?.getAllStocks().subscribe((data) => {
-      this.stocks = this.sortAlphabetically(data);
+      this.stocks = this.Helper.sortAlphabetically(data);
     });
   }
 
   getInvoices() {
     this.stocksService?.getAllInvoices().subscribe((data) => {
-      this.invoices = this.sortAlphabetically(data);
+      this.invoices = this.Helper.sortAlphabetically(data);
     });
   }
 
@@ -128,11 +124,6 @@ export class BiddingExemption {
           },
         );
       });
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   displayedColumns = [

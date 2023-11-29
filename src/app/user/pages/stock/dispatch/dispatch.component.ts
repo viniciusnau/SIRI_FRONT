@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
 import { StocksService } from '../../../../services/stocks.service';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'user-dispatch',
@@ -26,6 +27,7 @@ export class DispatchComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {

@@ -52,10 +52,6 @@ export class ProtocolsComponent implements OnInit {
     this.getContent();
   }
 
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
-  }
-
   getContent() {
     this.protocolService
       .getProtocols(this.currentPage.toString())
@@ -68,13 +64,13 @@ export class ProtocolsComponent implements OnInit {
 
   getAllCategories() {
     this.stockService.getAllCategories().subscribe((data) => {
-      this.modalData.categories = this.sortAlphabetically(data);
+      this.modalData.categories = this.Helper.sortAlphabetically(data);
     });
   }
 
   getSuppliers() {
     this.supplierService.getAllSuppliers().subscribe((data) => {
-      this.modalData.suppliers = this.sortAlphabetically(data);
+      this.modalData.suppliers = this.Helper.sortAlphabetically(data);
     });
   }
 
@@ -92,11 +88,6 @@ export class ProtocolsComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateProtocolsModalComponent, {
       data: this.modalData,
     });
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   downloadProtocols(file) {

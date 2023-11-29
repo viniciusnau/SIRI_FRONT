@@ -84,16 +84,6 @@ export class OrderItemsComponent implements OnInit {
     });
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent(this.orderId);
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
-  }
-
   getContent(orderId?: string) {
     this.ordersService
       .getOrderItems(orderId, this.currentPage.toString())

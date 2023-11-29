@@ -6,6 +6,7 @@ import { CreateMeasureModalComponent } from './createModal/create-measure-modal.
 import { MatTableDataSource } from '@angular/material/table';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 interface iAdminMeasures {
   id: number;
@@ -26,6 +27,7 @@ export class MeasuresComponent implements OnInit {
     private stocksService: StocksService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {

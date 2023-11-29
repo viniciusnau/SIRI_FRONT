@@ -8,6 +8,7 @@ import { CreateSuppliersModalComponent } from './createModal/create-suppliers-mo
 import { MatTableDataSource } from '@angular/material/table';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'app-suppliers',
@@ -24,6 +25,7 @@ export class SuppliersComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   currentPage = 1;
@@ -39,10 +41,6 @@ export class SuppliersComponent implements OnInit {
   onPageChange(page: number) {
     this.currentPage = page;
     this.getContent();
-  }
-
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
   sortContentTableAlphabetically(list) {
@@ -67,7 +65,7 @@ export class SuppliersComponent implements OnInit {
 
   getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.categories = this.sortAlphabetically(data);
+      this.categories = this.Helper.sortAlphabetically(data);
     });
   }
 

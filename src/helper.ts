@@ -32,8 +32,16 @@ export class Helper {
     }
   }
 
+  sortAlphabetically(list) {
+    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
+  }
+
   firstLetterOnCapital(text: string) {
     if (text.length == 0) return '';
     return text[0].toUpperCase() + text.substring(1);
+  }
+
+  notEmpty(content: any) {
+    return content ? content : '-';
   }
 }

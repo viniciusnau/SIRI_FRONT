@@ -8,6 +8,7 @@ import {
 } from './createModal/create-invoice-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'app-invoices',
@@ -31,6 +32,7 @@ export class InvoicesComponent implements OnInit {
     private suppliersService: SuppliersService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -38,10 +40,6 @@ export class InvoicesComponent implements OnInit {
     this.getContent();
     this.getSuppliers();
     this.getPublicDefenses();
-  }
-
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
   onPageChange(page: number) {
@@ -61,13 +59,13 @@ export class InvoicesComponent implements OnInit {
 
   getSuppliers() {
     this.suppliersService.getAllSuppliers().subscribe((data) => {
-      this.modalData.suppliers = this.sortAlphabetically(data);
+      this.modalData.suppliers = this.Helper.sortAlphabetically(data);
     });
   }
 
   getPublicDefenses() {
     this.stocksService.getAllPublicDefenses().subscribe((data) => {
-      this.modalData.public_defenses = this.sortAlphabetically(data);
+      this.modalData.public_defenses = this.Helper.sortAlphabetically(data);
     });
   }
 

@@ -27,11 +27,6 @@ export class CreateGeneralSupplierOrdersModalComponent implements OnInit {
     this.createForm();
   }
 
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
-  }
-
   createForm() {
     this.formSupplierOrders = this.formBuilder.group({
       supplier: ['', [Validators.required]],

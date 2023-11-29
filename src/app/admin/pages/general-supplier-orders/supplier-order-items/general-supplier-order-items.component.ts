@@ -48,11 +48,6 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
     this.getProtocolItems();
   }
 
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
-  }
-
   openCreateModal() {
     this.removeItems();
     const dialogRef = this.dialog.open(

@@ -77,11 +77,6 @@ export class DispatchReportsComponent implements OnInit {
       });
   }
 
-  firstLetterOnCapital(text: string) {
-    if (text.length === 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
-  }
-
   openModal(id): void {
     const dialogRef = this.dialog.open(DispatchReportsModalComponent, {
       data: id,

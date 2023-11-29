@@ -55,11 +55,6 @@ export class CreateSuppliersModalComponent implements OnInit {
     this.isInvalidEmail = emailControl.invalid && emailControl.dirty;
   }
 
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
-  }
-
   onNoClick(): void {
     this.dialogRef.close();
   }

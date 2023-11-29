@@ -91,31 +91,27 @@ export class StockReportsComponent implements OnInit {
     this.fetchSectors();
   }
 
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
-  }
-
   fetchCategories() {
     this.stockService.getAllCategories().subscribe((categories) => {
-      this.categories = this.sortAlphabetically(categories);
+      this.categories = this.Helper.sortAlphabetically(categories);
     });
   }
 
   fetchProducts() {
     this.stockService.getAllProducts().subscribe((products) => {
-      this.products = this.sortAlphabetically(products);
+      this.products = this.Helper.sortAlphabetically(products);
     });
   }
 
   fetchPublicDefenses() {
     this.stockService.getAllPublicDefenses().subscribe((publicDefenses) => {
-      this.publicDefenses = this.sortAlphabetically(publicDefenses);
+      this.publicDefenses = this.Helper.sortAlphabetically(publicDefenses);
     });
   }
 
   fetchSectors() {
     this.stockService.getAllSectors().subscribe((sectors) => {
-      this.sectors = this.sortAlphabetically(sectors);
+      this.sectors = this.Helper.sortAlphabetically(sectors);
     });
   }
 

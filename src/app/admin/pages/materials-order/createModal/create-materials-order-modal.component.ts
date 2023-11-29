@@ -181,7 +181,7 @@ export class CreateMaterialsConfirmOrderModalComponent implements OnInit {
           (product) =>
             `${
               productsMap[product][`${publicDefenses[0]}_${product}_code`]
-            }\n${this.firstLetterOnCapital(product)}`,
+            }\n${this.Helper.firstLetterOnCapital(product)}`,
         ),
       ];
       const tableData = [tableHeader];
@@ -286,10 +286,5 @@ export class CreateMaterialsConfirmOrderModalComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 }

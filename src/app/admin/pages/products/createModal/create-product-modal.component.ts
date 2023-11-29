@@ -39,11 +39,6 @@ export class CreateProductModalComponent implements OnInit {
     });
   }
 
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
-  }
-
   handlePriceFormat(field: string) {
     return field?.replace('R$ ', '').replace(/[.]/g, '').replace(/[,]/g, '.');
   }

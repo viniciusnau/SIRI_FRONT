@@ -79,11 +79,6 @@ export class OrderItemsComponent implements OnInit {
       });
   }
 
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
-  }
-
   openEditModal(orderItemId: string, addedQuantity: string, quantity: string) {
     const dialogRef = this.dialog.open(EditOrderItemModalComponent, {
       data: {

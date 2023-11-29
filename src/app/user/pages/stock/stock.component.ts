@@ -68,9 +68,4 @@ export class StockComponent implements OnInit {
   navToStockItemWithdrawals(stock_item_id: number) {
     this.router.navigate([`estoque/saidas/${stock_item_id}`]);
   }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
-  }
 }

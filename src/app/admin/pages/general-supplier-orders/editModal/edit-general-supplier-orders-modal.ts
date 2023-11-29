@@ -38,10 +38,6 @@ export class EditGeneralSuppliersOrdersModalComponent implements OnInit {
     });
   }
 
-  notEmpty(content: any) {
-    return content ? content : '';
-  }
-
   getChangedProperties(): any {
     const formValue = this.formSupplierOrder.getRawValue();
     const changedProperties: any = {};
