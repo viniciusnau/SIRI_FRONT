@@ -32,11 +32,6 @@ export class ReceivedComponent implements OnInit {
     this.getContent(this.stockItemId);
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent(this.stockItemId);
-  }
-
   getContent(id: string) {
     this.ordersService
       .getStockEntries(id, this.currentPage.toString())

@@ -33,11 +33,6 @@ export class StockBySectorItemsComponent {
     this.getContent(this.stockId);
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent(this.stockId);
-  }
-
   getContent(orderId: string) {
     this.stocksService
       .getStockItems(orderId, this.currentPage.toString())

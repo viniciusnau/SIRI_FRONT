@@ -41,11 +41,6 @@ export class ProtocolItemsComponent implements OnInit {
     this.removeItems();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
   removeItems() {
     if (this.response?.results?.length) {
       const responseProductIds = this.response.results.map(

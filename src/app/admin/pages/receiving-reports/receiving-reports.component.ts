@@ -74,11 +74,6 @@ export class ReceivingReportsComponent implements OnInit {
     this.getContent();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
   getContent() {
     this.stocksService
       .getReceivingReports(this.currentPage.toString())

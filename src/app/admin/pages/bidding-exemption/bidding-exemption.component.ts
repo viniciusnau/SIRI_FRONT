@@ -48,11 +48,6 @@ export class BiddingExemption {
     this.getProducts();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
   getContent() {
     this.stocksService
       .getBiddingExemption(this.currentPage.toString())

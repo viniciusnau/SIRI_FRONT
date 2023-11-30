@@ -37,11 +37,6 @@ export class OrdersComponent implements OnInit {
     this.getContent();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
   getContent() {
     this.ordersService
       .getOrders(this.currentPage.toString())

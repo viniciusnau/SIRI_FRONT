@@ -43,11 +43,6 @@ export class MaterialsOrderComponent implements OnInit {
     this.getSuppliers();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
   getContent(disableLoading = false) {
     this.ordersService
       .getMaterialsOrder(this.currentPage.toString())

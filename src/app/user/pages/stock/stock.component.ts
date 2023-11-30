@@ -42,12 +42,6 @@ export class StockComponent implements OnInit {
     this.getContent();
   }
 
-  onPageChange(page: number) {
-    this.loading = true;
-    this.currentPage = page;
-    this.getContent();
-  }
-
   getCategories() {
     this.userService.getUser().subscribe((data) => {
       this.categories = data.categories;

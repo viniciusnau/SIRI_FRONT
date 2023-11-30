@@ -42,11 +42,6 @@ export class InvoicesComponent implements OnInit {
     this.getPublicDefenses();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
   getContent() {
     this.stocksService
       .getInvoices(this.currentPage.toString())

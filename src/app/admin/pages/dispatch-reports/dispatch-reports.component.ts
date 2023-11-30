@@ -63,11 +63,6 @@ export class DispatchReportsComponent implements OnInit {
     this.getContent();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
   getContent() {
     this.stocksService
       .getDispatchReports(this.currentPage.toString())

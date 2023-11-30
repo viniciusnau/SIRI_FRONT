@@ -62,11 +62,6 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
     );
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
   getContent() {
     this.ordersService
       .getSupplierOrderItems(this.supplierOrderId, this.currentPage.toString())

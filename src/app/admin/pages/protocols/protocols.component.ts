@@ -47,11 +47,6 @@ export class ProtocolsComponent implements OnInit {
     this.getSuppliers();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
   getContent() {
     this.protocolService
       .getProtocols(this.currentPage.toString())

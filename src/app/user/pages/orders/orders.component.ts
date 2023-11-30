@@ -32,11 +32,6 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     this.getContent();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
   @ViewChild(MatSort) sort: MatSort;
   dataSource = new MatTableDataSource(this.response?.orders);
 
