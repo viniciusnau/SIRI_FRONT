@@ -219,9 +219,13 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  border-radius: 5rem;
   width: 12rem;
   height: 3.5rem;
-  border-radius: 5rem;
+  padding: 0.25rem 0.5rem;
+  box-shadow: 0 0.8rem 0.8rem -0.8rem $shadow-color;
+  background-color: #efefef;
 }
 
 .googleIcon {
