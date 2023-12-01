@@ -6,6 +6,7 @@ import { CreateGeneralSupplierOrdersItemsModalComponent } from './createModal/cr
 import { MatDialog } from '@angular/material/dialog';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'app-supplier-order-items',
@@ -34,6 +35,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -44,11 +46,6 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
 
     this.getContent();
     this.getProtocolItems();
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   openCreateModal() {
@@ -63,11 +60,6 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
         },
       },
     );
-  }
-
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
   }
 
   getContent() {

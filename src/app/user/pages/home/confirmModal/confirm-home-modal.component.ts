@@ -5,6 +5,7 @@ import { OrdersService } from '../../../../services/orders.service';
 import { Product } from '../../../../interfaces/stock/interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'confirm-home-modal',
@@ -22,8 +23,9 @@ export class ConfirmHomeModalComponent implements OnInit {
     public ordersService: OrdersService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {
-    this.chosenProducts = this.sortAlphabetically(data.chosenProducts);
+    this.chosenProducts = this.Helper.sortAlphabetically(data.chosenProducts);
     this.client = data.client;
   }
 
@@ -91,10 +93,6 @@ export class ConfirmHomeModalComponent implements OnInit {
         );
       },
     );
-  }
-
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
   onNoClick(): void {

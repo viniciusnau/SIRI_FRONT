@@ -5,6 +5,7 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { EditOrderItemModalComponent } from './editModal/edit-order-item-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'app-order-items',
@@ -23,16 +24,12 @@ export class OrderItemsComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.orderId = params['id'];
     });
-    this.getContent(this.orderId);
-  }
-
-  onPageChange(page: number) {
-    this.currentPage = page;
     this.getContent(this.orderId);
   }
 
@@ -75,11 +72,6 @@ export class OrderItemsComponent implements OnInit {
           },
         );
       });
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   openEditModal(orderItemId: string, addedQuantity: string, quantity: string) {

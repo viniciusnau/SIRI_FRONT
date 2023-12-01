@@ -8,6 +8,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { ProductsService } from '../../../services/products.service';
 import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 import { HttpClient } from '@angular/common/http';
+import { Helper } from 'src/helper';
 
 interface ReceivingReport {
   id: number;
@@ -65,15 +66,11 @@ export class ReceivingReportsComponent implements OnInit {
     public dialog: MatDialog,
     private priceFormatPipe: PriceFormatPipe,
     private http: HttpClient,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
     this.loading = true;
-    this.getContent();
-  }
-
-  onPageChange(page: number) {
-    this.currentPage = page;
     this.getContent();
   }
 
@@ -84,27 +81,6 @@ export class ReceivingReportsComponent implements OnInit {
         this.response = data;
         this.loading = false;
       });
-  }
-
-  formatDate(date: string) {
-    if (date) {
-      const originalDate = new Date(date);
-
-      const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1)
-        .toString()
-        .padStart(2, '0');
-      const year = originalDate.getUTCFullYear().toString();
-
-      return `${day}/${month}/${year}`;
-    } else {
-      return '';
-    }
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   openModal(id): void {

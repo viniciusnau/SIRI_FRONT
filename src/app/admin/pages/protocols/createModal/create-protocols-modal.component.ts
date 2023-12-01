@@ -41,11 +41,6 @@ export class CreateProtocolsModalComponent implements OnInit {
     this.createForm();
   }
 
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
-  }
-
   createForm() {
     this.formCreateProtocols = this.formBuilder.group({
       code: ['', [Validators.required]],

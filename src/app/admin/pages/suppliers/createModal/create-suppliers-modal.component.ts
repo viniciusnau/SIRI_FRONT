@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
+import { Helper } from 'src/helper';
 
 interface Supplier {
   id: number;
@@ -30,6 +31,7 @@ export class CreateSuppliersModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -51,11 +53,6 @@ export class CreateSuppliersModalComponent implements OnInit {
   checkEmailValidity() {
     const emailControl = this.formCreateSuppliers.get('email');
     this.isInvalidEmail = emailControl.invalid && emailControl.dirty;
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   onNoClick(): void {

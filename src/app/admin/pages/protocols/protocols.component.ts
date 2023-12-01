@@ -12,6 +12,7 @@ import {
 } from './editModal/edit-protocols-modal.component';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'app-protocols',
@@ -36,6 +37,7 @@ export class ProtocolsComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -43,15 +45,6 @@ export class ProtocolsComponent implements OnInit {
     this.getContent();
     this.getAllCategories();
     this.getSuppliers();
-  }
-
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
   getContent() {
@@ -66,13 +59,13 @@ export class ProtocolsComponent implements OnInit {
 
   getAllCategories() {
     this.stockService.getAllCategories().subscribe((data) => {
-      this.modalData.categories = this.sortAlphabetically(data);
+      this.modalData.categories = this.Helper.sortAlphabetically(data);
     });
   }
 
   getSuppliers() {
     this.supplierService.getAllSuppliers().subscribe((data) => {
-      this.modalData.suppliers = this.sortAlphabetically(data);
+      this.modalData.suppliers = this.Helper.sortAlphabetically(data);
     });
   }
 
@@ -90,27 +83,6 @@ export class ProtocolsComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateProtocolsModalComponent, {
       data: this.modalData,
     });
-  }
-
-  formatDate(date: string) {
-    if (date) {
-      const originalDate = new Date(date);
-
-      const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1)
-        .toString()
-        .padStart(2, '0');
-      const year = originalDate.getUTCFullYear().toString();
-
-      return `${day}/${month}/${year}`;
-    } else {
-      return '';
-    }
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   downloadProtocols(file) {

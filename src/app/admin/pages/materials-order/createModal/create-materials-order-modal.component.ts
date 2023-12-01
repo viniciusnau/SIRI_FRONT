@@ -8,6 +8,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { HttpClient } from '@angular/common/http';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 interface iSupplier {
   id: number;
@@ -58,6 +59,7 @@ export class CreateMaterialsConfirmOrderModalComponent implements OnInit {
     public ordersService: OrdersService,
     private http: HttpClient,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -179,7 +181,7 @@ export class CreateMaterialsConfirmOrderModalComponent implements OnInit {
           (product) =>
             `${
               productsMap[product][`${publicDefenses[0]}_${product}_code`]
-            }\n${this.firstLetterOnCapital(product)}`,
+            }\n${this.Helper.firstLetterOnCapital(product)}`,
         ),
       ];
       const tableData = [tableHeader];
@@ -284,10 +286,5 @@ export class CreateMaterialsConfirmOrderModalComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 }

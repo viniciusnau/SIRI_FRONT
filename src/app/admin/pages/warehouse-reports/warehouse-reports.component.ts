@@ -7,6 +7,7 @@ import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 import { HttpClient } from '@angular/common/http';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -42,6 +43,7 @@ export class WarehouseReportsComponent implements OnInit {
     private priceFormatPipe: PriceFormatPipe,
     private http: HttpClient,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit() {
@@ -75,11 +77,6 @@ export class WarehouseReportsComponent implements OnInit {
         );
       },
     );
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   generatePDF() {
@@ -127,7 +124,7 @@ export class WarehouseReportsComponent implements OnInit {
                     ],
                     ...this.warehouseReports.map((report) => [
                       report.productCode,
-                      this.firstLetterOnCapital(report.productName),
+                      this.Helper.firstLetterOnCapital(report.productName),
                       report.productMeasure,
                       report.quantity,
                       this.priceFormatPipe.transform(Number(report.price)),

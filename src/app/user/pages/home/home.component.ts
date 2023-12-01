@@ -8,6 +8,7 @@ import { Category, Product } from '../../../interfaces/stock/interfaces';
 import { OrdersService } from 'src/app/services/orders.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmHomeModalComponent } from './confirmModal/confirm-home-modal.component';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'user-home',
@@ -32,15 +33,12 @@ export class HomeComponent implements OnInit {
     public productsService: ProductsService,
     public ordersService: OrdersService,
     public dialog: MatDialog,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
     this.loading = true;
     this.getUserData();
-  }
-
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
   applyFilter(filterValue: string, page: string, isFirstPage: boolean) {
@@ -52,7 +50,7 @@ export class HomeComponent implements OnInit {
     this.productsService.searchProducts(filterValue, page).subscribe(
       (data) => {
         this.response = data;
-        this.products = this.sortAlphabetically(
+        this.products = this.Helper.sortAlphabetically(
           data.results.filter((product) => product.is_available),
         );
         const chosenProductIds = this.chosenProducts.map(
@@ -73,10 +71,9 @@ export class HomeComponent implements OnInit {
       (error) => {
         console.error('Error searching products:', error);
         this.loading = false;
-      }
+      },
     );
   }
-
 
   onPageChange(page: number) {
     this.currentPage = page;
@@ -102,7 +99,7 @@ export class HomeComponent implements OnInit {
   }
 
   updateProducts(returnToFirstPage = false): void {
-    this.isFiltered = false
+    this.isFiltered = false;
     if (returnToFirstPage) {
       this.currentPage = 1;
     }
@@ -141,7 +138,7 @@ export class HomeComponent implements OnInit {
     this.productsService.getProducts(getProductDto, pageChange).subscribe(
       (data) => {
         this.response = data;
-        this.products = this.sortAlphabetically(
+        this.products = this.Helper.sortAlphabetically(
           data.results.filter((product) => product.is_available),
         );
         const chosenProductIds = this.chosenProducts.map(
@@ -161,11 +158,6 @@ export class HomeComponent implements OnInit {
       },
       (error) => {},
     );
-  }
-
-  firstLetterOnCapital(text: string): string {
-    if (text.length === 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   openModal(data): void {

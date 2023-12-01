@@ -6,6 +6,7 @@ import { EditProductModalComponent } from './editModal/edit-product-modal.compon
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import snackbarConsts from 'src/snackbarConsts';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'app-products',
@@ -23,6 +24,7 @@ export class ProductsComponent implements OnInit {
     private stocksService: StocksService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -38,59 +40,30 @@ export class ProductsComponent implements OnInit {
     this.response.filter = filterValue;
   }
 
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
-  }
-
   sortContentTableAlphabetically(list) {
-    const sortedResults = list.sort((a, b) =>
-      a?.name?.localeCompare(b?.name),
-    );
+    const sortedResults = list.sort((a, b) => a?.name?.localeCompare(b?.name));
     return sortedResults;
   }
 
   getContent() {
-    this.stocksService
-      .getAllProducts()
-      .subscribe((data) => {
-        const sortedData = this.sortContentTableAlphabetically(data);
-        this.response = new MatTableDataSource(sortedData);
-        this.loadingProductId = null;
-        this.loading = false;
-      });
+    this.stocksService.getAllProducts().subscribe((data) => {
+      const sortedData = this.sortContentTableAlphabetically(data);
+      this.response = new MatTableDataSource(sortedData);
+      this.loadingProductId = null;
+      this.loading = false;
+    });
   }
 
   getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.categories = this.sortAlphabetically(data);
+      this.categories = this.Helper.sortAlphabetically(data);
     });
   }
 
   getAllMeasures() {
     this.stocksService.getAllMeasures().subscribe((data) => {
-      this.measures = this.sortAlphabetically(data);
+      this.measures = this.Helper.sortAlphabetically(data);
     });
-  }
-
-  formatDate(date: string) {
-    if (date) {
-      const originalDate = new Date(date);
-
-      const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1)
-        .toString()
-        .padStart(2, '0');
-      const year = originalDate.getUTCFullYear().toString();
-
-      return `${day}/${month}/${year}`;
-    } else {
-      return '';
-    }
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   deleteItem(id: string) {

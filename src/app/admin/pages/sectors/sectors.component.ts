@@ -1,6 +1,7 @@
 import { StocksService } from 'src/app/services/stocks.service';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Helper } from 'src/helper';
 
 interface AdminSectors {
   id: number;
@@ -17,14 +18,9 @@ export class SectorsComponent implements OnInit {
   currentPage = 1;
   response: any;
 
-  constructor(private stocksService: StocksService) {}
+  constructor(private stocksService: StocksService, public Helper: Helper) {}
 
   ngOnInit(): void {
-    this.getContent();
-  }
-
-  onPageChange(page: number) {
-    this.currentPage = page;
     this.getContent();
   }
 

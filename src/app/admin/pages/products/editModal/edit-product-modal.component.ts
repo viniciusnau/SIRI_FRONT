@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'edit-product-modal',
@@ -20,6 +21,7 @@ export class EditProductModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public stocksService: StocksService,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -28,12 +30,12 @@ export class EditProductModalComponent implements OnInit {
 
   createForm() {
     this.formProduct = this.formBuilder.group({
-      name: this.notEmpty(this.data.product.name),
-      description: this.notEmpty(this.data.product.description),
-      code: this.notEmpty(this.data.product.code),
-      category: this.notEmpty(this.data.product.category.id),
-      price: this.notEmpty(this.data.product.price),
-      is_available: this.notEmpty(this.data.product.is_available),
+      name: this.Helper.notEmpty(this.data.product.name),
+      description: this.Helper.notEmpty(this.data.product.description),
+      code: this.Helper.notEmpty(this.data.product.code),
+      category: this.Helper.notEmpty(this.data.product.category.id),
+      price: this.Helper.notEmpty(this.data.product.price),
+      is_available: this.Helper.notEmpty(this.data.product.is_available),
     });
 
     this.formProduct.valueChanges.subscribe(() => {
@@ -43,10 +45,6 @@ export class EditProductModalComponent implements OnInit {
 
   handlePriceFormat(field: any) {
     return field.replace('R$', '').replace(/[.]/g, '').replace(/[,]/g, '.');
-  }
-
-  notEmpty(content: any) {
-    return content ? content : '';
   }
 
   getChangedProperties(): any {
@@ -62,11 +60,6 @@ export class EditProductModalComponent implements OnInit {
     this.hasChanges = Object.keys(changedProperties).length > 0;
 
     return changedProperties;
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   onNoClick(): void {

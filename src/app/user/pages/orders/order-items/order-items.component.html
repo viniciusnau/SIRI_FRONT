@@ -13,7 +13,7 @@
         <ng-container matColumnDef="product">
           <th mat-header-cell *matHeaderCellDef>Produto</th>
           <td mat-cell *matCellDef="let orderItems">
-            {{ firstLetterOnCapital(orderItems.product.name) }}
+            {{ this.Helper.firstLetterOnCapital(orderItems.product.name) }}
           </td>
         </ng-container>
 
@@ -63,7 +63,11 @@
                 aria-label="Edit order item"
                 [disabled]="orderItems.quantity === orderItems.added_quantity"
                 (click)="
-                  openEditModal(orderItems.id, orderItems.added_quantity, orderItems.quantity)
+                  openEditModal(
+                    orderItems.id,
+                    orderItems.added_quantity,
+                    orderItems.quantity
+                  )
                 "
               >
                 <mat-icon>edit</mat-icon>
@@ -97,7 +101,14 @@
       <app-user-pagination
         [currentPage]="currentPage"
         [response]="response"
-        (pageChange)="onPageChange($event)"
+        (pageChange)="
+          this.Helper.onPageChange(
+            this.currentPage,
+            $event,
+            this.getContent,
+            this.orderId
+          )
+        "
         [page]="page"
       ></app-user-pagination>
     </mat-card-content>

@@ -54,7 +54,7 @@
         <hr class="line" />
       </div>
       <div>
-        <button (click)="redirect()" class="button googleService">
+        <a (click)="redirect()" class="googleService">
           <img
             width="30rem"
             alt="Ícone do Google"
@@ -62,12 +62,13 @@
             class="googleIcon"
           />
           Continuar com Google
-        </button>
+        </a>
       </div>
       <button
         [disabled]="loading || formLogin.invalid"
         class="btnLogin"
         (click)="login()"
+        (keyup.enter)="!formLogin.invalid && !loading ? login() : null"
       >
         <span class="btnLoginText" *ngIf="!loading">Entrar</span>
         <div class="custom-spinner" *ngIf="loading"></div>

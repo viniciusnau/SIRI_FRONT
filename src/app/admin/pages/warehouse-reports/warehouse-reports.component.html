@@ -20,7 +20,7 @@
         <ng-container matColumnDef="productName">
           <th mat-header-cell *matHeaderCellDef>Produto</th>
           <td mat-cell *matCellDef="let warehouseReport">
-            {{ firstLetterOnCapital(warehouseReport.productName) }}
+            {{ this.Helper.firstLetterOnCapital(warehouseReport.productName) }}
           </td>
         </ng-container>
 

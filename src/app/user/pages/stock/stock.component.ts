@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { Helper } from 'src/helper';
 
 interface Category {
   id: number;
@@ -29,17 +30,15 @@ export class StockComponent implements OnInit {
     'withdrawals',
   ];
 
-  constructor(public userService: UserService, private router: Router) {}
+  constructor(
+    public userService: UserService,
+    private router: Router,
+    public Helper: Helper,
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;
     this.getCategories();
-    this.getContent();
-  }
-
-  onPageChange(page: number) {
-    this.loading = true;
-    this.currentPage = page;
     this.getContent();
   }
 
@@ -62,10 +61,5 @@ export class StockComponent implements OnInit {
 
   navToStockItemWithdrawals(stock_item_id: number) {
     this.router.navigate([`estoque/saidas/${stock_item_id}`]);
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 }

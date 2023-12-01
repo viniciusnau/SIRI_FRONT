@@ -60,10 +60,6 @@ export class EditProtocolsModalComponent implements OnInit {
     });
   }
 
-  notEmpty(content: any) {
-    return content ? content : '';
-  }
-
   getChangedProperties(): any {
     const formValue = this.formProtocols.getRawValue();
     const changedProperties: any = {};

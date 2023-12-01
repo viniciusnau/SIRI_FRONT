@@ -40,21 +40,21 @@
         <ng-container matColumnDef="category">
           <th mat-header-cell *matHeaderCellDef>Categoria</th>
           <td mat-cell *matCellDef="let adminProtocols">
-            {{ firstLetterOnCapital(adminProtocols.category.name) }}
+            {{ this.Helper.firstLetterOnCapital(adminProtocols.category.name) }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="start_date">
           <th mat-header-cell *matHeaderCellDef>Início de Vigência</th>
           <td mat-cell *matCellDef="let adminProtocols">
-            {{ formatDate(adminProtocols.start_date) }}
+            {{ this.Helper.formatDate(adminProtocols.start_date) }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="final_date">
           <th mat-header-cell *matHeaderCellDef>Fim de Vigência</th>
           <td mat-cell *matCellDef="let adminProtocols">
-            {{ formatDate(adminProtocols.end_date) }}
+            {{ this.Helper.formatDate(adminProtocols.end_date) }}
           </td>
         </ng-container>
 
@@ -132,7 +132,9 @@
       <app-pagination
         [currentPage]="currentPage"
         [response]="response"
-        (pageChange)="onPageChange($event)"
+        (pageChange)="
+          this.Helper.onPageChange(this.currentPage, $event, this.getContent)
+        "
       ></app-pagination>
     </mat-card-content>
   </mat-card>

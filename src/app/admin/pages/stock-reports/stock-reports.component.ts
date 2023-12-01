@@ -7,6 +7,7 @@ import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 import { HttpClient } from '@angular/common/http';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -80,6 +81,7 @@ export class StockReportsComponent implements OnInit {
     private priceFormatPipe: PriceFormatPipe,
     private http: HttpClient,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit() {
@@ -89,31 +91,27 @@ export class StockReportsComponent implements OnInit {
     this.fetchSectors();
   }
 
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
-  }
-
   fetchCategories() {
     this.stockService.getAllCategories().subscribe((categories) => {
-      this.categories = this.sortAlphabetically(categories);
+      this.categories = this.Helper.sortAlphabetically(categories);
     });
   }
 
   fetchProducts() {
     this.stockService.getAllProducts().subscribe((products) => {
-      this.products = this.sortAlphabetically(products);
+      this.products = this.Helper.sortAlphabetically(products);
     });
   }
 
   fetchPublicDefenses() {
     this.stockService.getAllPublicDefenses().subscribe((publicDefenses) => {
-      this.publicDefenses = this.sortAlphabetically(publicDefenses);
+      this.publicDefenses = this.Helper.sortAlphabetically(publicDefenses);
     });
   }
 
   fetchSectors() {
     this.stockService.getAllSectors().subscribe((sectors) => {
-      this.sectors = this.sortAlphabetically(sectors);
+      this.sectors = this.Helper.sortAlphabetically(sectors);
     });
   }
 
@@ -122,11 +120,13 @@ export class StockReportsComponent implements OnInit {
     const queryParams = [];
 
     if (this.startDate) {
-      queryParams.push(`initial_date=${this.formatDate(this.startDate)}`);
+      queryParams.push(
+        `initial_date=${this.Helper.formatDate(this.startDate)}`,
+      );
     }
 
     if (this.finalDate) {
-      queryParams.push(`final_date=${this.formatDate(this.finalDate)}`);
+      queryParams.push(`final_date=${this.Helper.formatDate(this.finalDate)}`);
     }
 
     this.selectedCategories.forEach((categoryId) => {
@@ -177,18 +177,6 @@ export class StockReportsComponent implements OnInit {
         );
       },
     );
-  }
-
-  formatDate(dateString: string): string {
-    if (dateString) {
-      const date = new Date(dateString);
-      const day = String(date.getDate()).padStart(2, '0');
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const year = String(date.getFullYear());
-
-      return `${day}/${month}/${year}`;
-    }
-    return '';
   }
 
   generatePDF() {

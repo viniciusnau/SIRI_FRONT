@@ -22,7 +22,7 @@
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Nome</th>
           <td mat-cell *matCellDef="let categories">
-            {{ firstLetterOnCapital(categories.name) }}
+            {{ this.Helper.firstLetterOnCapital(categories.name) }}
           </td>
         </ng-container>
 
@@ -74,7 +74,9 @@
       <app-pagination
         [currentPage]="currentPage"
         [response]="response"
-        (pageChange)="onPageChange($event)"
+        (pageChange)="
+          this.Helper.onPageChange(this.currentPage, $event, this.getContent)
+        "
       ></app-pagination>
     </mat-card-content>
   </mat-card>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
+import { Helper } from 'src/helper';
 
 interface Entries {
   quantity: number;
@@ -21,6 +22,7 @@ export class ReceivedComponent implements OnInit {
   constructor(
     private ordersService: OrdersService,
     private route: ActivatedRoute,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -30,33 +32,12 @@ export class ReceivedComponent implements OnInit {
     this.getContent(this.stockItemId);
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent(this.stockItemId);
-  }
-
-  getContent(orderId: string) {
+  getContent(id: string) {
     this.ordersService
-      .getStockEntries(orderId, this.currentPage.toString())
+      .getStockEntries(id, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
       });
-  }
-
-  formatDate(date: string) {
-    if (date) {
-      const originalDate = new Date(date);
-
-      const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1)
-        .toString()
-        .padStart(2, '0');
-      const year = originalDate.getUTCFullYear().toString();
-
-      return `${day}/${month}/${year}`;
-    } else {
-      return '';
-    }
   }
 
   displayedColumns = ['quantity', 'date'];

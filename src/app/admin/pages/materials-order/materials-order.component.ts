@@ -9,6 +9,7 @@ import {
 } from './createModal/create-materials-order-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'app-materials-order',
@@ -32,6 +33,7 @@ export class MaterialsOrderComponent implements OnInit {
     private suppliersService: SuppliersService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -39,15 +41,6 @@ export class MaterialsOrderComponent implements OnInit {
     this.getContent();
     this.getAllCategories();
     this.getSuppliers();
-  }
-
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
   getContent(disableLoading = false) {
@@ -69,13 +62,13 @@ export class MaterialsOrderComponent implements OnInit {
 
   getAllCategories() {
     this.stocksService.getAllCategories().subscribe((data) => {
-      this.modalData.categories = this.sortAlphabetically(data);
+      this.modalData.categories = this.Helper.sortAlphabetically(data);
     });
   }
 
   getSuppliers() {
     this.suppliersService.getAllSuppliers().subscribe((data) => {
-      this.modalData.suppliers = this.sortAlphabetically(data);
+      this.modalData.suppliers = this.Helper.sortAlphabetically(data);
     });
   }
 
@@ -120,22 +113,6 @@ export class MaterialsOrderComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe((result) => {});
-  }
-
-  formatDate(date: string) {
-    if (date) {
-      const originalDate = new Date(date);
-
-      const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1)
-        .toString()
-        .padStart(2, '0');
-      const year = originalDate.getUTCFullYear().toString();
-
-      return `${day}/${month}/${year}`;
-    } else {
-      return '';
-    }
   }
 
   formatRange(dateRange: string) {

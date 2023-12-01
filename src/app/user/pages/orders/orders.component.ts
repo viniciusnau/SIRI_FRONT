@@ -32,11 +32,6 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     this.getContent();
   }
 
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
   @ViewChild(MatSort) sort: MatSort;
   dataSource = new MatTableDataSource(this.response?.orders);
 
@@ -116,22 +111,6 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(ConfirmOrderModalComponent, {
       data: data,
     });
-  }
-
-  formatDate(date: string) {
-    if (date) {
-      const originalDate = new Date(date);
-
-      const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1)
-        .toString()
-        .padStart(2, '0');
-      const year = originalDate.getUTCFullYear().toString();
-
-      return `${day}/${month}/${year}`;
-    } else {
-      return '';
-    }
   }
 
   displayedColumns = [

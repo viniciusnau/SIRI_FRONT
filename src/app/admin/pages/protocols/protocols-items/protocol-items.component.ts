@@ -5,6 +5,7 @@ import { StocksService } from '../../../../services/stocks.service';
 import { ActivatedRoute } from '@angular/router';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'app-protocol-items',
@@ -27,6 +28,7 @@ export class ProtocolItemsComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -37,15 +39,6 @@ export class ProtocolItemsComponent implements OnInit {
     this.getAllProducts();
     this.getContent();
     this.removeItems();
-  }
-
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.description?.localeCompare(b?.description));
   }
 
   removeItems() {
@@ -74,7 +67,7 @@ export class ProtocolItemsComponent implements OnInit {
 
   getAllProducts() {
     this.stockService.getAllProducts(this.protocolId).subscribe((data) => {
-      this.modalData.products = this.sortAlphabetically(data);
+      this.modalData.products = this.Helper.sortAlphabetically(data);
     });
   }
 
@@ -83,29 +76,6 @@ export class ProtocolItemsComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateProtocolItemsModalComponent, {
       data: this.modalData,
     });
-  }
-
-  formatDate(date: string) {
-    if (date) {
-      const originalDate = new Date(date);
-
-      const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1)
-        .toString()
-        .padStart(2, '0');
-      const year = originalDate.getUTCFullYear().toString();
-
-      return `${day}/${month}/${year}`;
-    } else {
-      return '';
-    }
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text && text.length > 0) {
-      return text[0].toUpperCase() + text.substring(1);
-    }
-    return '';
   }
 
   deleteItem(id: string) {

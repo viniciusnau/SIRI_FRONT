@@ -40,7 +40,7 @@
         <ng-container matColumnDef="created">
           <th mat-header-cell *matHeaderCellDef>Criado</th>
           <td mat-cell *matCellDef="let materialsOrder">
-            {{ formatDate(materialsOrder.created) }}
+            {{ this.Helper.formatDate(materialsOrder.created) }}
           </td>
         </ng-container>
 
@@ -87,7 +87,9 @@
       <app-pagination
         [currentPage]="currentPage"
         [response]="response"
-        (pageChange)="onPageChange($event)"
+        (pageChange)="
+          this.Helper.onPageChange(this.currentPage, $event, this.getContent)
+        "
       ></app-pagination>
     </mat-card-content>
   </mat-card>

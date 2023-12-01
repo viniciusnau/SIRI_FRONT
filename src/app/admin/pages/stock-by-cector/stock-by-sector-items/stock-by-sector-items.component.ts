@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StocksService } from 'src/app/services/stocks.service';
+import { Helper } from 'src/helper';
 
 interface iStockBySectorItems {
   id: number;
@@ -22,17 +23,13 @@ export class StockBySectorItemsComponent {
   constructor(
     public stocksService: StocksService,
     private route: ActivatedRoute,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.stockId = params['id'];
     });
-    this.getContent(this.stockId);
-  }
-
-  onPageChange(page: number) {
-    this.currentPage = page;
     this.getContent(this.stockId);
   }
 
@@ -44,11 +41,6 @@ export class StockBySectorItemsComponent {
         this.response.next = data?.next;
         this.response.count = data?.count;
       });
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
   }
 
   displayedColumns = ['id', 'product', 'description', 'quantity'];

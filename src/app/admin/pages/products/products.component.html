@@ -1,7 +1,6 @@
 <common-sidebar>
   <mat-card *ngIf="!loading" admin>
     <mat-card-content>
-
       <mat-form-field appearance="outline" class="search-bar">
         <mat-label>Pesquisar</mat-label>
         <input matInput (keyup)="applyFilter($event.target.value)" />
@@ -28,14 +27,14 @@
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Nome</th>
           <td mat-cell *matCellDef="let products">
-            {{ firstLetterOnCapital(products.name) }}
+            {{ this.Helper.firstLetterOnCapital(products.name) }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef>Descrição</th>
           <td mat-cell *matCellDef="let products">
-            {{ firstLetterOnCapital(products.description) }}
+            {{ this.Helper.firstLetterOnCapital(products.description) }}
           </td>
         </ng-container>
 
@@ -56,7 +55,7 @@
         <ng-container matColumnDef="category">
           <th mat-header-cell *matHeaderCellDef>Categoria</th>
           <td mat-cell *matCellDef="let products">
-            {{ firstLetterOnCapital(products.category.name) }}
+            {{ this.Helper.firstLetterOnCapital(products.category.name) }}
           </td>
         </ng-container>
 
@@ -77,14 +76,14 @@
         <ng-container matColumnDef="created">
           <th mat-header-cell *matHeaderCellDef>Criado</th>
           <td mat-cell *matCellDef="let products">
-            {{ formatDate(products.created) }}
+            {{ this.Helper.formatDate(products.created) }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="updated">
           <th mat-header-cell *matHeaderCellDef>Atualizado</th>
           <td mat-cell *matCellDef="let products">
-            {{ formatDate(products.updated) }}
+            {{ this.Helper.formatDate(products.updated) }}
           </td>
         </ng-container>
 

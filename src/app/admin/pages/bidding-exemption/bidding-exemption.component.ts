@@ -4,6 +4,7 @@ import { CreateBiddingExemptionModalComponent } from './createModal/create-biddi
 import { StocksService } from 'src/app/services/stocks.service';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 interface Stock {
   id: number;
@@ -36,6 +37,7 @@ export class BiddingExemption {
     private stocksService: StocksService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
@@ -44,15 +46,6 @@ export class BiddingExemption {
     this.getStocks();
     this.getInvoices();
     this.getProducts();
-  }
-
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.getContent();
-  }
-
-  sortAlphabetically(list) {
-    return list.sort((a, b) => a?.name?.localeCompare(b?.name));
   }
 
   getContent() {
@@ -72,19 +65,19 @@ export class BiddingExemption {
 
   getProducts() {
     this.stocksService?.getAllProducts().subscribe((data) => {
-      this.products = this.sortAlphabetically(data);
+      this.products = this.Helper.sortAlphabetically(data);
     });
   }
 
   getStocks() {
     this.stocksService?.getAllStocks().subscribe((data) => {
-      this.stocks = this.sortAlphabetically(data);
+      this.stocks = this.Helper.sortAlphabetically(data);
     });
   }
 
   getInvoices() {
     this.stocksService?.getAllInvoices().subscribe((data) => {
-      this.invoices = this.sortAlphabetically(data);
+      this.invoices = this.Helper.sortAlphabetically(data);
     });
   }
 
@@ -126,27 +119,6 @@ export class BiddingExemption {
           },
         );
       });
-  }
-
-  firstLetterOnCapital(text: string) {
-    if (text.length == 0) return '';
-    return text[0].toUpperCase() + text.substring(1);
-  }
-
-  formatDate(date: string) {
-    if (date) {
-      const originalDate = new Date(date);
-
-      const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1)
-        .toString()
-        .padStart(2, '0');
-      const year = originalDate.getUTCFullYear().toString();
-
-      return `${day}/${month}/${year}`;
-    } else {
-      return '';
-    }
   }
 
   displayedColumns = [

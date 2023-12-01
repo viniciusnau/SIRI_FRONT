@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import snackbarConsts from 'src/snackbarConsts';
 import { StocksService } from '../../../../services/stocks.service';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'user-dispatch',
@@ -26,17 +27,13 @@ export class DispatchComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.stockItemId = params['id'];
     });
-    this.getContent(this.stockItemId);
-  }
-
-  onPageChange(page: number) {
-    this.currentPage = page;
     this.getContent(this.stockItemId);
   }
 
@@ -80,22 +77,6 @@ export class DispatchComponent implements OnInit {
           },
         );
       });
-  }
-
-  formatDate(date: string) {
-    if (date) {
-      const originalDate = new Date(date);
-
-      const day = originalDate.getUTCDate().toString().padStart(2, '0');
-      const month = (originalDate.getUTCMonth() + 1)
-        .toString()
-        .padStart(2, '0');
-      const year = originalDate.getUTCFullYear().toString();
-
-      return `${day}/${month}/${year}`;
-    } else {
-      return '';
-    }
   }
 
   openModal(): void {
