@@ -37,6 +37,11 @@ export class DispatchComponent implements OnInit {
     this.getContent(this.stockItemId);
   }
 
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent(this.stockItemId);
+  }
+
   getContent(orderId: string, disableLoading = false) {
     this.ordersService
       .getStockWithdrawals(orderId, this.currentPage.toString())

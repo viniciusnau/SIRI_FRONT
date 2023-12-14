@@ -20,12 +20,17 @@ export class StockBySectorComponent implements OnInit {
   response: any;
 
   constructor(
-    private stocksService: StocksService,
+    public stocksService: StocksService,
     private router: Router,
     public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
+    this.getContent();
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
     this.getContent();
   }
 

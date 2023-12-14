@@ -10,8 +10,6 @@ export class PaginationComponent {
   @Input() response: any;
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor() {}
-
   hasPrevious(): boolean {
     return this.currentPage > 1;
   }

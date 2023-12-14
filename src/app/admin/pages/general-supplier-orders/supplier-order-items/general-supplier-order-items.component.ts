@@ -48,6 +48,11 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
     this.getProtocolItems();
   }
 
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
   openCreateModal() {
     this.removeItems();
     const dialogRef = this.dialog.open(

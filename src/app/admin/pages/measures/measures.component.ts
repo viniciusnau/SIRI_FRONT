@@ -34,6 +34,11 @@ export class MeasuresComponent implements OnInit {
     this.getContent();
   }
 
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
   sortContentTableAlphabetically(list) {
     const sortedResults = list.results.sort((a, b) =>
       a?.name?.localeCompare(b?.name),

@@ -8,8 +8,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { OrdersComponent } from './pages/orders/orders.component';
 import { OrderItemsComponent } from './pages/orders/order-items/order-items.component';
-import { StockBySectorComponent } from './pages/stock-by-cector/stock-by-sector.component';
-import { StockBySectorItemsComponent } from './pages/stock-by-cector/stock-by-sector-items/stock-by-sector-items.component';
+import { StockBySectorComponent } from './pages/stock-by-sector/stock-by-sector.component';
+import { StockBySectorItemsComponent } from './pages/stock-by-sector/stock-by-sector-items/stock-by-sector-items.component';
 import { InvoicesComponent } from './pages/invoices/invoices.component';
 import { SupplierOrdersComponent } from './pages/supplier-orders/supplier-orders.component';
 import { SuppliersComponent } from './pages/suppliers/suppliers.component';

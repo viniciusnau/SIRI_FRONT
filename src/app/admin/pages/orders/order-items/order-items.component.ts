@@ -84,6 +84,11 @@ export class OrderItemsComponent implements OnInit {
     });
   }
 
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent(this.orderId);
+  }
+
   getContent(orderId?: string) {
     this.ordersService
       .getOrderItems(orderId, this.currentPage.toString())

@@ -36,6 +36,7 @@ export class GeneralSupplierOrders implements OnInit {
   public_defenses = [];
   clientId = '';
   supplierId = '';
+  currentPage = 1;
 
   constructor(
     private ordersService: OrdersService,
@@ -57,6 +58,11 @@ export class GeneralSupplierOrders implements OnInit {
     this.getProtocols();
     this.getPublicDefenses();
     this.getClient();
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
   }
 
   getClient() {

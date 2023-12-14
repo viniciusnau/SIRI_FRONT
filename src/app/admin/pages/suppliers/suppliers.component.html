@@ -122,9 +122,7 @@
       <app-pagination
         [currentPage]="currentPage"
         [response]="response"
-        (pageChange)="
-          this.Helper.onPageChange(this.currentPage, $event, this.getContent)
-        "
+        (pageChange)="onPageChange($event)"
       ></app-pagination>
     </mat-card-content>
   </mat-card>
