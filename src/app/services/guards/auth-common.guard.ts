@@ -11,7 +11,6 @@ export class AuthCommonGuard implements CanActivate {
       return true;
     }
     this.loginService.logout();
-    this.router.navigate(['/login']);
     return false;
   }
 }

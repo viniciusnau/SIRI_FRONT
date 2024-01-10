@@ -4,7 +4,7 @@
       <a href="/admin">
         <img
           src="../../../../assets/logo_defensoria_sc_preferencial_branco.png"
-          alt=""
+          alt="Logo da defensoria pública"
           class="logoSide"
         />
       </a>
@@ -30,7 +30,11 @@
 
       <div *ngIf="sections.account" class="user-section">
         <mat-nav-list>
-          <mat-list-item (click)="resetPassword()" class="linkButton">
+          <mat-list-item
+            (click)="resetPassword()"
+            class="linkButton"
+            [ngClass]="{ 'current-page': isCurrentRoute('/mudar-senha-admin') }"
+          >
             <span>Alterar Senha</span>
           </mat-list-item>
           <mat-list-item (click)="logout()" class="linkButton">
@@ -60,13 +64,25 @@
 
       <div *ngIf="sections.product" class="user-section">
         <mat-nav-list>
-          <mat-list-item class="linkButton" routerLink="/categorias">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/categorias"
+            [ngClass]="{ 'current-page': isCurrentRoute('/categorias') }"
+          >
             <span>Categorias</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/medidas">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/medidas"
+            [ngClass]="{ 'current-page': isCurrentRoute('/medidas') }"
+          >
             <span>Medidas</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/produtos">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/produtos"
+            [ngClass]="{ 'current-page': isCurrentRoute('/produtos') }"
+          >
             <span>Produtos</span>
           </mat-list-item>
         </mat-nav-list>
@@ -93,13 +109,25 @@
 
       <div *ngIf="sections.inventory" class="user-section">
         <mat-nav-list>
-          <mat-list-item class="linkButton" routerLink="/estoque-por-setor">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/estoque-por-setor"
+            [ngClass]="{ 'current-page': isCurrentRoute('/estoque-por-setor') }"
+          >
             <span>Estoque</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/guias-de-entrada">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/guias-de-entrada"
+            [ngClass]="{ 'current-page': isCurrentRoute('/guias-de-entrada') }"
+          >
             <span>Guias de entrada</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/guias-de-saida">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/guias-de-saida"
+            [ngClass]="{ 'current-page': isCurrentRoute('/guias-de-saida') }"
+          >
             <span>Guias de saída</span>
           </mat-list-item>
         </mat-nav-list>
@@ -126,13 +154,27 @@
 
       <div *ngIf="sections.order" class="user-section">
         <mat-nav-list>
-          <mat-list-item class="linkButton" routerLink="/gerenciar-pedidos">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/gerenciar-pedidos"
+            [ngClass]="{ 'current-page': isCurrentRoute('/gerenciar-pedidos') }"
+          >
             <span>Pedidos</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/pedidos-fornecedor">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/pedidos-fornecedor"
+            [ngClass]="{
+              'current-page': isCurrentRoute('/pedidos-fornecedor')
+            }"
+          >
             <span>Pedidos do Fornecedor</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/pedido-de-AF">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/pedido-de-AF"
+            [ngClass]="{ 'current-page': isCurrentRoute('/pedido-de-AF') }"
+          >
             <span>Pedidos de AF</span>
           </mat-list-item>
         </mat-nav-list>
@@ -159,19 +201,41 @@
 
       <div *ngIf="sections.administration" class="user-section">
         <mat-nav-list>
-          <mat-list-item class="linkButton" routerLink="/setores">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/setores"
+            [ngClass]="{ 'current-page': isCurrentRoute('/setores') }"
+          >
             <span>Setores</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/notas">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/notas"
+            [ngClass]="{ 'current-page': isCurrentRoute('/notas') }"
+          >
             <span>Controle de notas</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/atas">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/atas"
+            [ngClass]="{ 'current-page': isCurrentRoute('/atas') }"
+          >
             <span>Atas</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/dispensa-de-licitacao">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/dispensa-de-licitacao"
+            [ngClass]="{
+              'current-page': isCurrentRoute('/dispensa-de-licitacao')
+            }"
+          >
             <span>Dispensa de Licitação</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/enviar-email">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/enviar-email"
+            [ngClass]="{ 'current-page': isCurrentRoute('/enviar-email') }"
+          >
             <span>Enviar Email</span>
           </mat-list-item>
         </mat-nav-list>
@@ -198,7 +262,11 @@
 
       <div *ngIf="sections.supplier" class="user-section">
         <mat-nav-list>
-          <mat-list-item class="linkButton" routerLink="/fornecedores">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/fornecedores"
+            [ngClass]="{ 'current-page': isCurrentRoute('/fornecedores') }"
+          >
             <span>Fornecedores</span>
           </mat-list-item>
         </mat-nav-list>
@@ -225,15 +293,30 @@
 
       <div *ngIf="sections.reports" class="user-section">
         <mat-nav-list>
-          <mat-list-item class="linkButton" routerLink="/relatorio-do-contador">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/relatorio-do-contador"
+            [ngClass]="{
+              'current-page': isCurrentRoute('/relatorio-do-contador')
+            }"
+          >
             <span>Relatório do Contador</span>
           </mat-list-item>
-          <mat-list-item class="linkButton" routerLink="/relatorio-de-estoque">
+          <mat-list-item
+            class="linkButton"
+            routerLink="/relatorio-de-estoque"
+            [ngClass]="{
+              'current-page': isCurrentRoute('/relatorio-de-estoque')
+            }"
+          >
             <span>Relatório de Estoque</span>
           </mat-list-item>
           <mat-list-item
             class="linkButton"
             routerLink="/relatorio-do-almoxarifado"
+            [ngClass]="{
+              'current-page': isCurrentRoute('/relatorio-do-almoxarifado')
+            }"
           >
             <span>Inventário do Almoxarifado</span>
           </mat-list-item>

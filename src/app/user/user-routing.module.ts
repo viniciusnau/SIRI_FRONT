@@ -12,6 +12,11 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 
 const routes: Routes = [
   {
+    path: 'criar-pedido',
+    component: HomeComponent,
+    canActivate: [AuthUserGuard],
+  },
+  {
     path: '',
     component: HomeComponent,
     canActivate: [AuthUserGuard],

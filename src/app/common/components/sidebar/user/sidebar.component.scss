@@ -63,7 +63,8 @@ span[class='account'] {
   max-width: 85%;
 }
 
-.linkButton:hover {
+.linkButton:hover,
+.current-page {
   background-color: $primary-button-hover-green-bg;
   border-radius: 1.25rem;
   transform: translateX(7.5%);
