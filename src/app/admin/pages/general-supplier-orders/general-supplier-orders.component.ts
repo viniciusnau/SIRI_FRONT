@@ -9,6 +9,7 @@ import { SuppliersService } from 'src/app/services/suppliers.service';
 import { UserService } from 'src/app/services/user.service';
 import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Helper } from 'src/helper';
 
 interface iSupplierOrders {
   id: number;
@@ -47,6 +48,7 @@ export class GeneralSupplierOrders implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
+    public Helper: Helper,
   ) {}
   ngOnInit(): void {
     this.loading = true;

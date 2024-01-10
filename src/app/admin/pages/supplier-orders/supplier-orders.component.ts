@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
+import { Helper } from 'src/helper';
 
 interface SupplierOrders {
   id: number;
@@ -27,6 +28,7 @@ export class SupplierOrdersComponent implements OnInit {
     private ordersService: OrdersService,
     private route: ActivatedRoute,
     private router: Router,
+    public Helper: Helper,
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
