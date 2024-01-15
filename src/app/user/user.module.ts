@@ -26,6 +26,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CommonCustomModule } from '../common/commonCustom.module';
 import { AdminModule } from '../admin/admin.module';
+import { RequestTravelComponent } from './pages/requestTravel/requestTravel.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AdminModule } from '../admin/admin.module';
     NegativeNotAllowedDirective,
     DecimalNotAllowedDirective,
     ConfirmHomeModalComponent,
+    RequestTravelComponent,
   ],
   imports: [
     CommonModule,

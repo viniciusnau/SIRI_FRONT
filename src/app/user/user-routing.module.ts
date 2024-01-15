@@ -9,6 +9,7 @@ import { OrderItemsComponent } from './pages/orders/order-items/order-items.comp
 import { LoginComponent } from '../common/pages/login/login.component';
 import { AuthUserGuard } from '../services/guards/auth-user.guard';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { RequestTravelComponent } from './pages/requestTravel/requestTravel.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,11 @@ const routes: Routes = [
   {
     path: 'mudar-senha-user',
     component: ResetPasswordComponent,
+    canActivate: [AuthUserGuard],
+  },
+  {
+    path: 'diaria',
+    component: RequestTravelComponent,
     canActivate: [AuthUserGuard],
   },
 ];

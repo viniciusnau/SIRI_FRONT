@@ -65,6 +65,38 @@
         >
           <span>Estoque</span>
         </mat-list-item>
+
+        <button
+          (click)="toggleSection('travel')"
+          class="account-button"
+          [class.transform-active]="sections.travel"
+        >
+          <div class="account-icon">
+            <mat-icon class="icon">description</mat-icon>
+          </div>
+          <div class="account-text">
+            <span *ngIf="userName" class="account">Diárias</span>
+          </div>
+          <div class="arrow-icon">
+            <mat-icon>{{
+              sections.travel ? 'expand_less' : 'expand_more'
+            }}</mat-icon>
+          </div>
+        </button>
+        <div *ngIf="sections.travel" class="user-section">
+          <mat-nav-list>
+            <mat-list-item
+              class="linkButton"
+              routerLink="/diaria"
+              [ngClass]="{
+                'current-page': isCurrentRoute('/diaria')
+              }"
+            >
+              <span>Pedir diária</span>
+            </mat-list-item>
+          </mat-nav-list>
+          <mat-divider class="divider"></mat-divider>
+        </div>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content> <ng-content></ng-content> </mat-sidenav-content>

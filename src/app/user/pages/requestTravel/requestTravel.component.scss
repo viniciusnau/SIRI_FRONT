@@ -1,0 +1,37 @@
+@import 'src/colors.scss';
+
+.container {
+  margin: 0 0 1rem 0;
+}
+
+.input,
+.inputT {
+  margin: 0.5rem 0.5rem 0 0;
+  width: 17.5rem;
+}
+.input:first-child {
+  margin: 0;
+}
+
+.observation {
+  width: 100%;
+  height: 10rem;
+}
+
+.button {
+  box-shadow: 0 0.8rem 0.8rem -0.8rem $shadow-color;
+  font-weight: 550;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: 10rem;
+  height: 2.5rem;
+  font-size: 1rem;
+}
+
+.button:last-child {
+  background-color: #2f5141;
+  color: white;
+  font-weight: 700;
+  margin: 0 0 0 0.5rem;
+}

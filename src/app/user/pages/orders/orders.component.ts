@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmOrderModalComponent } from './confirmModal/confirm-order-modal.component';
 import snackbarConsts from 'src/snackbarConsts';
+import { Helper } from 'src/helper';
 
 @Component({
   selector: 'user-orders',
@@ -25,6 +26,7 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     public ordersService: OrdersService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {

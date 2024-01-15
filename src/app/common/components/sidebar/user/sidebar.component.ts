@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class SidebarComponent {
   sections = {
     account: false,
+    travel: false,
   };
   userName: string = '';
   currentRoute: string = '';
@@ -19,6 +20,7 @@ export class SidebarComponent {
     createRequest: ['/criar-pedido'],
     requests: ['/pedidos'],
     stock: ['/estoque'],
+    travel: ['/diaria'],
   };
 
   constructor(private loginService: LoginService, private router: Router) {}

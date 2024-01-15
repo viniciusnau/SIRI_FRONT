@@ -22,7 +22,6 @@ export class LoginService {
         this.checkForAdmin(username, password).subscribe((body: any) => {
           this.storeUserData(token, username, password, body, remember);
           this.navigateToDashboard(body.is_admin);
-          console.log('body.is_admin: ', body.is_admin);
         });
       }),
     );

@@ -1,0 +1,95 @@
+<common-sidebar>
+  <mat-card *ngIf="!loading" user>
+    <mat-card-content>
+      <div class="container">
+        <mat-toolbar>
+          <span>Saída</span>
+        </mat-toolbar>
+
+        <div class="form">
+          <mat-form-field appearance="fill" class="inputT">
+            <mat-label>Origem</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Destino</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Data de saída</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Data de chegada</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Veículo</mat-label>
+            <mat-select
+              [(ngModel)]="selectedCategoryId"
+              name="categorySelect"
+              (selectionChange)="updateProducts(true)"
+            >
+              <mat-option value="0">Todas</mat-option>
+              <mat-option value="">Honda civic EG</mat-option>
+              <mat-option value="">Subaru WRX STI</mat-option>
+              <mat-option value="">Nissan GTR R32</mat-option>
+              <mat-option value="">Porsche 911 GT3 RS</mat-option>
+              <mat-option value="">BMW E36 328i</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="container">
+        <mat-toolbar>
+          <span>Chegada</span>
+        </mat-toolbar>
+
+        <div class="form">
+          <mat-form-field appearance="fill" class="inputT">
+            <mat-label>Origem</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Destino</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Data de saída</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Data de chegada</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Veículo</mat-label>
+            <mat-select
+              [(ngModel)]="selectedCategoryId"
+              name="categorySelect"
+              (selectionChange)="updateProducts(true)"
+            >
+              <mat-option value="0">Todas</mat-option>
+              <mat-option value="">Honda civic EG</mat-option>
+              <mat-option value="">Subaru WRX STI</mat-option>
+              <mat-option value="">Nissan GTR R32</mat-option>
+              <mat-option value="">Porsche 911 GT3 RS</mat-option>
+              <mat-option value="">BMW E36 328i</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-form-field appearance="fill" class="observation">
+        <mat-label>Observação</mat-label>
+        <input matInput />
+      </mat-form-field>
+      <div class="buttonContainer">
+        <button class="button">Limpar</button>
+        <button class="button">Enviar</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</common-sidebar>
+<div class="initial-custom-spinner" *ngIf="loading"></div>
