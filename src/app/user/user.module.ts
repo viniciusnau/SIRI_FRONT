@@ -4,7 +4,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialCommonsModule } from '../material-commons/material-commons.module';
-import { HomeComponent } from './pages/home/home.component';
+import { createOrderComponent } from './pages/createOrder/createOrder.component';
 import { StockComponent } from './pages/stock/stock.component';
 import { ReceivedComponent } from './pages/stock/received/received.component';
 import { DispatchComponent } from './pages/stock/dispatch/dispatch.component';
@@ -16,7 +16,7 @@ import { EditOrderItemModalComponent } from './pages/orders/order-items/editModa
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { UserPaginationComponent } from './components/pagination/user-pagination.component';
 import { ConfirmOrderModalComponent } from './pages/orders/confirmModal/confirm-order-modal.component';
-import { ConfirmHomeModalComponent } from './pages/home/confirmModal/confirm-home-modal.component';
+import { ConfirmHomeModalComponent } from './pages/createOrder/confirmModal/confirm-home-modal.component';
 import { DigitLimitDirective } from './directives/digit-limit.directive';
 import { DecimalNotAllowedDirective } from './directives/decimal-not-allowed.directive';
 import { NegativeNotAllowedDirective } from './directives/negative-not-allowed.directive';
@@ -29,7 +29,7 @@ import { AdminModule } from '../admin/admin.module';
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    createOrderComponent,
     StockComponent,
     ReceivedComponent,
     DispatchComponent,

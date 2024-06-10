@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
+import { createOrderComponent } from './pages/createOrder/createOrder.component';
 import { StockComponent } from './pages/stock/stock.component';
 import { ReceivedComponent } from './pages/stock/received/received.component';
 import { DispatchComponent } from './pages/stock/dispatch/dispatch.component';
@@ -12,8 +12,8 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
+    path: 'criar-pedido',
+    component: createOrderComponent,
     canActivate: [AuthUserGuard],
   },
   {

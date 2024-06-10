@@ -12,13 +12,40 @@ export class SidebarComponent {
     account: false,
   };
   userName: string = '';
+  currentRoute: string = '';
+
+  sidebarCategories = {
+    account: ['/mudar-senha-user'],
+    createRequest: ['/criar-pedido'],
+    requests: ['/pedidos'],
+    stock: ['/estoque'],
+  };
 
   constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {
+    this.updateSections();
     this.userName = sessionStorage.getItem('userName')
       ? sessionStorage.getItem('userName')
       : localStorage.getItem('userName');
+  }
+
+  updateSections(): void {
+    Object.keys(this.sidebarCategories).forEach((section) => {
+      if (
+        this.sidebarCategories[section].some((route) =>
+          this.isCurrentRoute(route),
+        )
+      ) {
+        this.sections[section] = true;
+      } else {
+        this.sections[section] = false;
+      }
+    });
+  }
+
+  isCurrentRoute(section: string): boolean {
+    return this.router.url.includes(section);
   }
 
   logout() {

@@ -22,6 +22,7 @@ export class LoginService {
         this.checkForAdmin(username, password).subscribe((body: any) => {
           this.storeUserData(token, username, password, body, remember);
           this.navigateToDashboard(body.is_admin);
+          console.log('body.is_admin: ', body.is_admin);
         });
       }),
     );
@@ -62,7 +63,7 @@ export class LoginService {
   }
 
   private navigateToDashboard(isAdmin: boolean): void {
-    const route = isAdmin ? '/admin' : '/';
+    const route = isAdmin ? '/gerenciar-pedidos' : '/criar-pedido';
     this.router.navigate([route]);
   }
 
@@ -77,7 +78,8 @@ export class LoginService {
     const sessionToken = sessionStorage.getItem('token');
     const localApiToken = localStorage.getItem('apiToken');
     const sessionApiToken = sessionStorage.getItem('apiToken');
-    const token = localToken || sessionToken || localApiToken || sessionApiToken;
+    const token =
+      localToken || sessionToken || localApiToken || sessionApiToken;
     return !!token;
   }
 }

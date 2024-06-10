@@ -4,7 +4,7 @@
       <a href="/">
         <img
           src="../../../../assets/logo_defensoria_sc_preferencial_branco.png"
-          alt=""
+          alt="Logo da defensoria pública"
           class="logoSide"
         />
       </a>
@@ -29,7 +29,11 @@
       </button>
       <div *ngIf="sections.account" class="user-section">
         <mat-nav-list>
-          <mat-list-item (click)="resetPassword()" class="linkButton">
+          <mat-list-item
+            (click)="resetPassword()"
+            class="linkButton"
+            [ngClass]="{ 'current-page': isCurrentRoute('/mudar-senha-user') }"
+          >
             <span>Alterar Senha</span>
           </mat-list-item>
           <mat-list-item (click)="logout()" class="linkButton">
@@ -40,13 +44,25 @@
       </div>
 
       <mat-nav-list>
-        <mat-list-item routerLink="/" class="linkButton">
+        <mat-list-item
+          routerLink="/criar-pedido"
+          class="linkButton"
+          [ngClass]="{ 'current-page': isCurrentRoute('/criar-pedido') }"
+        >
           <span>Criar Pedido</span>
         </mat-list-item>
-        <mat-list-item routerLink="/pedidos" class="linkButton">
+        <mat-list-item
+          routerLink="/pedidos"
+          class="linkButton"
+          [ngClass]="{ 'current-page': isCurrentRoute('/pedidos') }"
+        >
           <span>Pedidos</span>
         </mat-list-item>
-        <mat-list-item routerLink="/estoque" class="linkButton">
+        <mat-list-item
+          routerLink="/estoque"
+          class="linkButton"
+          [ngClass]="{ 'current-page': isCurrentRoute('/estoque') }"
+        >
           <span>Estoque</span>
         </mat-list-item>
       </mat-nav-list>

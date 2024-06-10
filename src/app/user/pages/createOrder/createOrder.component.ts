@@ -11,11 +11,11 @@ import { ConfirmHomeModalComponent } from './confirmModal/confirm-home-modal.com
 import { Helper } from 'src/helper';
 
 @Component({
-  selector: 'user-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'user-create-rder',
+  templateUrl: './createOrder.component.html',
+  styleUrls: ['./createOrder.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class createOrderComponent implements OnInit {
   categories: Category[] = [];
   products: Product[] = [];
   displayedColumns = ['name', 'description', 'measure', 'quantity'];

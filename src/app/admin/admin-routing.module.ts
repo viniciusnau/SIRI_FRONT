@@ -67,7 +67,7 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard],
   },
   {
-    path: 'fornecedor/pedidos/:id',
+    path: 'fornecedores/pedidos/:id',
     component: SupplierOrdersComponent,
     canActivate: [AuthAdminGuard],
     pathMatch: 'full',

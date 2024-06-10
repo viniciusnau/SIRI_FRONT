@@ -8,6 +8,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as moment from 'moment/moment';
 import { PriceFormatPipe } from '../../pipes/price-format.pipe';
+import { Helper } from 'src/helper';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -56,6 +57,7 @@ export class DispatchReportsComponent implements OnInit {
     public dialog: MatDialog,
     private priceFormatPipe: PriceFormatPipe,
     private http: HttpClient,
+    public Helper: Helper,
   ) {}
 
   ngOnInit(): void {
