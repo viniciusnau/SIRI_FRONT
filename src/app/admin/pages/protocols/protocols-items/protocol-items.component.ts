@@ -49,10 +49,10 @@ export class ProtocolItemsComponent implements OnInit {
   removeItems() {
     if (this.response?.results?.length) {
       const responseProductIds = this.response.results.map(
-        (result) => result.product.name,
+        (result) => result.product.name + ' ' + result.product.description,
       );
       this.modalData.products = this.modalData.products.filter(
-        (product) => !responseProductIds.includes(product.name),
+        (product) => !responseProductIds.includes(product.name + ' ' + product.description),
       );
     }
   }
