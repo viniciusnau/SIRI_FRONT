@@ -144,6 +144,7 @@ import { Helper } from 'src/helper';
     MatNativeDateModule,
     MatCardModule,
     CommonCustomModule,
+
   ],
   exports: [PaginationComponent],
   providers: [Helper],

@@ -14,6 +14,12 @@ import snackbarConsts from 'src/snackbarConsts';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Helper } from 'src/helper';
 
+interface Protocol {
+  id: number;
+  start_date: string;
+  end_date: string;
+}
+
 @Component({
   selector: 'app-protocols',
   templateUrl: './protocols.component.html',
@@ -28,6 +34,9 @@ export class ProtocolsComponent implements OnInit {
   modalData: ProtocolsModalData = {
     suppliers: [],
     categories: [],
+    protocolId: undefined,
+    initial_date: '',
+    final_date: '',
   };
 
   constructor(
@@ -69,12 +78,14 @@ export class ProtocolsComponent implements OnInit {
     });
   }
 
-  openModal(protocolId: number): void {
+  openModal(protocol: any): void {
     const dialogRef = this.dialog.open(EditProtocolsModalComponent, {
       data: {
         suppliers: this.modalData.suppliers,
         categories: this.modalData.categories,
-        protocolId: protocolId,
+        protocolId: protocol,
+        initial_date: protocol.start_date,
+        final_date: protocol.end_date, 
       },
     });
   }

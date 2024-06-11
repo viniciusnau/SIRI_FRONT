@@ -1,6 +1,7 @@
 {
   "name": "front-sed",
   "version": "0.0.0",
+  "homepage": "/login",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
