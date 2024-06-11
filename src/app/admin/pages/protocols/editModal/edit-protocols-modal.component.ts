@@ -19,6 +19,8 @@ export interface ProtocolsModalData {
   suppliers: Supplier[];
   categories: Category[];
   protocolId?: any;
+  initial_date?: string;
+  final_date?: string;
 }
 
 @Component({
@@ -55,8 +57,8 @@ export class EditProtocolsModalComponent implements OnInit {
       supplier: [this.data.protocolId.supplier.id],
       category: [this.data.protocolId.category.id],
       file: [this.data.protocolId.file.name],
-      initial_date: [this.data.protocolId.initial_date],
-      final_date: [this.data.protocolId.final_date],
+      initial_date: [this.data.initial_date],
+      final_date: [this.data.final_date],
     });
   }
 
