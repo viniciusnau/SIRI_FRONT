@@ -34,14 +34,14 @@
         <ng-container matColumnDef="created">
           <th mat-header-cell *matHeaderCellDef>Criado</th>
           <td mat-cell *matCellDef="let orders">
-            {{ this.Helper.formatDate(orders.created) }}
+            {{ formatDate(orders.created) }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="updated">
           <th mat-header-cell *matHeaderCellDef>Atualizado</th>
           <td mat-cell *matCellDef="let orders">
-            {{ this.Helper.formatDate(orders.updated) }}
+            {{ formatDate(orders.updated) }}
           </td>
         </ng-container>
 
