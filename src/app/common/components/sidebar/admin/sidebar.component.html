@@ -224,6 +224,13 @@
           </mat-list-item>
           <mat-list-item
             class="linkButton"
+            routerLink="/fornecedores"
+            [ngClass]="{ 'current-page': isCurrentRoute('/fornecedores') }"
+          >
+            <span>Fornecedores</span>
+          </mat-list-item>
+          <mat-list-item
+            class="linkButton"
             routerLink="/dispensa-de-licitacao"
             [ngClass]="{
               'current-page': isCurrentRoute('/dispensa-de-licitacao')
@@ -237,37 +244,6 @@
             [ngClass]="{ 'current-page': isCurrentRoute('/enviar-email') }"
           >
             <span>Enviar Email</span>
-          </mat-list-item>
-        </mat-nav-list>
-        <mat-divider class="divider"></mat-divider>
-      </div>
-
-      <button
-        (click)="toggleSection('supplier')"
-        class="account-button"
-        [class.transform-active]="sections.supplier"
-      >
-        <div class="account-icon">
-          <mat-icon class="icon">co_present</mat-icon>
-        </div>
-        <div class="account-text">
-          <span class="account">Fornecedores</span>
-        </div>
-        <div class="user-arrow-icon">
-          <mat-icon>{{
-            sections.supplier ? 'expand_less' : 'expand_more'
-          }}</mat-icon>
-        </div>
-      </button>
-
-      <div *ngIf="sections.supplier" class="user-section">
-        <mat-nav-list>
-          <mat-list-item
-            class="linkButton"
-            routerLink="/fornecedores"
-            [ngClass]="{ 'current-page': isCurrentRoute('/fornecedores') }"
-          >
-            <span>Fornecedores</span>
           </mat-list-item>
         </mat-nav-list>
         <mat-divider class="divider"></mat-divider>

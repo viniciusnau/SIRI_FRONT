@@ -48,7 +48,7 @@ export class CallbackComponent implements OnInit {
   }
 
   private navigateToDashboard(isAdmin: boolean): void {
-    const route = isAdmin ? '/admin' : '/';
+    const route = isAdmin ? '/admin' : '/criar-pedido';
     this.router.navigate([route]);
   }
 
