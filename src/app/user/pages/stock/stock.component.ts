@@ -21,14 +21,8 @@ export class StockComponent implements OnInit {
   page = 'next_stock_items';
   response: any;
   loading = false;
-  displayedColumns = [
-    'name',
-    'description',
-    'quantity',
-    'measure',
-    'entries',
-    'withdrawals',
-  ];
+  stock: number;
+  displayedColumns = [];
 
   constructor(
     public userService: UserService,
@@ -51,7 +45,20 @@ export class StockComponent implements OnInit {
   getContent(category = 1) {
     this.userService.getUser().subscribe((data) => {
       this.response = data;
+      this.stock = this.response.client.stock;
       this.loading = false;
+      if (this.stock !== 1) {
+        this.displayedColumns = [
+          'name',
+          'description',
+          'quantity',
+          'measure',
+          'entries',
+          'withdrawals',
+        ];
+      } else {
+        this.displayedColumns = ['name', 'description', 'quantity', 'measure'];
+      }
     });
   }
 
