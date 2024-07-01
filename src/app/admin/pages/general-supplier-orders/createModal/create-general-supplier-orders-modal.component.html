@@ -5,10 +5,10 @@
     <mat-form-field appearance="fill">
       <mat-select formControlName="supplier">
         <mat-option
-          *ngFor="let supplier of data.suppliers"
+          *ngFor="let supplier of suppliers"
           [value]="supplier.id"
-          >{{ this.Helper.firstLetterOnCapital(supplier.name) }}</mat-option
-        >
+          >{{ this.Helper.firstLetterOnCapital(supplier.name) }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -16,10 +16,9 @@
     <mat-form-field appearance="fill">
       <mat-select formControlName="protocol">
         <mat-option
-          *ngFor="let protocol of data.protocols"
+          *ngFor="let protocol of protocols"
           [value]="protocol.id"
-          >{{ protocol.code }}</mat-option
-        >
+          >{{ protocol.code }}</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -27,12 +26,9 @@
     <mat-form-field appearance="fill">
       <mat-select formControlName="public_defense">
         <mat-option
-          *ngFor="let public_defense of data.public_defenses"
+          *ngFor="let public_defense of public_defenses"
           [value]="public_defense.id"
-          >{{
-            this.Helper.firstLetterOnCapital(public_defense.name)
-          }}</mat-option
-        >
+          >{{ this.Helper.firstLetterOnCapital(public_defense.name) }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
