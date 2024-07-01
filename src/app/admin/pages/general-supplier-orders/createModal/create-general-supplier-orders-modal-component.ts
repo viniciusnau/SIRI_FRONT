@@ -13,6 +13,9 @@ import snackbarConsts from 'src/snackbarConsts';
 })
 export class CreateGeneralSupplierOrdersModalComponent implements OnInit {
   formSupplierOrders: FormGroup;
+  suppliers: any;
+  protocols: any;
+  public_defenses: any;
 
   constructor(
     public dialogRef: MatDialogRef<CreateGeneralSupplierOrdersModalComponent>,
@@ -25,6 +28,9 @@ export class CreateGeneralSupplierOrdersModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.sortSuppliers();
+    this.sortProtocols();
+    this.sortPublicDefenses();
   }
 
   createForm() {
@@ -33,6 +39,18 @@ export class CreateGeneralSupplierOrdersModalComponent implements OnInit {
       protocol: ['', [Validators.required]],
       public_defense: ['', [Validators.required]],
     });
+  }
+
+  sortSuppliers() {
+    this.suppliers = this.Helper.sortAlphabetically(this.data.suppliers);
+  }
+
+  sortProtocols() {
+    this.protocols = this.Helper.sortAlphabetically(this.data.protocols);
+  }
+
+  sortPublicDefenses() {
+    this.public_defenses = this.Helper.sortAlphabetically(this.data.public_defenses);
   }
 
   onNoClick(): void {
