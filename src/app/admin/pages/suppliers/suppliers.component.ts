@@ -32,6 +32,11 @@ export class SuppliersComponent implements OnInit {
   response: any;
   categories = [];
 
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+  
   ngOnInit(): void {
     this.loading = true;
     this.getContent();
