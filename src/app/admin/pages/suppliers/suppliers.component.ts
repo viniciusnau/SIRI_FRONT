@@ -96,7 +96,7 @@ export class SuppliersComponent implements OnInit {
   }
 
   navToSupplierOrders(supplier_id: number) {
-    this.router.navigate([`fornecedor/pedidos/${supplier_id}`]);
+    this.router.navigate([`fornecedores/pedidos/${supplier_id}`]);
   }
 
   openModal(suppliers): void {
