@@ -37,6 +37,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
     private snackBar: MatSnackBar,
     public Helper: Helper,
   ) {}
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.supplierOrderId = params['id'];
@@ -54,17 +55,19 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
   }
 
   openCreateModal() {
-    this.removeItems();
-    const dialogRef = this.dialog.open(
-      CreateGeneralSupplierOrdersItemsModalComponent,
-      {
+    this.getProtocolItems().then(() => {
+      const dialogRef = this.dialog.open(CreateGeneralSupplierOrdersItemsModalComponent, {
         data: {
           protocol: this.protocolId,
           products: this.protocolItems,
           supplier_order: this.supplierOrderId,
         },
-      },
-    );
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.getProtocolItems();
+      });
+    });
   }
 
   getContent() {
@@ -76,22 +79,31 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
       });
   }
 
-  getProtocolItems() {
-    this.stocksService
-      .getAllProtocolItems(this.protocolId)
-      .subscribe((data) => {
-        this.protocolItems = data.results;
-        this.removeItems();
-      });
+  getProtocolItems(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.stocksService.getAllProtocolItems(this.protocolId).subscribe(
+        (data) => {
+          this.protocolItems = data.results;
+          if (this.response && this.response.results) {
+            this.removeItems();
+          }
+          resolve();
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
   }
 
   removeItems() {
-    if (this.response?.results === 0 || this.protocolItems.length === 0) {
+    if (!this.response || !this.response.results || !this.protocolItems || this.protocolItems.length === 0) {
       return;
     }
+  
     this.protocolItems = this.protocolItems.filter((item) => {
       return !this.response.results.some(
-        (orderItem) => orderItem.product.id === item.product.id,
+        (orderItem) => orderItem.product.id === item.product.id
       );
     });
   }
@@ -109,9 +121,10 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
             duration: 3000,
             horizontalPosition: 'end',
             verticalPosition: 'top',
-          },
+          }
         );
         this.getContent();
+        this.getProtocolItems();
       })
       .catch((error: any) => {
         this.loading = null;
@@ -122,7 +135,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
             duration: 3000,
             horizontalPosition: 'end',
             verticalPosition: 'top',
-          },
+          }
         );
       });
   }

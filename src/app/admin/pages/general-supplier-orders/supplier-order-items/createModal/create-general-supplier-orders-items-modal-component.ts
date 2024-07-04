@@ -65,14 +65,16 @@ export class CreateGeneralSupplierOrdersItemsModalComponent implements OnInit {
     modifiedItem.quantity = Number(
       createSupplierOrderItemData.quantity.toString().slice(0, 6),
     );
-
+  
     createSupplierOrderItemData.supplier_order = parseInt(
       this.data.supplier_order,
     );
+  
     this.ordersService
       .createSupplierOrderItem(createSupplierOrderItemData)
       .subscribe(
         (response) => {
+          this.dialogRef.close();
           this.snackBar.open(
             snackbarConsts.admin.suppliersOrders.itens.create.success,
             snackbarConsts.close,
