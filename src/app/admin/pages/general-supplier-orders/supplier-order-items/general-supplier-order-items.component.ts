@@ -90,7 +90,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
           resolve();
         },
         (error) => {
-          reject(error); // Rejeitamos a Promise em caso de erro
+          reject(error);
         }
       );
     });
@@ -124,7 +124,7 @@ export class AdminGeneralSupplierOrderItemsComponent implements OnInit {
           }
         );
         this.getContent();
-        this.getProtocolItems(); // Atualiza os itens disponíveis
+        this.getProtocolItems();
       })
       .catch((error: any) => {
         this.loading = null;
