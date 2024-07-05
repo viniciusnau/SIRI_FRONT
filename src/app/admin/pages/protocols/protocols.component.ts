@@ -72,6 +72,11 @@ export class ProtocolsComponent implements OnInit {
     });
   }
 
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getContent();
+  }
+
   getSuppliers() {
     this.supplierService.getAllSuppliers().subscribe((data) => {
       this.modalData.suppliers = this.Helper.sortAlphabetically(data);
