@@ -71,15 +71,10 @@
               <mat-select
                 [disabled]="orderItem.quantity === orderItem.added_quantity"
                 [(value)]="orderItem.protocol && orderItem.protocol.id"
-                (selectionChange)="
-                  onProtocolSelectionChange(orderItem, $event.value)
-                "
+                (selectionChange)="onProtocolSelectionChange(orderItem, $event.value)"
                 name="protocol"
               >
-                <mat-option
-                  *ngFor="let protocol of protocols"
-                  [value]="protocol.id"
-                >
+                <mat-option *ngFor="let protocol of orderItem.availableProtocols" [value]="protocol.id">
                   {{ protocol.code }}
                 </mat-option>
               </mat-select>

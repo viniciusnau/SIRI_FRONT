@@ -24,6 +24,7 @@ interface iAdminOrderItems {
   product: {
     id: number;
     name: string;
+    description: string;
     measure: {
       id: number;
       name: string;
@@ -35,6 +36,7 @@ interface iAdminOrderItems {
   measure: number;
   protocol?: Protocol;
   supplier_quantity: number;
+  availableProtocols?: Protocol[]; 
 }
 
 @Component({
@@ -74,7 +76,6 @@ export class OrderItemsComponent implements OnInit {
       this.orderId = params['id'];
     });
     this.getContent(this.orderId);
-    this.getAllProtocols();
     this.supplierQuantityValidity$.subscribe((isValid) => {
       this.supplierQuantityIsValid = isValid;
     });
@@ -94,16 +95,19 @@ export class OrderItemsComponent implements OnInit {
       .getOrderItems(orderId, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
-        this.response.forEach((orderItem) => {
+        this.response.results.forEach((orderItem: iAdminOrderItems) => {
           this.supplierQuantityControls[orderItem.id] = new FormControl();
+          this.updateOrderItemProtocols(orderItem);
         });
       });
   }
 
-  getAllProtocols() {
-    this.stocksService.getAllProtocols().subscribe((data) => {
-      this.protocols = data;
-    });
+  updateOrderItemProtocols(orderItem: iAdminOrderItems) {
+    const { name, description } = orderItem.product;
+    this.stocksService.getProtocolsByNameAndDescription(name, description)
+      .subscribe((protocols) => {
+        orderItem.availableProtocols = protocols;
+      });
   }
 
   saveItem(orderItem: iAdminOrderItems) {
