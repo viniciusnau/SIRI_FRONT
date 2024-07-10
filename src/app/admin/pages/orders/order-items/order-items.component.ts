@@ -29,6 +29,7 @@ interface iAdminOrderItems {
       id: number;
       name: string;
     };
+    price: number;
   };
   quantity: number;
   added_quantity: number;
@@ -95,7 +96,7 @@ export class OrderItemsComponent implements OnInit {
       .getOrderItems(orderId, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
-        this.response.results.forEach((orderItem: iAdminOrderItems) => {
+        this.response.forEach((orderItem: iAdminOrderItems) => {
           this.supplierQuantityControls[orderItem.id] = new FormControl();
           this.updateOrderItemProtocols(orderItem);
         });
@@ -191,6 +192,7 @@ export class OrderItemsComponent implements OnInit {
     'id',
     'product',
     'description',
+    'price',
     'quantity',
     'added_quantity',
     'measure',
