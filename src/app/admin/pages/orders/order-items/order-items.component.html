@@ -110,7 +110,7 @@
           <th mat-header-cell *matHeaderCellDef>Salvar</th>
           <td mat-cell *matCellDef="let orderItem">
             <button
-              [disabled]="orderItem.quantity === orderItem.added_quantity"
+              [disabled]="orderItem.quantity === orderItem.added_quantity || !orderItem.protocol"
               mat-mini-fab
               class="btn"
               (click)="saveItem(orderItem)"
@@ -118,7 +118,7 @@
               <mat-icon>save</mat-icon>
             </button>
           </td>
-        </ng-container>
+        </ng-container>        
 
         <ng-container matColumnDef="deleteOrderItem">
           <th mat-header-cell *matHeaderCellDef>Excluir</th>

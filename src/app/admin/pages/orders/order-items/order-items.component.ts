@@ -107,8 +107,21 @@ export class OrderItemsComponent implements OnInit {
   }
 
   saveItem(orderItem: iAdminOrderItems) {
+    if (!orderItem.protocol) {
+      return this.snackBar.open(
+        'Por favor, selecione uma Ata antes de salvar.',
+        snackbarConsts.close,
+        {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        },
+      );
+    }
+  
     let payload = {};
-
+  
     if (orderItem.supplier_quantity > orderItem.quantity) {
       return this.snackBar.open(
         snackbarConsts.admin.manageOrders.itens.edit.error,
@@ -121,7 +134,7 @@ export class OrderItemsComponent implements OnInit {
         },
       );
     }
-
+  
     if (orderItem.protocol) {
       if (
         typeof orderItem.protocol === 'object' &&
@@ -140,7 +153,7 @@ export class OrderItemsComponent implements OnInit {
     } else {
       payload = { quantity: orderItem.quantity };
     }
-
+  
     this.ordersService.updateOrderItem(orderItem.id, payload).subscribe(
       (response) => {
         this.snackBar.open(
