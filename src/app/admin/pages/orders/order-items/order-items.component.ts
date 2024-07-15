@@ -94,10 +94,19 @@ export class OrderItemsComponent implements OnInit {
       .getOrderItems(orderId, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
-        this.response.forEach((orderItem) => {
-          this.supplierQuantityControls[orderItem.id] = new FormControl();
+        this.response.results.forEach((orderItem) => {
+          if (orderItem.supplier_quantity === 0) {
+            orderItem.supplier_quantity = orderItem.quantity;
+          }
+          this.supplierQuantityControls[orderItem.id] = new FormControl(orderItem.supplier_quantity);
         });
       });
+  }
+
+  onSupplierQuantityChange(orderItem: iAdminOrderItems, value: number) {
+    const newValue = value === 0 ? orderItem.quantity : value;
+    orderItem.supplier_quantity = newValue;
+    this.supplierQuantityControls[orderItem.id].setValue(newValue);
   }
 
   getAllProtocols() {
