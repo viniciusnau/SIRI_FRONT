@@ -106,6 +106,13 @@
           </td>
         </ng-container>        
 
+        <ng-container matColumnDef="warehouse">
+          <th mat-header-cell *matHeaderCellDef>Almoxarifado</th>
+          <td mat-cell *matCellDef="let order">
+            {{ order.quantity - order.supplier_quantity }}
+          </td>
+        </ng-container>        
+
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Salvar</th>
           <td mat-cell *matCellDef="let orderItem">
