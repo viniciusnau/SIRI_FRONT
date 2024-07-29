@@ -189,16 +189,15 @@ export class OrderItemsComponent implements OnInit {
   }
 
   displayedColumns = [
-    'id',
     'product',
     'description',
+    'measure',
     'price',
     'quantity',
     'added_quantity',
-    'measure',
+    'warehouse',
     'protocol',
     'supplier_quantity',
-    'warehouse',
     'actions',
     'deleteOrderItem',
   ];
