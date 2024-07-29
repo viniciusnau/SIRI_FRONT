@@ -89,17 +89,15 @@
             <mat-form-field appearance="fill" class="small-input">
               <input
                 matInput
-                [value]="orderItem.supplier_quantity"
-                name="supplier_quantity"
-                [type]="'number'"
                 [formControl]="supplierQuantityControls[orderItem.id]"
-                (input)="orderItem.supplier_quantity = $event.target.value"
+                (input)="onSupplierQuantityChange(orderItem, $event.target.value)"
                 decimalNotAllowed
                 appDigitLimit
                 negativeNotAllowed
               />
             </mat-form-field>
-          </td>
+          </td>     
+        
         </ng-container>        
 
         <ng-container matColumnDef="warehouse">
@@ -151,3 +149,4 @@
     </mat-card-content>
   </mat-card>
 </common-sidebar>
+ 

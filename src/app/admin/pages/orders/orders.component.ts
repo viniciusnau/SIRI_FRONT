@@ -4,6 +4,7 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InvoiceControlOrdersModalComponent } from './invoiceControlmodal/invoice-control-orders-modal.component';
 import { Helper } from 'src/helper';
+import { OrderDataService } from 'src/app/services/orderData.service';
 
 interface AdminOrder {
   id: number;
@@ -12,7 +13,7 @@ interface AdminOrder {
   completely_added_to_stock: boolean;
   created: string;
   updated: string;
-  client: number;
+  client: { name: string; stock_id: number };
 }
 
 @Component({
@@ -30,6 +31,7 @@ export class OrdersComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     public Helper: Helper,
+    private orderDataService: OrderDataService
   ) {}
 
   ngOnInit(): void {
@@ -53,8 +55,9 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  navigateToOrderItems(orderId: number) {
-    this.router.navigate([`/gerenciar-pedidos/itens/${orderId}`]);
+  navigateToOrderItems(order: AdminOrder) {
+    this.orderDataService.setStockId(order.client.stock_id);
+    this.router.navigate([`/gerenciar-pedidos/itens/${order.id}`]);
   }
 
   updateOrderSentStatus(order: AdminOrder) {

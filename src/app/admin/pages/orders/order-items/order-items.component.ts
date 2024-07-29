@@ -13,6 +13,7 @@ import { DeleteOrderItemModalComponent } from './deleteModal/delete-order-item-m
 import { BehaviorSubject } from 'rxjs';
 import snackbarConsts from 'src/snackbarConsts';
 import { Helper } from 'src/helper';
+import { OrderDataService } from 'src/app/services/orderData.service';
 
 interface Protocol {
   id: number;
@@ -55,6 +56,7 @@ export class OrderItemsComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   quantityIsValid: boolean = true;
   supplierQuantityIsValid: boolean = true;
+  stockId: number;
 
   private supplierQuantityValiditySubject = new BehaviorSubject<boolean>(true);
   private quantityValiditySubject = new BehaviorSubject<boolean>(true);
@@ -70,11 +72,13 @@ export class OrderItemsComponent implements OnInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     public Helper: Helper,
+    private orderDataService: OrderDataService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.orderId = params['id'];
+      this.stockId = this.orderDataService.getStockId();
     });
     this.getContent(this.orderId);
     this.supplierQuantityValidity$.subscribe((isValid) => {
@@ -96,8 +100,11 @@ export class OrderItemsComponent implements OnInit {
       .getOrderItems(orderId, this.currentPage.toString())
       .subscribe((data) => {
         this.response = data;
-        this.response.forEach((orderItem: iAdminOrderItems) => {
-          this.supplierQuantityControls[orderItem.id] = new FormControl();
+        this.response.results.forEach((orderItem: iAdminOrderItems) => {
+          if (orderItem.supplier_quantity === 0 && this.stockId === 1) {
+            orderItem.supplier_quantity = orderItem.quantity;
+          }
+          this.supplierQuantityControls[orderItem.id] = new FormControl(orderItem.supplier_quantity);
           this.updateOrderItemProtocols(orderItem);
         });
       });
