@@ -3,6 +3,11 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../environments/env.environment';
 
+interface Protocol {
+  id: number;
+  code: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class StocksService {
   apiUrl = `${environment.apiUrl}/stock`;
@@ -124,6 +129,14 @@ export class StocksService {
       this.httpOptions,
     );
   }
+
+  getProtocolsByNameAndDescription(name: string, description: string): Observable<Protocol[]> {
+    const params = new HttpParams().set('name', name).set('description', description);
+    return this.httpClient.get<Protocol[]>(`${this.apiUrl}/product-protocols/`, {
+      params: params,
+      headers: this.httpOptions.headers,
+    });
+  }  
 
   public getAllProducts(protocolId = null): Observable<any> {
     if (protocolId) {
