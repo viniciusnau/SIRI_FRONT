@@ -119,7 +119,7 @@ export class OrderItemsComponent implements OnInit {
   }
 
   saveItem(orderItem: iAdminOrderItems) {
-    if (!orderItem.protocol) {
+    if (!orderItem.protocol && this.stockId === 1) {
       return this.snackBar.open(
         'Por favor, selecione uma Ata antes de salvar.',
         snackbarConsts.close,
