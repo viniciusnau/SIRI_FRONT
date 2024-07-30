@@ -13,7 +13,6 @@ import { DeleteOrderItemModalComponent } from './deleteModal/delete-order-item-m
 import { BehaviorSubject } from 'rxjs';
 import snackbarConsts from 'src/snackbarConsts';
 import { Helper } from 'src/helper';
-import { OrderDataService } from 'src/app/services/orderData.service';
 
 interface Protocol {
   id: number;
@@ -38,7 +37,7 @@ interface iAdminOrderItems {
   measure: number;
   protocol?: Protocol;
   supplier_quantity: number;
-  availableProtocols?: Protocol[]; 
+  availableProtocols?: Protocol[];
 }
 
 @Component({
@@ -56,7 +55,7 @@ export class OrderItemsComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   quantityIsValid: boolean = true;
   supplierQuantityIsValid: boolean = true;
-  stockId: number;
+  stockId: number | undefined;
 
   private supplierQuantityValiditySubject = new BehaviorSubject<boolean>(true);
   private quantityValiditySubject = new BehaviorSubject<boolean>(true);
@@ -72,15 +71,17 @@ export class OrderItemsComponent implements OnInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     public Helper: Helper,
-    private orderDataService: OrderDataService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.orderId = params['id'];
-      this.stockId = this.orderDataService.getStockId();
+      this.getStockIdByOrderId(this.orderId).subscribe((stockId) => {
+        this.stockId = stockId;
+        this.getContent(this.orderId);
+      });
     });
-    this.getContent(this.orderId);
+
     this.supplierQuantityValidity$.subscribe((isValid) => {
       this.supplierQuantityIsValid = isValid;
     });
@@ -95,6 +96,10 @@ export class OrderItemsComponent implements OnInit {
     this.getContent(this.orderId);
   }
 
+  getStockIdByOrderId(orderId: string) {
+    return this.ordersService.getStockIdByOrderId(orderId);
+  }
+  
   getContent(orderId?: string) {
     this.ordersService
       .getOrderItems(orderId, this.currentPage.toString())
@@ -110,12 +115,30 @@ export class OrderItemsComponent implements OnInit {
       });
   }
 
+  onQuantityChange(orderItem: iAdminOrderItems, newQuantity: number) {
+    if (this.stockId === 1) {
+      orderItem.supplier_quantity = newQuantity;
+    }
+    
+    if (this.supplierQuantityControls[orderItem.id]) {
+      this.supplierQuantityControls[orderItem.id].setValue(orderItem.supplier_quantity, { emitEvent: false });
+    }
+  }
+
   updateOrderItemProtocols(orderItem: iAdminOrderItems) {
     const { name, description } = orderItem.product;
     this.stocksService.getProtocolsByNameAndDescription(name, description)
       .subscribe((protocols) => {
         orderItem.availableProtocols = protocols;
       });
+  }
+
+  isSaveButtonDisabled(orderItem: iAdminOrderItems): boolean {
+    if (this.stockId === 1) {
+      console.log(!orderItem.protocol)
+      return orderItem.quantity === orderItem.added_quantity || !orderItem.protocol;
+    }
+    return false;
   }
 
   saveItem(orderItem: iAdminOrderItems) {
@@ -131,9 +154,9 @@ export class OrderItemsComponent implements OnInit {
         },
       );
     }
-  
+
     let payload = {};
-  
+
     if (orderItem.supplier_quantity > orderItem.quantity) {
       return this.snackBar.open(
         snackbarConsts.admin.manageOrders.itens.edit.error,
@@ -146,7 +169,7 @@ export class OrderItemsComponent implements OnInit {
         },
       );
     }
-  
+
     if (orderItem.protocol) {
       if (
         typeof orderItem.protocol === 'object' &&
@@ -165,7 +188,7 @@ export class OrderItemsComponent implements OnInit {
     } else {
       payload = { quantity: orderItem.quantity };
     }
-  
+
     this.ordersService.updateOrderItem(orderItem.id, payload).subscribe(
       (response) => {
         this.snackBar.open(
@@ -206,6 +229,25 @@ export class OrderItemsComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteOrderItemModalComponent, {
       data: id,
     });
+  }
+
+  getWarehouseQuantity(orderItem: iAdminOrderItems): number {
+    if (this.stockId === 1) {
+      return 0;
+    }
+    return orderItem.supplier_quantity === 0 ? 0 : orderItem.quantity - orderItem.supplier_quantity;
+  }
+
+  updateSupplierQuantity(orderItem: iAdminOrderItems, newValue: string) {
+    const numericValue = parseFloat(newValue);
+    if (!isNaN(numericValue) && numericValue <= orderItem.quantity) {
+      orderItem.supplier_quantity = numericValue;
+      this.supplierQuantityControls[orderItem.id].setValue(numericValue, { emitEvent: false });
+    }
+  }
+  
+  onSupplierQuantityChange(orderItem: iAdminOrderItems, newValue: string) {
+    this.updateSupplierQuantity(orderItem, newValue); // Passa a string diretamente
   }
 
   displayedColumns = [
