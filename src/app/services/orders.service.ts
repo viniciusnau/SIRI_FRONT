@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../environments/env.environment';
 
@@ -43,6 +44,13 @@ export class OrdersService {
     );
   }
 
+  getStockIdByOrderId(orderId: string): Observable<number> {
+    return this.httpClient.get<{ stock_id: number }>(`${this.apiUrl}/order-stock/${orderId}/`, { headers: this.httpOptions.headers })
+      .pipe(
+        map(response => response.stock_id)
+      );
+  }
+  
   public getOrderItems(order_id: string, pageChange = ''): Observable<any> {
     const options = {
       headers: this.httpOptions.headers,

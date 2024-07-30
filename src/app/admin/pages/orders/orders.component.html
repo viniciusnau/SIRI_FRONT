@@ -73,12 +73,12 @@
             <button
               mat-mini-fab
               class="btn"
-              (click)="Helper.navigateTo('/gerenciar-pedidos/itens/', order.id)"
+              (click)="navigateToOrderItems(order)"
             >
               <mat-icon>exit_to_app</mat-icon>
             </button>
           </td>
-        </ng-container>
+        </ng-container>        
 
         <ng-container matColumnDef="confirm_order">
           <th mat-header-cell *matHeaderCellDef>Visualizar</th>

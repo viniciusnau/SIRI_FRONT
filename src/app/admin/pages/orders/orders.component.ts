@@ -4,7 +4,6 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InvoiceControlOrdersModalComponent } from './invoiceControlmodal/invoice-control-orders-modal.component';
 import { Helper } from 'src/helper';
-import { OrderDataService } from 'src/app/services/orderData.service';
 
 interface AdminOrder {
   id: number;
@@ -31,7 +30,6 @@ export class OrdersComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     public Helper: Helper,
-    private orderDataService: OrderDataService
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +54,6 @@ export class OrdersComponent implements OnInit {
   }
 
   navigateToOrderItems(order: AdminOrder) {
-    this.orderDataService.setStockId(order.client.stock_id);
     this.router.navigate([`/gerenciar-pedidos/itens/${order.id}`]);
   }
 
